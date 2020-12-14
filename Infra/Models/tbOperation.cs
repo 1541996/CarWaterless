@@ -14,6 +14,9 @@ namespace Infra.Models
         public Nullable<int> CustomerId { get; set; }
         public Nullable<int> CustomerVehicleId { get; set; }
         public Nullable<int> BranchId { get; set; }
+        public string WashType { get; set; }
+        public string CustomerAddress { get; set; }
+        public DateTime? RequestDateTime { get; set; }
         public string ServicePackageIds { get; set; }
         public string ServicePackageNames { get; set; }
         public Nullable<System.DateTime> OperationDate { get; set; }
