@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@model List<Infra.ViewModels.AdminViewModel>
+
+
+  @foreach(var item in Model)
+  {
+      <h3>@item.username</h3>
+
+  }
