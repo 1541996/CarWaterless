@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace CarWaterless.Controllers
 {
     /// <summary>
-    /// test
+    /// test2
     /// </summary>
     public class HomeController : Controller
     {
