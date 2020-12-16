@@ -1,0 +1,379 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+<style>
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        padding-left: 35px !important;
+        position: relative !important;
+    }
+
+    .select2-container .select2-selection--single {
+       
+        height: 35px !important;
+        
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        line-height:32px!important
+
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        top:3px!important
+    }
+
+
+    .nopad {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    /*image gallery*/
+    .image-checkbox {
+        cursor: pointer;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 4px solid transparent;
+        margin-bottom: 0;
+        outline: 0;
+    }
+
+        .image-checkbox input[type="checkbox"] {
+            display: none !important;
+        }
+
+    .image-checkbox-checked {
+        border-color: #4783B0;
+    }
+
+    .image-checkbox .fa {
+        position: absolute;
+        color: #4A79A3;
+        background-color: #fff;
+        padding: 10px;
+        top: 0;
+        right: 0;
+    }
+
+    .image-checkbox-checked .fa {
+        display: block !important;
+    }
+
+    .chk-package .vsb-middle {
+        padding: 5px 0px;
+        font-weight: 600;
+        font-size: 12px;
+    }
+
+    .chk-package .vsbm-left {
+        color: #000;
+        display: inline-block;
+    }
+
+
+    .chk-package .vsbm-right {
+        display: inline-block;
+        color: #df9403;
+        float: right;
+    }
+
+    .div-img {
+        width: 120px;
+        border-radius: 10px;
+    }
+
+        .div-img img {
+            width: 120px;
+            height: 80px;
+            border-radius: 10px;
+            object-fit:cover
+        }
+
+    .vsb-price {
+        /*  color: #00c9a7;*/
+        color: #fff;
+        position: absolute;
+        padding: 3px 5px;
+        background-color: #00c9a7;
+        top: 7px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        right: 7px;
+        font-size: 11px !important;
+    }
+
+    .div-active {
+        border: 3px solid #00c9a7;
+    }
+
+</style>
+
+    <div class="content-wrap">
+
+        <div class="subsite-banner">
+            <img src="~/Plesirthemes/img/subsite-banner.jpg">
+        </div>
+        <div class="subsite subsite-with-banner">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="subsite-heading">
+                        Book a car
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-layout">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label>Choose Car</label>
+                                    <div class="field-group">
+                                        <i class="fas fa-car"></i>
+                                        <select class="custom-select mr-sm-2 with-icon" id="caravailable">
+                                            <option selected disabled>Please select</option>
+                                            <option value="1">Nissan Juke</option>
+                                            <option value="2">KIA Rio</option>
+                                            <option value="3">Mitsubishi xpander</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label>Township</label>
+                                    <div class="field-group">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <select class="custom-select mr-sm-2 with-icon" id="township">
+                                            <option selected disabled>Please select</option>
+                                            <option value="1">location 1</option>
+                                            <option value="2">location 2</option>
+                                            <option value="3">location 3</option>
+                                            <option value="4">location 4</option>
+                                            <option value="4">location 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Branch</label>
+                                    <div class="field-group">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <select class="custom-select mr-sm-2 with-icon" id="branch">
+                                            <option selected disabled>Please select</option>
+                                            <option value="1">location 1</option>
+                                            <option value="2">location 2</option>
+                                            <option value="3">location 3</option>
+                                            <option value="4">location 4</option>
+                                            <option value="4">location 5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Choose Date</label>
+                                    <div class="row">
+                                        <div class="col no-padding-right">
+                                            <div class="field-group">
+                                                <svg class="svg-inline--fa fa-clock fa-w-16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg>
+                                                <input type="text" id="datestart" class="datepicker form-control with-icon date-start-class" placeholder=" Date">
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="field-group">
+                                                <svg class="svg-inline--fa fa-clock fa-w-16" aria-hidden="true" focusable="false" data-prefix="far" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"></path></svg>
+                                                <input type="text" id="timepicker" class="form-control timepicker with-icon" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-md-12">
+                                    <label for="note">Choose Package</label>
+                                    <div class="display-flex-row chk-package">
+                                        <div class="display-flex-column flex-basis mb-10">
+                                            <div class="div-img position-relative">
+                                                <div class="vsb-price">
+                                                    $500
+                                                </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img" class="div-active">
+                                                <div class="vsb-middle">
+                                                    <div class="vsbm-left">
+                                                        Platinum
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="display-flex-column flex-basis mb-10">
+                                            <div class="div-img position-relative">
+                                                <div class="vsb-price">
+                                                    $500
+                                                </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <div class="vsb-middle">
+                                                    <div class="vsbm-left">
+                                                        Platinum
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="display-flex-column flex-basis mb-10">
+                                            <div class="div-img position-relative">
+                                                <div class="vsb-price">
+                                                    $500
+                                                </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <div class="vsb-middle">
+                                                    <div class="vsbm-left">
+                                                        Platinum
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="display-flex-column flex-basis mb-10">
+
+                                            <div class="div-img position-relative">
+                                                <div class="vsb-price">
+                                                    $500
+                                                </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <div class="vsb-middle">
+                                                    <div class="vsbm-left">
+                                                        Platinum
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="display-flex-column flex-basis mb-10">
+
+                                            <div class="div-img position-relative">
+                                                <div class="vsb-price">
+                                                    $500
+                                                </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <div class="vsb-middle">
+                                                    <div class="vsbm-left">
+                                                        Platinum
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+
+                                <div class="form-group col-md-12 page-cart">
+
+                                    <div class="cart-total">
+                                        <div class="ct-row">
+                                            <div class="ct-left">Subtotal</div>
+                                            <div class="ct-right"><span><svg class="svg-inline--fa fa-dollar-sign fa-w-9" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512" data-fa-i2svg=""><path fill="currentColor" d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"></path></svg><!-- <i class="fas fa-dollar-sign"></i> -->145</span></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="ct-row">
+                                            <div class="ct-left">Discount</div>
+                                            <div class="ct-right"><span><svg class="svg-inline--fa fa-dollar-sign fa-w-9" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512" data-fa-i2svg=""><path fill="currentColor" d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"></path></svg><!-- <i class="fas fa-dollar-sign"></i> -->14</span></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="ct-row total">
+                                            <div class="ct-left">Total</div>
+                                            <div class="ct-right"><span><svg class="svg-inline--fa fa-dollar-sign fa-w-9" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="dollar-sign" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 512" data-fa-i2svg=""><path fill="currentColor" d="M209.2 233.4l-108-31.6C88.7 198.2 80 186.5 80 173.5c0-16.3 13.2-29.5 29.5-29.5h66.3c12.2 0 24.2 3.7 34.2 10.5 6.1 4.1 14.3 3.1 19.5-2l34.8-34c7.1-6.9 6.1-18.4-1.8-24.5C238 74.8 207.4 64.1 176 64V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48h-2.5C45.8 64-5.4 118.7.5 183.6c4.2 46.1 39.4 83.6 83.8 96.6l102.5 30c12.5 3.7 21.2 15.3 21.2 28.3 0 16.3-13.2 29.5-29.5 29.5h-66.3C100 368 88 364.3 78 357.5c-6.1-4.1-14.3-3.1-19.5 2l-34.8 34c-7.1 6.9-6.1 18.4 1.8 24.5 24.5 19.2 55.1 29.9 86.5 30v48c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16v-48.2c46.6-.9 90.3-28.6 105.7-72.7 21.5-61.6-14.6-124.8-72.5-141.7z"></path></svg><!-- <i class="fas fa-dollar-sign"></i> -->131</span></div>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <div class="form-group col-md-12">
+                                    <label for="note">Note</label>
+                                    <div class="input-group">
+                                        <textarea class="form-control" aria-label="note"></textarea>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                                <div class="form-group col-md-12">
+                                    <br>
+                                    <div class="button">
+                                        <button type="submit" class="theme-button">Reserve Now</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                 </form>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+@section scripts{
+    <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
+    <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
+    <script>
+
+        $(function () {
+            $('#caravailable').select2();
+            $('#township').select2();
+            $('#branch').select2();
+
+            $('#datestart').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format('YYYY'), 10)
+            }, function (start, end, label) {
+             //   var years = moment().diff(start, 'years');
+            //    alert("You are " + years + " years old!");
+            });
+
+            $('#timepicker').mdtimepicker();
+
+
+            //$('#datestart').datepicker({
+            //    uiLibrary: 'bootstrap'
+            //}); 
+        })
+
+
+
+    </script>
+    
+    
+    
+    
+    
+    }
