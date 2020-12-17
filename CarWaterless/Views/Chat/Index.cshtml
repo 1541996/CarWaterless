@@ -1,0 +1,363 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+
+<style>
+    #content{
+        max-width:100%!important
+    }
+
+    .bg-header{
+        background:#fff !important
+    }
+
+    .div-chat-footer {
+        /* height: 70px;
+      */
+        width: 100%;
+        border-top: 0px solid #ddd;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        z-index: 2;
+        background:#fff!important
+        /*  padding: 0px 5px 5px;*/
+    }
+
+
+    .pic {
+        width: 3rem;
+        height: 3rem;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+    }
+
+    .contact {
+        position: relative;     
+        padding-left: 4rem;       
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .contact .pic {
+            position: absolute;
+            left: 0;
+        }
+
+        .contact .name {
+            font-weight: 500;
+            margin-bottom: 0.125rem;
+        }
+
+        .contact .message, .contact .seen {
+            font-size: 10px;
+            color: #999;
+        }
+
+        .contact .badge {
+            box-sizing: border-box;
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            padding-top: 0.125rem;
+            border-radius: 1rem;
+            top: 0;
+            left: 2.5rem;
+            background: #333;
+            color: white;
+        }
+
+
+
+    .chat-layout .chat-box-wrapper {
+        padding: 15px;
+    }
+
+    .chat-box-wrapper {
+        display: flex;
+        clear: both;
+        padding: .75rem;
+    }
+
+    .avatar-icon-wrapper .badge-dot.badge-dot-lg.badge-bottom {
+        top: auto;
+        right: 0;
+        bottom: 0;
+    }
+
+    .avatar-icon-wrapper .badge-dot.badge-dot-lg {
+        width: 14px;
+        height: 14px;
+        border: #fff solid 2px;
+        top: 0;
+        right: 0;
+    }
+
+    .avatar-icon-wrapper .badge.badge-bottom {
+        top: auto;
+        right: -2px;
+        bottom: -2px;
+    }
+
+    .avatar-icon-wrapper .badge-dot {
+        width: 10px;
+        height: 10px;
+        border: #fff solid 2px;
+    }
+
+    .avatar-icon-wrapper .badge {
+        position: absolute;
+        right: -2px;
+        top: -2px;
+    }
+
+    .badge-dot-lg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .badge-dot {
+        text-indent: -999em;
+        padding: 0;
+        width: 8px;
+        height: 8px;
+        border: transparent solid 1px;
+        border-radius: 30px;
+        min-width: 2px;
+    }
+
+    .badge {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        min-width: 19px;
+    }
+
+    .badge-success {
+        color: #fff;
+        background-color: #3ac47d;
+    }
+
+    .badge-success {
+        color: #fff;
+        background-color: #3ac47d;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: .25em .4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25rem;
+    }
+
+    .avatar-icon.rounded {
+        border-radius: .39rem !important;
+    }
+
+    .avatar-icon {
+      /*  border: #fff solid 3px;*/
+        overflow: hidden;
+    }
+
+    .avatar-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        transition: all .2s;
+        opacity: 1;
+        border-radius: 50px;
+    }
+
+    .rounded {
+        border-radius: .25rem !important;
+    }
+
+    .avatar-icon img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .chat-box-wrapper .chat-box {
+        box-shadow: 0 0 0 transparent;
+        position: relative;
+        opacity: 1;
+        background: #e0f3ff;
+        border: 0;
+        padding: .75rem 1.5rem;
+        border-radius: 30px;
+        border-top-left-radius: .25rem;
+        flex: 1;
+        display: flex;
+        max-width: 50%;
+        min-width: 100%;
+        text-align: left;
+    }
+
+        .chat-box-wrapper .chat-box + small {
+            text-align: left;
+            padding: .5rem 0 0;
+            margin-left: 1.5rem;
+            display: block;
+        }
+
+    .opacity-6 {
+        opacity: .6 !important;
+    }
+
+    small, .small {
+        font-size: 80%;
+        font-weight: 400;
+    }
+
+    small {
+        font-size: 80%;
+    }
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-header">
+    <div class="container-fluid">
+        <div class="contact bar">
+            <div class="pic stark" style="background-image: url(../../Plesirthemes/img/profile4.jpg)"></div>
+            <div class="name">
+                The'Oo Ko
+            </div>
+            <div class="seen">
+                Today at 12:56
+            </div>
+
+        </div>
+        
+    </div>
+</nav>
+
+<div class="chat chat-layout">
+    <div class="chat-box-wrapper">
+        <div>
+            <div class="avatar-icon-wrapper mr-1">
+
+                <div class="avatar-icon avatar-icon-lg rounded">
+                    <img src="~/Plesirthemes/img/profile2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="chat-box">
+                But I must explain to you how all this mistaken idea of
+                denouncing pleasure and praising pain was born and I will give you a complete
+                account of the system.
+            </div>
+            <small class="opacity-6">
+                <i class="fa fa-calendar-alt mr-1"></i>
+                11:01 AM 
+            </small>
+        </div>
+    </div>
+
+
+
+   
+        <div class="chat-box-wrapper flex-end">
+
+            <div>
+                <div class="chat-box" style="background:#fff">
+                    But I must explain to you how all this mistaken idea of
+                    denouncing pleasure and praising pain was born and I will give you a complete
+                    account of the system.
+                </div>
+                <small class="opacity-6 text-right">
+                    <i class="fa fa-calendar-alt mr-1"></i>
+                    11:01 AM 
+                </small>
+            </div>
+        </div>
+   
+
+    <div class="chat-box-wrapper">
+        <div>
+            <div class="avatar-icon-wrapper mr-1">
+
+                <div class="avatar-icon avatar-icon-lg rounded">
+                    <img src="~/Plesirthemes/img/profile2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="chat-box">
+                But I must explain to you how all this mistaken idea of
+                denouncing pleasure and praising pain was born and I will give you a complete
+                account of the system.
+            </div>
+            <small class="opacity-6">
+                <i class="fa fa-calendar-alt mr-1"></i>
+                11:01 AM
+            </small>
+        </div>
+    </div>
+
+
+
+    
+        <div class="chat-box-wrapper flex-end">
+
+            <div>
+                <div class="chat-box" style="background:#fff">
+                    But I must explain 
+                </div>
+                <small class="opacity-6 text-right">
+                    <i class="fa fa-calendar-alt mr-1"></i>
+                    11:01 AM
+                </small>
+            </div>
+        </div>
+   
+
+</div>
+
+
+<div class="div-chat-footer">
+    <div class="display-flex-row">
+        <div class="display-flex-column" style="width:85%">
+            <div class="input-group">
+                <textarea class="form-control" placeholder="type here..." aria-label="note"></textarea>
+            </div>
+        </div>
+        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
+            <i class="fas fa-paper-plane"></i>
+        </div>
+        
+        
+    </div>
+
+
+</div>
+
+
+
+@section scripts{
+
+    <script>
+        $(function () {
+         //   $('.navbar').hide();
+            $('.bottom-panel').hide();
+
+        })
+
+
+
+    </script>
+
+
+}

@@ -166,6 +166,8 @@
     <Compile Include="Controllers\Admin_TestController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -191,6 +193,7 @@
     <Content Include="Plesirthemes\EcoPhoto\ads-holder.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads-holder1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\camera.png" />
     <Content Include="Plesirthemes\EcoPhoto\eco1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco3.jpg" />
@@ -265,6 +268,11 @@
     <Content Include="Plesirthemes\lib\slick\slick\slick-theme.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.min.js" />
+    <Content Include="Plesirthemes\lightSlider\css\lightslider.css" />
+    <Content Include="Plesirthemes\lightSlider\css\lightslider.min.css" />
+    <Content Include="Plesirthemes\lightSlider\img\controls.png" />
+    <Content Include="Plesirthemes\lightSlider\js\lightslider.js" />
+    <Content Include="Plesirthemes\lightSlider\js\lightslider.min.js" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.css" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.js" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.css" />
@@ -340,6 +348,10 @@
     <Content Include="Views\Branch\Detail.cshtml" />
     <Content Include="Views\Package\Index.cshtml" />
     <Content Include="Views\Package\Detail.cshtml" />
+    <Content Include="Views\Car\Index.cshtml" />
+    <Content Include="Views\Car\Detail.cshtml" />
+    <Content Include="Views\Car\Add.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

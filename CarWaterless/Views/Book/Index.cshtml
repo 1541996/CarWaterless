@@ -111,6 +111,26 @@
         border: 3px solid #00c9a7;
     }
 
+    input[type=checkbox], input[type=radio] {
+      display:none
+    }
+
+
+     .btn-group-justified{
+         width:100%
+    }
+
+
+    .btn-light {
+        color: #212529 !important;
+        background-color: #dae0e5!important;
+        border-color: #d3d9df!important;
+    }
+
+    .active {
+        color:#fff!important;
+        background: #00c9a7!important
+    }
 </style>
 
     <div class="content-wrap">
@@ -145,6 +165,23 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group col-md-12">
+                                    <label>Choose Type</label>
+                                    <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                        <label class="btn btn-light r_male rounded-default lb">
+                                            <input type="radio" name="Type" value="In-House" id="r_1" required=""> In-House
+                                        </label>
+
+                                        <label class="btn btn-light r_female rounded-default lb">
+                                            <input type="radio" name="Type" value="Walk-In" id="r_2" required=""> Walk-In
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                               
+
                                 <div class="form-group col-md-12">
                                     <label>Township</label>
                                     <div class="field-group">

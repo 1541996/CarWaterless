@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+<style>
+
+    .item ul {
+        list-style: none outside none;
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    .item li {
+        display: block;
+        float: left;
+        margin-right: 6px;
+        cursor: pointer;
+    }
+
+    .item img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .lSAction > a {
+        background-image: unset !important;
+    }
+
+    .attr {
+        border-bottom: 1px solid #ebebeb;
+        padding: 20px 0;
+    }
+
+</style>
+
+
+
+<div class="container mt-10">
+        
+     
+        <div class="subsite-heading mt-10 fs-22">
+            Nissan Jake
+        </div>
+
+
+        <ul id="lightSlider" class="item mt-10">
+            <li data-thumb="https://kktstroage.azureedge.net/yammo/mycar/e97d8745-9558-4a62-8a08-4e07da9cf344.png">
+                <img class="br-10" src="https://kktstroage.azureedge.net/yammo/mycar/e97d8745-9558-4a62-8a08-4e07da9cf344.png" />
+            </li>
+
+            <li data-thumb="/Plesirthemes/img/car2-honda2.png">
+                <img class="br-10" src="~/Plesirthemes/img/car2-honda2.png" />
+            </li>
+
+            <li data-thumb="https://kktstroage.azureedge.net/yammo/mycar/905f225f-2486-4f59-9996-573f8d2902e2.png">
+                <img class="br-10" src="https://kktstroage.azureedge.net/yammo/mycar/905f225f-2486-4f59-9996-573f8d2902e2.png" />
+            </li>
+
+            <li data-thumb="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png">
+                <img class="br-10" src="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png" />
+            </li>
+
+
+
+        </ul>
+
+
+        <div class="panel-custom-default mt-30 p-20">
+
+            <div class="display-flex-row attr pt-0">
+                <div class="display-flex-column d-block">
+                   
+                        <i class="fas fa-car"></i>&nbsp;&nbsp; Car No
+                   
+                </div>
+                <div class="display-flex-column ml-auto">
+                    <h6>
+                        1A/4444
+                    </h6>
+                        
+                </div>
+
+
+            </div>
+            <div class="display-flex-row attr">
+                <div class="display-flex-column d-block">
+                    <i class="fas fa-car-side"></i>&nbsp;&nbsp; Build Types
+                </div>
+                <div class="display-flex-column ml-auto">
+                    <h6>
+                        SUV
+                    </h6>
+                    
+                </div>
+
+
+            </div>
+
+            <div class="display-flex-row attr">
+                <div class="display-flex-column d-block">
+                    <i class="fas fa-dice-d6"></i>&nbsp;&nbsp; Color
+                </div>
+                <div class="display-flex-column ml-auto">
+                    <h6>
+                        Red
+                    </h6>
+                    
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+   
+</div>
+
+
+ 
+
+
+
+
+
+@section scripts{
+
+    <link href="~/Plesirthemes/lightSlider/css/lightslider.css" rel="stylesheet" />
+    <script src="~/Plesirthemes/lightSlider/js/lightslider.js"></script>
+    <script>
+
+        $(function () {
+
+
+            $('#lightSlider').lightSlider({
+                gallery: true,
+                item: 1,
+                loop: true,
+                slideMargin: 0,
+                thumbItem: 9,
+                adaptiveHeight: true,
+                prevHtml: '<i class="fas fa-chevron-circle-left" style="color:#00c9a7;font-size:30px"></i>',
+                nextHtml: '<i class="fas fa-chevron-circle-right" style="color:#00c9a7;font-size:30px"></i>',
+            });
+
+
+        })
+
+
+    </script>
+
+
+
+}

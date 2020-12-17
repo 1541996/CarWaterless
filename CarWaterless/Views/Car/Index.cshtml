@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+
+    <style>
+
+.news-card {
+  border: 0px solid aqua;
+  margin: 20px;
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  flex: 1;
+  min-width: 290px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+    background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1e1b26',GradientType=0 );
+    /* IE6-9 */
+}
+
+@@media (min-width: 900px) {
+
+.news-card {
+    height: 20rem
+}
+  }
+
+.news-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);;
+      z-index: 0;
+    }
+
+.news-card__card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+/*     background: rgba(255,0,0,.5); */
+  }
+
+.news-card__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 3s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    z-index: -1;
+  }
+
+.news-card__text-wrapper {
+    position: absolute;
+    bottom: 0rem;
+    padding: 1rem;
+    color: white;
+/*     background-color: rgba(0, 0, 0, 0.4); */
+    transition: background-color 1.5s ease;
+  }
+
+.news-card__title {
+    transition: color 1s ease;
+    margin-bottom: .5rem;
+    font-size:16px !important
+  }
+
+        .news-card__post-date {
+            font-size: 12px;
+            margin-bottom: .5rem;
+            color: #fff;
+            background: rgba(0,0,0,.5);
+            padding: 0 8px;
+            display:inline-block;
+            border-radius:5px;
+            border:1px solid #ddd;
+        }
+
+.news-card__details-wrapper {
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 1.5s ease, opacity 1s ease;
+  }
+
+@@media (min-width: 900px) {
+    .news-card:hover .news-card__details-wrapper {
+      max-height: 20rem;
+      opacity: 1;
+    }
+    .news-card:hover .news-card__text-wrapper {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .news-card:hover .news-card__title {
+      color: yellow;
+    }
+    .news-card:hover .news-card__image {
+      transform: scale(1.2);
+      z-index: -1;
+    }
+  }
+
+.news-card__excerpt {
+    font-weight: 300;
+  }
+
+.news-card__read-more {
+    background: black;
+    color: #bbb;
+    display: block;
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.3rem;
+    margin-top: 1rem;
+    border: 1px solid #444;
+    font-size: 0.8rem;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 7rem;
+    margin-left: auto;
+    position: relative;
+    z-index: 5;
+  }
+
+.news-card__read-more i {
+      position: relative;
+      left: 0.2rem;
+      color: #888;
+      transition: left 0.5s ease, color 0.6s ease;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+.news-card__read-more:hover i {
+      left: 0.5rem;
+      color: yellow;
+    }
+
+
+
+    </style>
+
+
+
+    <div class="content-wrap">
+        <div class="subsite-heading mt-10 fs-22">
+            My car garage
+        </div>
+       
+            <div class="news-card">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="~/Plesirthemes/img/car2-nissan3.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h2 class="news-card__title">Nissan Jake</h2>
+                        </div>
+                        <div class="display-flex-column ml-auto fs-22 flex-end">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="news-card__post-date">Van</div> <div class="news-card__post-date ml-5">yellow</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card mt-30">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="~/Plesirthemes/img/car2-honda2.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h2 class="news-card__title">Nissan Jake</h2>
+                        </div>
+                        <div class="display-flex-column ml-auto fs-22 flex-end">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="news-card__post-date">Van</div> <div class="news-card__post-date ml-5">yellow</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card mt-30">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="https://kktstroage.azureedge.net/yammo/mycar/e97d8745-9558-4a62-8a08-4e07da9cf344.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h2 class="news-card__title">Nissan Jake</h2>
+                        </div>
+                        <div class="display-flex-column ml-auto fs-22 flex-end">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="news-card__post-date">Van</div> <div class="news-card__post-date ml-5">yellow</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card mt-30">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="https://kktstroage.azureedge.net/yammo/mycar/905f225f-2486-4f59-9996-573f8d2902e2.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <h2 class="news-card__title">Amazing Forth Title that is Quite Long</h2>
+                    <div class="news-card__post-date">Jan 29, 2018</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet!</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card mt-30">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="https://kktstroage.azureedge.net/yammo/mycar/b5da6b78-5517-4200-9851-40b4061f8808.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h2 class="news-card__title">Nissan Jake</h2>
+                        </div>
+                        <div class="display-flex-column ml-auto fs-22 flex-end">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="news-card__post-date">Van</div> <div class="news-card__post-date ml-5">yellow</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-card mt-30">
+                <a href="#" class="news-card__card-link"></a>
+                <img src="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png" alt="" class="news-card__image">
+                <div class="news-card__text-wrapper">
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h2 class="news-card__title">Nissan Jake</h2>
+                        </div>
+                        <div class="display-flex-column ml-auto fs-22 flex-end">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </div>
+                    </div>
+
+
+                    <div class="news-card__post-date">Van</div> <div class="news-card__post-date ml-5">yellow</div>
+                    <div class="news-card__details-wrapper">
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>
+                </div>
+            </div>
+      
+    </div>
