@@ -34,8 +34,7 @@ namespace Infra.Models
         public DbSet<tbNotification> tbNotifications { get; set; }
         public DbSet<tbOperation> tbOperations { get; set; }
         public DbSet<tbRank> tbRanks { get; set; }
-        public DbSet<tbServiceCategory> tbServiceCategories { get; set; }
-        public DbSet<tbServicePackage> tbServicePackages { get; set; }
+        public DbSet<tbAdditionalService> tbAdditionalServices { get; set; }
         public DbSet<tbTopCustomer> tbTopCustomers { get; set; }
         public DbSet<tbTownship> tbTownships { get; set; }
 

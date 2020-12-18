@@ -17,8 +17,9 @@ namespace Infra.Models
         public string WashType { get; set; }
         public string CustomerAddress { get; set; }
         public DateTime? RequestDateTime { get; set; }
-        public string ServicePackageIds { get; set; }
-        public string ServicePackageNames { get; set; }
+        public string AdditionalIds { get; set; }
+        public string AdditionalNames { get; set; }
+        public string AdditionalPrices { get; set; }
         public Nullable<System.DateTime> OperationDate { get; set; }
         public Nullable<System.DateTime> StartTime { get; set; }
         public Nullable<System.DateTime> EndTime { get; set; }
@@ -34,5 +35,6 @@ namespace Infra.Models
         public string StarRate { get; set; }
         public string Feedback { get; set; }
         public string ComplaintsMessage { get; set; }
+        public int? CarCategoryId { get; set; }
     }
 }

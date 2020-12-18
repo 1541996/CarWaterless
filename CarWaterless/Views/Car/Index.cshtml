@@ -291,3 +291,67 @@
             </div>
       
     </div>
+
+
+@section scripts{
+    <script>
+
+
+         function GetCarCategory() {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetAudio", "Search")',
+                data: {
+
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#ddaudio').select2({
+                        placeholder: "Choose option or type",
+                        allowClear: true
+
+                    });
+
+
+                    for (var i = 0; i < result.length; i++) {
+                        $('#ddaudio').append('<option value="' + result[i].Audio + '">' + result[i].Audio + '</option>')
+                    };
+                },
+
+                complete: function () {
+
+                    if (audio != null && audio != "") {
+                        Select2DataBinding(audio, 'ddaudio');
+                    }
+
+
+                    $('#ddaudio').on('change', function () {
+                        var mapdata = [];
+                        var data = $('#ddaudio').select2('data');
+                        data.forEach(function (item) {
+                            mapdata.push(item.text);
+                            //   alert(item.text);
+                        })
+
+                        audio = mapdata.join();
+
+                        changeurl();
+                    });
+
+
+
+                }
+            })
+        }
+
+
+
+
+
+    </script>
+    
+    
+    
+    } 

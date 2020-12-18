@@ -18,11 +18,13 @@ namespace Infra.UnitOfWork
         private IRepository<tbNotification> _notificationRepo;
         private IRepository<tbOperation> _operationRepo;
         private IRepository<tbRank> _rankRepo;
-        private IRepository<tbServiceCategory> _serviceCategoryRepo;
-        private IRepository<tbServicePackage> _servicePackageRepo;
+        private IRepository<tbAdditionalService> _serviceCategoryRepo;
+      
         private IRepository<tbTopCustomer> _topCustomerRepo;
         private IRepository<tbTownship> _townshipRepo;
-      
+        private IRepository<tbPhoto> _photoRepo;
+        
+
 
 
 
@@ -141,6 +143,19 @@ namespace Infra.UnitOfWork
                 return _notificationRepo;
             }
         }
+
+        public IRepository<tbPhoto> photoRepo
+        {
+            get
+            {
+                if (_photoRepo == null)
+                {
+                    _photoRepo = new Repository<tbPhoto>(_dbContext);
+                }
+                return _photoRepo;
+            }
+        }
+
         //public IRepository<tbCollectionChannel> collectionChannelRepo
         //{
         //    get
@@ -274,7 +289,7 @@ namespace Infra.UnitOfWork
         //        return _reviewRepo;
         //    }
         //}
-        
+
 
 
     }

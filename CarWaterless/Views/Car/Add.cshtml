@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/_webLayout.cshtml";
 }
 
+
+@model Infra.Helper.CarPhotoModel
+
 <style>
 
     .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -169,7 +172,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-layout">
-                    <form>
+                    <form id="CarForm">
                         <div class="form-row">
 
                             <div class="form-group col-md-12 mt-20">
@@ -186,46 +189,53 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                    <div class="display-flex-column flex-basis mb-10">
-                                        <div class="div-img text-center">
-                                          
-                                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                            <i class="fas fa-trash-alt text-danger"></i>
-                                           
-                                        </div>
+
+                                        <input type="hidden" name="vehicle.CarPhoto" id="multiplePhoto" />
 
                                     </div>
-                                    <div class="display-flex-column flex-basis mb-10">
-                                        <div class="div-img text-center">
+                                    <div class="multiplephotoupload">
+                                        <div class="display-flex-column flex-basis mb-10">
+                                            <div class="div-img text-center">
 
-                                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                            <i class="fas fa-trash-alt text-danger"></i>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+
+                                            </div>
 
                                         </div>
+                                        <div class="display-flex-column flex-basis mb-10">
+                                            <div class="div-img text-center">
 
-                                    </div>
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <i class="fas fa-trash-alt text-danger"></i>
 
-                                    <div class="display-flex-column flex-basis mb-10">
-
-                                        <div class="div-img text-center">
-
-                                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                            <i class="fas fa-trash-alt text-danger"></i>
+                                            </div>
 
                                         </div>
-                                    </div>
-                                    <div class="display-flex-column flex-basis mb-10">
 
-                                        <div class="div-img text-center">
+                                        <div class="display-flex-column flex-basis mb-10">
 
-                                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                            <i class="fas fa-trash-alt text-danger"></i>
+                                            <div class="div-img text-center">
 
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+
+                                            </div>
                                         </div>
+                                        <div class="display-flex-column flex-basis mb-10">
+
+                                            <div class="div-img text-center">
+
+                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+
+                                            </div>
+                                        </div>
+
+
+
                                     </div>
-
-
+                                   
                                 </div>
 
 
@@ -238,7 +248,7 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" placeholder="Model Name" aria-label="car" />
+                                        <input class="form-control pl-35" placeholder="vehicle.VehicleName" aria-label="car" />
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +258,7 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" placeholder="Brand" aria-label="car" />
+                                        <input class="form-control pl-35" name="vehicle.VehicleBrand" placeholder="Brand" aria-label="car" />
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +268,7 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" placeholder="1A/BBBB" aria-label="car" />
+                                        <input class="form-control pl-35" name="vehicle.VehicleNo" placeholder="1A/BBBB" aria-label="car" />
                                     </div>
                                 </div>
                             </div>
@@ -306,11 +316,17 @@
     <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
     <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
     <script>
+        var photoRemove = [];
+        var filename = [];
+        var index = 0;
+
+        var filescount;
+        var count = 0;
 
         $(function () {
-          
+
             $('#color').select2();
-          
+
 
             $('#datestart').daterangepicker({
                 singleDatePicker: true,
@@ -324,11 +340,200 @@
 
             $('#timepicker').mdtimepicker();
 
+            $('#gallery-photo-add').on('change', function () {
+                imagesPreview(this, 'div.multiplephotoupload');
+            });
 
-            //$('#datestart').datepicker({
-            //    uiLibrary: 'bootstrap'
-            //});
+
+
         })
+
+
+       
+
+               $("#CarForm").submit(function (e) {
+                      e.preventDefault();
+
+                        imagesstring = "";
+                        var images = "";
+
+
+
+                        $('.multiplephotoupload').find('div').each(function () {
+                            images = $(this).attr("data-image");
+                            console.log("hello");
+                            console.log(images);
+                            imagesstring += images + "~";
+                            console.log(imagesstring);
+                            images = "";
+                        });
+
+
+                        imagesstring = imagesstring.slice(0, -1);
+
+
+                        $('#multiplePhoto').val(imagesstring);
+
+                        $.ajax({
+                            cache: false,
+                            url: '@Url.Action("AddCarData", "Car")',
+                            type: "Post",
+                            data: $(this).serialize(),
+
+
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+
+                            },
+                            success: function (myData) { },
+                            complete: function () {
+                                $('.btn').prop("disabled", true);
+                              //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
+                           
+                            }
+                        })
+                         })
+
+
+      
+
+        function imagesPreview(input, placeToInsertImagePreview) {
+                if (input.files) {
+
+                    filesAmount = input.files.length;
+                    filescount = input.files.length;
+                    count = count + filescount;
+                    var filetotal = parseInt(filesAmount) + parseInt(picturetotal);
+                    for (i = 0; i < filesAmount; i++) {
+                        console.log(i);
+
+                        multipleupload(input.files[i], index);
+                        index++;
+
+                    }
+            }
+
+            };
+
+
+     
+        function multipleupload(input, index) {
+
+            var reader = new FileReader();
+
+            console.log(input.name);
+
+            var img = document.createElement("img");
+
+                reader.onload = function (e) {
+
+                    img.src = e.target.result;
+                    var mime_type = "image/jpeg";
+                    if (typeof output_format !== "undefined" && output_format == "png") {
+                        mime_type = "image/png";
+                    }
+                    img.onload = function () {
+                        var canvas = document.createElement("canvas");
+                        var ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0);
+
+                        var MAX_WIDTH = 1200;
+                        var MAX_HEIGHT = 1200;
+                        var width = img.width;
+                        var height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) {
+                                height *= MAX_WIDTH / width;
+                                width = MAX_WIDTH;
+                            }
+                        } else {
+                            if (height > MAX_HEIGHT) {
+                                width *= MAX_HEIGHT / height;
+                                height = MAX_HEIGHT;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        var ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        var dataurl = canvas.toDataURL(mime_type, 60 / 100);
+
+                        $('.multiplephotoupload').append('<div class="col-md-3 col-sm-3 col-xs-3 text-center imagedivloop" data-filename="' + input.name + '"  data-image="' + dataurl + '" id="rmimage_' + index + '"><img  id="imagephoto_' + index + '" src = "' + dataurl + '" style="object-fit:cover;width:60px;height:60px;border-radius:10px;margin-top:10px"><br><span class="glyphicon glyphicon-remove-sign" id="removeButton_' + index + '" aria-label="Close" index="' + index + '" imageid="' + dataurl + '" onclick=removeimage(this)></span></div>')
+
+
+                        picturetotal = $("#pictureTotal").val();
+
+                        picturetotal++;
+
+                        $("#pictureTotal").val(picturetotal);
+
+                        photoRemove.push(index);
+                        index++;
+
+
+
+                    }
+
+
+
+                    }
+
+
+                
+
+                reader.readAsDataURL(input);
+
+
+        }
+
+
+
+        function removeimage(e) {
+
+            picturetotal = $("#pictureTotal").val();
+            picturetotal--;
+            $("#pictureTotal").val(picturetotal);
+
+           
+            var carimage = $(e).attr("imageid");
+            var index = $(e).attr("index");
+
+            photoRemove.splice(index, 1);
+
+            $("#rmimage_" + index).remove();
+
+
+        }
+
+
+       function Delete(e)
+        {
+            picturetotal = $("#pictureTotal").val();
+            picturetotal--;
+            $("#pictureTotal").val(picturetotal);
+            if (picturetotal < 10) {
+                $("#div_upload").show();
+            }
+            var photoId = $(e).attr("photoID");
+            $("#div-photo_"+photoId).remove();
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("DeletePhoto", "Car")',
+                data: { photoId: photoId },
+                beforeSend: function () {
+
+                },
+                success: function () {
+
+                },
+                complete: function () {
+                   
+                }
+            });
+
+        }
 
 
 

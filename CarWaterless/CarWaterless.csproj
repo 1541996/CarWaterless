@@ -164,6 +164,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Business\AdminRepository.cs" />
     <Compile Include="Controllers\Admin_TestController.cs" />
+    <Compile Include="Controllers\API_LoginController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\CarController.cs" />
