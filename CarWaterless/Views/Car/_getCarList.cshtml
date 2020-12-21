@@ -1,0 +1,35 @@
+﻿
+@model IQueryable<Infra.ViewModels.VehicleCategoryViewModel>
+
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+        <div class="news-card mt-30" onclick="Detail(@item.vehicle.Id)">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png" alt="" class="news-card__image">
+            <div class="news-card__text-wrapper width-100">
+                <div class="display-flex-row">
+                    <div class="display-flex-column">
+                        <h2 class="news-card__title">@item.vehicle.VehicleBrand @item.vehicle.VehicleName</h2>
+                    </div>
+                    <div class="display-flex-column ml-auto fs-22 flex-end">
+                        <i class="fas fa-chevron-circle-right"></i>
+                    </div>
+                </div>
+
+
+                <div class="news-card__post-date">@item.category.Name</div> <div class="news-card__post-date ml-5">@item.vehicle.VehicleColor</div>
+                @*<div class="news-card__details-wrapper">
+                    <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                    <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                </div>*@
+            </div>
+        </div>
+
+    }
+}
+
+
+

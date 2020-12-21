@@ -16,8 +16,8 @@ namespace Infra.Helper
 
     public class baseUrls
     {
-        public static String API_URL = "https://localhost:44330/";
-       //   public static string API_URL = "http://zettabyteplus-001-site2.ftempurl.com/";      
+      //  public static String API_URL = "https://localhost:44330/";
+          public static string API_URL = "http://filestorage.centurylinks-stock.com/";      
     }
     public class ApiRequest<T, U>
     {

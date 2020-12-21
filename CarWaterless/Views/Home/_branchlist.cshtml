@@ -1,0 +1,61 @@
+﻿
+@model IQueryable<Infra.ViewModels.BranchViewModel>
+
+
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+
+    <div class="row news-row">
+        <div class="col-md-12">
+            <div class="news-card">
+                <div class="nc-top">
+                    <div class="nc-left">
+                        <div class="ncl-image">
+                            <img src="~/Plesirthemes/img/news3.jpg" alt="image">
+                        </div>
+                    </div>
+                    <div class="nc-right">
+                        <div class="display-flex-row" onclick="BranchDetail('@item.branch.Id')">
+                            <div class="display-flex-column">
+                                <div class="ncr-row-a">
+                                    @item.branch.LocationName
+                                </div>
+                            </div>
+                            <div class="display-flex-column">
+                                <i class="fas fa-chevron-circle-right theme-color mt-2 ml-5 fs-16"></i>
+                            </div>
+                        </div>
+
+                        <div class="ncr-row-b">
+                            <i class="fas fa-calendar-times theme-color"></i> &nbsp; @item.branch.OpenTime - @item.branch.CloseTime
+
+                        </div>
+                        <div class="ncr-row-b">
+                            <i class="fas fa-phone-square theme-color"></i> &nbsp; @item.branch.LocationPhoneNo
+
+                        </div>
+                        <div class="ncr-row-b">
+                            <i class="fas fa-map-marker-alt theme-color"></i> &nbsp; @item.township.Name
+
+
+                        </div>
+
+                        @*<div class="ncr-row-b">
+                            <i class="fas fa-map-marker-alt theme-color"></i> &nbsp; @item.branch.LocationAddress
+
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    }
+
+}
+
+<div class="more-category">
+    <a href="../branch"><div class="theme-button mcbutton">See More</div></a>
+</div>

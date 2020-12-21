@@ -37,6 +37,7 @@ namespace Infra.Models
         public DbSet<tbAdditionalService> tbAdditionalServices { get; set; }
         public DbSet<tbTopCustomer> tbTopCustomers { get; set; }
         public DbSet<tbTownship> tbTownships { get; set; }
+        public DbSet<tbPhoto> tbPhotos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

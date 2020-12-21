@@ -22,31 +22,60 @@ namespace CarWaterless.Controllers
             uow = new UnitOfWork(dbContext);
         }
         // GET: Car
-        public ActionResult Index()
+        public ActionResult Index(string customerid = null)
         {
+            ViewBag.customerid = customerid;
             return View();
         }
 
-        public ActionResult Detail()
+        public ActionResult GetCarList(string customerid = null)
         {
-            return View();
+            var data = (from veh in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.CustomerId == customerid)
+                        join cat in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                        on veh.CarCategoryId equals cat.Id
+                        select new VehicleCategoryViewModel()
+                        {
+                            vehicle = veh,
+                            category = cat
+                        }).AsQueryable();
+
+            return PartialView("_getCarList", data);
         }
 
-        public ActionResult Add()
-        {
-            CarPhotoModel obj = new CarPhotoModel();
-            return View();
-        }
 
-        public ActionResult Edit(int Id = 0)
+        public ActionResult Detail(int Id = 0)
         {
             CarPhotoModel obj = new CarPhotoModel();
             obj.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == Id).FirstOrDefault();
+            obj.carcategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.vehicle.CarCategoryId).FirstOrDefault();
             obj.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == Id).AsQueryable();
             return View(obj);
         }
 
-
+        public ActionResult Add(int Id = 0,string type = "Add",string customerid = null)
+        {
+            ViewBag.id = Id;
+            ViewBag.formtype = type;
+            if(Id > 0)
+            {
+                CarPhotoModel obj = new CarPhotoModel();
+                obj.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == Id).FirstOrDefault();
+                obj.carcategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.vehicle.CarCategoryId).FirstOrDefault();
+                obj.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == Id).AsQueryable();
+                return View(obj);
+            }
+            else
+            {
+                CarPhotoModel obj = new CarPhotoModel();
+                //  obj.photos = new List<tbPhoto>();
+                obj.carcategory = new tbCarCategory();
+                obj.vehicle = new tbCustomerVehicle();
+                obj.vehicle.CustomerId = customerid;
+                return View(obj);
+            }
+            
+        }
+    
         public async System.Threading.Tasks.Task<ActionResult> SaveCarAsync(CarPhotoModel obj)
         {
             tbCustomerVehicle UpdateEntity = null;
@@ -66,7 +95,7 @@ namespace CarWaterless.Controllers
             if(UpdateEntity != null)
             {
                 List<string> photolist = new List<string>();
-                tbPhoto photoobj = new tbPhoto();
+              //  tbPhoto photoobj = new tbPhoto();
                 if (obj.vehicle.CarPhoto != null && obj.vehicle.CarPhoto != "")
                 {
                     photolist = obj.vehicle.CarPhoto.Split('~').ToList<string>();
@@ -84,12 +113,13 @@ namespace CarWaterless.Controllers
                     }
 
 
-                    List<FileUploadViewModel> responsefilelist = await FileUploadApiRequestHelper.uploadlist(fileuploadlist);
+                    List<string> responsefilelist = await FileUploadApiRequestHelper.uploadlist(fileuploadlist);
 
                     List<tbPhoto> savephotolist = new List<tbPhoto>();
                     foreach (var photo in responsefilelist)
                     {
-                        photoobj.Photo = photo.photo;
+                        tbPhoto photoobj = new tbPhoto();
+                        photoobj.Photo = photo;
                         photoobj.Type = "Vehicle";
                         photoobj.CarID = UpdateEntity.Id;
                         photoobj.IsDeleted = false;
@@ -97,7 +127,16 @@ namespace CarWaterless.Controllers
                         savephotolist.Add(photoobj);
                     }
 
-                    uow.photoRepo.InsertReturnList(savephotolist);
+                    try
+                    {
+                        uow.photoRepo.InsertReturnList(savephotolist);
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
+
+                  
 
 
                 }
@@ -116,7 +155,36 @@ namespace CarWaterless.Controllers
             }
 
         }
-   
+       
+        public ActionResult DeletePhoto(int photoId = 0)
+        {
+
+            tbPhoto UpdateEntity;
+            tbPhoto photo = uow.photoRepo.GetAll().Where(a => a.ID == photoId).Where(a => a.IsDeleted != true).FirstOrDefault();
+            photo.IsDeleted = true;
+          //  photo.Accesstime = MyExtension.getLocalTime(DateTime.UtcNow);
+            UpdateEntity = uow.photoRepo.UpdateWithObj(photo);
+
+            if (UpdateEntity != null)
+            {
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+        public ActionResult GetCategory(string cartype = null)
+        {
+            IQueryable data = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Type == cartype).AsQueryable();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+       
+    
     
     }
 }

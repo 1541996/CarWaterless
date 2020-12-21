@@ -37,13 +37,13 @@
 
 </style>
 
-
+@model Infra.Helper.CarPhotoModel
 
 <div class="container mt-10">
         
      
         <div class="subsite-heading mt-10 fs-22">
-            Nissan Jake
+            @Model.vehicle.VehicleBrand @Model.vehicle.VehicleName
         </div>
 
 
@@ -79,7 +79,7 @@
                 </div>
                 <div class="display-flex-column ml-auto">
                     <h6>
-                        1A/4444
+                       @Model.vehicle.VehicleNo
                     </h6>
                         
                 </div>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="display-flex-column ml-auto">
                     <h6>
-                        SUV
+                        @Model.carcategory.Name
                     </h6>
                     
                 </div>
@@ -106,7 +106,7 @@
                 </div>
                 <div class="display-flex-column ml-auto">
                     <h6>
-                        Red
+                       @Model.vehicle.VehicleColor
                     </h6>
                     
                 </div>

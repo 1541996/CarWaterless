@@ -353,6 +353,9 @@
     <Content Include="Views\Car\Detail.cshtml" />
     <Content Include="Views\Car\Add.cshtml" />
     <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Car\_getCarList.cshtml" />
+    <Content Include="Views\Home\_branchlist.cshtml" />
+    <Content Include="Views\Branch\_branchlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

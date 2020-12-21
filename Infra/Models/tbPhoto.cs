@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Models
 {
-    [Table("tbAdmin")]
+    [Table("tbPhoto")]
     public partial class tbPhoto
     {
         [Key]
@@ -20,13 +20,11 @@ namespace Infra.Models
             {
                 if (this.Photo != null)
                 {
-                    return string.Format("https://portalvhdslvb28rs1c3tmc.blob.core.windows.net/yammo/careme/{0}", Photo);
+                    return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/CustomerVehicle/{0}", Photo);
                 }
                 return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
 
             }
-
-
         }
         
         public Nullable<bool> IsDeleted { get; set; }

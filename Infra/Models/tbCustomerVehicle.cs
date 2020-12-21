@@ -11,7 +11,7 @@ namespace Infra.Models
         [Key]
         public int Id { get; set; }
         public string CustomerId { get; set; }
-        public string CarCategoryId { get; set; }
+        public int? CarCategoryId { get; set; }
         public string VehicleNo { get; set; }
         public string VehicleName { get; set; }
         public string VehicleBrand { get; set; }
@@ -22,5 +22,6 @@ namespace Infra.Models
         public Nullable<int> CreateUserId { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public string VehicleColor { get; set; }
     }
 }

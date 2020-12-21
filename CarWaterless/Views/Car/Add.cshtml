@@ -26,6 +26,21 @@
     }
 
 
+    .select2-hidden-accessible {
+        border: 0 !important;
+        clip: rect(0 0 0 0) !important;
+        -webkit-clip-path: inset(50%) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        width: 1px !important;
+        white-space: nowrap !important;
+        top: 32px !important;     
+        left:100px!important
+    }
+
     .nopad {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -175,72 +190,47 @@
                     <form id="CarForm">
                         <div class="form-row">
 
+                            <input type="hidden" name="vehicle.Id" value="@Model.vehicle.Id" />
+                            <input type="hidden" name="vehicle.CustomerId" value="@Model.vehicle.CustomerId" />
+
                             <div class="form-group col-md-12 mt-20">
                                 <label for="note">Upload car photo(s)</label>
-                                <div class="display-flex-row chk-package">
-                                    <div class="display-flex-column flex-basis mb-10">
+                                <input type="hidden" name="vehicle.CarPhoto" id="multiplePhoto" />
+                                <div class="display-flex-row chk-package multiplephotoupload">
+
+                                    @if (Model.photos != null)
+                                    {
+                                        if (Model.photos.Count() > 0)
+                                        {
+                                            foreach (var item in Model.photos)
+                                            {
+                                                <div class="display-flex-column flex-basis mb-10" data-image="" id="rmimage_@item.ID">
+
+                                                    <div class="div-img text-center">
+
+                                                        <img src="@item.PhotoUrl" alt="img">
+                                                        <i class="fas fa-trash-alt text-danger" id="removeButton_@item.ID" aria-label="Close"
+                                                           onclick="DeletePhoto(@item.ID)" photoId="@item.ID"></i>
+
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        }
+                                    }
+
+                                    <div class="display-flex-column flex-basis mb-10" id="placeholder">
                                         <div class="image-upload-wrap">
 
                                             <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">
 
                                             <div class="drag-text" style="text-align: center;padding:24px;">
-                                                <img src="~/Plesirthemes/EcoPhoto/camera.png" />
+                                                <img src="../Plesirthemes/EcoPhoto/camera.png" />
 
                                             </div>
                                         </div>
-
-
-                                        <input type="hidden" name="vehicle.CarPhoto" id="multiplePhoto" />
-
                                     </div>
-                                    <div class="multiplephotoupload">
-                                        <div class="display-flex-column flex-basis mb-10">
-                                            <div class="div-img text-center">
-
-                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="display-flex-column flex-basis mb-10">
-                                            <div class="div-img text-center">
-
-                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div class="display-flex-column flex-basis mb-10">
-
-                                            <div class="div-img text-center">
-
-                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-
-                                            </div>
-                                        </div>
-                                        <div class="display-flex-column flex-basis mb-10">
-
-                                            <div class="div-img text-center">
-
-                                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
-                                                <i class="fas fa-trash-alt text-danger"></i>
-
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                   
                                 </div>
-
-
-
-
                             </div>
 
                             <div class="form-group col-md-12">
@@ -248,7 +238,8 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" placeholder="vehicle.VehicleName" aria-label="car" />
+                                        <input class="form-control pl-35" name="vehicle.VehicleName" placeholder="Vehicle Name"
+                                               value="@Model.vehicle.VehicleName" required aria-label="car" />
                                     </div>
                                 </div>
                             </div>
@@ -258,7 +249,8 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" name="vehicle.VehicleBrand" placeholder="Brand" aria-label="car" />
+                                        <input class="form-control pl-35" required name="vehicle.VehicleBrand" placeholder="Brand" value="@Model.vehicle.VehicleBrand"
+                                               aria-label="car" />
                                     </div>
                                 </div>
                             </div>
@@ -268,26 +260,69 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" name="vehicle.VehicleNo" placeholder="1A/BBBB" aria-label="car" />
+                                        <input class="form-control pl-35" required name="vehicle.VehicleNo" placeholder="1A/BBBB" value="@Model.vehicle.VehicleNo"
+                                               aria-label="car" />
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Choose Car Type</label>
+                                <div class="field-group">
+                                    <i class="fas fa-dice-d6"></i>
+                                    <select class="custom-select mr-sm-2 with-icon" id="CarType" required>
+                                        <option value="">Choose Car Type</option>
+                                        <option value="small">Small</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="big">Big</option>
+
+                                    </select>
+
+                                    <input type="hidden" name="" id="txt_cartype" value="@Model.carcategory.Type" />
+
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Choose Car Category</label>
+                                <div class="field-group">
+                                    <i class="fas fa-dice-d6"></i>
+                                    <select class="custom-select mr-sm-2 with-icon" id="CarCategory" required>
+                                        <option selected disabled>Choose Car Category</option>
+
+                                    </select>
+
+                                    <input type="hidden" name="vehicle.CarCategoryId" id="txt_carcategory" value="@Model.vehicle.CarCategoryId" />
                                 </div>
                             </div>
 
 
                             <div class="form-group col-md-12">
-                                <label>Color</label>
+                                <label>Car Color</label>
                                 <div class="field-group">
-                                    <i class="fas fa-dice-d6"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" id="color">
-                                        <option selected disabled>Please select</option>
-                                        <option value="1">Red</option>
-                                        <option value="2">Blue</option>
-                                        <option value="3">Green</option>
-                                        <option value="4">Blue</option>
-
-                                    </select>
+                                    <i class="fas fa-car"></i>
+                                    <div class="input-group">
+                                        <input class="form-control pl-35" required name="vehicle.VehicleColor" value="@Model.vehicle.VehicleColor"
+                                               placeholder="eg. red" aria-label="car" />
+                                    </div>
                                 </div>
                             </div>
+
+
+                            @*<div class="form-group col-md-12">
+            <label>Color</label>
+            <div class="field-group">
+                <i class="fas fa-dice-d6"></i>
+                <select class="custom-select mr-sm-2 with-icon" id="color">
+                    <option selected disabled>Please select</option>
+                    <option value="1">Red</option>
+                    <option value="2">Blue</option>
+                    <option value="3">Green</option>
+                    <option value="4">Blue</option>
+
+                </select>
+            </div>
+        </div>*@
 
 
 
@@ -322,11 +357,34 @@
 
         var filescount;
         var count = 0;
+        var cartype;
+
 
         $(function () {
 
-            $('#color').select2();
+            $('#CarType').select2({
+                containerCssClass: function (e) {
+                    return $(e).attr('required') ? 'required' : '';
+                }
+            });
+            $('#CarCategory').select2();
 
+
+            if ('@ViewBag.formtype' == "Edit") {
+               
+                cartype = $("#txt_cartype").val();
+                $('#CarType').val(cartype).trigger("change");
+                BindCarCategory();
+            }
+
+            $('#CarType').on('change', function () {
+                cartype = $('#CarType :selected').val();
+                BindCarCategory();
+            });
+
+
+           
+            $('#DD_price').val($("#priceid").val());
 
             $('#datestart').daterangepicker({
                 singleDatePicker: true,
@@ -349,7 +407,56 @@
         })
 
 
-       
+
+        function BindCarCategory() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetCategory", "Car")',
+                data: {
+                    cartype: cartype
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    //$('#ddaudio').select2({
+                    //    placeholder: "Choose option or type",
+                    //    allowClear: true
+                    //});
+                    $('#CarCategory').empty();
+                    $('#CarCategory').append('<option value="">Choose Car Category</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        $('#CarCategory').append('<option value="' + result[i].Id + '">' + result[i].Name +'</option>')
+                    };
+
+                    $('#CarCategory').select2({
+                        placeholder: "Choose Car Category",
+                        allowClear: true
+                    });
+
+                  
+                },
+
+                complete: function () {
+
+                   // alert($("#txt_carcategory").val());
+
+                    $('#CarCategory').val(parseInt($("#txt_carcategory").val())).trigger("change");
+                 
+
+                    $('#CarCategory').on('change', function () {
+                        var id = $('#CarCategory :selected').val();
+
+                        $("#txt_carcategory").val(id);
+
+                    });
+
+
+                }
+            })
+        }
+
+
 
                $("#CarForm").submit(function (e) {
                       e.preventDefault();
@@ -357,9 +464,9 @@
                         imagesstring = "";
                         var images = "";
 
+                   $('#placeholder').remove();
 
-
-                        $('.multiplephotoupload').find('div').each(function () {
+                     $('.multiplephotoupload').find('.div_photo').each(function () {
                             images = $(this).attr("data-image");
                             console.log("hello");
                             console.log(images);
@@ -376,7 +483,7 @@
 
                         $.ajax({
                             cache: false,
-                            url: '@Url.Action("AddCarData", "Car")',
+                            url: '@Url.Action("SaveCarAsync", "Car")',
                             type: "Post",
                             data: $(this).serialize(),
 
@@ -385,25 +492,44 @@
                                 $('.btn').prop("disabled", true);
 
                             },
-                            success: function (myData) { },
+                            success: function (myData) {
+                                if (myData == "Success") {
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: "Car Successfully Added!",
+                                        icon: 'success',
+                                        //showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'OK!'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+
+                                            window.location.replace('../Car/Add?Id=@ViewBag.id&type=@ViewBag.formtype');
+                                        }
+                                    })
+
+                                }
+                            },
                             complete: function () {
                                 $('.btn').prop("disabled", true);
                               //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
-                           
+
                             }
                         })
                          })
 
 
-      
+
 
         function imagesPreview(input, placeToInsertImagePreview) {
                 if (input.files) {
 
                     filesAmount = input.files.length;
-                    filescount = input.files.length;
-                    count = count + filescount;
-                    var filetotal = parseInt(filesAmount) + parseInt(picturetotal);
+                  //  filescount = input.files.length;
+                  //  count = count + filescount;
+                  //  var filetotal = parseInt(filesAmount) + parseInt(picturetotal);
                     for (i = 0; i < filesAmount; i++) {
                         console.log(i);
 
@@ -416,7 +542,7 @@
             };
 
 
-     
+
         function multipleupload(input, index) {
 
             var reader = new FileReader();
@@ -460,7 +586,44 @@
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                         var dataurl = canvas.toDataURL(mime_type, 60 / 100);
 
-                        $('.multiplephotoupload').append('<div class="col-md-3 col-sm-3 col-xs-3 text-center imagedivloop" data-filename="' + input.name + '"  data-image="' + dataurl + '" id="rmimage_' + index + '"><img  id="imagephoto_' + index + '" src = "' + dataurl + '" style="object-fit:cover;width:60px;height:60px;border-radius:10px;margin-top:10px"><br><span class="glyphicon glyphicon-remove-sign" id="removeButton_' + index + '" aria-label="Close" index="' + index + '" imageid="' + dataurl + '" onclick=removeimage(this)></span></div>')
+                       // $('.multiplephotoupload').append('<div class="col-md-3 col-sm-3 col-xs-3 text-center imagedivloop" data-filename="' + input.name + '"  data-image="' + dataurl + '" id="rmimage_' + index + '"><img  id="imagephoto_' + index + '" src = "' + dataurl + '" style="object-fit:cover;width:60px;height:60px;border-radius:10px;margin-top:10px"><br><span class="glyphicon glyphicon-remove-sign" id="removeButton_' + index + '" aria-label="Close" index="' + index + '" imageid="' + dataurl + '" onclick=removeimage(this)></span></div>')
+
+
+                        $('#placeholder').remove();
+                        $('.multiplephotoupload').append(`<div class="display-flex-column div_photo flex-basis mb-10" data-image="${dataurl}" id="rmimage_${index}">
+
+                                            <div class="div-img text-center">
+
+                                                <img src="${dataurl}" alt="img">
+                                                <i class="fas fa-trash-alt text-danger" id="removeButton_${index}" aria-label="Close" index="${index}" imageid="${dataurl}" onclick=removeimage(this)></i>
+
+                                            </div>
+                                        </div>
+
+                                     <div class="display-flex-column flex-basis mb-10" id="placeholder">
+                                        <div class="image-upload-wrap">
+
+                                            <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">
+
+                                            <div class="drag-text" style="text-align: center;padding:24px;">
+                                                <img src="../Plesirthemes/EcoPhoto/camera.png" />
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+                        `)
+
+                        $('#gallery-photo-add').on('change', function () {
+                            imagesPreview(this, 'div.multiplephotoupload');
+                        });
 
 
                         picturetotal = $("#pictureTotal").val();
@@ -481,7 +644,7 @@
                     }
 
 
-                
+
 
                 reader.readAsDataURL(input);
 
@@ -496,7 +659,7 @@
             picturetotal--;
             $("#pictureTotal").val(picturetotal);
 
-           
+
             var carimage = $(e).attr("imageid");
             var index = $(e).attr("index");
 
@@ -508,16 +671,10 @@
         }
 
 
-       function Delete(e)
+        function DeletePhoto(photoId)
         {
-            picturetotal = $("#pictureTotal").val();
-            picturetotal--;
-            $("#pictureTotal").val(picturetotal);
-            if (picturetotal < 10) {
-                $("#div_upload").show();
-            }
-            var photoId = $(e).attr("photoID");
-            $("#div-photo_"+photoId).remove();
+
+
             $.ajax({
                 cache: false,
                 url: '@Url.Action("DeletePhoto", "Car")',
@@ -525,11 +682,13 @@
                 beforeSend: function () {
 
                 },
-                success: function () {
-
+                success: function (result) {
+                    if (result == "Success") {
+                        $("#rmimage_" + photoId).remove();
+                    }
                 },
                 complete: function () {
-                   
+
                 }
             });
 

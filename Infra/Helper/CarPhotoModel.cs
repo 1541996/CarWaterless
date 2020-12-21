@@ -10,6 +10,7 @@ namespace Infra.Helper
     public class CarPhotoModel
     {
         public tbCustomerVehicle vehicle { get; set; }
+        public tbCarCategory carcategory { get; set; }
         public IQueryable<tbPhoto> photos { get; set; }
     }
 }

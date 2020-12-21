@@ -16,10 +16,10 @@ namespace Infra.helper
             return await ApiRequest<FileUploadViewModel, string>.PostDiffRequest(url, fvm);
         }
 
-        public static async Task<List<FileUploadViewModel>> uploadlist(List<FileUploadViewModel> fvm)
+        public static async Task<List<string>> uploadlist(List<FileUploadViewModel> fvm)
         {
-            string url = string.Format("api/file/uploadlist");
-            return await ApiRequest<List<FileUploadViewModel>>.PostRequest(url, fvm);
+            string url = string.Format("api/file/uploadmultiple");
+            return await ApiRequest<List<FileUploadViewModel>,List<string>>.PostDiffRequest(url, fvm);
         }
         public static async Task<string> uploadsrt(FileUploadViewModel fvm)
         {

@@ -55,6 +55,17 @@ namespace Infra.UnitOfWork
                 return _branchRepo;
             }
         }
+        public IRepository<tbTownship> townshipRepo
+        {
+            get
+            {
+                if (_townshipRepo == null)
+                {
+                    _townshipRepo = new Repository<tbTownship>(_dbContext);
+                }
+                return _townshipRepo;
+            }
+        }
         public IRepository<tbCarCategory> carCategoryRepo
         {
             get

@@ -110,6 +110,13 @@
 }
 
 
+.mt-2 {
+    margin-top: 2px !important
+}
+
+
+
+
 
 .position-relative {
     position: relative;
@@ -121,7 +128,13 @@
 
 .fs-15 {
     font-size: 15px !important;
+
 }
+
+.fs-16 {
+    font-size: 16px;
+}
+
 
 .fs-17 {
     font-size: 17px;
