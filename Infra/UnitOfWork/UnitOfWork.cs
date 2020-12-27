@@ -23,7 +23,9 @@ namespace Infra.UnitOfWork
         private IRepository<tbTopCustomer> _topCustomerRepo;
         private IRepository<tbTownship> _townshipRepo;
         private IRepository<tbPhoto> _photoRepo;
-        
+
+        private IRepository<tbAdditionalService> _additionalServiceRepo;
+
 
 
 
@@ -33,6 +35,31 @@ namespace Infra.UnitOfWork
         {
             _dbContext = dbContext;
         }
+
+        public IRepository<tbOperation> operationRepo
+        {
+            get
+            {
+                if (_operationRepo == null)
+                {
+                    _operationRepo = new Repository<tbOperation>(_dbContext);
+                }
+                return _operationRepo;
+            }
+        }
+
+        public IRepository<tbAdditionalService> additionalServiceRepo
+        {
+            get
+            {
+                if (_additionalServiceRepo == null)
+                {
+                    _additionalServiceRepo = new Repository<tbAdditionalService>(_dbContext);
+                }
+                return _additionalServiceRepo;
+            }
+        }
+
         public IRepository<tbAdmin> adminRepo
         {
             get

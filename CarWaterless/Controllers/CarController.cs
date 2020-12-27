@@ -43,6 +43,8 @@ namespace CarWaterless.Controllers
         }
 
 
+       
+
         public ActionResult Detail(int Id = 0)
         {
             CarPhotoModel obj = new CarPhotoModel();

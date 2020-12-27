@@ -19,6 +19,7 @@ namespace Infra.Models
         public Nullable<int> UpdateUserId { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> DiscountPrice { get; set; }
+        public string CarType { get; set; }
 
 
     }

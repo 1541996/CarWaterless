@@ -52,16 +52,26 @@ namespace Infra.Repository
 
         public T InsertReturn(T entity)
         {
-            T newEntity = _dbContex.Set<T>().Add(entity);
-            var result = _dbContex.SaveChanges();
-            if (result > 0)
+            try
             {
-                return newEntity;
+                T newEntity = _dbContex.Set<T>().Add(entity);
+                var result = _dbContex.SaveChanges();
+                if (result > 0)
+                {
+                    return newEntity;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return null;
+
             }
+            return null;
+
+
         }
         public int InsertReturnList(List<T> entities)
         {

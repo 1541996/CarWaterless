@@ -14,7 +14,6 @@ namespace Infra.Models
         public Nullable<int> CustomerId { get; set; }
         public Nullable<int> CustomerVehicleId { get; set; }
         public Nullable<int> BranchId { get; set; }
-        public string WashType { get; set; }
         public string CustomerAddress { get; set; }
         public DateTime? RequestDateTime { get; set; }
         public string AdditionalIds { get; set; }
@@ -36,5 +35,6 @@ namespace Infra.Models
         public string Feedback { get; set; }
         public string ComplaintsMessage { get; set; }
         public int? CarCategoryId { get; set; }
+        public string WashOption { get; set; }
     }
 }

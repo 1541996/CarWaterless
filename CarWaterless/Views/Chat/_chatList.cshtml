@@ -1,0 +1,61 @@
+﻿@model List<Infra.Models.tbChatMessage>
+
+
+
+@if (Model.Count() > 0)
+{
+
+    // fromuserid = me
+    var fromuserid = ViewBag.fromuserid;
+
+
+    foreach (var item in Model)
+    {
+        if (item.FromUserID == fromuserid)
+        {
+            <div class="chat-box-wrapper flex-end">
+
+                <div>
+                    <div class="chat-box" style="background:#fff">
+                       @item.Message
+                    </div>
+                    <small class="opacity-6 text-right">
+                        <i class="fa fa-calendar-alt mr-1"></i>
+                        @item.SendDateTime.Value.ToShortTimeString()
+                    </small>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="chat-box-wrapper">
+                <div>
+                    <div class="avatar-icon-wrapper mr-1">
+
+                        <div class="avatar-icon avatar-icon-lg rounded">
+                            <img src="~/Plesirthemes/img/profile2.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="chat-box">
+                         @item.Message
+                    </div>
+                    <small class="opacity-6">
+                        <i class="fa fa-calendar-alt mr-1"></i>
+                        @item.SendDateTime.Value.ToShortTimeString()
+                    </small>
+                </div>
+            </div>
+        }
+
+
+
+
+    }
+
+
+
+
+}
+

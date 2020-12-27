@@ -18,5 +18,7 @@ namespace Infra.Models
         public Nullable<int> CreateUserId { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<int> UpdateUserId { get; set; }
+        public decimal? BasicPrice { get; set; }
+
     }
 }
