@@ -25,11 +25,13 @@
             if (isvalid == true) {
                 $.ajax({
                     type: "POST",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
                     url: loginUrl,
                     data: GetModel(),
                     success: function (data) {
                         if (data.MessageType == 1) {
-                            window.location = "/Home/Index";
+                            window.location = "/AdminSetup/Township";
                         }
                         else {
                             showMessage(data.MessageType, data.Message);
@@ -70,7 +72,7 @@
                 data: GetModel(),
                 success: function (data) {
                     if (data.MessageType == 1) {
-                        window.location = "/Home/Index";
+                        window.location = "/AdminSetup/Township";
                     }
                     else {
                         showMessage(data.MessageType, data.Message);
@@ -93,7 +95,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/Login/Index";
+                window.location = "/AdminLogin/Index";
             }
         });
     }
@@ -106,7 +108,7 @@ function showMessage(messagetype, message) {
             type: "error"
         }).then((result) => {
             if (result.value) {
-                window.location = "/Login/Index";
+                window.location = "/AdminLogin/Index";
             }
         });
     }

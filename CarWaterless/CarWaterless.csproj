@@ -193,6 +193,7 @@
     <Compile Include="Business\AdminRepository.cs" />
     <Compile Include="Business\AdminSetupRepository.cs" />
     <Compile Include="Business\CommonRepository.cs" />
+    <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
     <Compile Include="Controllers\Admin_TestController.cs" />
     <Compile Include="Controllers\API_LoginController.cs" />
@@ -203,7 +204,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\YeGyiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -323,6 +323,7 @@
     <Content Include="ArchitectThemes\image\CL-Logo-Icon.png" />
     <Content Include="ArchitectThemes\image\CL-Logo-Long-with-background.jpg" />
     <Content Include="ArchitectThemes\image\CL-Logo-Long.png" />
+    <Content Include="ArchitectThemes\image\igecowashlogo-removebg-preview.png" />
     <Content Include="ArchitectThemes\image\igecowashlogo.jpeg" />
     <Content Include="ArchitectThemes\image\login-bg-white.jpg" />
     <Content Include="ArchitectThemes\image\logo.jpg" />
@@ -601,9 +602,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\YeGyi\Index.cshtml" />
     <Content Include="Views\Shared\_webLayout.cshtml" />
-    <Content Include="Views\YeGyi\View.cshtml" />
     <Content Include="Views\Branch\Index.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Branch\Detail.cshtml" />
@@ -618,6 +617,7 @@
     <Content Include="Views\Branch\_branchlist.cshtml" />
     <Content Include="Views\Chat\_chatList.cshtml" />
     <Content Include="Views\AdminSetup\Township.cshtml" />
+    <Content Include="Views\AdminLogin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

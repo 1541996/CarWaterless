@@ -1,0 +1,105 @@
+﻿@model Infra.ViewModels.AdminViewModel
+
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>IG Eco wash - Login</title>
+    <link rel="icon" href="@Url.Content("~/ArchitectThemes/image/igecowashlogo.jpeg")" type="image/gif">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+
+    @*<link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/main.css")">*@
+    <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/custom.css")">
+
+    <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/sweetalert2.min.css")">
+    <script src="@Url.Content("~/ArchitectThemes/js/jquery-3.2.1.min.js")" type="text/javascript"></script>
+    <style>
+        .app-logo-inverse {
+            min-height: 100% !important;
+            min-width: 100% !important;
+            height: unset !important;
+            width: unset !important;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100 bg-plum-plate bg-animation">
+                <div class="d-flex h-100 justify-content-center align-items-center">
+                    <div class="mx-auto app-login-box col-md-8">
+                        <div class="app-logo-inverse mx-auto ">
+                            <a href="#" style="margin:unset;">
+                                <img src="@Url.Content("~/ArchitectThemes/image/igecowashlogo-removebg-preview.png")" style="width:130px;margin-left: auto;margin-right: auto;" />
+                            </a>
+                        </div>
+                        <div class="modal-dialog w-100 mx-auto">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div class="h5 modal-title text-center">
+                                        <h4 class="mt-2">
+                                            <div>Welcome to IG Eco Wash</div>
+                                        </h4>
+                                    </div>
+                                    <form class="">
+                                        <div class="form-row">
+                                            <div class="col-md-12">
+                                                <div class="position-relative form-group">
+                                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @type = "UserName", @placeholder = "User Name", @autofocus = "true", @autocomplete = "off" })
+                                                    <div id="UserName-error" class="invalid-feedback" style="display:none;">
+                                                        Enter User Name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="position-relative form-group">
+                                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @type = "Password", @placeholder = "Password", @autocomplete = "off" })
+                                                    <div id="Password-error" class="invalid-feedback" style="display:none;">
+                                                        Enter Password.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer clearfix">
+                                    <div class="float-right">
+                                        <button class="btn btn-focus btn-lg" id="btnLogin">Login to Dashboard</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center text-white opacity-8 mt-3">Copyright © Century Links Software 2020</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<script src="@Url.Content("~/ArchitectThemes/js/main.js")" type="text/javascript"></script>*@
+    <script src="@Url.Content("~/ArchitectThemes/js/sweetalert2.min.js")"></script>
+    <script src="@Url.Content("~/ArchitectThemes/js/custom.js")" type="text/javascript"></script>
+    @Scripts.Render("~/bundles/login")
+    <script type="text/javascript">
+        var loginUrl = '@Url.Action("Index","AdminLogin")';
+
+    </script>
+</body>
+
+</html>
