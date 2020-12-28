@@ -1,0 +1,365 @@
+/*licence form css*/
+
+@font-face {
+    font-family: "Pyidaungsu";
+    src: url('../webfonts/Pyidaungsu.ttf');
+}
+
+.wrapword {
+    white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+    white-space: -webkit-pre-wrap; /*Chrome & Safari */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    white-space: pre-wrap; /* css-3 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+    word-break: break-all;
+    white-space: normal;
+}
+
+
+.tbl {
+    font-size: 11px;
+    font-family: Integra English;
+    color: #000000;
+    border-collapse: unset;
+}
+
+.licform table, .eform table {
+    font-size: 11px;
+    font-family: Integra English;
+    color: #000000;
+    border-collapse: unset;
+}
+
+.licform span {
+    color: #000000;
+    margin-bottom: 0px;
+}
+
+span.head tr.nav td {
+    color: #FFFFCC;
+}
+
+span.head tr.nav a {
+    color: #000000;
+}
+
+    span.head tr.nav a:hover {
+        color: #3D4867;
+    }
+
+span.foot tr.f td {
+    color: #FFFFFF;
+    background: #9D9DC3;
+}
+
+span.head td.ltext {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+}
+
+
+span.eform table {
+    border: 1px #000000 solid;
+}
+
+    span.eform table.not {
+        border: 0px;
+    }
+
+span.eform.ext table.not {
+    border-bottom: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-left: 0px;
+}
+
+span.eform table.b1 {
+    padding: 4px;
+    border-bottom: 0px;
+}
+
+    span.eform table.b1 td.bg {
+        background: #EEEEEE;
+        font-size: 11px;
+        font-weight: bold;
+        color: #444444;
+        border-left: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+    span.eform table.b1 td.bg2 {
+        background: #EEEEEE;
+        font-size: 11px;
+        font-weight: bold;
+        color: #444444;
+        border-right: 1px #000000 solid;
+        border-top: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+    span.eform table.b1 td.bg3 {
+        background: #EEEEEE;
+        font-size: 11px;
+        font-weight: bold;
+        color: #444444;
+        border-top: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+span.eform table.b2 {
+    border: 1px #000000 solid;
+    border-left: 0px;
+    border-bottom: 0px;
+    padding: 0px;
+}
+
+    span.eform table.b2 td.bg {
+        padding: 4px;
+        background: #EEEEEE;
+        font-size: 11px;
+        font-weight: bold;
+        color: #444444;
+        border-bottom: 1px #000000 solid;
+        border-left: 1px #000000 solid;
+    }
+
+    span.eform table.b2 td.bg2 {
+        padding: 4px;
+        font-size: 11px;
+        font-weight: bold;
+        color: #444444;
+        border-bottom: 1px #000000 solid;
+        border-left: 1px #000000 solid;
+    }
+
+    span.eform table.b2 td {
+        padding: 4px;
+        border-left: 1px #000000 solid;
+        border-bottom: 1px #000000 solid
+    }
+
+    span.eform table.b2 tr.notb td {
+        padding: 4px;
+        border-left: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+    span.eform table.b2 tr.top td {
+        padding: 4px;
+        border-top: 1px #000000 solid;
+    }
+
+    span.eform table.b2 td.not {
+        border-left: 0px;
+        border-right: 0px;
+        padding: 0px;
+    }
+
+span.eform table.not {
+    border: 0px;
+    margin-top:0px;
+}
+
+    span.eform table.not td.not {
+        border: 0px;
+        font-size: 11px;
+        color: #000000;
+        padding: 0px;
+    }
+
+    span.eform table.not td.not2 {
+        padding: 4px;
+        background: #FFFFFF;
+        font-size: 11px;
+        color: #444444;
+        border-bottom: 1px #000000 solid;
+        border-left: 1px #000000 solid;
+        border-top: 1px #000000 solid;
+        border-right: 1px #000000 solid;
+    }
+
+span.eform td.b1 {
+    color: #000000;
+    background: #EEEEEE;
+    font-weight: bold;
+}
+
+span.eform input.button {
+    font-weight: bold;
+    border: 1px #000000 solid;
+    color: #000000;
+    background: #EEEEEE;
+    text-align: center;
+}
+
+span.eform table.b2 td.notb {
+    border-left: 1px #000000 solid;
+    border-bottom: 0px;
+}
+
+span.eform table.b2 td.up {
+    border-top: 1px #000000 solid;
+}
+
+span.eform table.b2 td.pad {
+    padding: 8px;
+}
+
+span.eform table.b2 td.lnot {
+    border-left: 0px;
+}
+
+.head {
+    font-size: 9px;
+}
+
+.caphead {
+    font-size: 9px;
+}
+
+.head2 {
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.hea {
+    font-size: 11px;
+    font-weight: bold;
+    color: #444444;
+}
+
+.mark {
+    font-family: Wingdings;
+    color: #FF0000;
+    font-weight: bold;
+}
+
+.mark2 {
+    font-family: Wingdings;
+    color: #000000;
+    font-weight: bold;
+}
+
+
+span.licform table {
+    border: 1px #000000 solid;
+}
+
+    span.licform table.not {
+        border: 0px;
+    }
+
+    span.licform table.b2 {
+        border: 1px #000000 solid;
+        border-left: 0px;
+        border-bottom: 0px;
+        padding: 0px;
+    }
+
+        span.licform table.b2 td {
+            padding: 2px;
+            border-left: 1px #000000 solid;
+            border-bottom: 1px #000000 solid;
+            padding-top: 0px;
+        }
+
+            span.licform table.b2 td.not {
+                border-left: 0px;
+                border-right: 0px;
+                padding: 0px;
+            }
+
+            span.licform table.b2 td.bnot {
+                border-bottom: 0px;
+                padding: 0px;
+            }
+
+            span.licform table.b2 td.lrnot {
+                border-right: 0px;
+                border-left: 0px;
+                padding: 0px;
+            }
+
+            span.licform table.b2 td.lrbnot {
+                border-bottom: 0px;
+                border-right: 0px;
+                border-left: 0px;
+                padding: 0px;
+            }
+
+    span.licform table.b3 {
+        border: 1px #000000 solid;
+        border-left: 0px;
+        border-bottom: 0px;
+        border-right: 0px;
+        padding: 0px;
+    }
+
+    span.licform table.not td.po {
+        padding: 0px;
+    }
+
+    span.licform table.not {
+        border: 0px;
+    }
+
+        span.licform table.not td.not {
+            border: 0px;
+            font-size: 11px;
+            color: #000000;
+            padding: 0px;
+        }
+
+        span.licform table.not td.not2 {
+            padding: 2px;
+            background: #FFFFFF;
+            font-size: 11px;
+            color: #444444;
+            border-bottom: 1px #000000 solid;
+            border-left: 1px #000000 solid;
+            border-top: 1px #000000 solid;
+            border-right: 1px #000000 solid;
+        }
+
+span.licform input.button {
+    font-weight: bold;
+    border: 1px #000000 solid;
+    color: #000000;
+    background: #EEEEEE;
+    text-align: center;
+}
+
+span.licform table.b4 {
+    border: 1px #000000 solid;
+    border-left: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+    padding: 0px;
+}
+
+    span.licform table.b4 tr.notb td {
+        padding: 4px;
+        border-left: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+    span.licform table.b4 tr.top td {
+        padding: 4px;
+        border-top: 1px #000000 solid;
+    }
+
+    span.licform table.b4 td.notb {
+        border-left: 1px #000000 solid;
+        border-bottom: 0px;
+    }
+
+    span.licform table.b4 td.up {
+        border-top: 1px #000000 solid;
+    }
+
+    span.licform table.b4 td.brnot {
+        border-left: 0px;
+        border-bottom: 1px #000000 solid;
+    }

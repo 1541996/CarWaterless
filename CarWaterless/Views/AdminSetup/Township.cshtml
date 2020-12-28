@@ -1,0 +1,87 @@
+﻿@model Infra.ViewModels.TownshipViewModel
+
+@{
+    ViewBag.Title = "Township";
+}
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Township
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <form class="">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <div class="position-relative form-group">
+                                <label>Name</label>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @type = "Name", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                                <div id="Name-error" class="invalid-feedback" style="display:none;">
+                                    Enter Name.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group" style="margin-top: 30px;float:right">
+                                <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
+                                <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row col-sm-12">
+                    <table id="tbl" class="table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/township")
+<script type="text/javascript">
+    $(function () {
+        $('#liSetting').addClass('mm-active');
+        $('#liTownship').addClass('mm-active');
+        $('#liSetting a').attr('aria-expanded', true);
+    });
+    var listUrl = '@Url.Action("GetAllTownship","AdminSetup")';
+    var saveUrl = '@Url.Action("Township","AdminSetup")';
+    var editUrl = '@Url.Action("EditTownship", "AdminSetup", new { id="__id__" })';
+    var deleteUrl = '@Url.Action("DeleteTownship", "AdminSetup")';
+</script>
+
+
+
+
