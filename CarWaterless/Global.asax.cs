@@ -41,6 +41,8 @@ namespace CarWaterless
             //// 10 seconds. 
             //// This value must be no more than 1/3 of the DisconnectTimeout value.
             GlobalHost.Configuration.KeepAlive = TimeSpan.FromSeconds(4); // 8
+          
+
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
