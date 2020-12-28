@@ -15,7 +15,7 @@ namespace CarWaterless
         {
             app.UseCors(CorsOptions.AllowAll);
 
-            app.MapSignalR(new HubConfiguration { EnableJSONP = true });
+          //  app.MapSignalR(new HubConfiguration { EnableJSONP = true });
             app.Map("/signalr", map =>
             {
                 map.UseCors(CorsOptions.AllowAll);
