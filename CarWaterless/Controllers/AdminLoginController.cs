@@ -26,7 +26,7 @@ namespace CarWaterless.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public ActionResult Index(AdminViewModel model)
+        public ActionResult LoginV2(AdminViewModel model)
         {
             AdminRepository repository = new AdminRepository();
 

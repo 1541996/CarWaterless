@@ -6160,7 +6160,9 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
     display: flex;
     padding-left: 0;
     list-style: none;
-    border-radius: .25rem
+    border-radius: .25rem;
+    justify-content:flex-end
+    
 }
 
 .page-link {

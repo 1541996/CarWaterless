@@ -91,7 +91,10 @@
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
+    <Compile Include="ViewModels\FCMViewModel.cs" />
     <Compile Include="ViewModels\FileUploadViewModel.cs" />
+    <Compile Include="ViewModels\OperationCustomerViewModel.cs" />
+    <Compile Include="ViewModels\PagedListModel.cs" />
     <Compile Include="ViewModels\TownshipModel.cs" />
     <Compile Include="ViewModels\VehicleCategoryViewModel.cs" />
   </ItemGroup>

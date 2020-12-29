@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading width-100">
+            <div class="display-flex-row">
+                @if (ViewBag.formtype != "Add")
+                {
+                    <div class="display-flex-column">
+                        Edit Customer
+                    </div>
+
+                }
+                else
+                {
+                    <div class="display-flex-column">
+                        Add New Customer
+                    </div>
+
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@model Infra.Models.tbCustomer
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+      
+        <form class="" id="frm_data">
+            <div class="position-relative row form-group">
+                <label for="txt_FullName" class="col-sm-2 col-form-label">Full Name</label>
+                <div class="col-sm-10">
+                    <input name="FullName" id="txt_FullName" value="@Model.FullName" placeholder="" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label for="txt_UserName" class="col-sm-2 col-form-label">User Name</label>
+                <div class="col-sm-10">
+                    <input name="UserName" id="txt_UserName" value="@Model.UserName" placeholder="" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label for="txt_Password" class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-10">
+                    <input name="Password" id="txt_Password" value="@Model.Password" placeholder="" type="password" class="form-control">
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label for="txt_PhoneNo" class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                    <input name="PhoneNo" id="txt_PhoneNo" value="@Model.PhoneNo" placeholder="" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="position-relative row form-group">
+                <label for="txt_Email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input name="Email" id="txt_Email" value="@Model.Email" placeholder="" type="email" class="form-control">
+                </div>
+            </div>
+
+            <div class="position-relative row form-group">
+                <label for="exampleFile" class="col-sm-2 col-form-label">Photo</label>
+                <div class="col-sm-10">
+                    <input name="file" id="exampleFile" type="file" class="form-control-file file_customer" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'customer')">
+                    <small class="form-text text-muted">Please upload photo.</small>
+                    <input type="hidden" id="photo_customer" name="Photo" />
+
+                </div>
+            </div>
+
+
+
+            @Html.HiddenFor(a => a.Id)
+            @Html.HiddenFor(a => a.IsDeleted)
+            @Html.HiddenFor(a => a.CreateDate)
+            @Html.HiddenFor(a => a.MemberCode)
+            @Html.HiddenFor(a => a.MemberExpireDate)
+            @Html.HiddenFor(a => a.MemberStartDate)
+            @Html.HiddenFor(a => a.RegisterStatus)
+            @Html.HiddenFor(a => a.BookingStatus)
+            @Html.HiddenFor(a => a.IsMember)
+            @Html.HiddenFor(a => a.FacebookId)
+            @Html.HiddenFor(a => a.UserAppId)
+            @Html.HiddenFor(a => a.IsSpecial)
+            @Html.HiddenFor(a => a.LastLoginTime)
+        
+
+            <div class="position-relative row form-check mt-30">
+                <div class="col-sm-12 d-flex flex-end">
+                    <button class="btn btn-lg btn-danger mr-20">Cancel</button>
+                    <button class="btn btn-lg btn-primary">Save</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+    <script src="~/ArchitectThemes/File/fileupload.js"></script>
+    <script>
+
+                     $("#frm_data").submit(function (e) {
+                        e.preventDefault();
+
+
+                        $.ajax({
+                            cache: false,
+                            url: '@Url.Action("UpsertData", "Admin_Customer")',
+                            type: "Post",
+                            data: $(this).serialize(),
+
+
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+
+                            },
+                            success: function (myData) {
+                                if (myData == "Success") {
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: "Successfully Added!",
+                                        icon: 'success',
+                                        //showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'OK!'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+
+                                           // window.location.replace('../Car/Add?Id=@ViewBag.id&type=@ViewBag.formtype');
+                                        }
+                                    })
+
+                                }
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", true);
+                              //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
+
+                            }
+                        })
+                         })
+
+
+
+
+    </script>
+
+
+}
+
+

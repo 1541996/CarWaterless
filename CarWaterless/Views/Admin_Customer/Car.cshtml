@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Car";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading width-100">
+            <div class="display-flex-row">
+                <div class="display-flex-column">
+                    Car SetUp
+                </div>
+                <div class="display-flex-column flex-end ml-auto">
+                    <a href="../admin_customer/CarForm?customerid=@ViewBag.customerid" class="mb-2 mr-2 btn btn-primary text-white">
+                        Add Car
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12" id="div_car">
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script>
+
+        var customerid = '@ViewBag.customerid'
+
+        $(function () {
+            GetCarList();
+        })
+
+
+        function GetCarList()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetCarList", "Admin_Customer")',
+                data: { customerid: customerid },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#div_car').empty().append(result);
+                },
+                complete: function () {
+
+                }
+            });
+
+         }
+
+
+        function Edit(ID) {
+            location.href = "../admin_customer/carform?ID=" + ID + "&FormType=Edit&customerid=" + customerid;
+        }
+
+
+
+
+
+    </script>
+
+
+
+} 

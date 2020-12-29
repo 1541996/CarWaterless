@@ -94,10 +94,10 @@
     </div>
     @*<script src="@Url.Content("~/ArchitectThemes/js/main.js")" type="text/javascript"></script>*@
     <script src="@Url.Content("~/ArchitectThemes/js/sweetalert2.min.js")"></script>
-    <script src="@Url.Content("~/ArchitectThemes/js/custom.js")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/ArchitectThemes/js/custom.js")" type="text/javascript"></script>*@
     @Scripts.Render("~/bundles/login")
     <script type="text/javascript">
-        var loginUrl = '@Url.Action("Index","AdminLogin")';
+        var loginUrl = '@Url.Action("LoginV2", "AdminLogin")';
 
     </script>
 </body>

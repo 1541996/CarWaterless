@@ -66,10 +66,13 @@
             $('#UserName-error').show();
         }
         if (isvalid == true) {
+            console.log(JSON.stringify(GetModel()));
+            console.log(GetModel());
             $.ajax({
                 type: "POST",
                 url: loginUrl,
                 data: GetModel(),
+                dataType: "json",
                 success: function (data) {
                     if (data.MessageType == 1) {
                         window.location = "/AdminSetup/Township";

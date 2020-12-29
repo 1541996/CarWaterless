@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model Infra.Models.tbCustomer
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">Grid</h5>
+            <form class="" id="frm_data">
+                <div class="position-relative row form-group">
+                    <label for="txt_FullName" class="col-sm-2 col-form-label">Full Name</label>
+                    <div class="col-sm-10">
+                        <input name="FullName" id="txt_FullName" value="@Model.FullName" placeholder="" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <label for="txt_UserName" class="col-sm-2 col-form-label">User Name</label>
+                    <div class="col-sm-10">
+                        <input name="UserName" id="txt_UserName" value="@Model.UserName" placeholder="" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <label for="txt_Password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input name="Password" id="txt_Password" value="@Model.Password" placeholder="" type="password" class="form-control">
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <label for="txt_PhoneNo" class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-sm-10">
+                        <input name="PhoneNo" id="txt_PhoneNo" value="@Model.PhoneNo" placeholder="" type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="position-relative row form-group">
+                    <label for="txt_Email" class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-sm-10">
+                        <input name="Email" id="txt_Email" value="@Model.Email" placeholder="" type="email" class="form-control">
+                    </div>
+                </div>
+              
+                <div class="position-relative row form-group">
+                    <label for="exampleFile" class="col-sm-2 col-form-label">Photo</label>
+                    <div class="col-sm-10">
+                        <input name="file" id="exampleFile" type="file" class="form-control-file">
+                        <small class="form-text text-muted">Please upload photo.</small>
+                    </div>
+                </div>
+                
+                <div class="position-relative row form-check">
+                    <div class="col-sm-10 offset-sm-2">
+                        <button class="btn btn-secondary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+

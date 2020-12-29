@@ -1,0 +1,70 @@
+﻿
+@model Infra.ViewModels.PagedListClient<Infra.ViewModels.OperationCustomerViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+@if (Model.Results.Count() > 0)
+{
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.TotalCount records found.</h5>
+            <div class="table-responsive">
+                <table class="mb-0 table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Customer Name</th>
+                            <th>Phone</th>
+                            <th>Car</th>
+                            <th>Wash Option</th>
+                            <th>Operation Date</th>
+                           
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int pagesize = ViewBag.pagesize;
+                            int pagestartno = ViewBag.page;
+                            int count = 0;
+                            count = (pagestartno - 1) * pagesize;
+                        }
+                        @foreach (var result in Model.Results)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@result.customer.FullName</td>
+                                <td>@result.customer.PhoneNo</td>
+                                <td>@result.vehicle.VehicleBrand @result.vehicle.VehicleBrand</td>
+                                <td>@result.operation.WashOption</td>
+                                <td>@result.operation.OperationDate.Value.ToString("dd MMM, yyyy") @result.operation.OperationDate.Value.ToShortTimeString()</td>
+                                 
+                               
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12">
+                <div class="paginator-wrap pagedList">
+
+                    @Html.PagedListPager(Model.Results, page => Url.Action("_list", "Admin_Customer",
+               new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+
+}
+
+

@@ -8,8 +8,8 @@ namespace Infra.ViewModels
 {
     public class AdminViewModel
     {
-        public string username { get; set; }
-        public int Id { get; set; }
+        //public string username { get; set; }
+        public int? Id { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
         public string Password { get; set; }
@@ -22,9 +22,9 @@ namespace Infra.ViewModels
         public DateTime? CreateDate { get; set; }
         public int? CreateUserId { get; set; }
 
-        public int No { get; set; }
+        public int? No { get; set; }
         public string Message { get; set; }
-        public int MessageType { get; set; }
+        public int? MessageType { get; set; }
         public string CurrentPassword { get; set; }
     }
 }

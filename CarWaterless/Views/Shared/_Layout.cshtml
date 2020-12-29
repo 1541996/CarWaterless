@@ -39,13 +39,16 @@
     <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/responsive.bootstrap4.min.css")">
     <!-- End DataTable styles -->
     <!-- Sweetalert styles -->
-    <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/sweetalert2.min.css")">
+    @*<link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/sweetalert2.min.css")">*@
     <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/bootstrap-timepicker.min.css")">
     <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/bootstrap-select.min.css")">
 
     <link rel="stylesheet" href='https://mmwebfonts.comquas.com/fonts/?font=pyidaungsu' />
 
     <link rel="stylesheet" href="@Url.Content("~/ArchitectThemes/css/main.css")">
+
+    <link rel="stylesheet" href="~/Plesirthemes/css/custom.css">
+    <link rel="stylesheet" href="~/ArchitectThemes/css/customstyle.css">
 
     <script src="@Url.Content("~/ArchitectThemes/js/jquery-3.2.1.min.js")" type="text/javascript"></script>
 
@@ -705,7 +708,7 @@
     <script src="@Url.Content("~/ArchitectThemes/js/dataTables.bootstrap4.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/dataTables.responsive.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/responsive.bootstrap4.min.js")"></script>
-    <script src="@Url.Content("~/ArchitectThemes/js/sweetalert2.min.js")"></script>
+    @*<script src="@Url.Content("~/ArchitectThemes/js/sweetalert2.min.js")"></script>*@
     <script src="@Url.Content("~/ArchitectThemes/js/select2.full.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/bootstrap-timepicker.min.js")"></script>
 
@@ -715,8 +718,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script src="~/ArchitectThemes/frontend/num-key.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 
     <script src="@Url.Content("~/ArchitectThemes/js/main.js")" type="text/javascript"></script>
     @RenderSection("scripts", required: false)
+
+
+
 </body>
 </html>
