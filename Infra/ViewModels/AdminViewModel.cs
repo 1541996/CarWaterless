@@ -17,9 +17,14 @@ namespace Infra.ViewModels
         public string UserRole { get; set; }
         public string BranchIds { get; set; }
         public string BranchNames { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<bool> IsDeleted { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<int> CreateUserId { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public int? CreateUserId { get; set; }
+
+        public int No { get; set; }
+        public string Message { get; set; }
+        public int MessageType { get; set; }
+        public string CurrentPassword { get; set; }
     }
 }

@@ -54,7 +54,7 @@
 </head>
 <body>
     <div id="mainsidebar" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-        <div class="app-header header-shadow bg-royal header-text-light">
+        <div class="app-header header-shadow bg-happy-green header-text-light">
             <div class="app-header__logo">
                 <div class="logo-src">IG Eco Wash</div>
                 <div class="header__pane ml-auto">
@@ -130,7 +130,7 @@
                                             <a href="@Url.Action("ChangePassword","User")" tabindex="0" class="dropdown-item">Change Password</a>
                                             <a href="@Url.Action("Add","User")" tabindex="0" class="dropdown-item">Add User</a>
                                             <div tabindex="-1" class="dropdown-divider"></div>
-                                            <a href="@Url.Action("Index","Login")" tabindex="0" class="dropdown-item">Log Out</a>
+                                            <a href="@Url.Action("Index","AdminLogin")" tabindex="0" class="dropdown-item">Log Out</a>
                                         </div>
                                     </div>
                                 </div>
@@ -439,7 +439,8 @@
                 </div>
             </div>*@
         <div class="app-main">
-            <div class="app-sidebar sidebar-shadow bg-vicious-stance sidebar-text-light">
+            @*<div class="app-sidebar sidebar-shadow bg-vicious-stance sidebar-text-light">*@
+            <div class="app-sidebar sidebar-shadow">
                 <div class="app-header__logo">
                     <div class="logo-src"></div>
                     <div class="header__pane ml-auto">

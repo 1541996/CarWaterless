@@ -14,16 +14,18 @@ namespace CarWaterless.Controllers
         #region Township
         public ActionResult Township()
         {
-            HttpCookie reqCookies = Request.Cookies["newsenseInfo"];
-            if (reqCookies != null)
-            {
-                TownshipViewModel model = new TownshipViewModel();
-                return View(model);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Login");
-            }
+            TownshipViewModel model = new TownshipViewModel();
+            return View(model);
+            //HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            //if (reqCookies != null)
+            //{
+            //    TownshipViewModel model = new TownshipViewModel();
+            //    return View(model);
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Login");
+            //}
 
         }
 
