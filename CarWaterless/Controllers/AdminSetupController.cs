@@ -11,21 +11,93 @@ namespace CarWaterless.Controllers
     public class AdminSetupController : Controller
     {
         // GET: AdminSetup
+        #region CarCategory
+        public ActionResult CarCategory()
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                CarCategoryViewModel model = new CarCategoryViewModel();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult CarCategory(CarCategoryViewModel model)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            bool isvalid = true;
+            if (model.Id == 0)
+            {
+                isvalid = repository.CheckExistCarCategory(model);
+                if (isvalid)
+                {
+                    model = repository.SaveCarCategory(model);
+                }
+                else
+                {
+                    model = new CarCategoryViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Already Exist!";
+                }
+            }
+            else
+            {
+                isvalid = repository.CheckExistUpdateCarCategory(model);
+                if (isvalid)
+                {
+                    model = repository.EditCarCategory(model);
+                }
+                else
+                {
+                    model = new CarCategoryViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Already Exist!";
+                }
+            }
+            return Json(model);
+        }
+
+        public ActionResult GetAllCarCategory()
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            List<CarCategoryViewModel> list = repository.GetAllCarCategory();
+            return Json(list);
+        }
+
+        public ActionResult EditCarCategory(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            CarCategoryViewModel model = repository.GetCarCategorybyId(id);
+            return Json(model);
+        }
+
+        public ActionResult DeleteCarCategory(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            CarCategoryViewModel model = repository.DeleteCarCategory(id);
+            return Json(model);
+        }
+        #endregion
+
         #region Township
         public ActionResult Township()
         {
-            TownshipViewModel model = new TownshipViewModel();
-            return View(model);
-            //HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
-            //if (reqCookies != null)
-            //{
-            //    TownshipViewModel model = new TownshipViewModel();
-            //    return View(model);
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Index", "Login");
-            //}
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                TownshipViewModel model = new TownshipViewModel();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
         }
 
@@ -87,5 +159,180 @@ namespace CarWaterless.Controllers
         }
         #endregion
 
+        #region AdditionalService
+        public ActionResult AdditionalService()
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                AdditionalServiceViewModel model = new AdditionalServiceViewModel();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult AdditionalService(AdditionalServiceViewModel model)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            bool isvalid = true;
+            if (model.Id == 0)
+            {
+                isvalid = repository.CheckExistAdditionalService(model);
+                if (isvalid)
+                {
+                    model = repository.SaveAdditionalService(model);
+                }
+                else
+                {
+                    model = new AdditionalServiceViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Already Exist!";
+                }
+            }
+            else
+            {
+                isvalid = repository.CheckExistUpdateAdditionalService(model);
+                if (isvalid)
+                {
+                    model = repository.EditAdditionalService(model);
+                }
+                else
+                {
+                    model = new AdditionalServiceViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Already Exist!";
+                }
+            }
+            return Json(model);
+        }
+
+        public ActionResult GetAllAdditionalService()
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            List<AdditionalServiceViewModel> list = repository.GetAllAdditionalService();
+            return Json(list);
+        }
+
+        public ActionResult EditAdditionalService(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            AdditionalServiceViewModel model = repository.GetAdditionalServicebyId(id);
+            return Json(model);
+        }
+
+        public ActionResult DeleteAdditionalService(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            AdditionalServiceViewModel model = repository.DeleteAdditionalService(id);
+            return Json(model);
+        }
+        #endregion
+
+        #region Branch
+        public ActionResult BranchList()
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                BranchViewModel model = new BranchViewModel();
+                AdminSetupRepository repository = new AdminSetupRepository();
+                model.TownshipList = new SelectList(repository.GetAllTownship(), "Id", "Name");
+                AdminRepository adminRepository = new AdminRepository();
+                model.AdminAgentList = new SelectList(adminRepository.GetAllAgents(), "Id", "FullName");
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        public ActionResult GetAllBranch(BranchViewModel model)
+        {
+            List<BranchViewModel> list = new List<BranchViewModel>();
+            AdminSetupRepository repository = new AdminSetupRepository();
+            model.IsActive = true;
+            list = repository.GetAllBranch(model);
+            return Json(list);
+        }
+
+        public ActionResult Branch(int id=0)
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                BranchViewModel model = new BranchViewModel();
+                AdminSetupRepository repository = new AdminSetupRepository();
+                AdminRepository adminRepository = new AdminRepository();
+                if (id != 0)
+                {
+                    model = repository.GetBranchbyId(id);
+                    model.CreateUserId = Convert.ToInt32(reqCookies["userid"].ToString());
+                   
+                }
+                model.TownshipList = new SelectList(repository.GetAllTownship(), "Id", "Name");
+
+                model.AdminAgentList = new SelectList(adminRepository.GetAllAgents(), "Id", "FullName");
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Branch(BranchViewModel model)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            if (model.Id == 0)
+            {
+                var checkexit = repository.CheckExistBranch(model);
+                if (checkexit == true)
+                {
+                    model = repository.SaveBranch(model);
+                }
+                else
+                {
+                    model = new BranchViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Branch already exists";
+                }
+
+            }
+            else
+            {
+                var checkexit = repository.CheckExistUpdateBranch(model);
+                if (checkexit == true)
+                {
+                    model = repository.EditBranch(model);
+                }
+                else
+                {
+                    model = new BranchViewModel();
+                    model.MessageType = 2;
+                    model.Message = "Branch already exists";
+                }
+
+            }
+            return Json(model);
+        }
+
+        public ActionResult DeleteBranch(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            BranchViewModel model = new BranchViewModel();
+            model = repository.DeleteBranch(id);
+            return Json(model);
+        }
+
+        #endregion
     }
 }

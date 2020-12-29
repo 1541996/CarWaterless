@@ -1,0 +1,99 @@
+﻿@model Infra.ViewModels.AdminViewModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Add New User
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <div class="d-inline-block dropdown">
+                <a href="@Url.Action("UserList","AdminSetup")" class="btn btn-info">
+                    <i class="fa fa-list"></i> User List
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <form class="">
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.IsActive)
+                    @Html.HiddenFor(x => x.CreateUserId)
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">User Name<span style="color:red">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @type = "Name", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="LocationName-error" class="invalid-feedback" style="display:none;">
+                                Enter User Name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">Full Name<span style="color:red">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @type = "PhoneNo", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="LocationPhoneNo-error" class="invalid-feedback" style="display:none;">
+                                Enter Phone No.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">Password<span style="color:red">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", @type = "PhoneNo", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="Password-error" class="invalid-feedback" style="display:none;">
+                                Enter Password.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">User Role</label>
+                        <div class="col-sm-9">
+                            <select id="ddlUserRole" class="form-control">
+                                <option value="superadministrator" selected>Super Administrator </option>
+                                <option value="administrator">Administrator</option>
+                                <option value="branchagent">Branch Agent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="chkIsActive" class="col-sm-3 col-form-label">Active?</label>
+                        <div class="col-sm-9">
+                            <div class="position-relative form-check">
+                                <label class="form-check-label">
+                                    <input id="chkIsActive" type="checkbox" class="form-check-input" checked>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label for="" class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <a href="javascript:void(0)" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
+                            <a href="javascript:void(0)" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/user-new")
+<script type="text/javascript">
+    
+    var saveUrl = '@Url.Action("Add", "AdminUser")';
+</script>
+

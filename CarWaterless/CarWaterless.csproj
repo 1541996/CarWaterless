@@ -206,6 +206,7 @@
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
     <Compile Include="Controllers\Admin_OperationController.cs" />
+    <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\Admin_TestController.cs" />
     <Compile Include="Controllers\API_LoginController.cs" />
     <Compile Include="Controllers\BookController.cs" />
@@ -295,7 +296,9 @@
     <Content Include="ArchitectThemes\File\fileupload.js" />
     <Content Include="ArchitectThemes\fonts\themify.svg" />
     <Content Include="ArchitectThemes\frontend\bankpay.js" />
-    <Content Include="ArchitectThemes\frontend\category.js" />
+    <Content Include="ArchitectThemes\frontend\additionalservice.js" />
+    <Content Include="ArchitectThemes\frontend\user-new.js" />
+    <Content Include="ArchitectThemes\frontend\carcategory.js" />
     <Content Include="ArchitectThemes\frontend\township.js" />
     <Content Include="ArchitectThemes\frontend\consumer-new.js" />
     <Content Include="ArchitectThemes\frontend\consumer-payment.js" />
@@ -327,8 +330,8 @@
     <Content Include="ArchitectThemes\frontend\stock-new.js" />
     <Content Include="ArchitectThemes\frontend\stock-refill.js" />
     <Content Include="ArchitectThemes\frontend\stock.js" />
-    <Content Include="ArchitectThemes\frontend\supplier-new.js" />
-    <Content Include="ArchitectThemes\frontend\supplier.js" />
+    <Content Include="ArchitectThemes\frontend\branch-new.js" />
+    <Content Include="ArchitectThemes\frontend\branch.js" />
     <Content Include="ArchitectThemes\frontend\unit.js" />
     <Content Include="ArchitectThemes\frontend\user-changepassword.js" />
     <Content Include="ArchitectThemes\frontend\user-editprofile.js" />
@@ -643,6 +646,11 @@
     <Content Include="Views\Admin_Customer\Car.cshtml" />
     <Content Include="Views\Admin_Customer\_getCarList.cshtml" />
     <Content Include="Views\Admin_Customer\CarForm.cshtml" />
+    <Content Include="Views\AdminSetup\CarCategory.cshtml" />
+    <Content Include="Views\AdminSetup\AdditionalService.cshtml" />
+    <Content Include="Views\AdminSetup\BranchList.cshtml" />
+    <Content Include="Views\AdminSetup\Branch.cshtml" />
+    <Content Include="Views\AdminUser\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
