@@ -135,6 +135,10 @@
             location.href = "../admin_customer/customerform?ID=" + ID + "&FormType=Edit";
         }
 
+        function AddCar(ID) {
+            location.href = "../admin_customer/car?customerid=" + ID;
+        }
+
         function Delete(e) {
             Swal.fire({
                 title: "Are you sure?",

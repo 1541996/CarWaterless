@@ -57,7 +57,7 @@
 </head>
 <body>
     <div id="mainsidebar" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-        <div class="app-header header-shadow bg-happy-green header-text-light">
+        <div class="app-header header-shadow bg-theme header-text-light">
             <div class="app-header__logo">
                 <div class="logo-src">IG Eco Wash</div>
                 <div class="header__pane ml-auto">
@@ -528,127 +528,31 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li id="liCommunity">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-users"></i>
-                                    Community
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("Index","Supplier")" id="liSupplier">
-                                            <i class="metismenu-icon"></i>
-                                            Supplier
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Consumer")" id="liConsumer">
-                                            <i class="metismenu-icon"></i>
-                                            Consumer
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Payment","Consumer")" id="liPayment">
-                                            <i class="metismenu-icon"></i>
-                                            Payment
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li id="liProduction">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-tools"></i>
-                                    Production
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("Index","RawMaterial")" id="liRawMaterial">
-                                            <i class="metismenu-icon"></i>
-                                            Raw Material List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("RawMaterial","RawMaterial")" id="liAddRawMaterial">
-                                            <i class="metismenu-icon"></i>
-                                            Add Raw Material
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Stock")" id="liStock">
-                                            <i class="metismenu-icon"></i>
-                                            Stock List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Stock","Stock")" id="liAddStock">
-                                            <i class="metismenu-icon"></i>
-                                            Add Stock
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                         
                             <li class="app-sidebar__heading">Operation</li>
                             <li id="liOperation">
                                 <a href="#">
                                     <i class="metismenu-icon pe-7s-monitor"></i>
-                                    Activity
+                                    Booking
                                     <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="@Url.Action("Index","Purchase")" id="liPurchase">
+                                        <a href="@Url.Action("Index","Admin_Customer")" id="liPurchase">
                                             <i class="metismenu-icon"></i>
-                                            Purchase List
+                                            Customer
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Purchase","Purchase")" id="liAddPurchase">
+                                        <a href="@Url.Action("Index","Admin_Book")" id="liPurchase">
                                             <i class="metismenu-icon"></i>
-                                            Add Purchase
+                                            Book 
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Sale")" id="liSale">
-                                            <i class="metismenu-icon"></i>
-                                            Sale List
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Sale","Sale")" id="liAddSale">
-                                            <i class="metismenu-icon"></i>
-                                            Add Sale
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("OtherExpense","Finance")" id="liOtherExpense">
-                                            <i class="metismenu-icon"></i>
-                                            Other Expense
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </li>
-                            <li id="liConsumerPayment">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-wallet"></i>
-                                    Consumer Payments
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("Credit","ConsumerPayment")" id="liCredit">
-                                            <i class="metismenu-icon"></i>
-                                            Credit
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Consignment","ConsumerPayment")" id="liConsignment">
-                                            <i class="metismenu-icon"></i>
-                                            Consignment
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            
                             <li class="app-sidebar__heading">Financial</li>
                             <li id="liFinance">
                                 <a href="#">

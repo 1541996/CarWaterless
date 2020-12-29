@@ -1,3 +1,8 @@
 ﻿.pagination{
     justify-content:flex-end!important
 }
+
+
+.bg-theme {
+    background-image: linear-gradient(to bottom, #13b490, #13b490) !important
+}

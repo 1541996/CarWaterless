@@ -38,10 +38,16 @@
                                 <td>@result.Email</td>
                                 <td>@result.PhoneNo</td>
                                 <td class="text-right">
-                                   <a class="btn btn-warning" onclick="Edit('@result.Id')">
-                                   <i class="fas fa-edit text-white"></i></a>&nbsp;&nbsp;
-                                   <a class="btn btn-danger" onclick="Delete('@result.Id')">
-                                   <i class="fas fa-trash text-white"></i></a></td>                              
+                                    <a class="btn btn-primary" onclick="AddCar('@result.Id')">
+                                        <i class="fas fa-plus-circle text-white"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a class="btn btn-warning" onclick="Edit('@result.Id')">
+                                        <i class="fas fa-edit text-white"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a class="btn btn-danger" onclick="Delete('@result.Id')">
+                                        <i class="fas fa-trash text-white"></i>
+                                    </a>
+                                </td>                              
                             </tr>
 
                         }
