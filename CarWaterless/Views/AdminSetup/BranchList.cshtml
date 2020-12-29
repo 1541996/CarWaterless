@@ -1,0 +1,95 @@
+﻿@model Infra.ViewModels.BranchViewModel
+
+@{
+    ViewBag.Title = "BranchList";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Branch List
+            </div>
+        </div>
+        <div class="page-title-actions">
+            <div class="d-inline-block dropdown">
+                <a href="@Url.Action("Branch","AdminSetup")" class="btn btn-info">
+                    <i class="fa fa-plus"></i> Add Branch
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Filter</h5>
+                <form class="">
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label>Township</label>
+                            <div class="position-relative form-group">
+                                @Html.DropDownListFor(model => model.TownshipId,Model.TownshipList, "- All Township -",new { @class = "form-control", @type = "Name", @autocomplete = "off" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label>Agent</label>
+                            <div class="position-relative form-group">
+                                @Html.DropDownListFor(model => model.AdminAgentId, Model.AdminAgentList,"- All Agents -", new { @class = "form-control", @type = "Name", @autocomplete = "off" })
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="position-relative form-group" style="float:right">
+                                <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSearch"><i class="fa fa-search"></i> Search</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <table id="tbl" class="table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Township</th>
+                                <th>Agent</th>
+                                <th>Address</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/branch")
+<script type="text/javascript">
+    $(function () {
+        $('#liSetting').addClass('mm-active');
+        $('#liBranch').addClass('mm-active');
+        $('#liSetting a').attr('aria-expanded', true);
+    });
+    var listUrl = '@Url.Action("GetAllBranch", "AdminSetup")';
+    var deleteUrl = '@Url.Action("DeleteBranch", "AdminSetup")';
+</script>
+

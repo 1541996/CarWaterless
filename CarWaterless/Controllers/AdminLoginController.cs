@@ -41,37 +41,7 @@ namespace CarWaterless.Controllers
             return Json(model);
         }
 
-        public ActionResult Signup()
-        {
-            AdminViewModel model = new AdminViewModel();
-            return View(model);
-        }
-
-        [HttpPost]
-        public JsonResult Signup(AdminViewModel model)
-        {
-            AdminRepository repository = new AdminRepository();
-            model = repository.Save(model);
-            //int count = repository.CheckUserNameValid(model.UserName);
-            //if (count == 0)
-            //{
-            //    model = repository.Save(model);
-            //}
-            //else
-            //{
-            //    model.MessageType = 2;
-            //    model.Message = "User name already exists.";
-            //}
-
-            return Json(model);
-        }
-
-        [HttpPost]
-        public JsonResult CheckUserNameValid(string username)
-        {
-            AdminRepository repository = new AdminRepository();
-            int count = repository.CheckUserNameValid(username);
-            return Json(count);
-        }
+       
+        
     }
 }

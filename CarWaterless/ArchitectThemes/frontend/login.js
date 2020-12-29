@@ -25,13 +25,11 @@
             if (isvalid == true) {
                 $.ajax({
                     type: "POST",
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
                     url: loginUrl,
                     data: GetModel(),
                     success: function (data) {
                         if (data.MessageType == 1) {
-                            window.location = "/AdminSetup/Township";
+                            window.location = "/AdminSetup/CarCategory";
                         }
                         else {
                             showMessage(data.MessageType, data.Message);
@@ -72,7 +70,7 @@
                 data: GetModel(),
                 success: function (data) {
                     if (data.MessageType == 1) {
-                        window.location = "/AdminSetup/Township";
+                        window.location = "/AdminSetup/CarCategory";
                     }
                     else {
                         showMessage(data.MessageType, data.Message);

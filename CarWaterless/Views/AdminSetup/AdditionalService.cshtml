@@ -1,0 +1,114 @@
+﻿@model Infra.ViewModels.AdditionalServiceViewModel
+
+@{
+    ViewBag.Title = "AdditionalService";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Additional Service
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <form class="">
+                    <div class="form-row">
+                        <div class="col-md-3">
+                            <div class="position-relative form-group">
+                                <label>Name</label>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @type = "Name", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                                <div id="Name-error" class="invalid-feedback" style="display:none;">
+                                    Enter Name
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="position-relative form-group">
+                                <label>Car Type</label>
+                                <select id="ddlCarType" class="form-control">
+                                    <option value="" selected>- Choose -</option>
+                                    <option value="big">Big </option>
+                                    <option value="normal">Normal</option>
+                                    <option value="small">Small</option>
+                                </select>
+                                <div id="ddlCarType-error" class="invalid-feedback" style="display:none;">
+                                    Choose Car Type
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="position-relative form-group">
+                                <label>Basic Price</label>
+                                @Html.TextBoxFor(model => model.Price, new { @class = "form-control", @type = "Name", @placeholder = "", @autocomplete = "off", @onkeypress = "return onlyNumberKey(event)" })
+                                <div id="Price-error" class="invalid-feedback" style="display:none;">
+                                    Enter Price
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="position-relative form-group">
+                                <label>Discount Price</label>
+                                @Html.TextBoxFor(model => model.DiscountPrice, new { @class = "form-control", @type = "Name", @placeholder = "", @autocomplete = "off", @onkeypress = "return onlyNumberKey(event)" })
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="position-relative form-group" style="margin-top: 30px;float:right">
+                                <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
+                                <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row col-sm-12">
+                    <table id="tbl" class="table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Price</th>
+                                <th>Discount Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/additionalservice")
+<script type="text/javascript">
+    $(function () {
+        $('#liSetting').addClass('mm-active');
+        $('#liAdditionalService').addClass('mm-active');
+        $('#liSetting a').attr('aria-expanded', true);
+    });
+    var listUrl = '@Url.Action("GetAllAdditionalService","AdminSetup")';
+    var saveUrl = '@Url.Action("AdditionalService","AdminSetup")';
+    var editUrl = '@Url.Action("EditAdditionalService", "AdminSetup", new { id="__id__" })';
+    var deleteUrl = '@Url.Action("DeleteAdditionalService", "AdminSetup")';
+</script>
+
+

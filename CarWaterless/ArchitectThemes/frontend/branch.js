@@ -1,48 +1,11 @@
 ﻿
 $(document).ready(function () {
 
-    
     BindGrid();
 
-    $("#PrefixCode").keyup(function () {
-        $(this).val($(this).val().toUpperCase());
-    });
 
-    $('#btnCancel').click(function () {
-        location.reload();
-    });
-
-    $('#btnSave').click(function () {
-
-        ClearError();
-
-        var isvalid = false;
-        var Name = $('#Name').val();
-        var PrefixCode = $('#PrefixCode').val();
-        if (Name != "") {
-            if (PrefixCode != "") {
-                isvalid = true;
-            }
-            else {
-                $('#PrefixCode').closest(".form-control").addClass("is-invalid");
-                $('#PrefixCode-error').show();
-            }
-        }
-        else {
-            $('#Name').closest(".form-control").addClass("is-invalid");
-            $('#Name-error').show();
-        }
-        if (isvalid == true) {
-            $.ajax({
-                type: "POST",
-                url: saveUrl,
-                data: GetModel(),
-                success: function (data) {
-                    showMessage(data.MessageType, data.Message);
-                    BindGrid();
-                }
-            })
-        }
+    $('#btnSearch').click(function () {
+        BindGrid();
     });
 
 
@@ -57,6 +20,7 @@ function BindGrid() {
         $.ajax({
             type: "POST",
             url: listUrl,
+            data: GetModel(),
             dataType: "json",
             success: function (data) {
 
@@ -65,7 +29,7 @@ function BindGrid() {
                 oTable = $("#tbl").dataTable({
                     "columnDefs": [
                         {
-                            className: "text-center", "targets": [3]
+                            className: "text-center", "targets": [5,6]
                         }
                     ],
                     "pagingType": "full_numbers",
@@ -78,25 +42,31 @@ function BindGrid() {
                     "aaSorting": [[0, "asc"]],
                     "aoColumns": [
                         {
-                            "mData": "No", "bSearchable": false, "bSortable": false, "width": "5%",
+                            "mData": "No", "bSearchable": false, "bSortable": false, "width": "3%",
                             "mRender": function (data) {
                                 return "<center>" + data.toString() + "</center>";
                             }
                         },
-                        { "mData": "Name", "bSearchable": true, "bSortable": true, "width": "35%" },
-                        { "mData": "PrefixCode", "bSearchable": true, "bSortable": true, "width": "30%" },
-                       
+                        { "mData": "LocationName", "bSearchable": true, "bSortable": true, "width": "15%" },
+                        { "mData": "LocationPhoneNo", "bSearchable": true, "bSortable": true, "width": "15%" },
+                        { "mData": "TownshipName", "bSearchable": true, "bSortable": true, "width": "10%" },
+                        { "mData": "AdminAgentName", "bSearchable": true, "bSortable": true, "width": "10%" },
+                        { "mData": "LocationAddress", "bSearchable": true, "bSortable": true, "width": "20%" },
+                        
+
                         {
-                            "mData": "Id", "bSearchable": false, "bSortable": false, "width": "30%",
+                            "mData": "Id", "bSearchable": false, "bSortable": false, "width": "15%",
                             "mRender": function (data) {
 
                                 var actions = "";
                                 var edit = "";
                                 var del = "";
 
+                                view = "<a class='btn btn-info btn-sm' href='javascript:void(0)' onclick=View('" + data.toString() + "')><i class='fas fa-eye'></i></a>&nbsp;&nbsp;";
                                 edit = "<a class='btn btn-warning btn-sm' href='javascript:void(0)' onclick=Edit('" + data.toString() + "')><i class='fas fa-edit'></i></a>&nbsp;&nbsp;";
                                 del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-trash'></i></a>";
 
+                                actions += view;
                                 actions += edit;
                                 actions += del;
 
@@ -130,7 +100,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/Setup/Category";
+                window.location = "/AdminSetup/BranchList";
             }
         });
     }
@@ -145,32 +115,34 @@ function showMessage(messagetype, message) {
     }
 }
 
-function Edit(id) {
+function View(id) {
+
     $.ajax({
-        url: editUrl,
+        url: viewUrl,
         type: 'POST',
-        data: { "Id": id },
+        data: { "id": id },
         success: function (data) {
-            $("#Id").val(data.Id);
-            $('#Name').val(data.Name);
-            $('#PrefixCode').val(data.PrefixCode);
-            
+            $('#lblName').text("" + data.Name);
+            $('#lblPhoneNo').text(data.PhoneNo);
+            $('#lblAddress').text(data.Address);
+            $('#lblPaymentType').text(data.PaymentTypeRoleName);
+            $('#lblCompany').text(data.CompanyName);
 
-            $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
-
-            //$('body, html').animate({ scrollTop: $(patientFormTop).offset().top }, 'slow');
-            $('html, body').animate({
-                scrollTop: 0
-            }, 800);
         },
     })
+
+}
+
+
+function Edit(id) {
+    window.location = "/AdminSetup/Branch?id=" + id;
 }
 
 function Delete(id) {
 
     Swal.fire({
         title: "Are you sure to delete?",
-        text: "Deleting category may occur errors for existing stocks.",
+        text: "Deleting branches may occur errors for existing records.",
         type: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#ff6258',
@@ -195,12 +167,12 @@ function Delete(id) {
                             'success'
                         ).then((result) => {
                             if (result.value) {
-                                window.location = "/Setup/Category";
+                                window.location = "/AdminSetup/BranchList";
                             }
                         });
                     }
 
-                    BindGird();
+                    BindGrid();
                 }
 
             });
@@ -212,20 +184,23 @@ function Delete(id) {
 
 function GetModel() {
     var model = {};
-    var id = $('#Id').val();
-    if (id != "") {
-        model.Id = id;
-    }
-    model.Name = $('#Name').val();
-    model.PrefixCode = $('#PrefixCode').val();
     
+    model.Name = $('#Name').val();
+    model.TownshipId = $('#TownshipId').val();
+    model.AdminAgentId = $('#AdminAgentId').val();
+    if ($('#chkIsActive').prop("checked") == true) {
+        model.IsActive = true;
+    }
+    else {
+        model.IsActive = false;
+    }
+
     return model;
 }
 
 
 function ClearError() {
-    $('#Name').closest(".form-control").removeClass("is-invalid");
-    $('#PrefixCode').closest(".form-control").removeClass("is-invalid");
+    $('#Name').closest(".form-group").removeClass("has-error");
     $('#Name-error').hide();
     $('#PrefixCode-error').hide();
 }

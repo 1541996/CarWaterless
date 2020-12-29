@@ -126,9 +126,13 @@
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <a href="@Url.Action("EditProfile","User")" tabindex="0" class="dropdown-item">Edit Profile</a>
-                                            <a href="@Url.Action("ChangePassword","User")" tabindex="0" class="dropdown-item">Change Password</a>
-                                            <a href="@Url.Action("Add","User")" tabindex="0" class="dropdown-item">Add User</a>
+                                            <a href="@Url.Action("EditProfile","AdminUser")" tabindex="0" class="dropdown-item">Edit Profile</a>
+                                            <a href="@Url.Action("ChangePassword","AdminUser")" tabindex="0" class="dropdown-item">Change Password</a>
+                                            @if (userrole == "superadministrator")
+                                            {
+                                                <a href="@Url.Action("Add","AdminUser")" tabindex="0" class="dropdown-item">Add User</a>
+                                                <a href="@Url.Action("UserList","AdminUser")" tabindex="0" class="dropdown-item">User List</a>
+                                            }
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <a href="@Url.Action("Index","AdminLogin")" tabindex="0" class="dropdown-item">Log Out</a>
                                         </div>
@@ -490,33 +494,33 @@
                                 </a>
                                 <ul>
                                     <li>
+                                        <a href="@Url.Action("CarCategory","AdminSetup")" id="liCarCategory">
+                                            <i class="metismenu-icon"></i>
+                                            Category
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="@Url.Action("Township","AdminSetup")" id="liTownship">
                                             <i class="metismenu-icon"></i>
                                             Township
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Category","Setup")" id="liCategory">
+                                        <a href="@Url.Action("Branch","AdminSetup")" id="liBranch">
                                             <i class="metismenu-icon"></i>
-                                            Category
+                                            Branch
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Color","Setup")" id="liColor">
+                                        <a href="@Url.Action("AdditionalService","AdminSetup")" id="liAdditionalService">
                                             <i class="metismenu-icon"></i>
-                                            Color
+                                            Additional Service
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="@Url.Action("Unit","Setup")" id="liUnit">
+                                        <a href="@Url.Action("Discount","AdminSetup")" id="liDiscount">
                                             <i class="metismenu-icon"></i>
-                                            Unit
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("OtherExpense","Setup")" id="liOtherExpense">
-                                            <i class="metismenu-icon"></i>
-                                            Other Expense
+                                            Discount
                                         </a>
                                     </li>
                                 </ul>

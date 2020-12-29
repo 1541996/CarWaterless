@@ -31,6 +31,21 @@ namespace CarWaterless
 
             bundles.Add(new ScriptBundle("~/bundles/township").Include(
                "~/ArchitectThemes/frontend/township.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/carcategory").Include(
+              "~/ArchitectThemes/frontend/carcategory.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/branch").Include(
+               "~/ArchitectThemes/frontend/branch.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/branch-new").Include(
+               "~/ArchitectThemes/frontend/branch-new.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/additionalservice").Include(
+               "~/ArchitectThemes/frontend/additionalservice.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/user-new").Include(
+              "~/ArchitectThemes/frontend/user-new.js"));
         }
     }
 }

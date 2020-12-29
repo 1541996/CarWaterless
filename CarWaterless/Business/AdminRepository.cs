@@ -94,6 +94,30 @@ namespace CarWaterless.Business
             return response;
         }
 
+        public List<AdminViewModel> GetAllAgents()
+        {
+            List<AdminViewModel> lst = new List<AdminViewModel>();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbAdmins
+                             where data.IsDeleted == false && data.UserRole =="branchagent"
+                             select new AdminViewModel
+                             {
+                                 Id = data.Id,
+                                 UserName = data.UserName,
+                                 FullName = data.FullName,
+                                 Password = data.Password,
+                             });
+                lst = query.AsEnumerable().Select((data, index) => new AdminViewModel()
+                {
+                    Id = data.Id,
+                    UserName = data.UserName,
+                    FullName = data.FullName,
+                    Password = data.Password
+                }).ToList();
+            }
+            return lst;
+        }
 
         public AdminViewModel GetById(int id)
         {

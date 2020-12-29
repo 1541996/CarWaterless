@@ -1,11 +1,53 @@
 ﻿
 $(document).ready(function () {
 
+    
     BindGrid();
 
+    
 
-    $('#btnSearch').click(function () {
-        BindGrid();
+    $('#btnCancel').click(function () {
+        location.reload();
+    });
+
+    $('#btnSave').click(function () {
+
+        ClearError();
+
+        var isvalid = false;
+        var Name = $('#Name').val();
+        var ddlCarType = $('#ddlCarType').val();
+        var BasicPrice = $('#BasicPrice').val();
+        if (Name != "") {
+            if (ddlCarType != "") {
+                if (BasicPrice != "") {
+                    isvalid = true;
+                }
+                else {
+                    $('#BasicPrice').closest(".form-control").addClass("is-invalid");
+                    $('#BasicPrice-error').show();
+                }
+            }
+            else {
+                $('#ddlCarType').closest(".form-control").addClass("is-invalid");
+                $('#ddlCarType-error').show();
+            }
+        }
+        else {
+            $('#Name').closest(".form-control").addClass("is-invalid");
+            $('#Name-error').show();
+        }
+        if (isvalid == true) {
+            $.ajax({
+                type: "POST",
+                url: saveUrl,
+                data: GetModel(),
+                success: function (data) {
+                    showMessage(data.MessageType, data.Message);
+                    BindGrid();
+                }
+            })
+        }
     });
 
 
@@ -20,7 +62,6 @@ function BindGrid() {
         $.ajax({
             type: "POST",
             url: listUrl,
-            data: GetModel(),
             dataType: "json",
             success: function (data) {
 
@@ -29,7 +70,7 @@ function BindGrid() {
                 oTable = $("#tbl").dataTable({
                     "columnDefs": [
                         {
-                            className: "text-center", "targets": [5,6]
+                            className: "text-center", "targets": [4]
                         }
                     ],
                     "pagingType": "full_numbers",
@@ -42,29 +83,17 @@ function BindGrid() {
                     "aaSorting": [[0, "asc"]],
                     "aoColumns": [
                         {
-                            "mData": "No", "bSearchable": false, "bSortable": false, "width": "3%",
+                            "mData": "No", "bSearchable": false, "bSortable": false, "width": "5%",
                             "mRender": function (data) {
                                 return "<center>" + data.toString() + "</center>";
                             }
                         },
                         { "mData": "Name", "bSearchable": true, "bSortable": true, "width": "15%" },
-                        { "mData": "CompanyName", "bSearchable": true, "bSortable": true, "width": "15%" },
-                        { "mData": "PhoneNo", "bSearchable": true, "bSortable": true, "width": "10%" },
-                        { "mData": "Address", "bSearchable": true, "bSortable": true, "width": "20%" },
+                        { "mData": "Type", "bSearchable": true, "bSortable": true, "width": "10%" },
+                        { "mData": "BasicPrice", "bSearchable": true, "bSortable": true, "width": "10%" },
+                       
                         {
-                            "mData": "IsActive", "bSearchable": true, "bSortable": true, "width": "5%",
-                            "mRender": function (data, type, full) {
-                                if (data.toString() == "true") {
-                                    return "<i class='fa fa-check-circle' style='color:green'></i>";
-                                }
-                                else {
-                                    return "<i class='fa fa-times-circle' style='color:red'></i>";
-                                }
-                            }
-                        },
-
-                        {
-                            "mData": "Id", "bSearchable": false, "bSortable": false, "width": "15%",
+                            "mData": "Id", "bSearchable": false, "bSortable": false, "width": "30%",
                             "mRender": function (data) {
 
                                 var actions = "";
@@ -107,7 +136,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/Setup/Supplier";
+                window.location = "/AdminSetup/CarCategory";
             }
         });
     }
@@ -123,14 +152,31 @@ function showMessage(messagetype, message) {
 }
 
 function Edit(id) {
-    window.location = "/Supplier/Supplier?id=" + id;
+    $.ajax({
+        url: editUrl,
+        type: 'POST',
+        data: { "Id": id },
+        success: function (data) {
+            $("#Id").val(data.Id);
+            $('#Name').val(data.Name);
+            $('#PrefixCode').val(data.PrefixCode);
+            
+
+            $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
+
+            //$('body, html').animate({ scrollTop: $(patientFormTop).offset().top }, 'slow');
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+        },
+    })
 }
 
 function Delete(id) {
 
     Swal.fire({
         title: "Are you sure to delete?",
-        text: "Deleting Suppliers may occur errors for existing payments.",
+        text: "Deleting car category may occur errors for existing records.",
         type: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#ff6258',
@@ -155,12 +201,12 @@ function Delete(id) {
                             'success'
                         ).then((result) => {
                             if (result.value) {
-                                window.location = "/Supplier/Index";
+                                window.location = "/AdminSetup/CarCategory";
                             }
                         });
                     }
 
-                    BindGrid();
+                    BindGird();
                 }
 
             });
@@ -172,21 +218,23 @@ function Delete(id) {
 
 function GetModel() {
     var model = {};
-    
+    var id = $('#Id').val();
+    if (id != "") {
+        model.Id = id;
+    }
     model.Name = $('#Name').val();
-    if ($('#chkIsActive').prop("checked") == true) {
-        model.IsActive = true;
-    }
-    else {
-        model.IsActive = false;
-    }
-
+    model.Type = $('#ddlCarType').val();
+    model.BasicPrice = $('#BasicPrice').val();
+    
     return model;
 }
 
 
 function ClearError() {
-    $('#Name').closest(".form-group").removeClass("has-error");
+    $('#Name').closest(".form-control").removeClass("is-invalid");
+    $('#ddlCarType').closest(".form-control").removeClass("is-invalid");
+    $('#BasicPrice').closest(".form-control").removeClass("is-invalid");
     $('#Name-error').hide();
-    $('#PrefixCode-error').hide();
+    $('#ddlCarType-error').hide();
+    $('#BasicPrice-error').hide();
 }

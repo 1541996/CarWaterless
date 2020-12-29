@@ -1,18 +1,6 @@
 ﻿
 $(document).ready(function () {
 
-    var id = $('#Id').val();
-    if (id != "") {
-        $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
-        var isactive = $('#IsActive').val();
-        if (isactive.toString() == "True") {
-            $("#chkIsActive").prop("checked", true);
-        }
-        else {
-            $("#chkIsActive").prop("checked", false);
-        }
-        
-    }
 
     $('#btnCancel').click(function () {
         location.reload();
@@ -23,27 +11,27 @@ $(document).ready(function () {
         ClearError();
 
         var isvalid = false;
-        var Name = $('#Name').val();
-        var PhoneNo = $('#PhoneNo').val();
-        var Address = $('#Address').val();
-        if (Name != "") {
-            if (PhoneNo != "") {
-                if (Address != "") {
+        var UserName = $('#UserName').val();
+        var FullName = $('#FullName').val();
+        var Password = $('#Password').val();
+        if (UserName != "") {
+            if (FullName != "") {
+                if (Password != "") {
                     isvalid = true;
                 }
                 else {
-                    $('#Address').closest(".form-control").addClass("is-invalid");
-                    $('#Address-error').show();
+                    $('#Password').closest(".form-control").addClass("is-invalid");
+                    $('#Password-error').show();
                 }
             }
             else {
-                $('#PhoneNo').closest(".form-control").addClass("is-invalid");
-                $('#PhoneNo-error').show();
+                $('#FullName').closest(".form-control").addClass("is-invalid");
+                $('#FullName-error').show();
             }
         }
         else {
-            $('#Name').closest(".form-control").addClass("is-invalid");
-            $('#Name-error').show();
+            $('#UserName').closest(".form-control").addClass("is-invalid");
+            $('#UserName-error').show();
         }
         if (isvalid == true) {
             $.ajax({
@@ -72,7 +60,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/Supplier/Index";
+                window.location = "/AdminUser/UserList";
             }
         });
     }
@@ -90,18 +78,18 @@ function showMessage(messagetype, message) {
 function GetModel() {
     var model = {};
     var id = $('#Id').val();
-    if (id != "") {
+    if (id != 0) {
         model.Id = id;
     }
-    model.Name = $('#Name').val();
-    model.PhoneNo = $('#PhoneNo').val();
-    model.CompanyName = $('#CompanyName').val() == null ? "" : $('#CompanyName').val();
-    model.Address = $('#Address').val();
+    model.UserName = $('#UserName').val();
+    model.FullName = $('#FullName').val();
+    model.Password = $('#Password').val();
+    model.UserRole = $('#ddlUserRole').val();
     model.CreateUserId = $('#CreateUserId').val();
     if ($('#chkIsActive').prop("checked") == true) {
         model.IsActive = true;
     }
-    else{
+    else {
         model.IsActive = false;
     }
     return model;
@@ -109,10 +97,20 @@ function GetModel() {
 
 
 function ClearError() {
-    $('#Name').closest(".form-control").removeClass("is-invalid");
-    $('#Name-error').hide();
-    $('#PhoneNo').closest(".form-control").removeClass("is-invalid");
-    $('#PhoneNo-error').hide();
-    $('#Address').closest(".form-control").removeClass("is-invalid");
-    $('#Address-error').hide();
+    $('#UserName').closest(".form-control").removeClass("is-invalid");
+    $('#UserName-error').hide();
+    $('#FullName').closest(".form-control").removeClass("is-invalid");
+    $('#FullName-error').hide();
+    $('#Password').closest(".form-control").removeClass("is-invalid");
+    $('#Password-error').hide();
+}
+
+
+function onlyNumberKey(evt) {
+
+    // Only ASCII charactar in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
 }
