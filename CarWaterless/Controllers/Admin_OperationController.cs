@@ -27,10 +27,12 @@ namespace CarWaterless.Controllers
             return View();
         }
 
-        public ActionResult _list(int pagesize = 10, int page = 1, string searchvalue = null, string OrderBy = "Accesstime",
-         string Direction = "ASC")
+        public ActionResult _list(int pagesize = 10, int page = 1, string searchvalue = null,
+            string OrderBy = "Accesstime", string Direction = "ASC",
+            DateTime? fromdate = null, DateTime? todate = null)
         {
             Expression<Func<tbCustomer, bool>> searchfilter = null;
+            Expression<Func<tbOperation, bool>>  datefilter = null;
 
             if (searchvalue != "" && searchvalue != null)
             {
@@ -45,10 +47,24 @@ namespace CarWaterless.Controllers
             }
 
 
+            if (fromdate != null && todate != null)
+            {
+                fromdate = fromdate.Value.Date;
+                todate = todate.Value.AddDays(1).Date;
+                datefilter = l => l.OperationDate >= fromdate && l.OperationDate < todate;
+            }
+            else
+            {
+                var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                var nextday = today.AddDays(1).Date;
+                datefilter = l => l.OperationDate >= today && l.OperationDate < nextday;
+            }
 
-            IQueryable<OperationCustomerViewModel> result = (from customer in uow.customerRepo.GetAll()
-                                                             join operation in uow.operationRepo.GetAll().Where(a => a.IsDeleted != true)
-                                                             on customer.Id equals operation.CustomerId                                                    
+
+            IQueryable<OperationCustomerViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                             Where(a => a.IsDeleted != true).Where(datefilter)
+                                                             join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                             on operation.CustomerId equals customer.Id                                                    
                                                              join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
                                                              on operation.CustomerVehicleId equals car.Id
                                                              join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
@@ -63,7 +79,9 @@ namespace CarWaterless.Controllers
                                                                  customer = customer,
                                                                  carcategory = carcategory,
                                                                  branch = branch,
-                                                                 township = township
+                                                                 township = township,
+                                                                 vehicle = car
+
                                                              }).AsQueryable();
             var totalCount = result.Count();
 

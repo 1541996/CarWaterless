@@ -6,3 +6,7 @@
 .bg-theme {
     background-image: linear-gradient(to bottom, #13b490, #13b490) !important
 }
+
+.theme-color {
+    color: #13b490!important
+}

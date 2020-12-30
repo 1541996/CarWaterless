@@ -5,13 +5,157 @@
 }
 
 
+<style>
+
+
+    .progress-meter {
+        padding: 0;
+    }
+
+    ol.progress-meter {
+        padding-bottom: 9.5px;
+        list-style-type: none;
+    }
+
+        ol.progress-meter li {
+            display: inline-block;
+            text-align: center;
+            text-indent: -19px;
+            height: 44px;
+            width: 23.99%;
+            font-size: 12px;
+            border-bottom-width: 6px;
+            border-bottom-style: solid;
+        }
+
+            ol.progress-meter li:before {
+                position: relative;
+                float: left;
+                text-indent: 0;
+                left: -webkit-calc(45% - 9.5px);
+                left: -moz-calc(45% - 9.5px);
+                left: -ms-calc(45% - 9.5px);
+                left: -o-calc(45% - 9.5px);
+                left: calc(45% - 9.5px);
+            }
+
+            ol.progress-meter li.done {
+                font-size: 12px;
+            }
+
+                /*ol.progress-meter li.done:before {
+                    content: "\2713";
+                    height: 34px;
+                    width: 34px;
+                    line-height: 21.85px;
+                    bottom: -28.175px;
+                    border: none;
+                    padding-top: 5px;
+                    font-size: 20px;
+                    border-radius: 50%;
+                    font-weight: bold;
+                }
+*/
+                ol.progress-meter li.done:before {
+                    content: "\2713";
+                    height: 24px;
+                    width: 24px;
+                    line-height: 13.85px;
+                    bottom: -28.175px;
+                    border: none;
+                    padding-top: 5px;
+                    font-size: 15px;
+                    border-radius: 50%;
+                    font-weight: bold;
+                }
+
+           /* ol.progress-meter li.todo:before {
+                content: "\2B24";
+                height: 24px;
+                width: 24px;
+                font-size: 15px;
+                bottom: -34.175px;
+                line-height: 18.05px;
+            }*/
+
+            ol.progress-meter li.todo:before {
+                content: "\2713";
+                height: 24px;
+                width: 24px;
+                line-height: 13.85px;
+                bottom: -28.175px;
+                border: none;
+                padding-top: 5px;
+                font-size: 15px;
+                border-radius: 50%;
+                font-weight: bold;
+            }
+
+            ol.progress-meter li.todo {
+                font-size: 12px;
+            }
+
+               /* ol.progress-meter li.todo:before {
+                    content: "\2B24";
+                    font-size: 40px;
+                    bottom: -34.175px;
+                    line-height: 18.05px;
+                }
+*/
+            ol.progress-meter li.done {
+                color: black;
+                border-bottom-color: #13b490;
+            }
+
+
+            ol.progress-meter li.todo:before {
+                content: "\2B24";
+                font-size: 29px;
+                bottom: -34.175px;
+                line-height: 0px;
+            }
+
+            ol.progress-meter li.done:before {
+                color: white;
+                background-color: #13b490;
+            }
+
+            ol.progress-meter li.todo {
+                color: silver;
+                border-bottom-color: silver;
+            }
+
+                ol.progress-meter li.todo:before {
+                    color: silver;
+                }
+
+            ol.progress-meter li.finish {
+                color: black;
+                border-bottom-color: #ff0000;
+            }
+
+</style>
+
 <div class="app-page-title">
     <div class="page-title-wrapper">
-        <div class="page-title-heading">
-            <div>
-                Customer
+        <div class="display-flex-row">
+            <div class="display-flex-column">
+                <div class="page-title-heading">
+                    <div>
+                        Manage Booking
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="display-flex-column ml-auto">
+                <input type="text" class="form-control" name="daterange" value="" />
+
+            </div>
+            <div class="display-flex-column">
+
             </div>
         </div>
+       
     </div>
 </div>
 
@@ -35,11 +179,23 @@
         var searchvalue = null;
         var OrderBy = "Accesstime";
         var Direction = "DESC";
+        var fromdate;
+        var todate;
         $(function () {
 
             LoadMainList();
             initPaging();
             initsComponent();
+
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left'
+            }, function (start, end, label) {
+                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                page = 1;
+                fromdate = start.format('YYYY-MM-DD');
+                todate = end.format('YYYY-MM-DD');
+                LoadMainList();
+            });
         });
         function initsComponent() {
 
@@ -104,7 +260,9 @@
                 cache: false,
                 url: '@Url.Action("_list", "Admin_Operation")',
                 data :{
-                    page: page, pagesize: pagesize, searchvalue: searchvalue, OrderBy: OrderBy, Direction: Direction
+                    page: page, pagesize: pagesize, searchvalue: searchvalue,
+                    OrderBy: OrderBy, Direction: Direction,
+                    fromdate: fromdate, todate: todate
                 },
                 beforeSend: function () {
                    // callloading('_itemlist');
