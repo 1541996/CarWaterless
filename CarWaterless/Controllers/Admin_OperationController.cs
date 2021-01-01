@@ -1,4 +1,5 @@
-﻿using Infra.Models;
+﻿using Data.Helper;
+using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
 using LinqKit;
@@ -69,17 +70,12 @@ namespace CarWaterless.Controllers
                                                              on operation.CustomerVehicleId equals car.Id
                                                              join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
                                                              on car.CarCategoryId equals carcategory.Id
-                                                             join branch in uow.branchRepo.GetAll().Where(a => a.IsDeleted != true)
-                                                             on operation.BranchId equals branch.Id
-                                                             join township in uow.townshipRepo.GetAll().Where(a => a.IsDeleted != true)
-                                                             on branch.TownshipId equals township.Id
+                                                            
                                                              select new OperationCustomerViewModel
                                                              {
                                                                  operation = operation,
                                                                  customer = customer,
                                                                  carcategory = carcategory,
-                                                                 branch = branch,
-                                                                 township = township,
                                                                  vehicle = car
 
                                                              }).AsQueryable();
@@ -120,6 +116,37 @@ namespace CarWaterless.Controllers
             var model = new PagedListClient<OperationCustomerViewModel>(objs, page, pagesize, totalCount);
             return PartialView("_list", model);
         }
+
+
+
+
+        public ActionResult newstatuschange(int id = 0, string status = null)
+        {
+            tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
+            if(status == "Waiting")
+            {
+                operation.ConfirmedTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                operation.Status = "Confirmed";
+            }
+
+            if (status == "Confirmed")
+            {
+                operation.FinishedTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                operation.Status = "Finished";
+            }
+
+            operation = uow.operationRepo.UpdateWithObj(operation);
+            return Json(operation, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult _StatusConfirm(int id = 0, string statuschange = null, int doctorid = 0, string doctorname = null, string patientname = null, int patientage = 0, string patientgender = null)
+        {
+            ViewBag.id = id;
+            ViewBag.statuschange = statuschange;
+          
+            return PartialView("_StatusConfirm");
+        }
+
 
 
     }

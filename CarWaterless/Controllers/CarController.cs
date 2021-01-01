@@ -30,13 +30,15 @@ namespace CarWaterless.Controllers
 
         public ActionResult GetCarList(string customerid = null)
         {
+            IQueryable<tbPhoto> photo = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true).AsQueryable();
             var data = (from veh in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.CustomerId == customerid)
                         join cat in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
                         on veh.CarCategoryId equals cat.Id
                         select new VehicleCategoryViewModel()
                         {
                             vehicle = veh,
-                            category = cat
+                            category = cat,
+                            photos = photo.Where(a => a.CarID == veh.Id).FirstOrDefault()
                         }).AsQueryable();
 
             return PartialView("_getCarList", data);

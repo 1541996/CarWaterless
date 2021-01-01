@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Infra.ViewModels
 {
-    public class OperationCustomerViewModel
+    public class BookingSuccessModel
     {
         public tbOperation operation { get; set; }
-        public tbCustomer customer { get; set; }
+        public tbCarCategory carCategory { get; set; }
         public tbCustomerVehicle vehicle { get; set; }
-        public tbCarCategory carcategory { get; set; }
-      
+        public IQueryable<tbPhoto> photos { get; set; }
+
     }
 }

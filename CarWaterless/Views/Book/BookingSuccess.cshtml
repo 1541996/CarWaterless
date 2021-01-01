@@ -1,0 +1,250 @@
+﻿
+@{
+    ViewBag.Title = "BookingSuccess";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+
+<style>
+    .float {
+        position: fixed;
+        width: 50px;
+        height: 50px;
+        bottom: 90px;
+        right: 16px;
+        background-color: #00c9a7;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 24px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+    }
+
+    .my-float {
+        margin: 12px;
+    }
+
+    .cart-total span{
+        text-align:right!important
+    }
+
+    .page-cart .cart-car-box .chart-car img {
+        border-radius: 10px;
+        max-width: 150px;
+        width: 100%;
+    }
+
+    body{
+        background:#fff!important
+    }
+
+    #content {
+        background: #fff !important
+    }
+
+</style>
+
+@model Infra.ViewModels.BookingSuccessModel
+
+
+<div id="div_chatappear">
+
+</div>
+
+
+<div class="content-wrap page-cart">
+    <div class="subsite">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="subsite-heading">
+                    Your Booking
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="chart-box">
+                    <div class="cart-car-box">
+                        @if (Model.photos.Count() > 0)
+                        {
+                            var photo = Model.photos.FirstOrDefault();
+                            <div class="chart-car"><img src="@photo.PhotoUrl"></div>
+                        }
+
+                        <div class="chart-car-title theme-color mt-10">@Model.vehicle.VehicleBrand @Model.vehicle.VehicleName</div>
+
+                    </div>
+                    <div class="cart-box-detail">
+                        <ul>
+                            <li><i class="fas fa-car"></i> <label>Category</label> : @Model.carCategory.Name</li>
+                            <li><i class="fas fa-cubes"></i> <label>Color</label> : @Model.vehicle.VehicleColor</li>
+
+                            <li><i class="fas fa-map-marker-alt"></i> <label>Township</label> : @Model.operation.TownshipName</li>
+                            <li><i class="fas fa-map-marker-alt"></i> <label>Branch</label> : @Model.operation.BranchName</li>
+                            <li><i class="fas fa-clock"></i> <label>Booking Time</label>: @Model.operation.OperationDate.Value.ToString("dd MMM, yyy") @Model.operation.OperationDate.Value.ToShortTimeString()</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="subsite-heading">
+                    Cart Totals
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="cart-total">
+                    <div class="ct-row">
+                        @if (Model.carCategory.Type == "small")
+                        {
+                            <div class="ct-left">ကားသေး</div>
+                            <div class="ct-right">
+                                <span>
+                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
+                                </span>
+                            </div>
+                        }
+                        else if (Model.carCategory.Type == "big")
+                        {
+                            <div class="ct-left">ကားကြီး</div>
+                            <div class="ct-right">
+                                <span>
+                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
+                                </span>
+                            </div>
+                        }
+                        else if (Model.carCategory.Type == "medium")
+                        {
+                            <div class="ct-left">ကားလတ်</div>
+                            <div class="ct-right">
+                                <span>
+                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
+                                </span>
+                            </div>
+                        }
+
+                        <div class="clear"></div>
+                    </div>
+                    <div id="div_additionalCalc">
+                        @{
+                            var additionalnames = Model.operation.AdditionalNames.Split('_').ToList();
+                            var additionalprices = Model.operation.AdditionalPrices.Split('_').ToList();
+
+                        }
+
+                        @for (int j = 0; j < additionalnames.Count(); j++)
+                        {
+                            <div class="ct-row">
+                                <div class="ct-left">@additionalnames[j]</div>
+                                <div class="ct-right">
+                                    <span>
+                                       @Convert.ToDecimal(additionalprices[j]).ToString("#,##0") MMK
+                                    </span>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        }
+
+
+
+
+
+                    </div>
+
+
+                    <div class="ct-row">
+                        <div class="ct-left">Discount</div>
+                        <div class="ct-right"><span>0</span></div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="ct-row total">
+                        <div class="ct-left">Total</div>
+                        <div class="ct-right" id="div_total">
+                            <span>
+                                @Model.operation.TotalAmount.Value.ToString("#,##0") MMK
+                            </span>
+
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>
+
+
+    <script>
+        var chathub = $.connection.chatHub;
+        var connectionId;
+        $(function () {
+
+            //$.connection.hub.start().done(function () {
+            //    connectionId = $.connection.hub.id;
+            //    console.log(connectionId);
+            //});
+            $.connection.hub.url = 'http://centurylinksmm-001-site7.dtempurl.com/signalr';
+
+            $.connection.hub.start().done(function () {
+                connectionId = $.connection.hub.id;
+                alert(connectionId);
+                console.log(connectionId);
+
+            });
+
+            //  transport: 'longPolling'
+
+
+            var tryingToReconnect = false;
+            var pageIsDisabled = false;
+            $.connection.hub.reconnecting(function () {
+            });
+            $.connection.hub.reconnected(function () {
+            });
+            $.connection.hub.disconnected(function () {
+                setTimeout(function () {
+                    $.connection.hub.start();
+                }, 5000);
+
+            });
+
+
+            chathub.client.chatAppear = function (fromuserid, touserid, operationid) {
+
+                alert("Signalr");
+
+                $('#div_chatappear').empty().append(`<a href="../chat?fromuserid=${fromuserid}&touserid=${touserid}&operationid=${operationid}" class="float" target="_blank">
+                        <i class= "fa fa-comments my-float"></i>
+                    </a>`)
+
+            }
+
+
+
+        })
+
+
+
+    </script>
+
+
+
+}

@@ -12,7 +12,9 @@ namespace Infra.ViewModels
     {
         public tbCustomerVehicle vehicle { get; set; }
         public tbCarCategory category { get; set; }
+        public tbPhoto photos { get; set; }
     }
+
 
 
     public class BranchViewModel

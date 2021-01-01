@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_webLayout.cshtml";
+    ViewBag.Title = "Chat";
+    Layout = "~/Views/Shared/_chatLayout.cshtml";
 }
 
 
@@ -232,11 +232,11 @@
         <div class="contact bar">
             <div class="pic stark" style="background-image: url(../../Plesirthemes/img/profile4.jpg)"></div>
             <div class="name">
-                The'Oo Ko
+                @ViewBag.username
             </div>
-            <div class="seen">
+            @*<div class="seen">
                 Today at 12:56
-            </div>
+            </div>*@
 
         </div>
 
@@ -281,6 +281,7 @@
 
         var fromuserid = '@ViewBag.fromuserid';
         var touserid = '@ViewBag.touserid';
+        var operationid = '@ViewBag.operationid';
         $(function () {
 
             //$.connection.hub.start().done(function () {
@@ -334,6 +335,7 @@
                   data: {
                       fromuserid: fromuserid,
                       touserid: touserid,
+                      operationid: operationid
                   },
                     beforeSend: function () {
                        // $('.btn').prop("disabled", true);
@@ -362,6 +364,7 @@
                   data: {
                       fromuserid: fromuserid,
                       touserid: touserid,
+                      operationid: operationid,
                       message: $('#txt_message').val()
                   },
                     beforeSend: function () {

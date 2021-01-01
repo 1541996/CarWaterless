@@ -72,28 +72,52 @@ namespace CarWaterless.Controllers
             
         }
 
+        public ActionResult BookingSuccess(int id = 0)
+        {
+            // ViewBag.customerid = customerid;
+            BookingSuccessModel bk = new BookingSuccessModel();
+            bk.operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
+            bk.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CustomerVehicleId).FirstOrDefault();
+            bk.carCategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CarCategoryId).FirstOrDefault();
+            bk.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).AsQueryable();
+            return View(bk);
+
+        }
+
 
 
         public async System.Threading.Tasks.Task<ActionResult> SaveBooking(tbOperation obj)
         {
             tbOperation UpdateEntity = null;
-
+            var branch = uow.branchRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.BranchId).FirstOrDefault();
+            if(branch != null)
+            {
+                obj.TownshipId = branch.TownshipId;
+                var township = uow.townshipRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.TownshipId).FirstOrDefault();
+                if(township != null)
+                {
+                    obj.TownshipName = township.Name;
+                }
+                obj.BranchName = branch.LocationName;
+            }
             if (obj.Id > 0)
             {
                 UpdateEntity = uow.operationRepo.UpdateWithObj(obj);
             }
             else
             {
+                
                 obj.IsDeleted = false;
                 obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
                 obj.OperationDate = DateTime.Parse(obj.OperationDate.Value.ToShortDateString() + " " + obj.StartTime.Value.ToShortTimeString());
+                obj.Status = "Waiting";
                 obj.StartTime = null;
                 UpdateEntity = uow.operationRepo.InsertReturn(obj);
             }
 
             if (UpdateEntity != null)
             {
-                return Json("Success", JsonRequestBehavior.AllowGet);
+                return Json(UpdateEntity, JsonRequestBehavior.AllowGet);
             }
             else
             {

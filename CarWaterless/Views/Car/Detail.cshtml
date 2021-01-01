@@ -48,11 +48,17 @@
 
 
         <ul id="lightSlider" class="item mt-10">
-            <li data-thumb="https://kktstroage.azureedge.net/yammo/mycar/e97d8745-9558-4a62-8a08-4e07da9cf344.png">
-                <img class="br-10" src="https://kktstroage.azureedge.net/yammo/mycar/e97d8745-9558-4a62-8a08-4e07da9cf344.png" />
-            </li>
 
-            <li data-thumb="/Plesirthemes/img/car2-honda2.png">
+            @foreach (var item in Model.photos)
+            {
+                <li data-thumb="@item.PhotoUrl">
+                    <img class="br-10" src="@item.PhotoUrl" />
+                </li>
+            }
+
+
+
+            @*<li data-thumb="/Plesirthemes/img/car2-honda2.png">
                 <img class="br-10" src="~/Plesirthemes/img/car2-honda2.png" />
             </li>
 
@@ -62,7 +68,7 @@
 
             <li data-thumb="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png">
                 <img class="br-10" src="https://kktstroage.azureedge.net/yammo/mycar/c7d80973-a5be-4a01-86eb-650a671bb2d0.png" />
-            </li>
+            </li>*@
 
 
 

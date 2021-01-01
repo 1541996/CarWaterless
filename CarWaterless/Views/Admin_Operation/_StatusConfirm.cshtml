@@ -1,0 +1,192 @@
+﻿<style>
+    .not-allowed {
+        cursor: not-allowed !important;
+    }
+
+    .user-select{
+         -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+    }
+
+
+</style>
+
+@using (Html.BeginForm("UpSertDoctor", "Doctor", FormMethod.Post, new { id = "_StatusConfirm" }))
+{
+    <div class="modal-header bg-blue">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="glyphicon glyphicon-remove-sign"></i></button>
+        <h4 class="modal-title">
+            <i class="glyphicon glyphicon-ok"></i>&nbsp;&nbsp; Status Change Confirmation
+        </h4>
+    </div>
+
+    if (ViewBag.statuschange == "CANCEL")
+    {
+        <div class="modal-body" id="mb">
+            <div class="row">
+                <div class="col-md-12">
+                    <h6 class="text-semibold" id="delete_body_title_info">Are you sure to cancel?</h6>
+                    <p id="delete_body_info"> If you are sure to cancel this, click 'Confirm' and note that it is irreversible in action.</p>
+                </div>
+            </div>
+
+
+          
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+
+                    <div class="text-center">
+                        <label class="mr-10">
+                            <input type="checkbox" class="option-input checkbox confirmation-checkbox" id="confirm1-checkbox" data-value="confirmed" name="checkbox-option" onclick="updateconfirmationstatus(this)" required />
+
+                        </label>
+                        <label>
+                            <input type="checkbox" class="option-input checkbox confirmation-checkbox" id="confirm2-checkbox" data-value="confirmed" name="checkbox-option" onclick="updateconfirmationstatus(this)" />
+
+                        </label>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+
+    }
+
+  
+
+    else
+    {
+        <div class="modal-body user-select" id="mb">
+           
+            <div class="row">
+                <div class="col-md-12 mt-10">
+
+
+                    @if (ViewBag.statuschange == "BOOKED")
+                    {
+
+                        <ol class="progress-meter">
+                            <li class="progress-point done not-allowed">BOOKED</li>
+                            <li class="progress-point done not-allowed" data-status="BOOKED" data-id="" onclick="">WAITING</li>
+                            <li class="progress-point todo not-allowed" data-status="WAITING" data-id="" onclick="">ISCHECKIN</li>
+                            <li class="progress-point todo not-allowed">CHECKOUT</li>
+                        </ol>
+
+                    }
+                    else if (ViewBag.statuschange == "WAITING")
+                    {
+
+                        <ol class="progress-meter">
+                            <li class="progress-point done not-allowed">BOOKED</li>
+                            <li class="progress-point done not-allowed" data-status="BOOKED" data-id="" onclick="">WAITING</li>
+                            <li class="progress-point done not-allowed" data-status="WAITING" data-id="" onclick="">ISCHECKIN</li>
+                            <li class="progress-point todo not-allowed" data-status="CHECKIN" data-id="" onclick="">CHECKOUT</li>
+                        </ol>
+
+                    }
+                    else if (ViewBag.statuschange == "CHECKIN")
+                    {
+
+                        <ol class="progress-meter">
+                            <li class="progress-point done not-allowed">BOOKED</li>
+                            <li class="progress-point done not-allowed" data-status="BOOKED" data-id="" onclick="">WAITING</li>
+                            <li class="progress-point done not-allowed" data-status="WAITING" data-id="" onclick="">ISCHECKIN</li>
+                            <li class="progress-point done not-allowed" data-status="CHECKIN" data-id="" onclick="">CHECKOUT</li>
+                        </ol>
+
+                    }
+                   
+                </div>
+            </div>
+
+
+
+            @*<div class="col-md-1 mt-10">
+
+                    <span class="text-success" data-status="ACCEPTED" data-id="">Booking <span style="font-size:26px!important;font-weight:bold;margin-left:10px">1</span> </span>
+
+                </div>*@
+        </div>
+
+        <br />
+        @*<div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-6">
+                <div class="icheckbox">
+                    <input id="confirm1-checkbox" data-value="confirmed" type="checkbox" class="hide-checkbox-round confirmation-checkbox" name="checkbox-option" onclick="updateconfirmationstatus(this)" style="display: none;" required>
+                    <label for="confirm1-checkbox">
+                        <h6 class="p-5 mt-0 mb-0"><i class="icon-2x icon-checkmark"></i></h6>
+                    </label>
+
+                </div>
+                &nbsp;&nbsp;
+                <div class="icheckbox">
+                    <input id="confirm2-checkbox" data-value="confirmed" type="checkbox" class="hide-checkbox-round confirmation-checkbox" name="checkbox-option" onclick="updateconfirmationstatus(this)" style="display: none;">
+                    <label for="confirm2-checkbox">
+                        <h6 class="p-5 mt-0 mb-0"><i class="icon-2x icon-checkmark"></i></h6>
+                    </label>
+
+                </div>
+
+
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+
+                <div class="text-center">
+                    <label class="mr-10">
+                        <input type="checkbox" class="option-input checkbox confirmation-checkbox" id="confirm1-checkbox" data-value="confirmed" name="checkbox-option" onclick="updateconfirmationstatus(this)" required />
+
+                    </label>
+                    <label>
+                        <input type="checkbox" class="option-input checkbox confirmation-checkbox" id="confirm2-checkbox" data-value="confirmed" name="checkbox-option" onclick="updateconfirmationstatus(this)" />
+
+                    </label>
+
+                </div>
+
+               
+
+
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+
+
+      
+        
+
+
+
+    }
+
+
+    <div class="row mt-10">
+        <div class="col-sm-12">
+            <div class="col-sm-12">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-rounded" data-dismiss="modal"><i class="glyphicon glyphicon-remove-circle"></i>&nbsp;Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-rounded" id="myBtn" disabled><span class="glyphicon glyphicon-ok-sign"></span> Confirm</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+
+

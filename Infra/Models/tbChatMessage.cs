@@ -15,6 +15,7 @@ namespace Infra.Models
         public string ToUserID { get; set; }
         public string ToUserName { get; set; }
         public string UserToken { get; set; }
+        public int OperationID { get; set; }
         public Nullable<System.DateTime> SendDateTime { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsConversationEnd { get; set; }

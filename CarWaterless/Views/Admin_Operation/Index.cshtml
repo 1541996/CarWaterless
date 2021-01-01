@@ -8,55 +8,77 @@
 <style>
 
 
-    .progress-meter {
-        padding: 0;
-    }
-
-    ol.progress-meter {
-        padding-bottom: 9.5px;
-        list-style-type: none;
-    }
-
-        ol.progress-meter li {
-            display: inline-block;
-            text-align: center;
-            text-indent: -19px;
-            height: 44px;
-            width: 23.99%;
-            font-size: 12px;
-            border-bottom-width: 6px;
-            border-bottom-style: solid;
+        .progress-meter {
+            padding: 0;
         }
 
-            ol.progress-meter li:before {
-                position: relative;
-                float: left;
-                text-indent: 0;
-                left: -webkit-calc(45% - 9.5px);
-                left: -moz-calc(45% - 9.5px);
-                left: -ms-calc(45% - 9.5px);
-                left: -o-calc(45% - 9.5px);
-                left: calc(45% - 9.5px);
-            }
+        ol.progress-meter {
+            padding-bottom: 9.5px;
+            list-style-type: none;
+        }
 
-            ol.progress-meter li.done {
+            ol.progress-meter li {
+                display: inline-block;
+                text-align: center;
+                text-indent: -19px;
+                height: 44px;
+                width: 23.99%;
                 font-size: 12px;
+                border-bottom-width: 6px;
+                border-bottom-style: solid;
             }
 
-                /*ol.progress-meter li.done:before {
-                    content: "\2713";
-                    height: 34px;
-                    width: 34px;
-                    line-height: 21.85px;
-                    bottom: -28.175px;
-                    border: none;
-                    padding-top: 5px;
-                    font-size: 20px;
-                    border-radius: 50%;
-                    font-weight: bold;
+                ol.progress-meter li:before {
+                    position: relative;
+                    float: left;
+                    text-indent: 0;
+                    left: -webkit-calc(45% - 9.5px);
+                    left: -moz-calc(45% - 9.5px);
+                    left: -ms-calc(45% - 9.5px);
+                    left: -o-calc(45% - 9.5px);
+                    left: calc(45% - 9.5px);
                 }
-*/
-                ol.progress-meter li.done:before {
+
+                ol.progress-meter li.done {
+                    font-size: 12px;
+                }
+
+                    /*ol.progress-meter li.done:before {
+                        content: "\2713";
+                        height: 34px;
+                        width: 34px;
+                        line-height: 21.85px;
+                        bottom: -28.175px;
+                        border: none;
+                        padding-top: 5px;
+                        font-size: 20px;
+                        border-radius: 50%;
+                        font-weight: bold;
+                    }
+    */
+                    ol.progress-meter li.done:before {
+                        content: "\2713";
+                        height: 24px;
+                        width: 24px;
+                        line-height: 13.85px;
+                        bottom: -28.175px;
+                        border: none;
+                        padding-top: 5px;
+                        font-size: 15px;
+                        border-radius: 50%;
+                        font-weight: bold;
+                    }
+
+                /* ol.progress-meter li.todo:before {
+                    content: "\2B24";
+                    height: 24px;
+                    width: 24px;
+                    font-size: 15px;
+                    bottom: -34.175px;
+                    line-height: 18.05px;
+                }*/
+
+                ol.progress-meter li.todo:before {
                     content: "\2713";
                     height: 24px;
                     width: 24px;
@@ -69,72 +91,166 @@
                     font-weight: bold;
                 }
 
-           /* ol.progress-meter li.todo:before {
-                content: "\2B24";
-                height: 24px;
-                width: 24px;
-                font-size: 15px;
-                bottom: -34.175px;
-                line-height: 18.05px;
-            }*/
-
-            ol.progress-meter li.todo:before {
-                content: "\2713";
-                height: 24px;
-                width: 24px;
-                line-height: 13.85px;
-                bottom: -28.175px;
-                border: none;
-                padding-top: 5px;
-                font-size: 15px;
-                border-radius: 50%;
-                font-weight: bold;
-            }
-
-            ol.progress-meter li.todo {
-                font-size: 12px;
-            }
-
-               /* ol.progress-meter li.todo:before {
-                    content: "\2B24";
-                    font-size: 40px;
-                    bottom: -34.175px;
-                    line-height: 18.05px;
+                ol.progress-meter li.todo {
+                    font-size: 12px;
                 }
-*/
-            ol.progress-meter li.done {
-                color: black;
-                border-bottom-color: #13b490;
-            }
 
+                /* ol.progress-meter li.todo:before {
+                        content: "\2B24";
+                        font-size: 40px;
+                        bottom: -34.175px;
+                        line-height: 18.05px;
+                    }
+    */
+                ol.progress-meter li.done {
+                    color: black;
+                    border-bottom-color: #13b490;
+                }
 
-            ol.progress-meter li.todo:before {
-                content: "\2B24";
-                font-size: 29px;
-                bottom: -34.175px;
-                line-height: 0px;
-            }
-
-            ol.progress-meter li.done:before {
-                color: white;
-                background-color: #13b490;
-            }
-
-            ol.progress-meter li.todo {
-                color: silver;
-                border-bottom-color: silver;
-            }
 
                 ol.progress-meter li.todo:before {
-                    color: silver;
+                    content: "\2B24";
+                    font-size: 29px;
+                    bottom: -34.175px;
+                    line-height: 0px;
                 }
 
-            ol.progress-meter li.finish {
-                color: black;
-                border-bottom-color: #ff0000;
+                ol.progress-meter li.done:before {
+                    color: white;
+                    background-color: #13b490;
+                }
+
+                ol.progress-meter li.todo {
+                    color: silver;
+                    border-bottom-color: silver;
+                }
+
+                    ol.progress-meter li.todo:before {
+                        color: silver;
+                    }
+
+                ol.progress-meter li.finish {
+                    color: black;
+                    border-bottom-color: #ff0000;
+                }
+
+    @@keyframes click-wave {
+        0% {
+            height: 40px;
+            width: 40px;
+            opacity: 0.35;
+            position: relative;
+        }
+
+        100% {
+            height: 200px;
+            width: 200px;
+            margin-left: -80px;
+            margin-top: -80px;
+            opacity: 0;
+        }
+    }
+
+    .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 13.33333px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 40px;
+        width: 40px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+        .option-input:hover {
+            background: #9faab7;
+        }
+
+        .option-input:checked {
+            /*background: #40e0d0;*/
+            background: #2196F3;
+        }
+
+            .option-input:checked::before {
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                content: "✔";
+                display: inline-block;
+                font-size: 26.66667px;
+                text-align: center;
+                line-height: 40px;
             }
 
+            .option-input:checked::after {
+                -webkit-animation: click-wave 0.65s;
+                -moz-animation: click-wave 0.65s;
+                animation: click-wave 0.65s;
+                /*background: #40e0d0;*/
+                background: #2196F3;
+                content: "";
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
+
+        .option-input.radio {
+            border-radius: 50%;
+        }
+
+            .option-input.radio::after {
+                border-radius: 50%;
+            }
+
+
+    .font-icon-wrapper.font-icon-lg i{
+        font-size:20px!important
+    }
+
+    .font-icon-wrapper.font-icon-lg {
+        float: right;
+        padding: 5px!important;
+        text-align: center;
+        margin-right: 15px!important;
+        min-width: 44px!important;
+    }
+
+    .bg-tempting-azure {
+        background-image: linear-gradient(120deg, #13b490 0%, #13b490 100%) !important;
+    }
+
 </style>
+
+
+
+<div class="modal fade" id="myModalAppointment" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="Appointment">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 <div class="app-page-title">
     <div class="page-title-wrapper">
@@ -144,7 +260,7 @@
                     <div>
                         Manage Booking
                     </div>
-                    
+
                 </div>
             </div>
             <div class="display-flex-column ml-auto">
@@ -155,15 +271,17 @@
 
             </div>
         </div>
-       
+
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-12" id="div_list">
-        
+
     </div>
 </div>
+
+
 
 
 
@@ -175,7 +293,7 @@
 
         var page = 1;
         var pagesize = 15;
-      
+
         var searchvalue = null;
         var OrderBy = "Accesstime";
         var Direction = "DESC";
@@ -269,11 +387,11 @@
                 },
                 success: function (result) {
                     $('#div_list').empty().append(result);
-                  
+
                 },
 
                 complete: function () {
-                 
+
 
                 }
             });
@@ -332,8 +450,77 @@
                 });
 
         }
+        
+
+        function gotochat(e) {
+            var fromuserid = $(e).attr('data-fromuserid');
+            var touserid = $(e).attr('data-touserid');
+            var operationid = $(e).attr('data-operationid');
+            window.open('../chat?fromuserid=' + fromuserid + '&touserid=' + touserid + '&operationid=' + operationid + '&type=admin');
+        }
 
 
+
+
+        function newstatusChange(e) {
+            var id = $(e).attr('data-id');
+            var statuschange = $(e).attr('data-status');
+              Swal.fire({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this actions!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#8CD4F5',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Confirm it!'
+              })
+                .then((result) => {
+
+                    if (result.value == true) {
+                            $.ajax({
+                            cache: false,
+                            url: '@Url.Action("newstatuschange", "Admin_Operation")',
+                            data: { id: id, status: statuschange },
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+                            },
+                            success: function (result) {
+                                if (result.Status == "Waiting") {
+                                    $('#ol_status_' + result.Id).empty().append(
+                                        `<li class="progress-point done">Waiting</li><li class="progress-point todo" data-status="Waiting" data-id="${result.Id}" onclick="newstatusChange(this)">Confirmed</li><li class="progress-point todo">Finished</li>`
+                                    )
+                                } else if (result.Status == "Confirmed") {
+                                    $('#ol_status_' + result.Id).empty().append(
+                                        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point todo" data-status="Confirmed" data-id="${result.Id}" onclick="newstatusChange(this)">Finished</li>`
+                                    )
+                                } else if (result.Status == "Finished") {
+                                    $('#ol_status_' + result.Id).empty().append(
+                                        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point done">Finished</li>`
+                                    )
+                                }
+
+                               
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", false);
+
+                            }
+                        });
+
+                    }
+
+
+
+
+                });
+
+             
+
+        }
+
+
+      
 
     </script>
 

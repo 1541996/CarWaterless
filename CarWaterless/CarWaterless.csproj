@@ -651,6 +651,9 @@
     <Content Include="Views\AdminSetup\BranchList.cshtml" />
     <Content Include="Views\AdminSetup\Branch.cshtml" />
     <Content Include="Views\AdminUser\Add.cshtml" />
+    <Content Include="Views\Admin_Operation\_StatusConfirm.cshtml" />
+    <Content Include="Views\Book\BookingSuccess.cshtml" />
+    <Content Include="Views\Shared\_chatLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
