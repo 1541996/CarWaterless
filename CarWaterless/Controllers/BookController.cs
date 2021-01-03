@@ -2,6 +2,7 @@
 using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
+using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,14 @@ namespace CarWaterless.Controllers
             var data = (from veh in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.CustomerId == customerid)
                         join cat in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
                         on veh.CarCategoryId equals cat.Id
-                        select new VehicleCategoryViewModel()
+                        select new CarDDViewModel()
                         {
-                            vehicle = veh,
-                            category = cat
+                            carid = veh.Id,
+                            carname = veh.VehicleName,
+                            carbrand = veh.VehicleBrand,
+                            carcategoryid = cat.Id,
+                            carcategoryname = cat.Name,
+                            carcategorytype = cat.Type
                         }).AsQueryable();
 
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -64,8 +69,9 @@ namespace CarWaterless.Controllers
         }
 
 
-        public ActionResult Index(string customerid = null)
+        public ActionResult Index(string customerid = null,string source = "APP")
         {
+            ViewBag.bksource = source;
             ViewBag.customerid = customerid;
             tbOperation operation = new tbOperation();
             return View(operation);
@@ -88,6 +94,7 @@ namespace CarWaterless.Controllers
 
         public async System.Threading.Tasks.Task<ActionResult> SaveBooking(tbOperation obj)
         {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
             tbOperation UpdateEntity = null;
             var branch = uow.branchRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.BranchId).FirstOrDefault();
             if(branch != null)
@@ -100,23 +107,36 @@ namespace CarWaterless.Controllers
                 }
                 obj.BranchName = branch.LocationName;
             }
+
+            //var carcategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.CarCategoryId).FirstOrDefault();
+            //if(carcategory != null)
+            //{
+            //    obj.CarCategoryName = carcategory.Name;
+            //    obj.CarCategoryType = carcategory.Type;
+            //}
+
+
             if (obj.Id > 0)
             {
                 UpdateEntity = uow.operationRepo.UpdateWithObj(obj);
             }
             else
-            {
-                
+            {                
                 obj.IsDeleted = false;
                 obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
                 obj.OperationDate = DateTime.Parse(obj.OperationDate.Value.ToShortDateString() + " " + obj.StartTime.Value.ToShortTimeString());
                 obj.Status = "Waiting";
+               
                 obj.StartTime = null;
                 UpdateEntity = uow.operationRepo.InsertReturn(obj);
             }
 
+            var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+            int operationcount = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.OperationDate >= today && a.Status == "Waiting").Count();
+
             if (UpdateEntity != null)
             {
+                hubContext.Clients.All.getWaitingNotiCount(operationcount);
                 return Json(UpdateEntity, JsonRequestBehavior.AllowGet);
             }
             else

@@ -33,11 +33,13 @@ namespace Infra.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<int> CreateUserId { get; set; }
         public string Status { get; set; }
-        public string IsFromApp { get; set; }
+        public string BookingSource { get; set; }
         public string StarRate { get; set; }
         public string Feedback { get; set; }
         public string ComplaintsMessage { get; set; }
         public int? CarCategoryId { get; set; }
+        //public string CarCategoryName { get; set; }
+        //public string CarCategoryType { get; set; }
         public string WashOption { get; set; }
         public DateTime? ConfirmedTime { get; set; }
         public DateTime? FinishedTime { get; set; }

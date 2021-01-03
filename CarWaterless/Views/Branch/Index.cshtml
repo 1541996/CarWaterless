@@ -4,10 +4,26 @@
     Layout = "~/Views/Shared/_webLayout.cshtml";
 }
 
+<style>
+    #content{
+        background:#fff!important;
+    }
+
+    body{
+        background:#fff!important
+    }
+
+
+    .subsite-banner{
+        height:126px!important
+    }
+
+</style>
+
 
 <div class="content-wrap page-news-list">
     <div class="subsite-banner">
-        <img src="~/Plesirthemes/EcoPhoto/eco4.jpg">
+        <img src="~/Plesirthemes/EcoPhoto/carwash1.png">
     </div>
     <div class="subsite subsite-with-banner">
         <div class="row">
@@ -42,17 +58,46 @@
     <script>
 
         var customerid = '@ViewBag.customerid'
+        var searchvalue;
 
         $(function () {
             GetBranchList();
         })
 
+        // Get the input box
+        let input = document.getElementById('search');
+
+        // Init a timeout variable to be used below
+        let timeout = null;
+
+        // Listen for keystroke events
+        input.addEventListener('keyup', function (e) {
+            // Clear the timeout if it has already been set.
+            // This will prevent the previous task from executing
+            // if it has been less than <MILLISECONDS>
+            clearTimeout(timeout);
+
+            // Make a new timeout set to go off in 1000ms (1 second)
+            timeout = setTimeout(function () {
+                Search();
+            }, 1000);
+        });
+
+
+       
+        function Search() {
+            page = 1;
+            searchvalue = $('#search').val();
+            GetBranchList();
+
+        }
 
         function GetBranchList()
         {
             $.ajax({
                 cache: false,
                 url: '@Url.Action("GetBranchList", "Branch")',
+                data: { searchvalue: searchvalue },
                 beforeSend: function () {
 
                 },

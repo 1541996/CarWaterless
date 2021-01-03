@@ -15,6 +15,44 @@ namespace Infra.ViewModels
         public tbPhoto photos { get; set; }
     }
 
+    public class CarDDViewModel
+    {
+        public int carid { get; set; }
+        public string carname { get; set; }
+        public string carbrand { get; set; }
+        public int carcategoryid { get; set; }
+        public string carcategoryname { get; set; }
+        public string carcategorytype { get; set; }
+
+    }
+
+
+
+    public class BookingViewModel
+    {
+        public string FullName { get; set; }
+        public string VehicleBrand { get; set; }
+        public string VehicleName { get; set; }
+        public string VehicleColor { get; set; }
+        public string CategoryName { get; set; }
+        public string VehicleNo { get; set; }
+        public string PhoneNo { get; set; }
+        public int OperationId { get; set; }
+        public string BookingStatus { get; set; }
+        public string WashOption { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CategoryType { get; set; }
+        public decimal? CategoryBasicPrice { get; set; }
+        public string AdditionalNames { get; set; }
+        public string AdditionalPrices { get; set; }
+        public int CustomerId { get; set; }
+        public DateTime? OperationDate { get; set; }
+        public DateTime? ConfirmedDate { get; set; }
+        public decimal? TotalAmount { get; set; }
+
+
+    }
+
 
 
     public class BranchViewModel

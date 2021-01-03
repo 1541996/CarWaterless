@@ -1,5 +1,5 @@
 ﻿
-@model Infra.ViewModels.PagedListClient<Infra.ViewModels.OperationCustomerViewModel>
+@model Infra.ViewModels.PagedListClient<Infra.ViewModels.BookingViewModel>
 @using PagedList;
 @using PagedList.Mvc;
 
@@ -11,7 +11,7 @@
 
     foreach (var result in Model.Results)
     {
-        <div class="main-card mb-3 card br-10">
+        <div class="main-card mb-3 card br-10" id="div_booking_@result.OperationId">
             <div class="card-body" style="padding-top:15px!important;">
 
                 <div class="row">
@@ -24,11 +24,11 @@
                         </div>
                     </div>*@
                                 <div class="widget-content-left flex2">
-                                    <div class="widget-heading">@result.customer.FullName</div>
-                                    <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.vehicle.VehicleBrand @result.vehicle.VehicleName <span class="badge badge-secondary mr-10">@result.vehicle.VehicleColor</span></div>
-                                    <div class="mt-5"><i class="fa fa-car-alt mr-5 theme-color"></i> @result.carcategory.Name</div>
-                                    <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.vehicle.VehicleNo</div>
-                                    <div class="mt-5"><i class="fa fa-phone-square ml-5 theme-color"></i> @result.customer.PhoneNo</div>
+                                    <div class="widget-heading">@result.FullName</div>
+                                    <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.VehicleBrand @result.VehicleName <span class="badge badge-primary ml-5">@result.VehicleColor</span></div>
+                                    <div class="mt-5"><i class="fa fa-car-alt mr-5 theme-color"></i> @result.CategoryName</div>
+                                    <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.VehicleNo</div>
+                                    <div class="mt-5"><i class="fa fa-phone-square theme-color"></i>  @result.PhoneNo</div>
                                 </div>
                             </div>
                         </div>
@@ -36,34 +36,34 @@
 
                     <div class="col-md-4 mt-5">
 
-                        @if (result.operation.Status == "Waiting")
+                        @if (result.BookingStatus == "Waiting")
                         {
 
-                            <ol class="progress-meter" id="ol_status_@result.operation.Id">
+                            <ol class="progress-meter" id="ol_status_@result.OperationId">
                                 <li class="progress-point done">Waiting</li>
-                                <li class="progress-point todo" data-status="Waiting" data-id="@result.operation.Id"
+                                <li class="progress-point todo" data-status="Waiting" data-id="@result.OperationId"
                                     onclick="newstatusChange(this)">Confirmed</li>
                                 <li class="progress-point todo">Finished</li>
 
                             </ol>
 
                         }
-                        else if (result.operation.Status == "Confirmed")
+                        else if (result.BookingStatus == "Confirmed")
                         {
 
-                            <ol class="progress-meter" id="ol_status_@result.operation.Id">
+                            <ol class="progress-meter" id="ol_status_@result.OperationId">
                                 <li class="progress-point done">Waiting</li>
                                 <li class="progress-point done">Confirmed</li>
-                                <li class="progress-point todo" data-status="Confirmed" data-id="@result.operation.Id"
+                                <li class="progress-point todo" data-status="Confirmed" data-id="@result.OperationId"
                                     onclick="newstatusChange(this)">Finished</li>
 
                             </ol>
 
                         }
-                        else if (result.operation.Status == "Finished")
+                        else if (result.BookingStatus == "Finished")
                         {
 
-                            <ol class="progress-meter" id="ol_status_@result.operation.Id">
+                            <ol class="progress-meter" id="ol_status_@result.OperationId">
                                 <li class="progress-point done">Waiting</li>
                                 <li class="progress-point done">Confirmed</li>
                                 <li class="progress-point done">Finished</li>
@@ -72,10 +72,10 @@
 
                         }
 
-                        <div class="badge badge-success">@result.operation.WashOption</div>
-                        @if (result.operation.WashOption == "In-House")
+                        <div class="badge badge-success">@result.WashOption</div>
+                        @if (result.WashOption == "In-House")
                         {
-                            <p class="mt-10"><i class="fa fa-map-marker-alt"></i> @result.operation.CustomerAddress</p>
+                    <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.CustomerAddress</span>
                         }
 
 
@@ -86,26 +86,26 @@
                     <div class="col-md-4 text-right">
 
                         <div class="">
-                            @if (result.carcategory.Type == "medium")
+                            @if (result.CategoryType == "medium")
                             {
-                                <h6>ကားလတ် - <span class="text text-danger"> @result.carcategory.BasicPrice.Value.ToString("#,##0") MMK</span></h6>
+                                <h6>ကားလတ် - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span></h6>
                             }
-                            else if (result.carcategory.Type == "big")
+                            else if (result.CategoryType == "big")
                             {
-                                <h6>ကားကြီး - <span class="text text-danger"> @result.carcategory.BasicPrice.Value.ToString("#,##0") MMK</span> </h6>
+                                <h6>ကားကြီး - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
 
                             }
                             else
                             {
-                                <h6>ကားသေး - <span class="text text-danger">@result.carcategory.BasicPrice.Value.ToString("#,##0") MMK</span> </h6>
+                                <h6>ကားသေး - <span class="text text-danger">@result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
 
                             }
 
 
                         </div>
                         @{
-                            var name = result.operation.AdditionalNames.Split('_').ToList();
-                            var price = result.operation.AdditionalPrices.Split('_').ToList();
+                            var name = result.AdditionalNames.Split('_').ToList();
+                            var price = result.AdditionalPrices.Split('_').ToList();
                         }
 
                         @for (var i = 0; i < name.Count(); i++)
@@ -117,7 +117,7 @@
                         }
 
                         <div class="mt-10">
-                            <h6>Total - <span class="text text-danger">@result.operation.TotalAmount.Value.ToString("#,##0") MMK</span> </h6>
+                            <h6>Total - <span class="text text-danger">@result.TotalAmount.Value.ToString("#,##0") MMK</span> </h6>
 
                         </div>
 
@@ -131,8 +131,8 @@
                     <div class="col-md-1">
                         <div class="font-icon-wrapper font-icon-lg" onclick="gotochat(this)"
                              data-fromuserid="@userid"
-                             data-touserid="@result.operation.CustomerId" 
-                             data-operationid="@result.operation.Id">
+                             data-touserid="@result.CustomerId" 
+                             data-operationid="@result.OperationId">
                            <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
                         </div>
                         <div class="font-icon-wrapper font-icon-lg"><i class="fas fa-trash icon-gradient bg-love-kiss cursor-pointer"> </i></div>

@@ -1,4 +1,8 @@
-﻿.objectfit-cover{
+﻿*{
+    outline-style:none!important
+}
+
+.objectfit-cover{
     object-fit:cover!important
 }
 
@@ -585,7 +589,8 @@
 
 .ads-holder img {
     width: 970px;
-    height: 90px
+    height: 90px;
+   object-fit:cover
 }
 
 

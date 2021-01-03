@@ -249,31 +249,75 @@
 
 
 
-
-
-
-<div class="app-page-title">
-    <div class="page-title-wrapper">
-        <div class="display-flex-row">
-            <div class="display-flex-column">
-                <div class="page-title-heading">
-                    <div>
-                        Manage Booking
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Wash Option</label>
+                        <select class="mb-2 form-control" id="dd_washtype">
+                            <option value="">All</option>
+                            <option value="In-House">In-House</option>
+                            <option value="Walk-In">Walk-In</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Booking Status</label>
+                        <select class="mb-2 form-control" id="dd_statustype">
+                            <option value="Waiting">Waiting</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Finished">Finished</option>
+                        </select>
                     </div>
 
+                    <div class="col-md-5">
+                        <label>Datefilter</label>
+                        <input type="text" class="form-control" name="daterange" value="" autocomplete="off" />
+
+                    </div>
+                   
+                </div>
+
+                <div class="row mt-15" style="margin-bottom:5px!important">
+
+                    <div class="col-md-3">
+                        <label>Booking Source</label>
+                        <select class="mb-2 form-control" id="dd_bktype">
+                            <option value="">All</option>
+                            <option value="APP">APP</option>
+                            <option value="IOS">IOS</option>
+                            <option value="Portal">Portal</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Search(Car No,Vehicle Brand,Vehicle Name)</label>
+                        <input type="text" class="form-control" value="" id="txt_cardata" placeholder="keywords..." autocomplete="off" />
+
+                    </div>
+                    <div class="col-md-3">
+                        <label>Search(Name,Phone)</label>
+                        <input type="text" class="form-control" value="" id="txt_keywords" placeholder="keywords..." autocomplete="off" />
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <button class="mr-2 mt-20 btn-block btn btn-light mt-30" onclick="Search()">
+                            <i class="fa fa-search mr-5"></i> Search
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div class="display-flex-column ml-auto">
-                <input type="text" class="form-control" name="daterange" value="" />
-
-            </div>
-            <div class="display-flex-column">
-
-            </div>
         </div>
-
     </div>
+
 </div>
+
+
+
 
 <div class="row">
     <div class="col-md-12" id="div_list">
@@ -299,6 +343,9 @@
         var Direction = "DESC";
         var fromdate;
         var todate;
+        var type = "Waiting";
+        var washtype;
+        var cardata;
         $(function () {
 
             LoadMainList();
@@ -314,40 +361,54 @@
                 todate = end.format('YYYY-MM-DD');
                 LoadMainList();
             });
+
+
         });
         function initsComponent() {
 
-            $('.sort li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
 
-            $('.sort li').on('click', function () {
-                var text = $(this).text();
-                OrderBy = text;
-
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
+            $('#dd_statustype').on('change', function () {
+                type = $('#dd_statustype').val();
                 Search();
             });
 
-            $('.direction li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
 
-            $('.direction li').on('click', function () {
-                var text = $(this).text();
-                Direction = text;
-
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
+            $('#dd_washtype').on('change', function () {
+                washtype = $('#dd_washtype').val();
                 Search();
             });
 
 
 
         }
+
+        //// Get the input box
+        //let input = document.getElementById('txt_keywords');
+
+        //// Init a timeout variable to be used below
+        //let timeout = null;
+
+        //// Listen for keystroke events
+        //input.addEventListener('keyup', function (e) {           
+        //    clearTimeout(timeout);
+        //    // Make a new timeout set to go off in 1000ms (1 second)
+        //    timeout = setTimeout(function () {
+        //        Search();
+        //    }, 1000);
+        //});
+
+        //// Get the input box
+        //let input1 = document.getElementById('txt_cardata');
+        //// Init a timeout variable to be used below
+        //let timeout1 = null;
+        //// Listen for keystroke events
+        //input1.addEventListener('keyup', function (e) {          
+        //    clearTimeout(timeout1);
+        //    // Make a new timeout set to go off in 1000ms (1 second)
+        //    timeout1 = setTimeout(function () {
+        //        Search();
+        //    }, 1000);
+        //});
 
 
         function initPaging() {
@@ -369,7 +430,8 @@
         }
         function Search(value) {
             page = 1;
-            searchvalue = value;
+            searchvalue = $('#txt_keywords').val();
+            cardata = $('#txt_cardata').val();
             LoadMainList();
 
         }
@@ -380,7 +442,8 @@
                 data :{
                     page: page, pagesize: pagesize, searchvalue: searchvalue,
                     OrderBy: OrderBy, Direction: Direction,
-                    fromdate: fromdate, todate: todate
+                    fromdate: fromdate, todate: todate, type: type,
+                    washtype: washtype, cardata: cardata
                 },
                 beforeSend: function () {
                    // callloading('_itemlist');
@@ -485,20 +548,23 @@
                             beforeSend: function () {
                                 $('.btn').prop("disabled", true);
                             },
-                            success: function (result) {
-                                if (result.Status == "Waiting") {
-                                    $('#ol_status_' + result.Id).empty().append(
-                                        `<li class="progress-point done">Waiting</li><li class="progress-point todo" data-status="Waiting" data-id="${result.Id}" onclick="newstatusChange(this)">Confirmed</li><li class="progress-point todo">Finished</li>`
-                                    )
-                                } else if (result.Status == "Confirmed") {
-                                    $('#ol_status_' + result.Id).empty().append(
-                                        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point todo" data-status="Confirmed" data-id="${result.Id}" onclick="newstatusChange(this)">Finished</li>`
-                                    )
-                                } else if (result.Status == "Finished") {
-                                    $('#ol_status_' + result.Id).empty().append(
-                                        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point done">Finished</li>`
-                                    )
-                                }
+                             success: function (result) {
+                             
+                                 $('#div_booking_' + id).remove();
+                                 getWaitingNotiCount();
+                                //if (result.Status == "Waiting") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point todo" data-status="Waiting" data-id="${result.Id}" onclick="newstatusChange(this)">Confirmed</li><li class="progress-point todo">Finished</li>`
+                                //    )
+                                //} else if (result.Status == "Confirmed") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point todo" data-status="Confirmed" data-id="${result.Id}" onclick="newstatusChange(this)">Finished</li>`
+                                //    )
+                                //} else if (result.Status == "Finished") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point done">Finished</li>`
+                                //    )
+                                //}
 
                                
                             },

@@ -1,65 +1,1045 @@
 ﻿
 @{
-    ViewBag.Title = "Add";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@model Infra.Models.tbOperation
 
-@model Infra.Models.tbCustomer
+<style>
 
-    <div class="main-card mb-3 card">
-        <div class="card-body">
-            <h5 class="card-title">Grid</h5>
-            <form class="" id="frm_data">
-                <div class="position-relative row form-group">
-                    <label for="txt_FullName" class="col-sm-2 col-form-label">Full Name</label>
-                    <div class="col-sm-10">
-                        <input name="FullName" id="txt_FullName" value="@Model.FullName" placeholder="" type="text" class="form-control">
+   
+    body{
+      overflow-x:hidden!important
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 32px !important
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 3px !important
+    }
+
+
+    .select2-container {
+        width: 100% !important
+    }
+
+    .select2-hidden-accessible {
+        border: 0 !important;
+        clip: rect(0 0 0 0) !important;
+        -webkit-clip-path: inset(50%) !important;
+        clip-path: inset(50%) !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        position: absolute !important;
+        width: 1px !important;
+        white-space: nowrap !important;
+        top: 32px !important;
+        left: 100px !important
+    }
+
+
+    .nopad {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    /*image gallery*/
+    .image-checkbox {
+        cursor: pointer;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 4px solid transparent;
+        margin-bottom: 0;
+        outline: 0;
+    }
+
+        .image-checkbox input[type="checkbox"] {
+            display: none !important;
+        }
+
+    .image-checkbox-checked {
+        border-color: #4783B0;
+    }
+
+    .image-checkbox .fa {
+        position: absolute;
+        color: #4A79A3;
+        background-color: #fff;
+        padding: 10px;
+        top: 0;
+        right: 0;
+    }
+
+    .image-checkbox-checked .fa {
+        display: block !important;
+    }
+
+    .chk-package .vsb-middle {
+        padding: 5px 0px;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .chk-package .vsbm-left {
+        color: #000;
+        display: inline-block;
+    }
+
+
+    .chk-package .vsbm-right {
+        display: inline-block;
+        color: #df9403;
+        float: right;
+    }
+
+    .div-img {
+        width: 200px;
+        border-radius: 10px;
+    }
+
+        .div-img img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover
+        }
+
+    .vsb-price {
+        /*  color: #00c9a7;*/
+        color: #fff;
+        position: absolute;
+        padding: 3px 5px;
+        background-color: #00c9a7;
+        top: 7px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        left: 118px;
+        width: 75px;
+        font-size: 12px !important;
+    }
+
+    .div-active {
+        border: 3px solid #00c9a7;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        display: none
+    }
+
+
+    .btn-group-justified {
+        width: 100%
+    }
+
+
+    .btn-light {
+        color: #212529 !important;
+        background-color: #dae0e5 !important;
+        border-color: #d3d9df !important;
+    }
+
+    .active {
+        color: #fff !important;
+        background: #00c9a7 !important
+    }
+
+
+
+
+    @@keyframes click-wave {
+        0% {
+            height: 40px;
+            width: 40px;
+            opacity: 0.35;
+            position: relative;
+        }
+
+        100% {
+            height: 200px;
+            width: 200px;
+            margin-left: -80px;
+            margin-top: -80px;
+            opacity: 0;
+        }
+    }
+
+    .chk .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 10.33333px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+        .chk .option-input:hover {
+            background: #9faab7;
+        }
+
+        .chk .option-input:checked {
+            background: #40e0d0;
+        }
+
+            .chk .option-input:checked::before {
+                height: 30px;
+                width: 30px;
+                position: absolute;
+                content: "✔";
+                display: inline-block;
+                font-size: 20.66667px;
+                text-align: center;
+                line-height: 33px;
+            }
+
+            .chk .option-input:checked::after {
+                -webkit-animation: click-wave 0.65s;
+                -moz-animation: click-wave 0.65s;
+                animation: click-wave 0.65s;
+                background: #40e0d0;
+                content: "";
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
+
+        .chk .option-input.radio {
+            border-radius: 50%;
+        }
+
+            .chk .option-input.radio::after {
+                border-radius: 50%;
+            }
+
+
+    .chk label {
+        display: block;
+        /* line-height: 40px;*/
+    }
+
+   
+
+    .subsite-banner {
+        height: 128px !important
+    }
+
+    .page-cart .cart-total {
+        padding: 10px 10px;
+        border: 0px solid #dadfe3;
+        border-radius: 10px;
+        background-color: #f7f7f7;
+    }
+
+        .page-cart .cart-total .ct-row {
+            padding: 0px 0px 5px;
+        }
+
+            .page-cart .cart-total .ct-left {
+                width: 50%;
+                float: left;
+                text-align: left;
+            }
+
+            .page-cart .cart-total .ct-row .ct-right {
+                width: 50%;
+                float: left;
+                text-align: right;
+            }
+
+                .page-cart .cart-total .ct-row .ct-right span {
+                    width: 100px;
+                    text-align: left;
+                    display: inline-block;
+                }
+
+            .page-cart .cart-total .ct-row.total {
+                font-weight: 600;
+            }
+
+        .page-cart .cart-total .svg-inline--fa.fa-dollar-sign {
+            color: #a4a4a4;
+            margin-right: 5px;
+        }
+</style>
+
+
+
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Book a car
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-card mb-3 card">
+    <div class="card-body">
+        <div class="form-layout">
+            <form id="bookingform">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label>Choose Customer</label>
+                        <div class="field-group">
+
+                            <select class="custom-select mr-sm-2 with-icon" id="ddcustomer">
+                                <option selected disabled>Choose Customer</option>
+
+                            </select>
+
+                            <input type="hidden" name="CustomerId" id="txt_CustomerId" value="@ViewBag.customerid" />
+                        </div>
                     </div>
-                </div>
-                <div class="position-relative row form-group">
-                    <label for="txt_UserName" class="col-sm-2 col-form-label">User Name</label>
-                    <div class="col-sm-10">
-                        <input name="UserName" id="txt_UserName" value="@Model.UserName" placeholder="" type="text" class="form-control">
+
+                    <div class="form-group col-md-12">
+                        <label>Choose Car</label>
+                        <div class="field-group">
+
+                            <select class="custom-select mr-sm-2 with-icon" id="caravailable">
+                                <option selected disabled>Choose Car</option>
+
+                            </select>
+
+                            <input type="hidden" name="CustomerVehicleId" id="txt_CustomerVehicleId" />
+                            <input type="hidden" name="CarCategoryId" id="txt_CarCategoryId" />
+
+                        </div>
                     </div>
-                </div>
-                <div class="position-relative row form-group">
-                    <label for="txt_Password" class="col-sm-2 col-form-label">Password</label>
-                    <div class="col-sm-10">
-                        <input name="Password" id="txt_Password" value="@Model.Password" placeholder="" type="password" class="form-control">
+
+                    <div class="form-group col-md-12">
+                        <label>Choose Type</label>
+                        <div class="btn-group btn-group-justified" data-toggle="buttons">
+                            <label class="btn btn-light r_male rounded-default lb">
+                                <input type="radio" name="WashOption" class="rad_washType" onchange="radchange('In-House')" value="In-House" id="r_1" required> In-House
+                            </label>
+
+                            <label class="btn btn-light r_female rounded-default lb">
+                                <input type="radio" name="WashOption" class="rad_washType" onchange="radchange('Walk-In')" value="Walk-In" id="r_2" required> Walk-In
+                            </label>
+                        </div>
+
                     </div>
-                </div>
-                <div class="position-relative row form-group">
-                    <label for="txt_PhoneNo" class="col-sm-2 col-form-label">Phone</label>
-                    <div class="col-sm-10">
-                        <input name="PhoneNo" id="txt_PhoneNo" value="@Model.PhoneNo" placeholder="" type="text" class="form-control">
+
+                  
+
+                    <div class="form-group col-md-12 div_address" style="display:none">
+                        <label for="Address">Address</label>
+                        <div class="input-group">
+                            <textarea class="form-control" name="CustomerAddress" aria-label="Address"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="position-relative row form-group">
-                    <label for="txt_Email" class="col-sm-2 col-form-label">Phone</label>
-                    <div class="col-sm-10">
-                        <input name="Email" id="txt_Email" value="@Model.Email" placeholder="" type="email" class="form-control">
+
+
+
+                    <div class="form-group col-md-12 div_township" style="display:none">
+                        <label>Township</label>
+                        <div class="field-group">
+
+                            <select class="custom-select mr-sm-2 with-icon" id="township">
+                                <option selected disabled>Choose Township</option>
+
+                            </select>
+
+                            <input type="hidden" name="" id="" />
+                        </div>
                     </div>
-                </div>
-              
-                <div class="position-relative row form-group">
-                    <label for="exampleFile" class="col-sm-2 col-form-label">Photo</label>
-                    <div class="col-sm-10">
-                        <input name="file" id="exampleFile" type="file" class="form-control-file">
-                        <small class="form-text text-muted">Please upload photo.</small>
+
+                    <div class="form-group col-md-12 div_branch" style="display:none">
+                        <label>Branch</label>
+                        <div class="field-group">
+
+                            <select class="custom-select mr-sm-2 with-icon" id="branch">
+                                <option selected disabled>Choose Branch</option>
+
+                            </select>
+
+                            <input type="hidden" name="BranchId" id="txt_BranchId" />
+                        </div>
                     </div>
-                </div>
-                
-                <div class="position-relative row form-check">
-                    <div class="col-sm-10 offset-sm-2">
-                        <button class="btn btn-secondary">Submit</button>
+
+                    <div class="form-group col-md-12">
+
+                        <div class="row">
+                            <div class="col no-padding-right">
+                                <label>Choose Date</label>
+                                <div class="field-group">
+
+                                    <input type="text" id="datestart" name="OperationDate"
+                                           class="datepicker form-control with-icon date-start-class" placeholder="Date" required>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <label>Choose Time</label>
+                                <div class="field-group">
+
+                                    <input type="text" id="timepicker" name="StartTime"
+                                           class="form-control timepicker with-icon" required />
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+
+                    <div class="form-group col-md-12 mt-10" style="margin-bottom:5px;">
+                        <div class="row">
+                            <div class="col-md-6 chk">
+                                <div id="div_carcategory">
+
+                                </div>
+                                <div id="div_additionalservice" class="mt-10">
+
+                                </div>
+
+                                <input type="hidden" name="AdditionalIds" id="txt_AdditionalIds" />
+                                <input type="hidden" name="AdditionalPrices" id="txt_AdditionalPrices" />
+                                <input type="hidden" name="AdditionalNames" id="txt_AdditionalNames" />
+
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="page-cart mt-20" id="div_pricing">
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <input type="hidden" value="" id="txt_TotalAmount" name="TotalAmount" />
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="col-md-12 d-flex flex-end mt-30">
+                        <button class="btn btn-lg btn-danger mr-20">Cancel</button>
+                        <button class="btn btn-lg btn-primary" type="submit">Save</button>
+                    </div>
+
                 </div>
+
+
             </form>
         </div>
     </div>
+</div>
+
+
+@section scripts{
+    <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
+    <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
+
+
+    <script>
+        var townshipid;
+        var customerid = '@ViewBag.customerid';
+        var carcategoryid;
+        var cartype;
+        var basicprice;
+        var total;
+        var additionalids;
+        var additionalsname;
+        var additionalprices;
+        $(function () {
+
+            //$("input[type='radio'].rad_washType").change(function () {
+            //    if ($("input[type='radio'].rad_washType").is(':checked')) {
+            //        var washtype = $("input[type='radio'].rad_washType:checked").val();
+            //        if (washtype == "In-House") {
+            //            $('.div_address').show();
+            //            $('.div_township').hide();
+            //            $('.div_branch').hide();
+            //            $('#txt_BranchId').val(0);
+
+            //        } else {
+            //            $('.div_address').hide();
+            //            $('.div_township').show();
+            //            $('.div_branch').show();
+
+            //        }
+            //    }
+            //});
+
+            $('#caravailable').select2();
+            $('#township').select2();
+            $('#branch').select2();
+
+            $('#datestart').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                maxYear: parseInt(moment().format('YYYY'), 10)
+            }, function (start, end, label) {
+             //   var years = moment().diff(start, 'years');
+            //    alert("You are " + years + " years old!");
+            });
+
+            $('#timepicker').mdtimepicker();
+
+
+         //   GetCarListByCustomer();
+
+            GetCustomerList();
+
+            BindTownshipList();
+
+
+       
+
+
+            //$('#datestart').datepicker({
+            //    uiLibrary: 'bootstrap'
+            //});
+        })
+
+
+
+        function radchange(washtype) {
+            if (washtype == "In-House") {
+                $('.div_address').show();
+                $('.div_township').hide();
+                $('.div_branch').hide();
+                $('#txt_BranchId').val(0);
+
+            } else {
+                $('.div_address').hide();
+                $('.div_township').show();
+                $('.div_branch').show();
+
+            }
+        }
+
+           function BindTownshipList() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetTownshipList", "Admin_Operation")',
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    $('#township').empty();
+                    $('#township').append('<option value="">Choose Township</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        $('#township').append('<option value="' + result[i].Id + '">' + result[i].Name +'</option>')
+                    };
+
+                    $('#township').select2({
+                        placeholder: "Choose Township",
+                        allowClear: true
+                    });
+
+
+                },
+
+                complete: function () {
+
+                   // alert($("#txt_carcategory").val());
+
+
+
+
+                    $('#township').on('change', function () {
+                        townshipid = $('#township :selected').val();
+                        BindBrandListByTownship();
+                        $("#txt_township").val(townshipid);
+
+                    });
+
+
+                }
+            })
+        }
+
+
+            function GetCustomerList() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetCustomerList", "Admin_Operation")',
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    $('#ddcustomer').empty();
+                    $('#ddcustomer').append('<option value="">Choose Customer</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        $('#ddcustomer').append('<option value="' + result[i].Id + '">' + result[i].FullName +'</option>')
+                    };
+
+                    $('#ddcustomer').select2({
+                        placeholder: "Choose Customer",
+                        allowClear: true
+                    });
+
+
+                },
+
+                complete: function () {
+
+                   // alert($("#txt_carcategory").val());
+
+
+
+
+                    $('#ddcustomer').on('change', function () {
+                        customerid = $('#ddcustomer').val();
+                        $("#txt_CustomerId").val(customerid);
+                        GetCarListByCustomer();
+                      
+
+                    });
+
+
+                }
+            })
+        }
 
 
 
 
 
+
+        function BindBrandListByTownship() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetBrandListByTownship", "Admin_Operation")',
+                data: {
+                    townshipid : townshipid
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    $('#branch').empty();
+                    $('#branch').append('<option value="">Choose Branch</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        $('#branch').append('<option value="' + result[i].Id + '">' + result[i].LocationName +'</option>')
+                    };
+
+                    $('#branch').select2({
+                        placeholder: "Choose Branch",
+                        allowClear: true
+                    });
+
+
+                },
+
+                complete: function () {
+
+
+                    $('#branch').on('change', function () {
+                        var id = $('#branch :selected').val();
+
+                        $("#txt_BranchId").val(id);
+
+                    });
+
+
+                }
+            })
+        }
+
+
+
+
+        function GetCarListByCustomer() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetCarListByCustomer", "Admin_Operation")',
+                data: {
+                    customerid: customerid
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    console.log(result);
+
+                    $('#caravailable').empty();
+                    $('#caravailable').append('<option value="">Choose Car</option>')
+                    for (var i = 0; i < result.length; i++) {
+                        $('#caravailable').append('<option data-carcategoryid="' + result[i].carcategoryid + '" data-cartype="' + result[i].carcategorytype + '" value="' + result[i].carid + '">' + result[i].carbrand + ' ' + result[i].carname + '(' + result[i].carcategoryname + ')</option>')
+
+                    };
+
+                    $('#caravailable').select2({
+                        placeholder: "Choose Car",
+                        allowClear: true
+                    });
+
+                },
+
+                complete: function () {
+
+                   // alert($("#txt_carcategory").val());
+
+                    $('#caravailable').on('change', function () {
+                        var id = $('#caravailable :selected').val();
+
+
+                        cartype = $('#caravailable :selected').data('cartype');
+                        carcategoryid = $('#caravailable :selected').data('carcategoryid');
+
+                        $("#txt_CustomerVehicleId").val(id);
+                        $("#txt_CarCategoryId").val(carcategoryid);
+
+                        GetCarCategoryByID();
+                        GetAdditionalService();
+
+                        $('#div_pricing').empty();
+
+
+                    });
+
+
+                }
+            })
+        }
+
+
+        function GetAdditionalService() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetAdditionalService", "Admin_Operation")',
+                data: {
+                    cartype: cartype
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    $('#div_additionalservice').empty().append('<label for="note" class="mb-0">Choose Additional Service (optional)</label>');
+
+                    for (var i = 0; i < result.length; i++) {
+                        $('#div_additionalservice').append(`<div><label>
+                            <input type="checkbox" value="${result[i].Name}" data-price="${result[i].Price}" data-id="${result[i].Id}" class="option-input checkbox chk_additionalservice" />
+                                   ${result[i].Name} (${result[i].Price} MMK)
+                            </label></div>`)
+                    };
+
+
+                },
+
+                complete: function () {
+
+
+                    $('.chk_additionalservice').on("click", function () {
+                        additionalids = "";
+                        additionalsname = "";
+                        additionalprices = "";
+
+                        total = basicprice;
+
+
+                        if ($('.chk_additionalservice:checked').length == 0) {
+                            $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
+                        }
+
+
+                        $('#div_additionalCalc').empty();
+                        $('.chk_additionalservice:checked').each(function () {
+
+                           // specialties += $(this).val() + "_";
+                            var name = $(this).val();
+                            var price = $(this).data('price');
+                            var id = $(this).data('id');
+
+                            additionalids += id + "_";
+                            additionalsname += name + "_";
+                            additionalprices += price + "_";
+
+
+                            total += price;
+
+                            $('#div_additionalCalc').append(`
+                                  <div class="">
+                                    <div class="ct-left">${name}</div>
+                                    <div class="ct-right"><span>
+                                     ${price} MMK</span></div>
+                                    <div class="clear"></div>
+                                </div>
+
+                             `);
+
+                            $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
+
+                        });
+                        additionalids = additionalids.slice(0, -1);
+                        additionalsname = additionalsname.slice(0, -1);
+                        additionalprices = additionalprices.slice(0, -1);
+
+
+                        $('#txt_AdditionalIds').val(additionalids);
+                        $('#txt_AdditionalNames').val(additionalsname);
+                        $('#txt_AdditionalPrices').val(additionalprices);
+
+                        $('#txt_TotalAmount').val(total);
+
+                    });
+
+
+                }
+            })
+        }
+
+
+
+
+
+        function GetCarCategoryByID() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetCarCategoryByID", "Admin_Operation")',
+                data: {
+                    id: carcategoryid
+                },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+
+                    $('#div_carcategory').empty();
+
+                    console.log(result);
+                    basicprice = result.BasicPrice;
+
+
+                    if (result.Type == "big") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+                                <div class="chk-package">
+
+                                    <div class="div-img position-relative">
+                                        <div class="vsb-price">
+                                            ${result.BasicPrice} MMK
+                                        </div>
+                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားကြီး
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+                    }
+                    else if (result.Type == "medium") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+                            <div class="chk-package">
+
+                                <div class="div-img position-relative">
+                                    <div class="vsb-price">
+                                       ${result.BasicPrice} MMK
+                                        </div>
+                                    <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားလတ်
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+
+                    }
+                    else if (result.Type == "small") {
+                        $('#div_carcategory').append(` <label for="note" id="lbl_package">Package for</label>
+                                <div class="chk-package">
+
+                                    <div class="div-img position-relative">
+                                        <div class="vsb-price">
+                                            ${result.BasicPrice} MMK
+                                        </div>
+                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားသေး
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+
+                    }
+
+
+
+
+                },
+
+                complete: function () {
+
+
+                    changePrice();
+
+                }
+            })
+        }
+
+
+
+        function changePrice() {
+
+            total = basicprice;
+
+            if (cartype == "big") {
+                cartype = "ကားကြီး";
+            } else if (cartype == "small") {
+                cartype = "ကားသေး";
+            } else if (cartype == "medium") {
+                cartype = "ကားလတ်";
+            }
+
+
+            $('#div_pricing').append(`
+              <div class="cart-total">
+                <div class="">
+                    <div class="ct-left">${cartype}</div>
+                    <div class="ct-right"><span>
+                                  ${basicprice} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+                <div id="div_additionalCalc">
+
+                </div>
+
+
+                <div class="">
+                    <div class="ct-left">Discount</div>
+                    <div class="ct-right"><span>0</span></div>
+                    <div class="clear"></div>
+                </div>
+                <div class="total">
+                    <div class="ct-left">Total</div>
+                    <div class="ct-right" id="div_total"><span>
+                          ${total} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+           `)
+
+            $('#txt_TotalAmount').val(total);
+
+        }
+
+
+
+                  $("#bookingform").submit(function (e) {
+                      e.preventDefault();
+
+                        $.ajax({
+                            cache: false,
+                            url: '@Url.Action("SaveBooking", "Admin_Operation")',
+                            type: "Post",
+                            data: $(this).serialize(),
+
+
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+
+                            },
+                            success: function (myData) {
+                                if (myData != null) {
+                                    Swal.fire(
+                                        'Success!',
+                                        'Booking Successfully Added!',
+                                        'success'
+                                    )
+                                } else {
+                                    Swal.fire(
+                                        'Fail!',
+                                        'Booking Fail!',
+                                        'error'
+                                    )
+                                }
+
+                              //  if (myData == "Success") {
+                                    //Swal.fire({
+                                    //    title: 'Success!',
+                                    //    text: "Booking Success.We will contact you soon.!",
+                                    //    icon: 'success',
+                                    //    //showCancelButton: true,
+                                    //    confirmButtonColor: '#3085d6',
+                                    //    cancelButtonColor: '#d33',
+                                    //    confirmButtonText: 'OK!'
+
+                                    //}).then((result) => {
+                                    //    if (result.value) {
+                                    //        window.location.replace('../book/bookingsuccess?Id=' + myData.Id);
+
+                                    //    }
+                                    //})
+
+                               // }
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", true);
+
+                            }
+                        })
+                         })
+
+
+
+
+
+    </script>
+
+
+
+
+
+}

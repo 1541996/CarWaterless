@@ -43,6 +43,10 @@
         background: #fff !important
     }
 
+    .subsite-banner {
+        height: 128px !important
+    }
+
 </style>
 
 @model Infra.ViewModels.BookingSuccessModel
@@ -54,7 +58,11 @@
 
 
 <div class="content-wrap page-cart">
-    <div class="subsite">
+    <div class="subsite-banner">
+        <img src="~/Plesirthemes/EcoPhoto/carwash2.jpg">
+    </div>
+
+    <div class="subsite subsite-with-banner">
         <div class="row">
             <div class="col-md-12">
                 <div class="subsite-heading">
@@ -145,7 +153,7 @@
                                 <div class="ct-left">@additionalnames[j]</div>
                                 <div class="ct-right">
                                     <span>
-                                       @Convert.ToDecimal(additionalprices[j]).ToString("#,##0") MMK
+                                        @Convert.ToDecimal(additionalprices[j]).ToString("#,##0") MMK
                                     </span>
                                 </div>
                                 <div class="clear"></div>

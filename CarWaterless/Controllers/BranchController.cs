@@ -1,9 +1,11 @@
 ﻿using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
+using LinqKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -32,10 +34,29 @@ namespace CarWaterless.Controllers
             return View(obj);
         }
 
-        public ActionResult GetBranchList()
+        public ActionResult GetBranchList(string searchvalue = null)
         {
+            Expression<Func<tbBranch, bool>> searchfilter = null;
+            Expression<Func<tbTownship, bool>> townshipfilter = null;
+
+            if (searchvalue != "" && searchvalue != null)
+            {
+                searchfilter = PredicateBuilder.New<tbBranch>();
+                searchfilter = searchfilter.Or(l => l.LocationName.StartsWith(searchvalue));
+
+                //townshipfilter = PredicateBuilder.New<tbTownship>();
+                //townshipfilter = townshipfilter.Or(l => l.Name.StartsWith(searchvalue));
+
+            }
+            else
+            {
+                searchfilter = l => l.IsDeleted != true;
+              //  townshipfilter = l => l.IsDeleted != true;
+            }
+
+            
             //   var data = uow.branchRepo.GetAll().Where(a => a.IsDeleted != true).AsQueryable();
-            var data = (from branch in uow.branchRepo.GetAll().Where(a => a.IsDeleted != true)
+            var data = (from branch in uow.branchRepo.GetAll().Where(a => a.IsDeleted != true).Where(searchfilter)
                         join township in uow.townshipRepo.GetAll().Where(a => a.IsDeleted != true)
                         on branch.TownshipId equals township.Id
                         select new BranchViewModel()

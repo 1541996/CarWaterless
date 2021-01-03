@@ -243,14 +243,21 @@
             background: #fff !important
         }
 
+        #content {
+            background: #fff !important
+        }
 
+
+        .subsite-banner{
+            height:128px!important
+        }
        
     </style>
 
 <div class="content-wrap">
 
     <div class="subsite-banner">
-        <img src="~/Plesirthemes/img/subsite-banner.jpg">
+        <img src="~/Plesirthemes/EcoPhoto/carwash2.jpg">
     </div>
     <div class="subsite subsite-with-banner">
 
@@ -272,15 +279,14 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <select class="custom-select mr-sm-2 with-icon" id="caravailable">
-                                        <option selected disabled>Please select</option>
-                                        <option value="1">Nissan Juke</option>
-                                        <option value="2">KIA Rio</option>
-                                        <option value="3">Mitsubishi xpander</option>
+                                        <option selected disabled>Choose Car</option>
+
                                     </select>
 
                                     <input type="hidden" name="CustomerVehicleId" id="txt_CustomerVehicleId" />
                                     <input type="hidden" name="CarCategoryId" id="txt_CarCategoryId" />
                                     <input type="hidden" name="CustomerId" id="txt_CustomerId" value="@ViewBag.customerid" />
+                                    <input type="hidden" name="BookingSource" value="@ViewBag.bksource" />
                                 </div>
                             </div>
 
@@ -480,7 +486,7 @@
                 success: function (result) {
 
                     $('#township').empty();
-                    $('#township').append('<option value="">Choose Towbship</option>')
+                    $('#township').append('<option value="">Choose Township</option>')
                     for (var i = 0; i < result.length; i++) {
                         $('#township').append('<option value="' + result[i].Id + '">' + result[i].Name +'</option>')
                     };
@@ -578,7 +584,8 @@
                     $('#caravailable').empty();
                     $('#caravailable').append('<option value="">Choose Car</option>')
                     for (var i = 0; i < result.length; i++) {
-                        $('#caravailable').append('<option data-carcategoryid="' + result[i].category.Id + '" data-cartype="' + result[i].category.Type + '" value="' + result[i].vehicle.Id + '">' + result[i].vehicle.VehicleBrand + ' ' + result[i].vehicle.VehicleName + '(' + result[i].category.Name + ')</option>')
+                        $('#caravailable').append('<option data-carcategoryid="' + result[i].carcategoryid + '" data-cartype="' + result[i].carcategorytype + '" value="' + result[i].carid + '">' + result[i].carbrand + ' ' + result[i].carname + '(' + result[i].carcategoryname + ')</option>')
+
                     };
 
                     $('#caravailable').select2({

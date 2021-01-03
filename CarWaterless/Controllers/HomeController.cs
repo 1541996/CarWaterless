@@ -21,10 +21,10 @@ namespace CarWaterless.Controllers
             dbContext = new CarWaterLessContext();
             uow = new UnitOfWork(dbContext);
         }
-        public ActionResult Index()
+        public ActionResult Index(string customerid = null)
         {
             ViewBag.Title = "Home Page";
-
+            ViewBag.customerid = customerid;
             return View();
         }
 
