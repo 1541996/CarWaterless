@@ -230,5 +230,75 @@ namespace CarWaterless.Business
             return model;
         }
         #endregion
+
+        public List<AdminViewModel> GetAllUser(AdminViewModel model)
+        {
+            List<AdminViewModel> lst = new List<AdminViewModel>();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbAdmins
+                             where data.IsDeleted == false
+                             select new AdminViewModel
+                             {
+                                 Id = data.Id,
+                                 FullName = data.FullName,
+                                 UserName = data.UserName,
+                                 UserRole = data.UserRole,
+                                 IsActive = data.IsActive,
+                             });
+                lst = query.AsEnumerable().Select((data, index) => new AdminViewModel()
+                {
+                    Id = data.Id,
+                    FullName = data.FullName,
+                    UserName = data.UserName,
+                    UserRole = data.UserRole,
+                    IsActive = data.IsActive,
+                    UserRoleName = CommonRepository.GetUserRoleName(data.UserRole),
+                    No = ++index
+                }).ToList();
+            }
+            return lst;
+        }
+
+        public AdminViewModel De_activateUser(int id, bool flag)
+        {
+            AdminViewModel model = new AdminViewModel();
+            using (var context = new CarWaterLessContext())
+            {
+
+                context.tbAdmins.First(x => x.Id == id).IsActive = flag;
+                context.SaveChanges();
+
+
+                model.MessageType = 1;
+                model.Message = "";
+            }
+
+            return model;
+        }
+
+        public AdminViewModel AddUser(AdminViewModel model)
+        {
+            using (var context = new CarWaterLessContext())
+            {
+                tbAdmin obj = new tbAdmin();
+                obj.UserName = model.UserName;
+                obj.FullName = model.FullName;
+                obj.Password = model.Password;
+                obj.UserRole = model.UserRole;
+                obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                obj.CreateUserId = model.CreateUserId;
+                obj.IsActive = model.IsActive;
+                obj.IsDeleted = false;
+                context.tbAdmins.Add(obj);
+                context.SaveChanges();
+            }
+            model = new AdminViewModel();
+            model.Message = "New user added";
+            model.MessageType = 1;
+
+            return model;
+        }
+
     }
 }

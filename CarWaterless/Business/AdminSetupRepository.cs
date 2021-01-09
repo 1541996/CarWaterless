@@ -183,11 +183,13 @@ namespace CarWaterless.Business
                              {
                                  Id = data.Id,
                                  Name = data.Name,
+                                 TownshipCode = data.TownshipCode,
                              });
                 lst = query.AsEnumerable().Select((data, index) => new TownshipViewModel()
                 {
                     Id = data.Id,
                     Name = data.Name,
+                    TownshipCode = data.TownshipCode,
                     No = ++index
                 }).ToList();
             }
@@ -205,11 +207,13 @@ namespace CarWaterless.Business
                              {
                                  Id = data.Id,
                                  Name = data.Name,
+                                 TownshipCode = data.TownshipCode,
                              });
                 model = query.AsEnumerable().Select((data, index) => new TownshipViewModel()
                 {
                     Id = data.Id,
                     Name = data.Name,
+                    TownshipCode = data.TownshipCode,
                 }).FirstOrDefault();
             }
             return model;
@@ -224,6 +228,7 @@ namespace CarWaterless.Business
                 {
                     tbTownship obj = new tbTownship();
                     obj.Name = model.Name;
+                    obj.TownshipCode = model.TownshipCode;
                     obj.IsDeleted = false;
                     obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
                     context.tbTownships.Add(obj);
@@ -245,7 +250,7 @@ namespace CarWaterless.Business
         {
             using (var context = new CarWaterLessContext())
             {
-                var query = context.tbTownships.Where(x => x.Name == model.Name && x.IsDeleted == false).ToList();
+                var query = context.tbTownships.Where(x => x.Name == model.Name && x.TownshipCode == model.TownshipCode && x.IsDeleted == false).ToList();
                 if (query.Count > 0)
                 {
                     return false;
@@ -264,6 +269,7 @@ namespace CarWaterless.Business
                 using (var context = new CarWaterLessContext())
                 {
                     context.tbTownships.First(x => x.Id == model.Id).Name = model.Name;
+                    context.tbTownships.First(x => x.Id == model.Id).TownshipCode = model.TownshipCode;
                     context.SaveChanges();
 
                     response.MessageType = 1;
@@ -281,7 +287,7 @@ namespace CarWaterless.Business
         {
             using (var context = new CarWaterLessContext())
             {
-                var query = context.tbTownships.Where(x => x.Name == model.Name && x.Id == model.Id && x.IsDeleted == false).ToList();
+                var query = context.tbTownships.Where(x => x.Name == model.Name && x.TownshipCode == model.TownshipCode && x.Id == model.Id && x.IsDeleted == false).ToList();
                 if (query.Count > 0)
                 {
                     return false;

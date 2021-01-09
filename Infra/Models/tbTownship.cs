@@ -11,6 +11,7 @@ namespace Infra.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
+        public string TownshipCode { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
