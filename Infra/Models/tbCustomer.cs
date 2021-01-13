@@ -28,5 +28,9 @@ namespace Infra.Models
         public Nullable<System.DateTime> MemberStartDate { get; set; }
         public Nullable<System.DateTime> MemberExpireDate { get; set; }
         public string BookingStatus { get; set; }
+        public bool? IsPrepaid { get; set; }
+        public decimal? PrepaidLeftAmount { get; set; }
+        public decimal? PrepaidAmount { get; set; }
+
     }
 }

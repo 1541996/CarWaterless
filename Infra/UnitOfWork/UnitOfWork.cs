@@ -25,6 +25,7 @@ namespace Infra.UnitOfWork
         private IRepository<tbPhoto> _photoRepo;
 
         private IRepository<tbAdditionalService> _additionalServiceRepo;
+        private IRepository<tbFeedBack> _feedbackRepo;
 
 
 
@@ -34,6 +35,18 @@ namespace Infra.UnitOfWork
         public UnitOfWork(CarWaterLessContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public IRepository<tbFeedBack> feedbackRepo
+        {
+            get
+            {
+                if (_feedbackRepo == null)
+                {
+                    _feedbackRepo = new Repository<tbFeedBack>(_dbContext);
+                }
+                return _feedbackRepo;
+            }
         }
 
         public IRepository<tbOperation> operationRepo

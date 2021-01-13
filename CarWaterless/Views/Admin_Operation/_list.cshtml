@@ -6,7 +6,7 @@
 @if (Model.Results.Count() > 0)
 {
 
-    <h5 class="card-title">@Model.TotalCount records found.</h5>
+    <h5 class="card-title"><span class="text text-success" id="txt_totalcount">@Model.TotalCount</span> records found.</h5>
 
 
     foreach (var result in Model.Results)
@@ -70,12 +70,15 @@
 
                             </ol>
 
+                        }else if(result.BookingStatus == "Cancel")
+                        {
+                            <p>Cancel at <span class="text text-primary">@result.CancelDate.Value.ToString("dd MMM yyyy") @result.CancelDate.Value.ToShortTimeString()</span></p>
                         }
 
                         <div class="badge badge-success">@result.WashOption</div>
                         @if (result.WashOption == "In-House")
                         {
-                    <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.CustomerAddress</span>
+                             <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.CustomerAddress</span>
                         }
 
 
@@ -135,7 +138,17 @@
                              data-operationid="@result.OperationId">
                            <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
                         </div>
-                        <div class="font-icon-wrapper font-icon-lg"><i class="fas fa-trash icon-gradient bg-love-kiss cursor-pointer"> </i></div>
+
+                        @if(result.BookingStatus != "Cancel")
+                        {
+                             <div class="font-icon-wrapper font-icon-lg"
+                                 data-operationid="@result.OperationId"
+                                 onclick="statusCancel(this)">
+                                 <i class="fas fa-trash icon-gradient bg-love-kiss cursor-pointer"> </i>
+                           </div>
+                        }
+
+                       
                         
                     </div>
 

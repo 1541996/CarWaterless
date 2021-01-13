@@ -24,6 +24,21 @@ namespace Infra.Models
         public Nullable<int> CreateUserId { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<int> UpdateUserId { get; set; }
+        public string Photo { get; set; }
+        public string MapHtml { get; set; }
+        public string PhotoUrl
+        {
+            get
+            {
+                if (this.Photo != null)
+                {
+                    return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Branch/{0}", Photo);
+                }
+                return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
+
+            }
+        }
+
 
     }
 }

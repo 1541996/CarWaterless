@@ -43,5 +43,7 @@ namespace Infra.Models
         public string WashOption { get; set; }
         public DateTime? ConfirmedTime { get; set; }
         public DateTime? FinishedTime { get; set; }
+        public DateTime? CancelTime { get; set; }
+
     }
 }

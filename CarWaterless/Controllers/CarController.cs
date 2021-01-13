@@ -60,7 +60,9 @@ namespace CarWaterless.Controllers
         {
             ViewBag.id = Id;
             ViewBag.formtype = type;
-            if(Id > 0)
+
+            ViewBag.customerid = customerid;
+            if (Id > 0)
             {
                 CarPhotoModel obj = new CarPhotoModel();
                 obj.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == Id).FirstOrDefault();

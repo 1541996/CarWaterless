@@ -289,7 +289,8 @@ namespace CarWaterless.Controllers
         }
 
         [HttpPost]
-        public ActionResult Branch(BranchViewModel model)
+        [ValidateInput(false)]
+        public async System.Threading.Tasks.Task<ActionResult> Branch(BranchViewModel model)
         {
             AdminSetupRepository repository = new AdminSetupRepository();
             if (model.Id == 0)
@@ -297,7 +298,7 @@ namespace CarWaterless.Controllers
                 var checkexit = repository.CheckExistBranch(model);
                 if (checkexit == true)
                 {
-                    model = repository.SaveBranch(model);
+                    model = await repository.SaveBranchAsync(model);
                 }
                 else
                 {
@@ -312,7 +313,7 @@ namespace CarWaterless.Controllers
                 var checkexit = repository.CheckExistUpdateBranch(model);
                 if (checkexit == true)
                 {
-                    model = repository.EditBranch(model);
+                    model = await repository.EditBranchAsync(model);
                 }
                 else
                 {

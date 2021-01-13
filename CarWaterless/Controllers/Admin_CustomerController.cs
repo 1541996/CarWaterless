@@ -107,6 +107,64 @@ namespace CarWaterless.Controllers
             }
         }
 
+        public ActionResult IsMember(int ID = 0)
+        {           
+             tbCustomer data = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == ID).FirstOrDefault();
+             
+             if(data.IsMember == true)
+             {
+                data.IsMember = false;
+                data = uow.customerRepo.UpdateWithObj(data);
+             }
+            else
+            {
+                data.IsMember = true;
+                data = uow.customerRepo.UpdateWithObj(data);
+            }
+
+            
+             if(data != null)
+            {
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+          
+        }
+
+        public ActionResult AddPrepaidCode(int ID = 0,decimal? prepaidamt = null)
+        {
+            tbCustomer data = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == ID).FirstOrDefault();
+
+            if(prepaidamt != null)
+            {
+                data.IsPrepaid = true;
+                data.PrepaidAmount = prepaidamt;
+                data.PrepaidLeftAmount = prepaidamt;
+                data = uow.customerRepo.UpdateWithObj(data);
+            }
+            else
+            {
+                data.IsPrepaid = false;
+                data.PrepaidAmount = null;
+                data.PrepaidLeftAmount = null;
+                data = uow.customerRepo.UpdateWithObj(data);
+            }
+
+          
+            if (data != null)
+            {
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
         public async System.Threading.Tasks.Task<ActionResult> UpsertData(tbCustomer obj)
         {
             tbCustomer UpdateEntity = null;

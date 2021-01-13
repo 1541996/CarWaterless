@@ -8,7 +8,7 @@
 
 <style>
 
-    .select2-container--default .select2-selection--single .select2-selection__rendered {
+    /*.select2-container--default .select2-selection--single .select2-selection__rendered {
         padding-left: 35px !important;
         position: relative !important;
     }
@@ -37,9 +37,9 @@
         position: absolute !important;
         width: 1px !important;
         white-space: nowrap !important;
-        top: 32px !important;     
-        left:100px!important
-    }
+        top: 32px !important;
+        left: 100px !important
+    }*/
 
     .nopad {
         padding-left: 0 !important;
@@ -168,8 +168,8 @@
         cursor: pointer;
     }
 
-    .subsite-banner{
-        height:127px!important
+    .subsite-banner {
+        height: 127px !important
     }
 </style>
 
@@ -243,8 +243,10 @@
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
                                         <input class="form-control pl-35" name="vehicle.VehicleName" placeholder="Vehicle Name"
-                                               value="@Model.vehicle.VehicleName" required aria-label="car" />
+                                               value="@Model.vehicle.VehicleName" data-error="#errVehicleName" required aria-label="car" />
+
                                     </div>
+                                    <div id="errVehicleName" class="error-message"></div>
                                 </div>
                             </div>
 
@@ -253,9 +255,12 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" required name="vehicle.VehicleBrand" placeholder="Brand" value="@Model.vehicle.VehicleBrand"
+                                        <input class="form-control pl-35" required name="vehicle.VehicleBrand"
+                                               data-error="#errVehicleBrand"
+                                               placeholder="Brand" value="@Model.vehicle.VehicleBrand"
                                                aria-label="car" />
                                     </div>
+                                    <div id="errVehicleBrand" class="error-message"></div>
                                 </div>
                             </div>
 
@@ -264,9 +269,12 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" required name="vehicle.VehicleNo" placeholder="1A/BBBB" value="@Model.vehicle.VehicleNo"
+                                        <input class="form-control pl-35" required
+                                               data-error="#errVehicleNo"
+                                               name="vehicle.VehicleNo" placeholder="1A/BBBB" value="@Model.vehicle.VehicleNo"
                                                aria-label="car" />
                                     </div>
+                                    <div id="errVehicleNo" class="error-message"></div>
                                 </div>
                             </div>
 
@@ -274,7 +282,7 @@
                                 <label>Choose Car Type</label>
                                 <div class="field-group">
                                     <i class="fas fa-dice-d6"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" id="CarType" required>
+                                    <select class="custom-select mr-sm-2 with-icon" id="CarType"  data-error="#errVehicleCarType" required>
                                         <option value="">Choose Car Type</option>
                                         <option value="small">Small</option>
                                         <option value="medium">Medium</option>
@@ -285,19 +293,21 @@
                                     <input type="hidden" name="" id="txt_cartype" value="@Model.carcategory.Type" />
 
                                 </div>
+                                <div id="errVehicleCarType" class="error-message"></div>
                             </div>
 
                             <div class="form-group col-md-12">
                                 <label>Choose Car Category</label>
                                 <div class="field-group">
                                     <i class="fas fa-dice-d6"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" id="CarCategory" required>
-                                        <option selected disabled>Choose Car Category</option>
-
+                                    <select name="ErrorVehicleCarCat" class="custom-select mr-sm-2 with-icon" data-error="#errVehicleCarCat" id="CarCategory" required>
+                                        <option value="">Choose Car Category</option>
+                                       
                                     </select>
 
                                     <input type="hidden" name="vehicle.CarCategoryId" id="txt_carcategory" value="@Model.vehicle.CarCategoryId" />
                                 </div>
+                                <div id="errVehicleCarCat" class="error-message"></div>
                             </div>
 
 
@@ -306,27 +316,30 @@
                                 <div class="field-group">
                                     <i class="fas fa-car"></i>
                                     <div class="input-group">
-                                        <input class="form-control pl-35" required name="vehicle.VehicleColor" value="@Model.vehicle.VehicleColor"
+                                        <input class="form-control pl-35" required name="vehicle.VehicleColor"
+                                               data-error="#errVehicleColor"
+                                               value="@Model.vehicle.VehicleColor"
                                                placeholder="eg. red" aria-label="car" />
                                     </div>
+                                    <div id="errVehicleColor" class="error-message"></div>
                                 </div>
                             </div>
 
 
                             @*<div class="form-group col-md-12">
-                                <label>Color</label>
-                                <div class="field-group">
-                                    <i class="fas fa-dice-d6"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" id="color">
-                                        <option selected disabled>Please select</option>
-                                        <option value="1">Red</option>
-                                        <option value="2">Blue</option>
-                                        <option value="3">Green</option>
-                                        <option value="4">Blue</option>
+                                    <label>Color</label>
+                                    <div class="field-group">
+                                        <i class="fas fa-dice-d6"></i>
+                                        <select class="custom-select mr-sm-2 with-icon" id="color">
+                                            <option selected disabled>Please select</option>
+                                            <option value="1">Red</option>
+                                            <option value="2">Blue</option>
+                                            <option value="3">Green</option>
+                                            <option value="4">Blue</option>
 
-                                    </select>
-                                </div>
-                            </div>*@
+                                        </select>
+                                    </div>
+                                </div>*@
 
 
 
@@ -354,6 +367,9 @@
 @section scripts{
     <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
     <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+  
+
     <script>
         var photoRemove = [];
         var filename = [];
@@ -366,18 +382,105 @@
 
         $(function () {
 
-            $('#CarType').select2({
-                containerCssClass: function (e) {
-                    return $(e).attr('required') ? 'required' : '';
+            $("#CarForm").validate({
+                rules:
+                {
+                    ErrorVehicleCarCat:
+                    {
+                        required: true
+                    }
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function (form) {
+                 
+                 //   $("#CarForm").submit(function (e) {
+                     //    $(form).preventDefault();
+
+                    $('#pageloading').show();
+
+                        imagesstring = "";
+                        var images = "";
+
+                      $('#placeholder').remove();
+
+                     $('.multiplephotoupload').find('.div_photo').each(function () {
+                            images = $(this).attr("data-image");
+                            console.log("hello");
+                            console.log(images);
+                            imagesstring += images + "~";
+                            console.log(imagesstring);
+                            images = "";
+                        });
+
+
+                        imagesstring = imagesstring.slice(0, -1);
+
+
+                        $('#multiplePhoto').val(imagesstring);
+
+                        $.ajax({
+                            cache: false,
+                            url: '@Url.Action("SaveCarAsync", "Car")',
+                            type: "Post",
+                            data: $(form).serialize(),
+
+
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+
+                            },
+                            success: function (myData) {
+                                if (myData == "Success") {
+                                    Swal.fire({
+                                        title: 'Success!',
+                                        text: "Car Successfully Added!",
+                                        icon: 'success',
+                                        //showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'OK!'
+
+                                    }).then((result) => {
+                                        if (result.value) {
+
+                                            window.location.replace('../Car/Add?Id=@ViewBag.id&type=@ViewBag.formtype&customerid=@ViewBag.customerid');
+                                        }
+                                    })
+
+                                }
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", true);
+                                $('#pageloading').hide();
+                              //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
+
+                            }
+                        })
+                     //    })
+
                 }
+
             });
-            $('#CarCategory').select2();
+
+            //$('#CarType').select2({
+            //    containerCssClass: function (e) {
+            //        return $(e).attr('required') ? 'required' : '';
+            //    }
+            //});
+            //$('#CarCategory').select2();
 
 
             if ('@ViewBag.formtype' == "Edit") {
-               
+
                 cartype = $("#txt_cartype").val();
-                $('#CarType').val(cartype).trigger("change");
+                $('#CarType').val(cartype);
                 BindCarCategory();
             }
 
@@ -387,7 +490,7 @@
             });
 
 
-           
+
             $('#DD_price').val($("#priceid").val());
 
             $('#datestart').daterangepicker({
@@ -403,6 +506,7 @@
             $('#timepicker').mdtimepicker();
 
             $('#gallery-photo-add').on('change', function () {
+                uploadCar();
                 imagesPreview(this, 'div.multiplephotoupload');
             });
 
@@ -433,20 +537,22 @@
                         $('#CarCategory').append('<option value="' + result[i].Id + '">' + result[i].Name +'</option>')
                     };
 
-                    $('#CarCategory').select2({
-                        placeholder: "Choose Car Category",
-                        allowClear: true
-                    });
 
-                  
+
+                    //$('#CarCategory').select2({
+                    //    placeholder: "Choose Car Category",
+                    //    allowClear: true
+                    //});
+
+
                 },
 
                 complete: function () {
 
                    // alert($("#txt_carcategory").val());
 
-                    $('#CarCategory').val(parseInt($("#txt_carcategory").val())).trigger("change");
-                 
+                    $('#CarCategory').val(parseInt($("#txt_carcategory").val()));
+
 
                     $('#CarCategory').on('change', function () {
                         var id = $('#CarCategory :selected').val();
@@ -462,67 +568,6 @@
 
 
 
-               @*$("#CarForm").submit(function (e) {
-                      e.preventDefault();
-
-                        imagesstring = "";
-                        var images = "";
-
-                   $('#placeholder').remove();
-
-                     $('.multiplephotoupload').find('.div_photo').each(function () {
-                            images = $(this).attr("data-image");
-                            console.log("hello");
-                            console.log(images);
-                            imagesstring += images + "~";
-                            console.log(imagesstring);
-                            images = "";
-                        });
-
-
-                        imagesstring = imagesstring.slice(0, -1);
-
-
-                        $('#multiplePhoto').val(imagesstring);
-
-                        $.ajax({
-                            cache: false,
-                            url: '@Url.Action("SaveCarAsync", "Car")',
-                            type: "Post",
-                            data: $(this).serialize(),
-
-
-                            beforeSend: function () {
-                                $('.btn').prop("disabled", true);
-
-                            },
-                            success: function (myData) {
-                                if (myData == "Success") {
-                                    Swal.fire({
-                                        title: 'Success!',
-                                        text: "Car Successfully Added!",
-                                        icon: 'success',
-                                        //showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'OK!'
-
-                                    }).then((result) => {
-                                        if (result.value) {
-
-                                            window.location.replace('../Car/Add?Id=@ViewBag.id&type=@ViewBag.formtype');
-                                        }
-                                    })
-
-                                }
-                            },
-                            complete: function () {
-                                $('.btn').prop("disabled", true);
-                              //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
-
-                            }
-                        })
-                         })*@
 
 
 
@@ -698,6 +743,13 @@
 
         }
 
+
+
+        function uploadCar() {
+            if (window.Car && window.Car.postMessage) {
+                Car.postMessage("Upload Now");
+            }
+        }
 
 
     </script>

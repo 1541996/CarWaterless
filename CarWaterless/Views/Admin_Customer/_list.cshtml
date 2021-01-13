@@ -38,6 +38,36 @@
                                 <td>@result.Email</td>
                                 <td>@result.PhoneNo</td>
                                 <td class="text-right">
+
+                                    @if (result.IsMember == true)
+                                    {
+                                        <a class="btn btn-success" id="member_@result.Id" onclick="IsMember('@result.Id')">
+                                            <i class="fas fa-user text-white"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger" id="member_@result.Id" onclick="IsMember('@result.Id')">
+                                            <i class="fas fa-user text-white"></i>
+                                        </a>
+                                    }
+
+                                    @if (result.IsPrepaid == true)
+                                    {
+                                        <a class="btn btn-success" id="prepaid_member_@result.Id" onclick="AddPrepaidCode('@result.Id')">
+                                            <i class="fas fa-money-bill text-white"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger" id="prepaid_member_@result.Id" onclick="AddPrepaidCode('@result.Id')">
+                                            <i class="fas fa-money-bill text-white"></i>
+                                        </a>
+                                    }
+
+
+
+
                                     <a class="btn btn-primary" onclick="AddCar('@result.Id')">
                                         <i class="fas fa-plus-circle text-white"></i>
                                     </a>&nbsp;&nbsp;
@@ -47,6 +77,19 @@
                                     <a class="btn btn-danger" onclick="Delete('@result.Id')">
                                         <i class="fas fa-trash text-white"></i>
                                     </a>
+                                    <div id="div_prepaidcode_@result.Id" style="display:none">
+                                        <div class="d-flex mt-10 justify-content-end">
+                                            <div>
+                                                <input class="form-control" placeholder="Prepaid Amount" value="@result.PrepaidLeftAmount" type="text" id="txt_prepaid_@result.Id" />
+                                            </div>
+                                            <div class="ml-10">
+                                                <button class="btn btn-primary btn-round" onclick="PrepaidCodeProcess()">Add</button>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
                                 </td>                              
                             </tr>
 

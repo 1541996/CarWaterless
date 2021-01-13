@@ -49,6 +49,7 @@ namespace Infra.ViewModels
         public DateTime? OperationDate { get; set; }
         public DateTime? ConfirmedDate { get; set; }
         public decimal? TotalAmount { get; set; }
+        public DateTime? CancelDate { get; set; }
 
 
     }
@@ -74,6 +75,9 @@ namespace Infra.ViewModels
         public int? CreateUserId { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int? UpdateUserId { get; set; }
+        public string Photo { get; set; }
+        public string MapHtml { get; set; }
+       
 
         public int No { get; set; }
         public string Message { get; set; }

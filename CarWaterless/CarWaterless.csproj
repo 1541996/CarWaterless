@@ -202,6 +202,7 @@
     <Compile Include="Business\AdminRepository.cs" />
     <Compile Include="Business\AdminSetupRepository.cs" />
     <Compile Include="Business\CommonRepository.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\Admin_CustomerController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PushNotiTestController.cs" />
@@ -337,6 +339,8 @@
     <Content Include="ArchitectThemes\frontend\user-editprofile.js" />
     <Content Include="ArchitectThemes\image\admin.jpg" />
     <Content Include="ArchitectThemes\image\body.jpg" />
+    <Content Include="ArchitectThemes\image\carloading.jpg" />
+    <Content Include="ArchitectThemes\image\carloadingv2.png" />
     <Content Include="ArchitectThemes\image\CL-Logo-Icon-with-background.png" />
     <Content Include="ArchitectThemes\image\CL-Logo-Icon.png" />
     <Content Include="ArchitectThemes\image\CL-Logo-Long-with-background.jpg" />
@@ -407,9 +411,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Plesirthemes\css\custom.css" />
+    <Content Include="Plesirthemes\css\customv1.css" />
     <Content Include="Plesirthemes\css\normalize.css" />
-    <Content Include="Plesirthemes\css\theme.css" />
+    <Content Include="Plesirthemes\css\themev1.css" />
     <Content Include="Plesirthemes\css\theme\themelibrary.html" />
     <Content Include="Plesirthemes\EcoPhoto\20945488-min.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\20945732-min.jpg" />
@@ -427,6 +431,10 @@
     <Content Include="Plesirthemes\EcoPhoto\eco2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco3.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco4.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\fbicon.png" />
+    <Content Include="Plesirthemes\EcoPhoto\feedback.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\igeco.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\mailicon.png" />
     <Content Include="Plesirthemes\img\bgcar.jpg" />
     <Content Include="Plesirthemes\img\cab.png" />
     <Content Include="Plesirthemes\img\car2-honda2.png" />
@@ -471,7 +479,7 @@
     <Content Include="Plesirthemes\img\temple.png" />
     <Content Include="Plesirthemes\img\train.png" />
     <Content Include="Plesirthemes\img\transmission.png" />
-    <Content Include="Plesirthemes\js\theme.js" />
+    <Content Include="Plesirthemes\js\themev1.js" />
     <Content Include="Plesirthemes\lib\bootstrap-timepicker\bootstrap-timepicker.js" />
     <Content Include="Plesirthemes\lib\bootstrap\css\bootstrap.min.css" />
     <Content Include="Plesirthemes\lib\bootstrap\js\bootstrap.min.js" />
@@ -662,11 +670,13 @@
     <Content Include="Views\Admin_Operation\_StatusConfirm.cshtml" />
     <Content Include="Views\Book\BookingSuccess.cshtml" />
     <Content Include="Views\Shared\_chatLayout.cshtml" />
+    <Content Include="Views\FeedBack\Index.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Admin_Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Admin_Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

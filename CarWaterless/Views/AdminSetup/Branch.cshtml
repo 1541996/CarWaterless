@@ -100,6 +100,13 @@
                         </div>
                     </div>
                     <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">Map<span style="color:red">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.TextAreaFor(model => model.MapHtml, new { @class = "form-control", @type = "", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                           
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
                         <label for="chkIsActive" class="col-sm-3 col-form-label">Active?</label>
                         <div class="col-sm-9">
                             <div class="position-relative form-check">
@@ -109,6 +116,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="position-relative row form-group">
+                        <label for="exampleFile" class="col-sm-3 col-form-label">Photo</label>
+                        <div class="col-sm-3">
+                            <input name="file" id="exampleFile" type="file" class="form-control-file file_branch" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'branch')">
+                            <small class="form-text text-muted">Please upload photo.</small>
+                            <input type="hidden" id="photo_branch" name="Photo" />
+
+                        </div>
+                        <div class="col-sm-6">
+                            <img id="imagePreview" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Branch/@Model.Photo" style="width:200px" />
+
+                        </div>
+                    </div>
+
                     <div class="position-relative row form-group">
                         <label for="" class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
@@ -124,6 +146,7 @@
 </div>
 
 @Scripts.Render("~/bundles/branch-new")
+<script src="~/ArchitectThemes/File/fileupload.js"></script>
 <script type="text/javascript">
     $(function () {
         $('#liSetting').addClass('mm-active');

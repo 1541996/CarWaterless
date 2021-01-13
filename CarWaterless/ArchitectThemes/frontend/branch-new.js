@@ -96,6 +96,9 @@ function GetModel() {
     model.CloseTime = $('#CloseTime').val();
     model.LocationAddress = $('#LocationAddress').val();
     model.CreateUserId = $('#CreateUserId').val();
+    model.Photo = $('#photo_branch').val();
+    model.MapHtml = $('#MapHtml').val();
+   
     if ($('#chkIsActive').prop("checked") == true) {
         model.IsActive = true;
     }

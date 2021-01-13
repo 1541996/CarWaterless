@@ -78,6 +78,21 @@ namespace CarWaterless.Controllers
                     datefilter = l => l.OperationDate >= today && l.OperationDate < nextday;
                 }
             }
+            else if(type == "Cancel")
+            {
+                if (fromdate != null && todate != null)
+                {
+                    fromdate = fromdate.Value.Date;
+                    todate = todate.Value.AddDays(1).Date;
+                    datefilter = l => l.CancelTime >= fromdate && l.CancelTime < todate;
+                }
+                else
+                {
+                    var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                    var nextday = today.AddDays(1).Date;
+                    datefilter = l => l.CancelTime >= today && l.CancelTime < nextday;
+                }
+            }
             else
             {
                 if (fromdate != null && todate != null)
@@ -170,6 +185,7 @@ namespace CarWaterless.Controllers
                                                                    OperationDate = operation.OperationDate,
                                                                    ConfirmedDate = operation.ConfirmedTime,
                                                                    TotalAmount = operation.TotalAmount,
+                                                                   CancelDate = operation.CancelTime,
 
                                                              }).AsQueryable();
             var totalCount = result.Count();
@@ -237,16 +253,19 @@ namespace CarWaterless.Controllers
                 operation.Status = "Finished";
             }
 
+            
+
             operation = uow.operationRepo.UpdateWithObj(operation);
             return Json(operation, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult _StatusConfirm(int id = 0, string statuschange = null, int doctorid = 0, string doctorname = null, string patientname = null, int patientage = 0, string patientgender = null)
+        public ActionResult statusCancel(int id = 0)
         {
-            ViewBag.id = id;
-            ViewBag.statuschange = statuschange;
-          
-            return PartialView("_StatusConfirm");
+            tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();         
+            operation.CancelTime = MyExtension.getLocalTime(DateTime.UtcNow);
+            operation.Status = "Cancel";         
+            operation = uow.operationRepo.UpdateWithObj(operation);
+            return Json(operation, JsonRequestBehavior.AllowGet);
         }
 
 

@@ -4,59 +4,73 @@
     Layout = "~/Views/Shared/_webLayout.cshtml";
 }
 
+<style>
+    .advertisement .slick-dots{
+        padding-right:60px!important
+    }
+
+
+    .advertisement .slick-slide img {
+        
+         margin:0!important;
+         padding:0!important
+        
+    }
+
+</style>
 
 <!-- Content Wrap  -->
-<div class="content-wrap">
-    <!-- slider -->
-    <div class="img-hero">
-        <div>
-            <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" alt="slider">
-        </div>
-        <div>
-            <img src="~/Plesirthemes/EcoPhoto/eco2.jpg" alt="slider">
-        </div>
-        <div>
-            <img src="~/Plesirthemes/EcoPhoto/eco3.jpg" alt="slider">
-        </div>
-        <div>
-            <img src="~/Plesirthemes/EcoPhoto/eco4.jpg" alt="slider">
-        </div>
+    <div class="content-wrap">
+        <!-- slider -->
+        <div class="img-hero">
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco2.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco3.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco4.jpg" alt="slider">
+            </div>
 
-    </div>
-    <!-- .slider -->
-    <!-- section 1 -->
-    <div class="home-icon">
-        <div class="section-home">
-            <div class="container">
-                <div class="row">
-                    <div class="col s-icon">
-                        <a href="../book?customerid=@ViewBag.customerid" class="homepage-icon-menu">
-                            <img src="~/Plesirthemes/EcoPhoto/bookcar.jpg" alt="icon" style="width: 35px; margin-bottom: 5px;">
-                            <div class="s-icon-text">
-                                Book a car
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col s-icon">
-                        <a href="../branch" class="homepage-icon-menu">
-                            <img src="~/Plesirthemes/img/hotel.png" alt="icon">
-                            <div class="s-icon-text">
-                                Our branches
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col s-icon">
-                        <a href="../car/add?ID=0&type=Add&customerid=@ViewBag.customerid" class="homepage-icon-menu">
-                            <img src="~/Plesirthemes/img/cab.png" alt="icon">
-                            <div class="s-icon-text">
-                                Add a car
-                            </div>
-                        </a>
-                    </div>
+        </div>
+        <!-- .slider -->
+        <!-- section 1 -->
+        <div class="home-icon">
+            <div class="section-home">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s-icon">
+                            <a href="#" onclick="book('@ViewBag.customerid')" class="homepage-icon-menu">
+                                <img src="~/Plesirthemes/EcoPhoto/bookcar.jpg" alt="icon" style="width: 35px; margin-bottom: 5px;">
+                                <div class="s-icon-text">
+                                    Book a car
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="#" class="homepage-icon-menu" onclick="branch()">
+                                <img src="~/Plesirthemes/img/hotel.png" alt="icon">
+                                <div class="s-icon-text">
+                                    Our branches
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col s-icon">
+                            <a href="#" onclick="caradd('@ViewBag.customerid')" class="homepage-icon-menu">
+                                <img src="~/Plesirthemes/img/cab.png" alt="icon">
+                                <div class="s-icon-text">
+                                    Add a car
+                                </div>
+                            </a>
+                        </div>
 
-                   
-                </div>
-                @*<div class="row">
+
+                    </div>
+                    @*<div class="row">
                         <div class="col s-icon">
                             <a href="#" class="homepage-icon-menu">
                                 <img src="~/Plesirthemes/img/temple.png" alt="icon">
@@ -90,223 +104,232 @@
                             </a>
                         </div>
                     </div>*@
-            </div>
-        </div>
-    </div>
-    <!-- .section 1 -->
-    <!-- section 2 -->
-    <div class="heading-section">
-
-        <div class="sa-title popcat">Our Packages </div>
-        <div class="heading-info">
-            Let's see our packages
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="section-home available-car">
-
-        <div class="default-carousel car-carousel">
-            <!-- item -->
-            <div class="item">
-                <div class="acr-box">
-                    <div class="acr-box-in">
-                        <div class="acr-img">
-                            <img src="~/Plesirthemes/img/car2-nissan3.png" alt="you might like">
-                        </div>
-                        <div class="acr-content">
-                            <div class="ct-name">Platinum</div>
-                            <div class="ct-cost"><span class="cprice"> $120 </span></div>
-
-                            <div class="ct-reserve mt-10">
-                                <a href="car_single.html" class="theme-button">
-                                    Book Now
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="acr-bg">
-                        <img src="~/Plesirthemes/img/bgcar.jpg">
-                    </div>
                 </div>
             </div>
-            <!-- .item -->
-            <!-- item -->
-            <div class="item">
-                <div class="acr-box">
-                    <div class="acr-box-in">
-                        <div class="acr-img">
-                            <img src="~/Plesirthemes/img/car2-kia1.png" alt="you might like">
-                        </div>
-                        <div class="acr-content">
-                            <div class="ct-name">Bronze</div>
-                            <div class="ct-cost"><span class="cprice"> $120 </span></div>
+        </div>
+        <!-- .section 1 -->
+        <!-- section 2 -->
+        <div class="heading-section">
 
-                            <div class="ct-reserve mt-10">
-                                <a href="car_single.html" class="theme-button">
-                                    Book Now
-                                </a>
+            <div class="sa-title popcat">Our Packages </div>
+            <div class="heading-info">
+                Let's see our packages
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home available-car">
+
+            <div class="default-carousel car-carousel">
+                <!-- item -->
+                <div class="item">
+                    <div class="acr-box">
+                        <div class="acr-box-in">
+                            <div class="acr-img">
+                                <img src="~/Plesirthemes/img/car2-nissan3.png" alt="you might like">
+                            </div>
+                            <div class="acr-content">
+                                <div class="ct-name">Platinum</div>
+                                <div class="ct-cost"><span class="cprice"> $120 </span></div>
+
+                                <div class="ct-reserve mt-10">
+                                    <a href="car_single.html" class="theme-button">
+                                        Book Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="acr-bg">
-                        <img src="~/Plesirthemes/img/bgcar.jpg">
+                        <div class="acr-bg">
+                            <img src="~/Plesirthemes/img/bgcar.jpg">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- .item -->
-            <!-- item -->
-            <div class="item">
-                <div class="acr-box">
-                    <div class="acr-box-in">
-                        <div class="acr-img">
-                            <img src="~/Plesirthemes/img/car2-mitsubishi2.png" alt="you might like">
-                        </div>
-                        <div class="acr-content">
-                            <div class="ct-name">Silver</div>
-                            <div class="ct-cost"><span class="cprice"> $120 </span></div>
+                <!-- .item -->
+                <!-- item -->
+                <div class="item">
+                    <div class="acr-box">
+                        <div class="acr-box-in">
+                            <div class="acr-img">
+                                <img src="~/Plesirthemes/img/car2-kia1.png" alt="you might like">
+                            </div>
+                            <div class="acr-content">
+                                <div class="ct-name">Bronze</div>
+                                <div class="ct-cost"><span class="cprice"> $120 </span></div>
 
-                            <div class="ct-reserve mt-10">
-                                <a href="car_single.html" class="theme-button">
-                                    Book Now
-                                </a>
+                                <div class="ct-reserve mt-10">
+                                    <a href="car_single.html" class="theme-button">
+                                        Book Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="acr-bg">
-                        <img src="~/Plesirthemes/img/bgcar.jpg">
+                        <div class="acr-bg">
+                            <img src="~/Plesirthemes/img/bgcar.jpg">
+                        </div>
                     </div>
                 </div>
+                <!-- .item -->
+                <!-- item -->
+                <div class="item">
+                    <div class="acr-box">
+                        <div class="acr-box-in">
+                            <div class="acr-img">
+                                <img src="~/Plesirthemes/img/car2-mitsubishi2.png" alt="you might like">
+                            </div>
+                            <div class="acr-content">
+                                <div class="ct-name">Silver</div>
+                                <div class="ct-cost"><span class="cprice"> $120 </span></div>
+
+                                <div class="ct-reserve mt-10">
+                                    <a href="car_single.html" class="theme-button">
+                                        Book Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="acr-bg">
+                            <img src="~/Plesirthemes/img/bgcar.jpg">
+                        </div>
+                    </div>
+                </div>
+                <!-- .item -->
             </div>
-            <!-- .item -->
         </div>
-    </div>
-    <!-- .section 2-->
+        <!-- .section 2-->
 
-    <div class="ads-holder text-center section-home home-news">
-        <a href="#">
-            <img src="~/Plesirthemes/EcoPhoto/ads-holder1.jpg">
-        </a>
-    </div>
-
-    <!-- section 3 -->
-    <div class="heading-section">
-        <div class="sa-title popcat">Our Packages </div>
-        <div class="heading-info">
-            Let's see our packages
+        <div class="ads-holder text-center section-home home-news">
+            <a href="#">
+                <img src="~/Plesirthemes/EcoPhoto/ads-holder1.jpg">
+            </a>
         </div>
-        <div class="clear"></div>
-    </div>
-    <div class="section-home vacation-destination">
-        <div class="default-carousel vs-carousel">
-            <!-- item -->
-            <div class="item">
-                <div class="vs-box">
-                    <div class="vsb-top">
-                        @*<div class="vsb-rating">
+
+        <!-- section 3 -->
+        <div class="heading-section">
+            <div class="sa-title popcat">Our Packages </div>
+            <div class="heading-info">
+                Let's see our packages
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="section-home vacation-destination">
+            <div class="default-carousel vs-carousel">
+                <!-- item -->
+                <div class="item">
+                    <div class="vs-box">
+                        <div class="vsb-top">
+                            @*<div class="vsb-rating">
                                 4.8 <i class="fas fa-star"></i>
                             </div>*@
-                        <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                            <div class="vsbt-img">
+                                <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                            </div>
                         </div>
-                    </div>
-                    <div class="vsb-middle">
-                        <div class="vsbm-left">
-                            ကားသေး
-                        </div>
-                        <div class="vsbm-right">
-                            4000 MMK
+                        <div class="vsb-middle">
+                            <div class="vsbm-left">
+                                ကားသေး
+                            </div>
+                            <div class="vsbm-right">
+                                4000 MMK
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- .item -->
-            <!-- item -->
-            <div class="item">
-                <div class="vs-box">
-                    <div class="vsb-top">
-                        @*<div class="vsb-rating">
+                <!-- .item -->
+                <!-- item -->
+                <div class="item">
+                    <div class="vs-box">
+                        <div class="vsb-top">
+                            @*<div class="vsb-rating">
                                 4.5 <i class="fas fa-star"></i>
                             </div>*@
-                        <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination2.jpg" alt="img">
+                            <div class="vsbt-img">
+                                <img src="~/Plesirthemes/img/destination2.jpg" alt="img">
+                            </div>
                         </div>
-                    </div>
-                    <div class="vsb-middle">
-                        <div class="vsbm-left">
-                            ကားလတ်
-                        </div>
-                        <div class="vsbm-right">
-                            5000 MMK
+                        <div class="vsb-middle">
+                            <div class="vsbm-left">
+                                ကားလတ်
+                            </div>
+                            <div class="vsbm-right">
+                                5000 MMK
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- .item -->
-            <!-- item -->
-            <div class="item">
-                <div class="vs-box">
-                    <div class="vsb-top">
-                        @*<div class="vsb-rating">
+                <!-- .item -->
+                <!-- item -->
+                <div class="item">
+                    <div class="vs-box">
+                        <div class="vsb-top">
+                            @*<div class="vsb-rating">
                                 4.5 <i class="fas fa-star"></i>
                             </div>*@
-                        <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination3.jpg" alt="img">
+                            <div class="vsbt-img">
+                                <img src="~/Plesirthemes/img/destination3.jpg" alt="img">
+                            </div>
                         </div>
-                    </div>
-                    <div class="vsb-middle">
-                        <div class="vsbm-left">
-                            ကားကြီး
-                        </div>
-                        <div class="vsbm-right">
-                            6000 MMK
+                        <div class="vsb-middle">
+                            <div class="vsbm-left">
+                                ကားကြီး
+                            </div>
+                            <div class="vsbm-right">
+                                6000 MMK
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- .item -->
+                <!-- .item -->
 
-        </div>
-    </div>
-    <!-- .section 3 -->
-    <!-- section 4 -->
-    <div class="heading-section">
-        <div class="sa-title popcat">Branch </div>
-        <div class="heading-info">
-            Let's see our branches
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="section-home home-news">
-
-        <div class="home-news-wrap" id="div_branch">
-
-        </div>
-    </div>
-    <!-- .section 4 -->
-    <!-- SUBSCRIBE -->
-    <div class="section-subscribe">
-        <div class="subcontainer">
-            <div class="subrow">
-                <div class="subcol">
-                    <div class="section-title">SUBSCRIBE</div>
-                    <p class="textsub">Signup for our weekly newsletter to get the latest news, updates and amazing offers</p>
-                    <div class="mail-subscribe-box">
-                        <form name="subsribe">
-                            <input class="form-control" name="user-email" placeholder="Enter email address" value="" type="email">
-                            <button type="submit" class="submitsub"> <i class="fa fa-angle-right"></i></button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
-        <div class="bg-subscribe">
-            <img src="~/Plesirthemes/img/image.jpg" alt="banner">
+        <!-- .section 3 -->
+        <!-- section 4 -->
+        <div class="heading-section">
+            <div class="sa-title popcat">Branch </div>
+            <div class="heading-info">
+                Let's see our branches
+            </div>
+            <div class="clear"></div>
         </div>
+        <div class="section-home home-news">
+
+            <div class="home-news-wrap" id="div_branch">
+
+            </div>
+        </div>
+
+
+        <div style="background:#f4f4f4;height:10px">
+
+        </div>
+
+        <div class="heading-section">
+
+            <div class="sa-title popcat">Advertisement </div>
+
+            <div class="clear"></div>
+        </div>
+
+        <div class="advertisement p-30 pt-10 pb-10">
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco2.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco3.jpg" alt="slider">
+            </div>
+            <div>
+                <img src="~/Plesirthemes/EcoPhoto/eco4.jpg" alt="slider">
+            </div>
+
+        </div>
+
+        <!-- .section 4 -->
+       
+
+
     </div>
-    <!-- END SUBSCRIBE -->
-
-
-</div>
 
 
 
@@ -341,8 +364,24 @@
          }
 
 
+        function book() {
+            $('.preloading').show();
+            window.location.replace('../book?customerid=@ViewBag.customerid');
+        }
+
+        function branch() {
+            $('.preloading').show();
+            window.location.replace('../branch');
+        }
+
+        function caradd() {
+            $('.preloading').show();
+            window.location.replace('../car/add?ID=0&type=Add&customerid=@ViewBag.customerid');
+        }
+
         function SeeMore(Id) {
-               window.location.replace('../Branch');
+            $('.preloading').show();
+            window.location.replace('../Branch');
         }
 
 

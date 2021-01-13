@@ -268,6 +268,8 @@
                             <option value="Waiting">Waiting</option>
                             <option value="Confirmed">Confirmed</option>
                             <option value="Finished">Finished</option>
+                            <option value="Cancel">Cancel</option>
+
                         </select>
                     </div>
 
@@ -322,6 +324,10 @@
 <div class="row">
     <div class="col-md-12" id="div_list">
 
+        
+      
+            
+        
     </div>
 </div>
 
@@ -389,7 +395,7 @@
         //let timeout = null;
 
         //// Listen for keystroke events
-        //input.addEventListener('keyup', function (e) {           
+        //input.addEventListener('keyup', function (e) {
         //    clearTimeout(timeout);
         //    // Make a new timeout set to go off in 1000ms (1 second)
         //    timeout = setTimeout(function () {
@@ -402,7 +408,7 @@
         //// Init a timeout variable to be used below
         //let timeout1 = null;
         //// Listen for keystroke events
-        //input1.addEventListener('keyup', function (e) {          
+        //input1.addEventListener('keyup', function (e) {
         //    clearTimeout(timeout1);
         //    // Make a new timeout set to go off in 1000ms (1 second)
         //    timeout1 = setTimeout(function () {
@@ -436,6 +442,7 @@
 
         }
         function LoadMainList() {
+            callloading('div_list');
             $.ajax({
                 cache: false,
                 url: '@Url.Action("_list", "Admin_Operation")',
@@ -446,7 +453,7 @@
                     washtype: washtype, cardata: cardata
                 },
                 beforeSend: function () {
-                   // callloading('_itemlist');
+                   
                 },
                 success: function (result) {
                     $('#div_list').empty().append(result);
@@ -513,7 +520,7 @@
                 });
 
         }
-        
+
 
         function gotochat(e) {
             var fromuserid = $(e).attr('data-fromuserid');
@@ -549,7 +556,70 @@
                                 $('.btn').prop("disabled", true);
                             },
                              success: function (result) {
-                             
+
+                                 $('#div_booking_' + id).remove();
+                                 getWaitingNotiCount();
+                                 $('#txt_totalcount').text(parseInt($('#txt_totalcount').text()) - 1);
+                                //if (result.Status == "Waiting") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point todo" data-status="Waiting" data-id="${result.Id}" onclick="newstatusChange(this)">Confirmed</li><li class="progress-point todo">Finished</li>`
+                                //    )
+                                //} else if (result.Status == "Confirmed") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point todo" data-status="Confirmed" data-id="${result.Id}" onclick="newstatusChange(this)">Finished</li>`
+                                //    )
+                                //} else if (result.Status == "Finished") {
+                                //    $('#ol_status_' + result.Id).empty().append(
+                                //        `<li class="progress-point done">Waiting</li><li class="progress-point done">Confirmed</li><li class="progress-point done">Finished</li>`
+                                //    )
+                                //}
+
+
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", false);
+
+                            }
+                        });
+
+                    }
+
+
+
+
+                });
+
+
+
+        }
+
+
+
+         function statusCancel(e) {
+             var id = $(e).attr('data-operationid');
+           // var statuschange = $(e).attr('data-status');
+              Swal.fire({
+                title: "Are you sure you want to cancel?",
+                text: "Once Cancel, you will not be able to recover this actions!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#8CD4F5',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Confirm it!'
+              })
+                .then((result) => {
+
+                    if (result.value == true) {
+                            $.ajax({
+                            cache: false,
+                            url: '@Url.Action("statusCancel", "Admin_Operation")',
+                            data: { id: id },
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+                            },
+                             success: function (result) {
+
                                  $('#div_booking_' + id).remove();
                                  getWaitingNotiCount();
                                 //if (result.Status == "Waiting") {
@@ -566,7 +636,7 @@
                                 //    )
                                 //}
 
-                               
+
                             },
                             complete: function () {
                                 $('.btn').prop("disabled", false);
@@ -581,12 +651,12 @@
 
                 });
 
-             
+
 
         }
 
 
-      
+
 
     </script>
 

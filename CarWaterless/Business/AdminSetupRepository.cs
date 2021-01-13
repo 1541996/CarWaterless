@@ -6,6 +6,7 @@ using Infra.ViewModels;
 using Infra.Models;
 using Infra.Helper;
 using Data.Helper;
+using Infra.helper;
 
 namespace CarWaterless.Business
 {
@@ -553,6 +554,8 @@ namespace CarWaterless.Business
                                  TownshipId = data.TownshipId,
                                  TownshipName = town.Name,
                                  IsActive = data.IsActive,
+                                 Photo = data.Photo,
+                                 MapHtml = data.MapHtml
                              });
                 model = query.AsEnumerable().Select((data, index) => new BranchViewModel()
                 {
@@ -568,13 +571,15 @@ namespace CarWaterless.Business
                     TownshipId = data.TownshipId,
                     TownshipName = data.TownshipName,
                     IsActive = data.IsActive,
+                    Photo = data.Photo,
+                    MapHtml = data.MapHtml,
                     No = ++index
                 }).FirstOrDefault();
             }
             return model;
         }
 
-        public BranchViewModel SaveBranch(BranchViewModel model)
+        public async System.Threading.Tasks.Task<BranchViewModel> SaveBranchAsync(BranchViewModel model)
         {
             BranchViewModel response = new BranchViewModel();
             try
@@ -582,6 +587,16 @@ namespace CarWaterless.Business
                 using (var context = new CarWaterLessContext())
                 {
                     tbBranch obj = new tbBranch();
+                    if (model.Photo != null)
+                    {
+                        FileUploadViewModel fileupload = new FileUploadViewModel();
+                        fileupload.photo = model.Photo;
+                        fileupload.filepath = "/ImageStorage/CarWaterlessProject/Branch";
+                        var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+
+                        obj.Photo = responsefile;
+                    }
+
                     obj.LocationName = model.LocationName;
                     obj.LocationPhoneNo = model.LocationPhoneNo;
                     obj.LocationAddress = model.LocationAddress;
@@ -594,6 +609,7 @@ namespace CarWaterless.Business
                     obj.IsDeleted = false;
                     obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
                     obj.CreateUserId = model.CreateUserId;
+                    obj.MapHtml = model.MapHtml;
                     context.tbBranches.Add(obj);
                     context.SaveChanges();
                 }
@@ -628,13 +644,31 @@ namespace CarWaterless.Business
                 }
             }
         }
-        public BranchViewModel EditBranch(BranchViewModel model)
+        public async System.Threading.Tasks.Task<BranchViewModel> EditBranchAsync(BranchViewModel model)
         {
             BranchViewModel response = new BranchViewModel();
             try
             {
                 using (var context = new CarWaterLessContext())
                 {
+                    if (model.Id > 0)
+                    {
+                        if (model.Photo != null)
+                        {
+                            FileUploadViewModel fileupload = new FileUploadViewModel();
+                            fileupload.photo = model.Photo;
+                            fileupload.filepath = "/ImageStorage/CarWaterlessProject/Branch";
+                            var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+                            model.Photo = responsefile;
+                        }
+                        else
+                        {
+                            var olddata = context.tbBranches.Where(a => a.IsDeleted != true && a.Id == model.Id).FirstOrDefault();
+                            model.Photo = olddata.Photo;
+                        }
+
+                       
+                    }                  
                     context.tbBranches.First(x => x.Id == model.Id).LocationName = model.LocationName;
                     context.tbBranches.First(x => x.Id == model.Id).LocationPhoneNo = model.LocationPhoneNo;
                     context.tbBranches.First(x => x.Id == model.Id).LocationAddress = model.LocationAddress;
@@ -645,6 +679,8 @@ namespace CarWaterless.Business
                     context.tbBranches.First(x => x.Id == model.Id).AdminAgentId = model.AdminAgentId;
                     context.tbBranches.First(x => x.Id == model.Id).IsActive = model.IsActive;
                     context.tbBranches.First(x => x.Id == model.Id).UpdateUserId = model.UpdateUserId;
+                    context.tbBranches.First(x => x.Id == model.Id).MapHtml = model.MapHtml;
+                    context.tbBranches.First(x => x.Id == model.Id).Photo = model.Photo;
                     context.SaveChanges();
 
                     response.MessageType = 1;

@@ -38,10 +38,12 @@ namespace Infra.Models
         public DbSet<tbTopCustomer> tbTopCustomers { get; set; }
         public DbSet<tbTownship> tbTownships { get; set; }
         public DbSet<tbPhoto> tbPhotos { get; set; }
+        public DbSet<tbFeedBack> tbFeedBacks { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Ignore field map
+            modelBuilder.Entity<tbBranch>().Ignore(t => t.PhotoUrl);
         }
     }
 }

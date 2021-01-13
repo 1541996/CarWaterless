@@ -216,14 +216,15 @@ img {
   background-color: #2450a6; }
 
 ul.slick-dots li button {
-  width: 15px;
-  height: 5px;
-  background-color: #2450a6;
-  padding: 0px;
-  -webkit-border-radius: 90px;
-  -moz-border-radius: 90px;
-  border-radius: 90px;
-  opacity: 0.3; }
+    width: 15px;
+    height: 5px;
+    background-color: #00c9a7;
+    padding: 0px;
+    -webkit-border-radius: 90px;
+    -moz-border-radius: 90px;
+    border-radius: 90px;
+    opacity: 0.3;
+}
 
 ul.slick-dots li.slick-active button {
   opacity: 1; }
@@ -496,11 +497,12 @@ form .input-group > .form-control:not(:last-child) {
   display: table;
   left: 0; }
 
-.preloading .wrap-preload {
-  background-color: #2450a6;
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle; }
+    .preloading .wrap-preload {
+        background-color: #00c9a7;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
 
 .preloading .cssload-loader {
   width: 49px;

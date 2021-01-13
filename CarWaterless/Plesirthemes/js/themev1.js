@@ -47,7 +47,18 @@
         slidesToShow: 1,
         adaptiveHeight: false
       });
-      
+
+    $('.advertisement').slick({
+        autoplay: true,
+        dots: true,
+        infinite: true,
+        arrows: false,
+        speed: 2000,
+        slidesToShow: 1,
+        adaptiveHeight: false
+    });
+
+
       
       /* DEFAULT CAROUSEL */
       $('.default-carousel').slick({  

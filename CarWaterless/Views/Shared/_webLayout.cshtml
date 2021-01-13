@@ -19,7 +19,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/Plesirthemes/css/normalize.css">
 
-    <link rel="stylesheet" href="~/Plesirthemes/css/theme.css">
+    <link rel="stylesheet" href="~/Plesirthemes/css/themev1.css">
     <!-- Slick CSS -->
     <link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick.css">
     <link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick-theme.css">
@@ -30,13 +30,29 @@
     <script defer src="~/Plesirthemes/lib/fontawesome-free-5.10.2-web/js/brands.js"></script>
     <script defer src="~/Plesirthemes/lib/fontawesome-free-5.10.2-web/js/solid.js"></script>
     <script defer src="~/Plesirthemes/lib/fontawesome-free-5.10.2-web/js/fontawesome.js"></script>
-    <link href="~/Plesirthemes/css/custom.css" rel="stylesheet" />
+    <link href="~/Plesirthemes/css/customv1.css" rel="stylesheet" />
+    
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 
 </head>
 <body class="default">
+
+    <div id="pageloading" style="display:none">
+        <div class="overlayloading">
+            <div class="loading text-center">
+                <div>
+                    <img src="../ArchitectThemes/image/igecowashlogo-removebg-preview.png" alt="" style="object-fit:cover;width:60px;border-radius:10px" class="menu-image img-w round-corner2">
+                </div>
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                <div class="mt-5">
+                    <span style="color:#ddd;">Loading. Please wait...</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- Preloading -->
     <div class="preloading">
@@ -47,219 +63,273 @@
     <!-- .Preloading -->
     <!-- Sidebar left -->
     @*<nav id="sidebarleft" class="sidenav">
-        <div id="dismiss">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="sidebar-header">
-            <h3>Account</h3>
-        </div>
-        <div class="sdprofile">
-            <div class="sdp-left">
-                <img src="~/Plesirthemes/img/profile4.jpg" alt="profile">
+            <div id="dismiss">
+                <i class="fas fa-times"></i>
             </div>
-            <div class="sdp-right">
-                <div class="sd-name">Lilia Doe</div>
-                <div class="sd-status">+62123123123</div>
+            <div class="sidebar-header">
+                <h3>Account</h3>
             </div>
-        </div>
-        <ul class="list-unstyled components">
-            <li>
-                <a href="index.html"><i class="fas fa-home"></i>Home</a>
-            </li>
-            <li>
-                <a href="book_a_car.html"><i class="fas fa-car"></i>Book a car</a>
-            </li>
-            <li>
-                <a href="#pagemybooking" data-toggle="collapse" aria-expanded="false"><i class="fas fa-receipt"></i>My Bookings <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagemybooking">
-                    <li>
-                        <a href="my_rides.html">My rides</a>
-                    </li>
-                    <li>
-                        <a href="cart.html">Cart</a>
-                    </li>
-                    <li>
-                        <a href="checkout.html">Checkout</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-            <li>
-                <a href="#pagemyaccount" data-toggle="collapse" aria-expanded="false"><i class="fas fa-user"></i>My Account <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagemyaccount">
-                    <li>
-                        <a href="profile.html">Profile</a>
-                    </li>
-                    <li>
-                        <a href="setting.html">Settings</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="car_list.html"><i class="fas fa-car"></i>Car list</a>
-            </li>
-            <li>
-                <a href="destinations.html"><i class="fas fa-map"></i>Destinations</a>
-            </li>
-            <li>
-                <a href="news_list.html"><i class="fas fa-newspaper"></i>News & travel guides</a>
-            </li>
+            <div class="sdprofile">
+                <div class="sdp-left">
+                    <img src="~/Plesirthemes/img/profile4.jpg" alt="profile">
+                </div>
+                <div class="sdp-right">
+                    <div class="sd-name">Lilia Doe</div>
+                    <div class="sd-status">+62123123123</div>
+                </div>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+                </li>
+                <li>
+                    <a href="book_a_car.html"><i class="fas fa-car"></i>Book a car</a>
+                </li>
+                <li>
+                    <a href="#pagemybooking" data-toggle="collapse" aria-expanded="false"><i class="fas fa-receipt"></i>My Bookings <span><i class="fas fa-caret-down"></i></span></a>
+                    <ul class="collapse collapsible-body" id="pagemybooking">
+                        <li>
+                            <a href="my_rides.html">My rides</a>
+                        </li>
+                        <li>
+                            <a href="cart.html">Cart</a>
+                        </li>
+                        <li>
+                            <a href="checkout.html">Checkout</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                <li>
+                    <a href="#pagemyaccount" data-toggle="collapse" aria-expanded="false"><i class="fas fa-user"></i>My Account <span><i class="fas fa-caret-down"></i></span></a>
+                    <ul class="collapse collapsible-body" id="pagemyaccount">
+                        <li>
+                            <a href="profile.html">Profile</a>
+                        </li>
+                        <li>
+                            <a href="setting.html">Settings</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="car_list.html"><i class="fas fa-car"></i>Car list</a>
+                </li>
+                <li>
+                    <a href="destinations.html"><i class="fas fa-map"></i>Destinations</a>
+                </li>
+                <li>
+                    <a href="news_list.html"><i class="fas fa-newspaper"></i>News & travel guides</a>
+                </li>
 
-            <li>
-                <a href="#pagesubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-clone"></i>Pages <span><i class="fas fa-caret-down"></i></span></a>
-                <ul class="collapse collapsible-body" id="pagesubmenu">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="car_list.html">Car list</a>
-                    </li>
-                    <li>
-                        <a href="car_single.html">Car single</a>
-                    </li>
-                    <li>
-                        <a href="feedback.html">Feedback</a>
-                    </li>
-                    <li>
-                        <a href="setting.html">Setting</a>
-                    </li>
-                    <li>
-                        <a href="gallery.html">Gallery</a>
-                    </li>
-                    <li>
-                        <a href="news_list.html">News list</a>
-                    </li>
-                    <li>
-                        <a href="news.html">News</a>
-                    </li>
-                    <li>
-                        <a href="register.html">Register</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login</a>
-                    </li>
-                    <li>
-                        <a href="profile.html">Profile</a>
-                    </li>
-                    <li>
-                        <a href="single_page.html">Single page</a>
-                    </li>
-                    <li>
-                        <a href="404.html">404 error page</a>
-                    </li>
-                </ul>
-            </li>
+                <li>
+                    <a href="#pagesubmenu" data-toggle="collapse" aria-expanded="false"><i class="fas fa-clone"></i>Pages <span><i class="fas fa-caret-down"></i></span></a>
+                    <ul class="collapse collapsible-body" id="pagesubmenu">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="car_list.html">Car list</a>
+                        </li>
+                        <li>
+                            <a href="car_single.html">Car single</a>
+                        </li>
+                        <li>
+                            <a href="feedback.html">Feedback</a>
+                        </li>
+                        <li>
+                            <a href="setting.html">Setting</a>
+                        </li>
+                        <li>
+                            <a href="gallery.html">Gallery</a>
+                        </li>
+                        <li>
+                            <a href="news_list.html">News list</a>
+                        </li>
+                        <li>
+                            <a href="news.html">News</a>
+                        </li>
+                        <li>
+                            <a href="register.html">Register</a>
+                        </li>
+                        <li>
+                            <a href="login.html">Login</a>
+                        </li>
+                        <li>
+                            <a href="profile.html">Profile</a>
+                        </li>
+                        <li>
+                            <a href="single_page.html">Single page</a>
+                        </li>
+                        <li>
+                            <a href="404.html">404 error page</a>
+                        </li>
+                    </ul>
+                </li>
 
-            <li>
-                <a href="#"><i class="fas fa-star"></i>Rate</a>
-            </li>
-            <li>
-                <a href="feedback.html"><i class="fas fa-envelope"></i>Feedback</a>
-            </li>
+                <li>
+                    <a href="#"><i class="fas fa-star"></i>Rate</a>
+                </li>
+                <li>
+                    <a href="feedback.html"><i class="fas fa-envelope"></i>Feedback</a>
+                </li>
 
-            <li>
-                <a href="single_page.html"><i class="fas fa-exclamation-circle"></i>About</a>
-            </li>
-        </ul>
-    </nav>*@
+                <li>
+                    <a href="single_page.html"><i class="fas fa-exclamation-circle"></i>About</a>
+                </li>
+            </ul>
+        </nav>*@
     <!-- .Sidebar left -->
     <!-- Sidebar right -->
     @*<nav id="sidebarright" class="sidenav">
-        <div id="dismiss">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="sidebar-header">
-            <h3>Notifications</h3>
-        </div>
-        <ul class="right-menu">
+            <div id="dismiss">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="sidebar-header">
+                <h3>Notifications</h3>
+            </div>
+            <ul class="right-menu">
 
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-envelope"></i>
-                    <div class="ntitle">Your transaction was successful</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-star"></i>
-                    <div class="ntitle">You have received an award</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-car-alt"></i>
-                    <div class="ntitle">Your tour schedule</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-ticket-alt"></i>
-                    <div class="ntitle">Promo offer for you today</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
-            <li class="right-menu-item">
-                <a href="#">
-                    <i class="fas fa-envelope"></i>
-                    <div class="ntitle">You get a point</div>
-                    <div class="desc">lorem ipsum dolor sit amet...</div>
-                </a>
-            </li>
+                <li class="right-menu-item">
+                    <a href="#">
+                        <i class="fas fa-envelope"></i>
+                        <div class="ntitle">Your transaction was successful</div>
+                        <div class="desc">lorem ipsum dolor sit amet...</div>
+                    </a>
+                </li>
+                <li class="right-menu-item">
+                    <a href="#">
+                        <i class="fas fa-star"></i>
+                        <div class="ntitle">You have received an award</div>
+                        <div class="desc">lorem ipsum dolor sit amet...</div>
+                    </a>
+                </li>
+                <li class="right-menu-item">
+                    <a href="#">
+                        <i class="fas fa-car-alt"></i>
+                        <div class="ntitle">Your tour schedule</div>
+                        <div class="desc">lorem ipsum dolor sit amet...</div>
+                    </a>
+                </li>
+                <li class="right-menu-item">
+                    <a href="#">
+                        <i class="fas fa-ticket-alt"></i>
+                        <div class="ntitle">Promo offer for you today</div>
+                        <div class="desc">lorem ipsum dolor sit amet...</div>
+                    </a>
+                </li>
+                <li class="right-menu-item">
+                    <a href="#">
+                        <i class="fas fa-envelope"></i>
+                        <div class="ntitle">You get a point</div>
+                        <div class="desc">lorem ipsum dolor sit amet...</div>
+                    </a>
+                </li>
 
-        </ul>
-    </nav>*@
+            </ul>
+        </nav>*@
     <!-- .Sidebar right-->
     <!-- Header  -->
     @*<nav class="navbar navbar-expand-lg navbar-light bg-header">
-        <div class="container-fluid">
-            <button type="button" id="sidebarleftbutton" class="btn">
-                <i class="fas fa-align-left"></i>
-            </button>
-            <div class="logo">Plesir</div>
-            <button type="button" id="sidebarrightbutton" class="btn">
-                <div class="notif">
-                    <i class="fas fa-bell"></i>
-                    <i class="fas fa-circle "></i>
-                </div>
-            </button>
-        </div>
-    </nav>*@
+            <div class="container-fluid">
+                <button type="button" id="sidebarleftbutton" class="btn">
+                    <i class="fas fa-align-left"></i>
+                </button>
+                <div class="logo">Plesir</div>
+                <button type="button" id="sidebarrightbutton" class="btn">
+                    <div class="notif">
+                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-circle "></i>
+                    </div>
+                </button>
+            </div>
+        </nav>*@
     <!-- .Header  -->
     <!-- Content  -->
     <div id="content" class="p-0">
         @RenderBody()
     </div>
+
+    <!-- SUBSCRIBE -->
+    <div class="section-subscribe mt-0" id="footer" style="padding:10px 10px">
+        <div class="subcontainer">
+            <div class="subrow">
+                <div class="subcol">
+                    <div class="section-title">IG Eco Wash</div>
+
+
+                    <p class="textsub fs-14 mb-0 font-bold">
+                        <a href="tel:09965010078" class="textsub">
+                            ☎️ 0996 5010078,
+                        </a>
+                        <a href="tel:0978 5010078" class="textsub">
+                            0995 5010078
+                        </a>
+
+                    </p>
+                    <p class="textsub fs-14 font-bold">
+
+                        <a href="tel:0978 5010078" class="textsub">
+                            0978 5010078
+                        </a>
+                    </p>
+
+                    <p class="textsub fs-14">
+                        🏠 No.(35/A-B), Thuwanna 29th Quarter, KamarKyi Road, Thingangyun Township, Yangon, Myanmar.
+
+                    </p>
+                    @*<p class="textsub fs-14 font-bold">
+                        <a href="mailto:igmcarcare.mm@gmail.com">📧 igmcarcare.mm@gmail.com</a>
+
+                    </p>*@
+
+                    <p class="textsub fs-14 font-bold">
+
+                        <a href="https://www.facebook.com/IGEcoWash/"><img style="width:25px" src="~/Plesirthemes/EcoPhoto/fbicon.png" /></a>
+                        <a href="mailto:igmcarcare.mm@gmail.com"><img style="width:25px" class="ml-5" src="~/Plesirthemes/EcoPhoto/mailicon.png" /></a>
+
+                    </p>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="bg-subscribe">
+            <img src="~/Plesirthemes/img/image.jpg" alt="banner">
+        </div>
+    </div>
+    <!-- END SUBSCRIBE -->
     <!-- .Content  -->
     <!-- Botom Panel  -->
     @*<div class="bottom-panel">
-        <div class="bp-col">
-            <a href="index.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/iphome.png" alt="icon"> </div>
-                <div class="bp-text">Home</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="my_rides.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipcar.png" alt="icon"></div>
-                <div class="bp-text">My Rides</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="destinations.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipoffer2.png" alt="icon"></div>
-                <div class="bp-text">Offers</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="setting.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipaccount.png" alt="icon"></div>
-                <div class="bp-text">Account</div>
-            </a>
-        </div>
-    </div>*@
+            <div class="bp-col">
+                <a href="index.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/iphome.png" alt="icon"> </div>
+                    <div class="bp-text">Home</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="my_rides.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipcar.png" alt="icon"></div>
+                    <div class="bp-text">My Rides</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="destinations.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipoffer2.png" alt="icon"></div>
+                    <div class="bp-text">Offers</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="setting.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipaccount.png" alt="icon"></div>
+                    <div class="bp-text">Account</div>
+                </a>
+            </div>
+        </div>*@
     <!-- .Bottom Panel  -->
 
 
@@ -276,7 +346,7 @@
     <!-- Slick JS -->
     <script src="~/Plesirthemes/lib/slick/slick/slick.min.js"></script>
     <!--  Custom JS -->
-    <script src="~/Plesirthemes/js/theme.js"></script>
+    <script src="~/Plesirthemes/js/themev1.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 

@@ -8,9 +8,9 @@
 
 <style>
 
-   
-    body{
-      overflow-x:hidden!important
+
+    body {
+        overflow-x: hidden !important
     }
 
     .select2-container .select2-selection--single {
@@ -241,7 +241,7 @@
         /* line-height: 40px;*/
     }
 
-   
+
 
     .subsite-banner {
         height: 128px !important
@@ -258,32 +258,37 @@
             padding: 0px 0px 5px;
         }
 
-            .page-cart .cart-total .ct-left {
-                width: 50%;
-                float: left;
+        .page-cart .cart-total .ct-left {
+            width: 50%;
+            float: left;
+            text-align: left;
+        }
+
+        .page-cart .cart-total .ct-row .ct-right {
+            width: 50%;
+            float: left;
+            text-align: right;
+        }
+
+            .page-cart .cart-total .ct-row .ct-right span {
+                width: 100px;
                 text-align: left;
+                display: inline-block;
             }
 
-            .page-cart .cart-total .ct-row .ct-right {
-                width: 50%;
-                float: left;
-                text-align: right;
-            }
-
-                .page-cart .cart-total .ct-row .ct-right span {
-                    width: 100px;
-                    text-align: left;
-                    display: inline-block;
-                }
-
-            .page-cart .cart-total .ct-row.total {
-                font-weight: 600;
-            }
+        .page-cart .cart-total .ct-row.total {
+            font-weight: 600;
+        }
 
         .page-cart .cart-total .svg-inline--fa.fa-dollar-sign {
             color: #a4a4a4;
             margin-right: 5px;
         }
+
+    .error-message{
+        color:red!important
+    }
+
 </style>
 
 
@@ -308,28 +313,32 @@
                         <label>Choose Customer</label>
                         <div class="field-group">
 
-                            <select class="custom-select mr-sm-2 with-icon" id="ddcustomer">
+                            <select class="custom-select mr-sm-2 with-icon" data-error="#errCustomer" id="ddcustomer" required>
                                 <option selected disabled>Choose Customer</option>
 
                             </select>
-
                             <input type="hidden" name="CustomerId" id="txt_CustomerId" value="@ViewBag.customerid" />
                         </div>
+                        <div id="errCustomer" class="error-message"></div>
                     </div>
 
                     <div class="form-group col-md-12">
                         <label>Choose Car</label>
                         <div class="field-group">
 
-                            <select class="custom-select mr-sm-2 with-icon" id="caravailable">
+                            <select name="selectcar" class="custom-select mr-sm-2 with-icon" data-error="#errVehicleName" id="caravailable" required>
                                 <option selected disabled>Choose Car</option>
 
                             </select>
+
 
                             <input type="hidden" name="CustomerVehicleId" id="txt_CustomerVehicleId" />
                             <input type="hidden" name="CarCategoryId" id="txt_CarCategoryId" />
 
                         </div>
+
+                        <div id="errVehicleName" class="error-message"></div>
+
                     </div>
 
                     <div class="form-group col-md-12">
@@ -344,15 +353,18 @@
                             </label>
                         </div>
 
+                        <div id="errWashOption" class="error-message"></div>
+
                     </div>
 
-                  
+
 
                     <div class="form-group col-md-12 div_address" style="display:none">
                         <label for="Address">Address</label>
                         <div class="input-group">
-                            <textarea class="form-control" name="CustomerAddress" aria-label="Address"></textarea>
+                            <textarea class="form-control" name="CustomerAddress" data-error="#errAddress" id="txt_address" aria-label="Address"></textarea>
                         </div>
+                        <div id="errAddress" class="error-message"></div>
                     </div>
 
 
@@ -361,26 +373,28 @@
                         <label>Township</label>
                         <div class="field-group">
 
-                            <select class="custom-select mr-sm-2 with-icon" id="township">
+                            <select name="selecttownship" class="custom-select mr-sm-2 with-icon" data-error="#errTownship" id="township">
                                 <option selected disabled>Choose Township</option>
 
                             </select>
 
                             <input type="hidden" name="" id="" />
                         </div>
+                        <div id="errTownship" class="error-message"></div>
                     </div>
 
                     <div class="form-group col-md-12 div_branch" style="display:none">
                         <label>Branch</label>
                         <div class="field-group">
 
-                            <select class="custom-select mr-sm-2 with-icon" id="branch">
+                            <select name="selectbranch" class="custom-select mr-sm-2 with-icon" data-error="#errBranch" id="branch">
                                 <option selected disabled>Choose Branch</option>
 
                             </select>
 
                             <input type="hidden" name="BranchId" id="txt_BranchId" />
                         </div>
+                        <div id="errBranch" class="error-message"></div>
                     </div>
 
                     <div class="form-group col-md-12">
@@ -391,16 +405,19 @@
                                 <div class="field-group">
 
                                     <input type="text" id="datestart" name="OperationDate"
-                                           class="datepicker form-control with-icon date-start-class" placeholder="Date" required>
+                                           class="datepicker form-control with-icon date-start-class"
+                                           placeholder="Date" data-error="#errdate" required>
                                 </div>
+                                <div id="errdate" class="error-message"></div>
                             </div>
                             <div class="col">
                                 <label>Choose Time</label>
                                 <div class="field-group">
 
                                     <input type="text" id="timepicker" name="StartTime"
-                                           class="form-control timepicker with-icon" required />
+                                           class="form-control timepicker with-icon" data-error="#errtime" required />
                                 </div>
+                                <div id="errtime" class="error-message"></div>
                             </div>
                         </div>
                     </div>
@@ -461,6 +478,9 @@
 @section scripts{
     <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
     <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+
 
 
     <script>
@@ -475,23 +495,7 @@
         var additionalprices;
         $(function () {
 
-            //$("input[type='radio'].rad_washType").change(function () {
-            //    if ($("input[type='radio'].rad_washType").is(':checked')) {
-            //        var washtype = $("input[type='radio'].rad_washType:checked").val();
-            //        if (washtype == "In-House") {
-            //            $('.div_address').show();
-            //            $('.div_township').hide();
-            //            $('.div_branch').hide();
-            //            $('#txt_BranchId').val(0);
 
-            //        } else {
-            //            $('.div_address').hide();
-            //            $('.div_township').show();
-            //            $('.div_branch').show();
-
-            //        }
-            //    }
-            //});
 
             $('#caravailable').select2();
             $('#township').select2();
@@ -517,7 +521,89 @@
             BindTownshipList();
 
 
-       
+
+              $("#bookingform").validate({
+                rules:
+                {
+                    WashOption: {
+                        required: true
+                    },
+                    selecttownship:
+                    {
+                        required: true
+                    },
+                    selectbranch:
+                    {
+                        required: true
+                    },
+                    selectcar:
+                    {
+                        required: true
+                    },
+
+                },
+                errorPlacement: function (error, element) {
+                    var placement = $(element).data('error');
+                    if (placement) {
+                        $(placement).append(error)
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                submitHandler: function (form) {
+                //    alert("submit");
+
+                    // $("#bookingform").submit(function (e) {
+                    //  e.preventDefault();
+                    if ($("input[type='radio'].rad_washType:checked").length != 0) {
+
+                        $('#pageloading').show();
+                         $.ajax({
+                            cache: false,
+                            url: '@Url.Action("SaveBooking", "Admin_Operation")',
+                            type: "Post",
+                            data: $(this).serialize(),
+                            beforeSend: function () {
+                                $('.btn').prop("disabled", true);
+
+                            },
+                            success: function (myData) {
+                                if (myData != null) {
+                                    Swal.fire(
+                                        'Success!',
+                                        'Booking Successfully Added!',
+                                        'success'
+                                    )
+                                } else {
+                                    Swal.fire(
+                                        'Fail!',
+                                        'Booking Fail!',
+                                        'error'
+                                    )
+                                }
+
+
+                            },
+                            complete: function () {
+                                $('.btn').prop("disabled", true);
+
+                            }
+                        })
+                    } else {
+                        $('#errWashOption').text('You must select wash option.')
+                    }
+
+                        // })
+
+
+
+
+
+                }
+
+            });
+
+
 
 
             //$('#datestart').datepicker({
@@ -532,12 +618,21 @@
                 $('.div_address').show();
                 $('.div_township').hide();
                 $('.div_branch').hide();
+
+                $('#txt_address').attr('required', 'required');
+                $('#branch').removeAttr('required');
+                $('#township').removeAttr('required');
+
                 $('#txt_BranchId').val(0);
 
             } else {
                 $('.div_address').hide();
                 $('.div_township').show();
                 $('.div_branch').show();
+
+                $('#txt_address').removeAttr('required');
+                $('#branch').attr('required', 'required');
+                $('#township').attr('required', 'required');
 
             }
         }
@@ -619,7 +714,7 @@
                         customerid = $('#ddcustomer').val();
                         $("#txt_CustomerId").val(customerid);
                         GetCarListByCustomer();
-                      
+
 
                     });
 
@@ -977,7 +1072,7 @@
 
 
 
-                  $("#bookingform").submit(function (e) {
+                  @*$("#bookingform").submit(function (e) {
                       e.preventDefault();
 
                         $.ajax({
@@ -1030,7 +1125,7 @@
 
                             }
                         })
-                         })
+                         })*@
 
 
 
