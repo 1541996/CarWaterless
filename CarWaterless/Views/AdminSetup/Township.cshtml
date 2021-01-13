@@ -31,7 +31,11 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-
+                            <label>Code</label>
+                            @Html.TextBoxFor(model => model.TownshipCode, new { @class = "form-control", @type = "Name", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                        <div id="TownshipCode-error" class="invalid-feedback" style="display:none;">
+                            Enter Township Code.
+                        </div>
                         </div>
                         <div class="col-md-4">
                             <div class="position-relative form-group" style="margin-top: 30px;float:right">

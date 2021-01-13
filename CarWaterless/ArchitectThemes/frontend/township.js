@@ -13,8 +13,15 @@ $(document).ready(function () {
 
         var isvalid = false;
         var Name = $('#Name').val();
+        var TownshipCode = $('#TownshipCode').val();
         if (Name != "") {
-            isvalid = true;
+            if (TownshipCode != "") {
+                isvalid = true;
+            }
+            else {
+                $('#TownshipCode').closest(".form-control").addClass("is-invalid");
+                $('#TownshipCode-error').show();
+            }
         }
         else {
             $('#Name').closest(".form-control").addClass("is-invalid");
@@ -53,7 +60,7 @@ function BindGrid() {
                 oTable = $("#tbl").dataTable({
                     "columnDefs": [
                         {
-                            className: "text-center", "targets": [2]
+                            className: "text-center", "targets": [3]
                         }
                     ],
                     "pagingType": "full_numbers",
@@ -71,7 +78,8 @@ function BindGrid() {
                                 return "<center>" + data.toString() + "</center>";
                             }
                         },
-                        { "mData": "Name", "bSearchable": true, "bSortable": true, "width": "50%" },
+                        { "mData": "Name", "bSearchable": true, "bSortable": true, "width": "30%" },
+                        { "mData": "TownshipCode", "bSearchable": true, "bSortable": true, "width": "20%" },
 
                         {
                             "mData": "Id", "bSearchable": false, "bSortable": false, "width": "30%",
@@ -140,6 +148,7 @@ function Edit(id) {
         success: function (data) {
             $("#Id").val(data.Id);
             $('#Name').val(data.Name);
+            $('#TownshipCode').val(data.TownshipCode);
 
 
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
@@ -201,6 +210,7 @@ function GetModel() {
         model.Id = id;
     }
     model.Name = $('#Name').val();
+    model.TownshipCode = $('#TownshipCode').val();
 
     return model;
 }

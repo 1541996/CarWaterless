@@ -25,5 +25,6 @@ namespace Infra.ViewModels
         public string Message { get; set; }
         public int? MessageType { get; set; }
         public string CurrentPassword { get; set; }
+        public string UserRoleName { get; set; }
     }
 }

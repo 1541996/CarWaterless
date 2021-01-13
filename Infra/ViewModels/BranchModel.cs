@@ -14,6 +14,8 @@ namespace Infra.ViewModels
         public string LocationName { get; set; }
         public string LocationPhoneNo { get; set; }
         public string LocationAddress { get; set; }
+        public string Photo { get; set; }
+        public string MapHtml { get; set; }
         public int? AdminAgentId { get; set; }
         public string OpenTime { get; set; }
         public string CloseTime { get; set; }
