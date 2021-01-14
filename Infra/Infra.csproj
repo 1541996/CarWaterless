@@ -102,6 +102,7 @@
     <Compile Include="Models\tbDiscountedCar.cs" />
     <Compile Include="Models\tbFeedBack.cs" />
     <Compile Include="Models\tbFinance.cs" />
+    <Compile Include="Models\tbMemberPackage.cs" />
     <Compile Include="Models\tbNotification.cs" />
     <Compile Include="Models\tbOperation.cs" />
     <Compile Include="Models\tbPhoto.cs" />

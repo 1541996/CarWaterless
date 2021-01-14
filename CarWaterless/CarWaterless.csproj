@@ -216,6 +216,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PushNotiTestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -673,6 +674,9 @@
     <Content Include="Views\FeedBack\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Admin_Test\Index.cshtml" />
+    <Content Include="Views\Home\_packages.cshtml" />
+    <Content Include="Views\Service\Detail.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

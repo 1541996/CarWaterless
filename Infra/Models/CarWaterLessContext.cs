@@ -39,7 +39,7 @@ namespace Infra.Models
         public DbSet<tbTownship> tbTownships { get; set; }
         public DbSet<tbPhoto> tbPhotos { get; set; }
         public DbSet<tbFeedBack> tbFeedBacks { get; set; }
-
+        public DbSet<tbMemberPackage> tbMemberPackages { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Ignore field map

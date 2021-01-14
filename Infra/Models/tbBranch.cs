@@ -26,8 +26,6 @@ namespace Infra.Models
         public Nullable<int> CreateUserId { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<int> UpdateUserId { get; set; }
-        public string Photo { get; set; }
-        public string MapHtml { get; set; }
         public string PhotoUrl
         {
             get
