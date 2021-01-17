@@ -139,13 +139,18 @@
 
 }
 
+
+.fs-20 {
+    font-size: 20px !important;
+}
+
 .fs-16 {
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 
 .fs-17 {
-    font-size: 17px;
+    font-size: 17px !important;
 }
 
 .fs-28{

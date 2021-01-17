@@ -15,4 +15,12 @@ namespace Infra.ViewModels
         public IQueryable<tbPhoto> photos { get; set; }
 
     }
+
+    public class ServiceViewModel
+    {
+        public List<tbMemberPackage> big { get; set; }
+        public List<tbMemberPackage> small { get; set; }
+        public List<tbMemberPackage> medium { get; set; }
+    }
+
 }

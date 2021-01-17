@@ -443,6 +443,7 @@
     <script>
         var townshipid;
         var customerid = '@ViewBag.customerid';
+        var ismember = '@ViewBag.ismember';
         var carcategoryid;
         var cartype;
         var basicprice;
@@ -700,9 +701,16 @@
                         $("#txt_CustomerVehicleId").val(id);
                         $("#txt_CarCategoryId").val(carcategoryid);
 
-                        GetCarCategoryByID();
-                        GetAdditionalService();
+                        if (ismember == true) {
 
+
+                        } else {
+                            GetCarCategoryByID();
+                            GetAdditionalService();
+
+                        }
+
+                      
                         $('#div_pricing').empty();
 
 

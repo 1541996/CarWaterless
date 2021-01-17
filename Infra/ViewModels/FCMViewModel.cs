@@ -44,17 +44,8 @@ namespace Infra.ViewModels
         public string title { get; set; }
         public string body { get; set; }
         public string type { get; set; }
-        public string roomno { get; set; }
-        public DateTime accesstime { get; set; }
-        public string directcall { get; set; }
-
-        public string callername { get; set; }
-        public string calltype { get; set; }
-        public string bookingno { get; set; }
-        public string patientname { get; set; }
-
-
-
+        public string weburl { get; set; }
+     
     }
 
 }

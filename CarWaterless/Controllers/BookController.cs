@@ -73,6 +73,11 @@ namespace CarWaterless.Controllers
         {
             ViewBag.bksource = source;
             ViewBag.customerid = customerid;
+            tbCustomer customer = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid).FirstOrDefault();
+            if(customer.IsMember == true)
+            {
+                ViewBag.ismember = true;
+            }
             tbOperation operation = new tbOperation();
             return View(operation);
             

@@ -4,50 +4,59 @@
     Layout = "~/Views/Shared/_webLayout.cshtml";
 }
 
-    <div class="content-wrap page-car-single">
 
-        <div class="subsite pt-10">
-            <div class="subsite-heading mt-10 fs-22">
-                Check our packages
-            </div>
+@model IQueryable<Infra.Models.tbAdditionalService>
+
+
+
+<div class="content-wrap page-car-single">
+
+    <div class="subsite pt-10">
+        <div class="subsite-heading mt-10 fs-22">
+            Check our service
+        </div>
+
+        @if (Model.Count() > 0)
+        {
+            var big = Model.Where(a => a.CarType == "big").ToList();
+            var small = Model.Where(a => a.CarType == "small").ToList();
+            var medium = Model.Where(a => a.CarType == "medium").ToList();
+
+
 
             <div class="panel-custom-default mb-10 br-10 mt-10" id="1" style="background:#f2fbff!important;">
                 <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
-
                 <div class="p-15">
 
                     <div class="display-flex-row">
                         <div class="display-flex-column">
-                            <h6 class="black-color">Diamond Package</h6>
+                            <h6 class="black-color fs-15">ကားသေး</h6>
+                            <div class="price">
+                                <div class="price-value theme-color fs-16">4000 MMK</div>
+                            
+                            </div>
 
                         </div>
-                        <div class="display-flex-column ml-auto">
-                            <div class="price">
-                                <div class="price-value theme-color"> $120 </div>
-                                @*<div class="duration"> per day </div>*@
-                            </div>
+                        <div class="display-flex-column ml-auto justify-content-center">
+                              <i class="fa fa-arrow-circle-down theme-color" style="font-size:20px" onclick="toggle('small')"></i>
                         </div>
 
                     </div>
 
-                    <div class="mt-15" style="display:flex;justify-content:space-between;">
+                    <div class="mt-15" style="display:flex;justify-content:space-between;display:none" id="div_small">
                         <div class="p-0">
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Body Wask</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
+
+                            @foreach (var item in small)
+                            {
+                                <ul class="pl-0" style="list-style-type:none">
+                                    <li class="black-color"><img src="~/Plesirthemes/EcoPhoto/tick.svg" style="width:15px" />
+                                    @item.Name <span class="float-right">@item.Price.Value.ToString("#,##0") MMK</span>
+                                    </li>
+                                    
+                                </ul>
+                            }
+
 
                         </div>
 
@@ -56,44 +65,39 @@
 
             </div>
 
-
-            <div class="panel-custom-default mb-10 br-10 mt-30" id="1" style="background:#f2fbff!important;">
+            <div class="panel-custom-default mb-10 br-10 mt-20" id="1" style="background:#f2fbff!important;">
                 <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
-
                 <div class="p-15">
 
                     <div class="display-flex-row">
                         <div class="display-flex-column">
-                            <h6 class="black-color">Diamond Package</h6>
-
-                        </div>
-                        <div class="display-flex-column ml-auto">
+                            <h6 class="black-color fs-15">ကားလတ်</h6>
                             <div class="price">
-                                <div class="price-value theme-color"> $120 </div>
-                                @*<div class="duration"> per day </div>*@
+                                <div class="price-value theme-color fs-16">5000 MMK</div>
+
                             </div>
+
+                        </div>
+                        <div class="display-flex-column ml-auto justify-content-center">
+                            <i class="fa fa-arrow-circle-down theme-color" style="font-size:20px" onclick="toggle('medium')"></i>
                         </div>
 
+                      
                     </div>
 
-                    <div class="mt-15" style="display:flex;justify-content:space-between;">
+                    <div class="mt-15" style="display:flex;justify-content:space-between;display:none" id="div_medium">
                         <div class="p-0">
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Body Wask</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
+
+                            @foreach (var item in medium)
+                            {
+                                <ul class="pl-0" style="list-style-type:none">
+                                    <li class="black-color"><img src="~/Plesirthemes/EcoPhoto/tick.svg" style="width:15px" />
+                                    @item.Name <span class="float-right">@item.Price.Value.ToString("#,##0") MMK</span>
+                                    </li>
+                                </ul>
+                            }
+
 
                         </div>
 
@@ -102,44 +106,38 @@
 
             </div>
 
-
-            <div class="panel-custom-default mb-10 br-10 mt-30" id="1" style="background:#f2fbff!important;">
+            <div class="panel-custom-default mb-10 br-10 mt-20" id="1" style="background:#f2fbff!important;">
                 <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
-
                 <div class="p-15">
 
                     <div class="display-flex-row">
                         <div class="display-flex-column">
-                            <h6 class="black-color">Diamond Package</h6>
+                            <h6 class="black-color fs-15">ကားကြီး</h6>
+                            <div class="price">
+                                <div class="price-value theme-color fs-16">6000 MMK</div>
+
+                            </div>
 
                         </div>
-                        <div class="display-flex-column ml-auto">
-                            <div class="price">
-                                <div class="price-value theme-color"> $120 </div>
-                                @*<div class="duration"> per day </div>*@
-                            </div>
+                        <div class="display-flex-column ml-auto justify-content-center">
+                            <i class="fa fa-arrow-circle-down theme-color" style="font-size:20px" onclick="toggle('big')"></i>
                         </div>
 
                     </div>
 
-                    <div class="mt-15" style="display:flex;justify-content:space-between;">
+                    <div class="mt-15" style="display:flex;justify-content:space-between;display:none" id="div_big">
                         <div class="p-0">
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Body Wask</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
+
+                            @foreach (var item in big)
+                            {
+                                <ul class="pl-0" style="list-style-type:none">
+                                    <li class="black-color"><img src="~/Plesirthemes/EcoPhoto/tick.svg" style="width:15px" />
+                                    @item.Name <span class="float-right">@item.Price.Value.ToString("#,##0") MMK</span>
+                                    </li>
+                                </ul>
+                            }
+
 
                         </div>
 
@@ -148,51 +146,34 @@
 
             </div>
 
-            <div class="panel-custom-default mb-10 br-10 mt-30" id="1" style="background:#f2fbff!important;">
-                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
 
-                <div class="p-15">
+         
+        }
 
-                    <div class="display-flex-row">
-                        <div class="display-flex-column">
-                            <h6 class="black-color">Diamond Package</h6>
 
-                        </div>
-                        <div class="display-flex-column ml-auto">
-                            <div class="price">
-                                <div class="price-value theme-color"> $120 </div>
-                                @*<div class="duration"> per day </div>*@
-                            </div>
-                        </div>
 
-                    </div>
 
-                    <div class="mt-10" style="display:flex;justify-content:space-between;">
-                        <div class="p-0">
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Body Wask</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-                            <ul class="pl-15">
-                                <li class="black-color"> Car Interior Wash</li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+     
 
     </div>
+
+</div>
+
+
+@section scripts{
+    
+    <script>
+
+        function toggle(type) {
+
+            $('#div_' + type).toggle();
+
+        }
+
+
+    </script>
+    
+    
+    
+    }

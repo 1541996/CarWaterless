@@ -19,5 +19,8 @@ namespace Infra.Models
         public string ResponseType { get; set; }
         public string NotiType { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
+        public string UserAppID { get; set; }
+
     }
 }

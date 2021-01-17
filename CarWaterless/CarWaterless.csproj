@@ -224,6 +224,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ChatHub.cs" />
+    <Compile Include="Helper\CommonHelper.cs" />
     <Compile Include="Helper\ConnectionMappingHelper.cs" />
     <Compile Include="Helper\FCMRequestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -436,6 +437,7 @@
     <Content Include="Plesirthemes\EcoPhoto\feedback.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\igeco.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\mailicon.png" />
+    <Content Include="Plesirthemes\EcoPhoto\tick.svg" />
     <Content Include="Plesirthemes\img\bgcar.jpg" />
     <Content Include="Plesirthemes\img\cab.png" />
     <Content Include="Plesirthemes\img\car2-honda2.png" />

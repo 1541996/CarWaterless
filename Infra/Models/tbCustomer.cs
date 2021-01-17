@@ -31,6 +31,10 @@ namespace Infra.Models
         public bool? IsPrepaid { get; set; }
         public decimal? PrepaidLeftAmount { get; set; }
         public decimal? PrepaidAmount { get; set; }
+        public string UserToken { get; set; }
+        public string ReturnStatus { get; set; }
+        public string ReturnMessage { get; set; }
+
 
     }
 }
