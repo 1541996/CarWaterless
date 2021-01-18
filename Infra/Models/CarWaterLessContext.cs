@@ -44,6 +44,8 @@ namespace Infra.Models
         {
             // Ignore field map
             modelBuilder.Entity<tbBranch>().Ignore(t => t.PhotoUrl);
+            modelBuilder.Entity<tbCustomer>().Ignore(t => t.ReturnStatus);
+            modelBuilder.Entity<tbCustomer>().Ignore(t => t.ReturnMessage);
         }
     }
 }

@@ -17,88 +17,55 @@
 
             @foreach (var item in Model)
             {
-                <!-- item -->
+              
+
             <div class="item">             
                 <div class="vs-box">
-                    <div class="vsb-top">
-                        <div class="vsb-cartype">
-                            @item.Title
-                        </div>
-
-                        @if (item.CarType == "small")
-                        {
-
-
-                            <div class="vsb-categorytype">
-                                 ကားသေး 
-                            </div>
-                           
-
-                        }
-                        else if (item.CarType == "big")
-                        {
-                            <div class="vsb-categorytype">
-                                ကားကြီး
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="vsb-categorytype">
-                                ကားလတ်
-                            </div>
-                        }
-
-
-                        <div class="vsb-carprice">
-                            @item.PackagePrice.Value.ToString("#,##0") MMK
-                        </div>
-                        <div class="vsbt-img">
+                    <div class="vsb-top position-relative">
+                       
+                        <div class="vsbt-img br-package-image">
                             <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
                         </div>
+
+                        <div class="vsb-middle">
+                            <div class="vsbm-left">
+                                @item.Title
+
+                            </div>
+                            <div class="vsbm-right">
+                                @item.PackagePrice.Value.ToString("#,##0") MMK
+                            </div>
+                            @if (item.CarType == "small")
+                            {
+                               
+                                <div class="car-categorytype">
+                                    ကားသေး
+                                </div>
+
+
+                            }
+                            else if (item.CarType == "big")
+                            {
+                                <div class="car-categorytype">
+                                    ကားကြီး
+                                </div>
+                            }
+                            else
+                            {
+                               
+                                <div class="car-categorytype">
+                                    ကားလတ်
+                                </div>
+                            }
+
+                        </div>
+                        
                     </div>
                  
                 </div>
-                   
-                @*<div class="acr-box">
-            <div class="acr-box-in">
-                <div class="acr-img">
-                    <img src="~/Plesirthemes/img/destination1.jpg" alt="you might like">
-                </div>
-                <div class="acr-content">
-                    <div class="ct-name">@item.Title</div>
-                    <div class="ct-cost"><span class="cprice fs-17"> @item.PackagePrice.Value.ToString("#,##0") MMK </span></div>
-
-                    @if (item.CarType == "small")
-                    {
-                        <div class="vsb-cartype mt-10">
-                            ကားသေး <i class="fas fa-star"></i>
-                        </div>
-
-
-                    }
-                    else if (item.CarType == "big")
-                    {
-                        <div class="vsb-cartype mt-10">
-                                ကားကြီး <i class="fas fa-star"></i>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="vsb-cartype mt-10">
-                                ကားလတ် <i class="fas fa-star"></i>
-                        </div>
-                    }
-
-
-                </div>
+              
             </div>
-            <div class="acr-bg">
-                <img src="~/Plesirthemes/img/bgcar.jpg">
-            </div>
-        </div>*@
-            </div>
-                <!-- .item -->
-
+            
             }
 
         </div>

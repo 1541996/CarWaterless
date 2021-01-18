@@ -1,0 +1,35 @@
+﻿
+
+@model IQueryable<Infra.Models.tbMemberPackage>
+
+
+<input type="hidden" id="stackcards_count" value="@Model.Count()" />
+
+<div id="stacked-cards-block" class="stackedcards stackedcards--animatable init">
+
+
+    <div class="stackedcards-container">
+        @for (var i = 0; i < 10; i++)
+        {
+            foreach (var item in Model)
+            {
+                <div class="card-item">
+                    <img src="~/Plesirthemes/img/destination1.jpg" class="br-10" alt="">
+                </div>
+
+            }
+
+        }
+
+
+
+    </div>
+    <div class="stackedcards--animatable stackedcards-overlay top">TOP</div>
+    <div class="stackedcards--animatable stackedcards-overlay right">RIGHT</div>
+    <div class="stackedcards--animatable stackedcards-overlay left">LEFT</div>
+</div>
+@*<div class="global-actions">
+    <div class="left-action">Left</div>
+    <div class="top-action">Top</div>
+    <div class="right-action">Right</div>
+</div>*@

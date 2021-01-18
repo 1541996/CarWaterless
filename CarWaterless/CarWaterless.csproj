@@ -482,6 +482,7 @@
     <Content Include="Plesirthemes\img\temple.png" />
     <Content Include="Plesirthemes\img\train.png" />
     <Content Include="Plesirthemes\img\transmission.png" />
+    <Content Include="Plesirthemes\js\stackedCards.js" />
     <Content Include="Plesirthemes\js\themev1.js" />
     <Content Include="Plesirthemes\lib\bootstrap-timepicker\bootstrap-timepicker.js" />
     <Content Include="Plesirthemes\lib\bootstrap\css\bootstrap.min.css" />
@@ -679,6 +680,7 @@
     <Content Include="Views\Home\_packages.cshtml" />
     <Content Include="Views\Service\Detail.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Home\_stackedCardPackages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1746,7 +1746,7 @@ a[data-toggle="collapse"] {
       border-radius: 10px;
       overflow: hidden;
       width: 120px;
-      height: 80px;
+    /*  height: 80px;*/
       position: absolute;
       left: 0px;
       top: 0px; }
