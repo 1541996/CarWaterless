@@ -20,6 +20,7 @@ namespace Infra.Models
         public Nullable<decimal> Price { get; set; }
         public Nullable<decimal> DiscountPrice { get; set; }
         public string CarType { get; set; }
+        public bool? IsDailyHot { get; set; }
 
 
 

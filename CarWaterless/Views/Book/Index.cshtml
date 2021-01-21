@@ -384,11 +384,11 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-12 div_packages" style="display:block">
+                            <div class="form-group col-md-12 div_packages">
                                 <label>Choose Packages</label>
                                 <div class="field-group">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" name="selectpacakges" data-error="#errPackages" id="packages" required>
+                                    <select class="custom-select mr-sm-2 with-icon" onchange="packageschange()" name="selectpacakges" id="ddpackages" required>
                                         <option selected disabled>Choose Packages</option>
 
                                     </select>
@@ -398,7 +398,7 @@
                                     <input type="hidden" name="BookingPackage" id="txt_bookingpackage" />
                                 </div>
 
-                                <div id="errPackages" class="error-message"></div>
+                                @*<div id="errPackages" class="error-message"></div>*@
                             </div>
 
 
@@ -730,8 +730,7 @@
 
 
                         } else {
-                         //   GetCarCategoryByID();
-                            //   GetAdditionalService();
+                       
                             GetMemberPackages();
                         }
 
@@ -764,7 +763,23 @@
                     $('#div_additionalservice').empty().append('<label for="note" class="mb-0">Choose Additional Service (optional)</label>');
 
                     for (var i = 0; i < result.length; i++) {
-                        $('#div_additionalservice').append(`<div><label>
+
+                        if (result[i].IsDailyHot == true) {
+                            $('#div_additionalservice').append(`<div><label>
+                            <input type="checkbox" value="${result[i].Name}"
+                                    data-price="${result[i].Price}" data-id="${result[i].Id}"
+                                    data-dailyhot="${result[i].IsDailyHot}"
+                                    data-discount="${result[i].DiscountPrice}"
+                                    class="option-input checkbox chk_additionalservice" />
+                                   ${result[i].Name} 
+                            </label>
+                            <span class="badge badge-danger ml-5 fs-12">Daily Hot</span>
+                            <span style="text-decoration: line-through;">(${result[i].Price} MMK)</span>
+                            <span class="font-bold">(${result[i].DiscountPrice} MMK)</span>
+
+                            </div>`)
+                        } else {
+                            $('#div_additionalservice').append(`<div><label>
                             <input type="checkbox" value="${result[i].Name}"
                                     data-price="${result[i].Price}" data-id="${result[i].Id}"
                                     data-dailyhot="${result[i].IsDailyHot}"
@@ -772,6 +787,9 @@
                                     class="option-input checkbox chk_additionalservice" />
                                    ${result[i].Name} (${result[i].Price} MMK)
                             </label></div>`)
+                        }
+
+                      
                     };
 
 
@@ -780,6 +798,7 @@
                 complete: function () {
 
 
+                  
                     $('.chk_additionalservice').on("click", function () {
                         additionalids = "";
                         additionalsname = "";
@@ -807,9 +826,9 @@
                             var isdailyhot = $(this).data('dailyhot');
                             var discount = $(this).data('discount');
 
-                            alert(isdailyhot);
+                           
 
-                            if (isdailyhot == "True") {
+                            if (isdailyhot == true) {
                                 additionalids += id + "_";
                                 additionalsname += name + "_";
                                 additionalprices += discount + "_";
@@ -817,9 +836,9 @@
 
                                 $('#div_additionalCalc').append(`
                                   <div class="ct-row">
-                                    <div class="ct-left">${name}</div>
+                                    <div class="ct-left">${name}<span class="badge badge-danger ml-5 fs-12">Daily Hot</span></div>
                                     <div class="ct-right"><span>
-                                     ${price} ${discount} MMK</span></div>
+                                      ${discount} MMK</span></div>
                                     <div class="clear"></div>
                                 </div>
 
@@ -971,8 +990,8 @@
 
                 complete: function () {
 
-
                     changePrice();
+                 
 
                 }
             })
@@ -1036,12 +1055,12 @@
 
                     console.log(result);
 
-                    $('#packages').empty();
-                    $('#packages').append('<option value="">Choose Packages</option>')
-                    $('#packages').append('<option value="0">Custom Packages</option>')
+                    $('#ddpackages').empty();
+                    $('#ddpackages').append('<option value="">Choose Packages</option>')
+                    $('#ddpackages').append('<option value="0">Custom Packages</option>')
 
                     for (var i = 0; i < result.length; i++) {
-                        $('#packages').append('<option value="' + result[i].ID + '" data-memberpackagesname="' + result[i].Title + '"  data-serviceids="' + result[i].AdditionalServiceIds + '"  data-servicenames="' + result[i].AdditionalServiceNames + '" data-packageprice= "' + result[i].PackagePrice + '"  >' + result[i].Title + '(' + result[i].CarType + ')</option>')
+                        $('#ddpackages').append('<option value="' + result[i].ID + '" data-memberpackagesname="' + result[i].Title + '"  data-serviceids="' + result[i].AdditionalServiceIds + '"  data-servicenames="' + result[i].AdditionalServiceNames + '" data-packageprice= "' + result[i].PackagePrice + '"  >' + result[i].Title + '(' + result[i].CarType + ')</option>')
 
                     };
 
@@ -1055,73 +1074,88 @@
                 complete: function () {
 
                    // alert($("#txt_carcategory").val());
+                    
+                   
 
-                    $('#packages').on('change', function () {
-                        var id = $('#packages :selected').val();
-
-                        if (id == 0) {
-                            $('#div_carcategory').empty();
-                            $('#div_pricing').empty();
-                            $('#div_additionalservice').empty();
-
-                            $('#txt_AdditionalIds').val('');
-                            $('#txt_AdditionalPrices').val('');
-                            $('#txt_AdditionalNames').val('');
-
-                            //if (cartype == "ကားကြီး") {
-                            //    cartype = "big"
-                            //}
-                            //else if (cartype == "ကားလတ်") {
-                            //    cartype = "medium"
-                            //}
-                            //else if (cartype == "ကားသေး") {
-                            //    cartype = "small"
-                            //} 
-
-                            $('#txt_memberpackagesid').val(0);
-                            $('#txt_memberpackagesname').val('');
-                            $('#txt_bookingpackage').val("Normal");
-                         //   alert(cartype);
-
-                            GetCarCategoryByID();
-                            GetAdditionalService();
-                        } else {
-
-                           
-
-                            var serviceids = $('#packages :selected').data('serviceids').split('_');
-                            var servicenames = $('#packages :selected').data('servicenames').split('_');
-                            var packageprice = $('#packages :selected').data('packageprice');
-                            txt_AdditionalPrices
-                            $('#txt_AdditionalPrices').val('');
-                            $('#txt_AdditionalIds').val($('#packages :selected').data('serviceids'));
-                            $('#txt_AdditionalNames').val($('#packages :selected').data('servicenames'));
-
-                            $('#txt_memberpackagesid').val($('#packages :selected').val());
-                            $('#txt_memberpackagesname').val($('#packages :selected').data('memberpackagesname'));
-                            
-
-                            $('#txt_bookingpackage').val("Special");
-                            $('#txt_TotalAmount').val(packageprice);
-
-                            console.log(servicenames);
-                            console.log(cartype);
-                            $('#div_carcategory').empty();
-                            $('#div_pricing').empty();
-                            $('#div_additionalservice').empty();
-
-                            //if (cartype == "big") {
-                            //    cartype = "ကားကြီး";
-                            //} else if (cartype == "small") {
-                            //    cartype = "ကားသေး";
-                            //} else if (cartype == "medium") {
-                            //    cartype = "ကားလတ်";
-                            //}
+                }
+            })
+        }
 
 
 
-                            if (cartype == "big") {
-                                $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+        function packageschange() {
+         
+                var id = $('#ddpackages').val();
+
+           
+
+
+                if (id == 0) {
+                    $('#div_carcategory').empty();
+                    $('#div_pricing').empty();
+                    $('#div_additionalservice').empty();
+
+                    $('#txt_AdditionalIds').val('');
+                    $('#txt_AdditionalPrices').val('');
+                    $('#txt_AdditionalNames').val('');
+
+                    //if (cartype == "ကားကြီး") {
+                    //    cartype = "big"
+                    //}
+                    //else if (cartype == "ကားလတ်") {
+                    //    cartype = "medium"
+                    //}
+                    //else if (cartype == "ကားသေး") {
+                    //    cartype = "small"
+                    //} 
+
+                    $('#txt_memberpackagesid').val(0);
+                    $('#txt_memberpackagesname').val('');
+                    $('#txt_bookingpackage').val("Normal");
+                    //   alert(cartype);
+
+                    GetCarCategoryByID();
+                    GetAdditionalService();
+
+                  
+
+                } else {
+
+
+
+                    var serviceids = $('#ddpackages :selected').data('serviceids').split('_');
+                    var servicenames = $('#ddpackages :selected').data('servicenames').split('_');
+                    var packageprice = $('#ddpackages :selected').data('packageprice');
+                    txt_AdditionalPrices
+                    $('#txt_AdditionalPrices').val('');
+                    $('#txt_AdditionalIds').val($('#ddpackages :selected').data('serviceids'));
+                    $('#txt_AdditionalNames').val($('#ddpackages :selected').data('servicenames'));
+
+                    $('#txt_memberpackagesid').val($('#ddpackages :selected').val());
+                    $('#txt_memberpackagesname').val($('#ddpackages :selected').data('memberpackagesname'));
+
+
+                    $('#txt_bookingpackage').val("Special");
+                    $('#txt_TotalAmount').val(packageprice);
+
+                    console.log(servicenames);
+                    console.log(cartype);
+                    $('#div_carcategory').empty();
+                    $('#div_pricing').empty();
+                    $('#div_additionalservice').empty();
+
+                    //if (cartype == "big") {
+                    //    cartype = "ကားကြီး";
+                    //} else if (cartype == "small") {
+                    //    cartype = "ကားသေး";
+                    //} else if (cartype == "medium") {
+                    //    cartype = "ကားလတ်";
+                    //}
+
+
+
+                    if (cartype == "big") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
                                 <div class="chk-package">
 
                                     <div class="div-img position-relative">
@@ -1140,9 +1174,9 @@
 
 
                                 </div>`)
-                            }
-                            else if (cartype == "medium") {
-                                $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+                    }
+                    else if (cartype == "medium") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
                                <div class="chk-package">
 
                                 <div class="div-img position-relative">
@@ -1162,9 +1196,9 @@
 
                                 </div>`)
 
-                            }
-                            else if (cartype == "small") {
-                                $('#div_carcategory').append(` <label for="note" id="lbl_package">Package for</label>
+                    }
+                    else if (cartype == "small") {
+                        $('#div_carcategory').append(` <label for="note" id="lbl_package">Package for</label>
                                 <div class="chk-package">
 
                                     <div class="div-img position-relative">
@@ -1184,72 +1218,50 @@
 
                                 </div>`)
 
-                            }
+                    }
 
 
-                            for (var i = 0; i < servicenames.length; i++) {
-                                $('#div_additionalservice').append(`<div><label>
+                    for (var i = 0; i < servicenames.length; i++) {
+                        $('#div_additionalservice').append(`<div><label>
                                     <input type="checkbox" value="${servicenames[i]}" class="option-input checkbox" disabled="disabled" checked  />
                                            ${servicenames[i]}
                                     </label></div>`)
 
 
-                            }
+                    }
 
-                          
 
-                         
 
-                            var elements = `<div class="cart-total">`;
-                            for (var i = 0; i < servicenames.length; i++) {
-                                elements += `<div class="ct-row">
+
+
+                    var elements = `<div class="cart-total">`;
+                    for (var i = 0; i < servicenames.length; i++) {
+                        elements += `<div class="ct-row">
                                         <div class="ct-left">${servicenames[i]}</div>                                       
                                         <div class="clear"></div>
                                     </div>`;
-                            }
-                            elements += `<div class="ct-row total">
+                    }
+                    elements += `<div class="ct-row total">
                                         <div class="ct-left">Total</div>
                                         <div class="ct-right" id="div_total"><span>
                                               ${packageprice} MMK</span></div>
                                         <div class="clear"></div>
                                     </div>`;
-                            elements += `</div>`;
+                    elements += `</div>`;
 
-                            $('#div_pricing').append(elements);
-
-
-
-                            
-
-                        }
-
-                        //cartype = $('#caravailable :selected').data('cartype');
-                        //carcategoryid = $('#caravailable :selected').data('carcategoryid');
-
-                        //$("#txt_CustomerVehicleId").val(id);
-                        //$("#txt_CarCategoryId").val(carcategoryid);
-
-                        //if (ismember == true) {
+                    $('#div_pricing').append(elements);
 
 
-                        //} else {
-                        //    GetCarCategoryByID();
-                        //    GetAdditionalService();
 
-                        //}
-
-
-                        //$('#div_pricing').empty();
-
-
-                    });
 
 
                 }
-            })
+
+
+
+        
+
         }
-
-
 
     </script>
 
