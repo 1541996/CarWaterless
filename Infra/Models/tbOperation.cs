@@ -44,6 +44,10 @@ namespace Infra.Models
         public DateTime? ConfirmedTime { get; set; }
         public DateTime? FinishedTime { get; set; }
         public DateTime? CancelTime { get; set; }
+        public string BookingPackage { get; set; }
+        public int? MemberPackageId { get; set; }
+        public string MemberPackageName { get; set; }
+
 
     }
 }

@@ -22,5 +22,6 @@ namespace Infra.Models
         public string CarType { get; set; }
 
 
+
     }
 }

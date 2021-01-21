@@ -105,88 +105,172 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
 
-                <div class="cart-total">
-                    <div class="ct-row">
-                        @if (Model.carCategory.Type == "small")
-                        {
-                            <div class="ct-left">ကားသေး</div>
-                            <div class="ct-right">
-                                <span>
-                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
-                                </span>
-                            </div>
-                        }
-                        else if (Model.carCategory.Type == "big")
-                        {
-                            <div class="ct-left">ကားကြီး</div>
-                            <div class="ct-right">
-                                <span>
-                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
-                                </span>
-                            </div>
-                        }
-                        else if (Model.carCategory.Type == "medium")
-                        {
-                            <div class="ct-left">ကားလတ်</div>
-                            <div class="ct-right">
-                                <span>
-                                    @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
-                                </span>
-                            </div>
-                        }
+        @if (Model.operation.BookingPackage == "Normal")
+        {
+            <div class="row">
+                <div class="col-md-12">
 
-                        <div class="clear"></div>
-                    </div>
-                    <div id="div_additionalCalc">
-                        @{
-                            var additionalnames = Model.operation.AdditionalNames.Split('_').ToList();
-                            var additionalprices = Model.operation.AdditionalPrices.Split('_').ToList();
-
-                        }
-
-                        @for (int j = 0; j < additionalnames.Count(); j++)
-                        {
-                            <div class="ct-row">
-                                <div class="ct-left">@additionalnames[j]</div>
+                    <div class="cart-total">
+                        <div class="ct-row">
+                            @if (Model.carCategory.Type == "small")
+                            {
+                                <div class="ct-left">ကားသေး</div>
                                 <div class="ct-right">
                                     <span>
-                                        @Convert.ToDecimal(additionalprices[j]).ToString("#,##0") MMK
+                                        @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
                                     </span>
                                 </div>
-                                <div class="clear"></div>
-                            </div>
-                        }
+                            }
+                            else if (Model.carCategory.Type == "big")
+                            {
+                                <div class="ct-left">ကားကြီး</div>
+                                <div class="ct-right">
+                                    <span>
+                                        @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
+                                    </span>
+                                </div>
+                            }
+                            else if (Model.carCategory.Type == "medium")
+                            {
+                                <div class="ct-left">ကားလတ်</div>
+                                <div class="ct-right">
+                                    <span>
+                                        @Model.carCategory.BasicPrice.Value.ToString("#,##0") MMK
+                                    </span>
+                                </div>
+                            }
+
+                            <div class="clear"></div>
+                        </div>
+                        <div id="div_additionalCalc">
+                            @{
+                                var additionalnames = Model.operation.AdditionalNames.Split('_').ToList();
+                                var additionalprices = Model.operation.AdditionalPrices.Split('_').ToList();
+
+                            }
+
+                            @for (int j = 0; j < additionalnames.Count(); j++)
+                            {
+                                <div class="ct-row">
+                                    <div class="ct-left">@additionalnames[j]</div>
+                                    <div class="ct-right">
+                                        <span>
+                                            @Convert.ToDecimal(additionalprices[j]).ToString("#,##0") MMK
+                                        </span>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                            }
 
 
 
 
-
-                    </div>
-
-
-                    <div class="ct-row">
-                        <div class="ct-left">Discount</div>
-                        <div class="ct-right"><span>0</span></div>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="ct-row total">
-                        <div class="ct-left">Total</div>
-                        <div class="ct-right" id="div_total">
-                            <span>
-                                @Model.operation.TotalAmount.Value.ToString("#,##0") MMK
-                            </span>
 
                         </div>
-                        <div class="clear"></div>
+
+
+
+                        <div class="ct-row total">
+                            <div class="ct-left">Total</div>
+                            <div class="ct-right" id="div_total">
+                                <span>
+                                    @Model.operation.TotalAmount.Value.ToString("#,##0") MMK
+                                </span>
+
+                            </div>
+                            <div class="clear"></div>
+                        </div>
                     </div>
+
+
                 </div>
-
-
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="cart-total">
+                        <div class="ct-row">
+                            @if (Model.carCategory.Type == "small")
+                            {
+
+                                <div class="ct-left fs-17">
+                                    <span class="font-bold" style="color:#00c9a7">
+                                        @Model.operation.MemberPackageName
+                                    </span>
+                                    <span class="badge badge-success ml-5">ကားသေး</span>
+                                </div>
+
+
+                            }
+                            else if (Model.carCategory.Type == "big")
+                            {
+                                <div class="ct-left fs-17">
+                                    <span class="font-bold" style="color:#00c9a7">
+                                        @Model.operation.MemberPackageName
+                                    </span>
+                                    <span class="badge badge-success ml-5">ကားကြီး</span>
+                                </div>
+                               
+                            }
+                            else if (Model.carCategory.Type == "medium")
+                            {
+                                <div class="ct-left fs-17">
+                                    <span class="font-bold" style="color:#00c9a7">
+                                        @Model.operation.MemberPackageName
+                                    </span>
+                                    <span class="badge badge-success ml-5">ကားလတ်</span>
+                                </div>
+                               
+                            }
+
+                            <div class="clear"></div>
+                        </div>
+                        <div id="div_additionalCalc" class="mt-10">
+                            @{
+                                var additionalnames = Model.operation.AdditionalNames.Split('_').ToList();
+                              //  var additionalprices = Model.operation.AdditionalPrices.Split('_').ToList();
+
+                            }
+
+                            @for (int j = 0; j < additionalnames.Count(); j++)
+                            {
+                                <div class="ct-row">
+                                    <div class="ct-left">@additionalnames[j]</div>
+                                   
+                                    <div class="clear"></div>
+                                </div>
+                            }
+
+
+
+
+
+                        </div>
+
+
+
+                        <div class="ct-row total">
+                            <div class="ct-left">Total</div>
+                            <div class="ct-right" id="div_total">
+                                <span>
+                                    @Model.operation.TotalAmount.Value.ToString("#,##0") MMK
+                                </span>
+
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        }
+
+
 
     </div>
 </div>

@@ -55,6 +55,12 @@ namespace CarWaterless.Controllers
         }
 
 
+        public ActionResult GetMemberPackages(string cartype = null)
+        {
+            IQueryable data = uow.memberPackageRepo.GetAll().Where(a => a.IsDeleted != true && a.CarType == cartype).AsQueryable();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult GetTownshipList()
         {
@@ -120,6 +126,7 @@ namespace CarWaterless.Controllers
             //    obj.CarCategoryType = carcategory.Type;
             //}
 
+            
 
             if (obj.Id > 0)
             {
