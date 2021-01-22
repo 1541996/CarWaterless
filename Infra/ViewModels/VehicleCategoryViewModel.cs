@@ -50,6 +50,14 @@ namespace Infra.ViewModels
         public DateTime? ConfirmedDate { get; set; }
         public decimal? TotalAmount { get; set; }
         public DateTime? CancelDate { get; set; }
+        public DateTime? FinishedDate { get; set; }
+        public string Email { get; set; }
+        public string BookingPackage { get; set; }
+        public string MemberPackage { get; set; }
+        public string PaymentType { get; set; }
+        public string ComplaintMessage { get; set; }
+        public string Township { get; set; }
+        public string Branch { get; set; }
 
 
     }

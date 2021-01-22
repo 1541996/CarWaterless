@@ -52,7 +52,13 @@
                                         </a>
                                     }
 
-                                    @if (result.IsPrepaid == true)
+                                  
+                                        <a class="btn btn-success" id="member_@result.Id" href="../Admin_Customer/OperationList?customerid=@result.Id">
+                                            <i class="fas fa-list text-white"></i>
+                                        </a>
+                                   
+
+                                    @*@if (result.IsPrepaid == true)
                                     {
                                         <a class="btn btn-success" id="prepaid_member_@result.Id" onclick="AddPrepaidCode('@result.Id')">
                                             <i class="fas fa-money-bill text-white"></i>
@@ -63,13 +69,13 @@
                                         <a class="btn btn-danger" id="prepaid_member_@result.Id" onclick="AddPrepaidCode('@result.Id')">
                                             <i class="fas fa-money-bill text-white"></i>
                                         </a>
-                                    }
+                                    }*@
 
 
 
 
                                     <a class="btn btn-primary" onclick="AddCar('@result.Id')">
-                                        <i class="fas fa-plus-circle text-white"></i>
+                                        <i class="fas fa-car text-white"></i>
                                     </a>&nbsp;&nbsp;
                                     <a class="btn btn-warning" onclick="Edit('@result.Id')">
                                         <i class="fas fa-edit text-white"></i>
@@ -77,7 +83,7 @@
                                     <a class="btn btn-danger" onclick="Delete('@result.Id')">
                                         <i class="fas fa-trash text-white"></i>
                                     </a>
-                                    <div id="div_prepaidcode_@result.Id" style="display:none">
+                                    @*<div id="div_prepaidcode_@result.Id" style="display:none">
                                         <div class="d-flex mt-10 justify-content-end">
                                             <div>
                                                 <input class="form-control" placeholder="Prepaid Amount" value="@result.PrepaidLeftAmount" type="text" id="txt_prepaid_@result.Id" />
@@ -88,7 +94,7 @@
                                         </div>
 
 
-                                    </div>
+                                    </div>*@
 
                                 </td>                              
                             </tr>

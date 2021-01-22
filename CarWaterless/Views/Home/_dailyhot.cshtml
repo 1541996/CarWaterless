@@ -1,0 +1,46 @@
+﻿
+@model IQueryable<Infra.Models.tbAdditionalService>
+<div class="heading-section">
+
+    <div class="sa-title popcat">Our Packages </div>
+    <div class="heading-info">
+        Let's see our packages
+    </div>
+    <div class="clear"></div>
+</div>
+
+@if (Model.Count() > 0)
+{
+    <div class="heading-section">
+        <div class="sa-title popcat">Daily Hot </div>
+        <div class="heading-info">
+            Let's see our daily hot
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    foreach (var item in Model)
+    {
+        <div class="mt-20">
+            <div class="owl-carousel">
+                <div>
+                    <img src="@item.PhotoUrl" class="br-10" alt="">
+                    <div class="vsb-rating">
+                        25% off
+                    </div>
+                    <div class="d-title mt-5">
+                        @item.Name
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    }
+
+
+
+}
+
+

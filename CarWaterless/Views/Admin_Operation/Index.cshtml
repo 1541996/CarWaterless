@@ -289,7 +289,7 @@
                             <option value="">All</option>
                             <option value="APP">APP</option>
                             <option value="IOS">IOS</option>
-                            <option value="Portal">Portal</option>
+                            @*<option value="Portal">Portal</option>*@
                         </select>
                     </div>
 
@@ -535,9 +535,16 @@
         function newstatusChange(e) {
             var id = $(e).attr('data-id');
             var statuschange = $(e).attr('data-status');
+            var statustype;
+            if (statuschange == "Waiting") {
+                statustype = "confirmed"
+            } else if (statuschange == "Confirmed") {
+                statustype = "finished"
+            }
+
               Swal.fire({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this actions!",
+                  text: "Do you want to " + statustype + " this booking?",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

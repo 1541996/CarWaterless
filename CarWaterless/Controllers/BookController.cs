@@ -126,7 +126,15 @@ namespace CarWaterless.Controllers
             //    obj.CarCategoryType = carcategory.Type;
             //}
 
-            
+            if(obj.WashOption == "In-House")
+            {
+                obj.TransportationCharges = 500;
+            }
+            else
+            {
+                obj.TransportationCharges = null;
+            }
+
 
             if (obj.Id > 0)
             {

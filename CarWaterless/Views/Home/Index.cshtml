@@ -385,84 +385,12 @@
 
 
     <!-- section 3 -->
-    <div class="heading-section">
-        <div class="sa-title popcat">Daily Hot </div>
-        <div class="heading-info">
-            Let's see our daily hot
-        </div>
-        <div class="clear"></div>
+
+    <div id="div_dailyhot">
+
     </div>
 
-    <div class="mt-20">
-        <div class="owl-carousel">
-            <div>
-                <img src="~/Plesirthemes/img/destination1.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-
-
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination1.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination2.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination3.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination4.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination5.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-            <div>
-                <img src="~/Plesirthemes/img/destination1.jpg" class="br-10" alt="">
-                <div class="vsb-rating">
-                    25% off
-                </div>
-                <div class="d-title mt-5">
-                    Cleaning Interior
-                </div>
-            </div>
-        </div>
-    </div>
-
+ 
 
 
     <!-- .section 3 -->
@@ -499,7 +427,7 @@
                                 4.8 <i class="fas fa-star"></i>
                             </div>*@
                         <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination1.jpg" alt="img">
+                            <img src="~/Plesirthemes/EcoPhoto/small.jpg" class="objectfit-cover"  alt="img">
                         </div>
                     </div>
                     <div class="vsb-middle">
@@ -521,7 +449,7 @@
                                 4.5 <i class="fas fa-star"></i>
                             </div>*@
                         <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination2.jpg" alt="img">
+                            <img src="~/Plesirthemes/EcoPhoto/medium.jpg" class="objectfit-cover" alt="img">
                         </div>
                     </div>
                     <div class="vsb-middle">
@@ -543,7 +471,7 @@
                                 4.5 <i class="fas fa-star"></i>
                             </div>*@
                         <div class="vsbt-img">
-                            <img src="~/Plesirthemes/img/destination3.jpg" alt="img">
+                            <img src="~/Plesirthemes/EcoPhoto/big.jpg" class="objectfit-cover" alt="img">
                         </div>
                     </div>
                     <div class="vsb-middle">
@@ -632,25 +560,7 @@
            // GetStackCardsMemberPackages();
 
 
-            var $owl = $('.owl-carousel');
-
-            $owl.children().each(function (index) {
-                $(this).attr('data-position', index); // NB: .attr() instead of .data()
-            });
-
-            $owl.owlCarousel({
-                center: true,
-                loop: true,
-                items: 2,
-            });
-
-            $(document).on('click', '.owl-item>div', function () {
-                // see https://owlcarousel2.github.io/OwlCarousel2/docs/api-events.html#to-owl-carousel
-                var $speed = 300;  // in ms
-                $owl.trigger('to.owl.carousel', [$(this).data('position'), $speed]);
-            });
-
-
+        
 
         })
 
@@ -684,7 +594,7 @@
 
                 },
                 success: function (result) {
-                    $('#div_memberpackages').empty().append((result));
+                    $('#div_memberpackages').empty().append(result);
                 },
                 complete: function () {
                     $('.default-carousel').slick({
@@ -702,6 +612,44 @@
          }
 
 
+
+        function GetDailyHot()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetDailyHot", "Home")',
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#div_dailyhot').empty().append(result);
+                },
+                complete: function () {
+                    var $owl = $('.owl-carousel');
+
+                    $owl.children().each(function (index) {
+                        $(this).attr('data-position', index); // NB: .attr() instead of .data()
+                    });
+
+                    $owl.owlCarousel({
+                        center: true,
+                        loop: true,
+                        items: 2,
+                    });
+
+                    $(document).on('click', '.owl-item>div', function () {
+                        // see https://owlcarousel2.github.io/OwlCarousel2/docs/api-events.html#to-owl-carousel
+                        var $speed = 300;  // in ms
+                        $owl.trigger('to.owl.carousel', [$(this).data('position'), $speed]);
+                    });
+
+
+                }
+            });
+
+         }
+
+
           function GetStackCardsMemberPackages()
         {
             $.ajax({
@@ -711,7 +659,7 @@
 
                 },
                 success: function (result) {
-                    
+
                     $('#div_stackcardsmemberpackages').empty().append((result));
                  //   var stackcount = parseInt($('#stackcards_count').val());
                   //  var items = stackcount;
@@ -720,9 +668,9 @@
 
                 },
                 complete: function () {
-                   
+
                     stackedCards();
-                 
+
                 }
             });
 

@@ -424,19 +424,31 @@
     <Content Include="Plesirthemes\EcoPhoto\ads-holder.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads-holder1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\bank-transfer.png" />
+    <Content Include="Plesirthemes\EcoPhoto\big.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\bookcar.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\bronze.png" />
     <Content Include="Plesirthemes\EcoPhoto\camera.png" />
     <Content Include="Plesirthemes\EcoPhoto\carwash1.png" />
     <Content Include="Plesirthemes\EcoPhoto\carwash2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\carwash3.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\cleaninginterior.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\COD.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco3.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco4.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\fbicon.png" />
     <Content Include="Plesirthemes\EcoPhoto\feedback.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\gold.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\handpolish.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\igeco.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\mailicon.png" />
+    <Content Include="Plesirthemes\EcoPhoto\medium.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\ozone.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\platinum.png" />
+    <Content Include="Plesirthemes\EcoPhoto\silver.png" />
+    <Content Include="Plesirthemes\EcoPhoto\small.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\tick.svg" />
     <Content Include="Plesirthemes\img\bgcar.jpg" />
     <Content Include="Plesirthemes\img\cab.png" />
@@ -681,6 +693,10 @@
     <Content Include="Views\Service\Detail.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Home\_stackedCardPackages.cshtml" />
+    <Content Include="Views\Admin_Customer\OperationList.cshtml" />
+    <Content Include="Views\Admin_Customer\_operationlist.cshtml" />
+    <Content Include="Views\Admin_Customer\_exceloperationlist.cshtml" />
+    <Content Include="Views\Home\_dailyhot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

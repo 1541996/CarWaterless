@@ -1223,7 +1223,7 @@ a[data-toggle="collapse"] {
         .vacation-destination .vs-carousel .item .vs-box .vsb-top .vsbt-img img {
           width: 100%;
           height: auto;
-          max-height: 99999999px; }
+        /*  max-height: 99999999px;*/ }
     .vacation-destination .vs-carousel .item .vs-box .vsb-middle {
       padding: 5px 0px;
       font-weight: 600;

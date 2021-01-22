@@ -261,6 +261,27 @@
     #div_additionalservice label{
         display:inline-block;
     }
+
+    .payment {
+        cursor: pointer;
+        background-size: contain;
+       /* width: 60px;*/
+        height: 80px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        transition: all 50ms ease-in-out;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .payment-active {
+        border: 2px solid #00c9a7;
+    }
+
+
+
 </style>
 
 
@@ -410,16 +431,16 @@
 
 
 
-                          
-                                <div id="div_additionalservice" class="form-group col-md-12 chk mt-10">
 
-                                </div>
+                            <div id="div_additionalservice" class="form-group col-md-12 chk mt-10">
 
-                                <input type="hidden" name="AdditionalIds" id="txt_AdditionalIds" />
-                                <input type="hidden" name="AdditionalPrices" id="txt_AdditionalPrices" />
-                                <input type="hidden" name="AdditionalNames" id="txt_AdditionalNames" />
+                            </div>
 
-                          
+                            <input type="hidden" name="AdditionalIds" id="txt_AdditionalIds" />
+                            <input type="hidden" name="AdditionalPrices" id="txt_AdditionalPrices" />
+                            <input type="hidden" name="AdditionalNames" id="txt_AdditionalNames" />
+
+
 
                             <div class="form-group col-md-12 page-cart mt-20" id="div_pricing">
 
@@ -431,12 +452,48 @@
 
 
 
+                            <div class="col-md-12 text-center mt-10">
+                                <label>Choose Payment Method</label>
+
+                                <div class="d-flex justify-content-center mt-10">
+                                    <div>
+                                        <div class="payment payment-active" id="p1" onclick="paymentfilter('COD')">
+                                            <img src="~/Plesirthemes/EcoPhoto/COD.jpg" style="margin-top: 8px; width: 80px; object-fit: cover;" />
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="payment ml-10" id="p2" onclick="paymentfilter('Bank')">
+                                            <img src="~/Plesirthemes/EcoPhoto/bank-transfer.png" style=" width: 80px; object-fit: cover;" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <input type="hidden" name="PaymentType" id="txt_Payment" value="COD" />
 
 
 
 
+                            </div>
 
-                            <div class="form-group col-md-12">
+
+                            <input type="hidden" name="TransportationCharges" value="500" />
+
+                            <div class="form-group col-md-12 mt-15">
+                                <label for="Address">Message</label>
+                                <div class="input-group">
+                                    <textarea class="form-control" name="ComplaintsMessage"></textarea>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="form-group col-md-12 mt-20">
                                 <br>
                                 <div class="button">
                                     <button type="submit" class="theme-button">Book Now</button>
@@ -473,6 +530,7 @@
         var additionalids;
         var additionalsname;
         var additionalprices;
+        var washtype;
         $(function () {
 
             $('#datestart').daterangepicker({
@@ -495,19 +553,51 @@
 
             $("input[type='radio'].rad_washType").change(function () {
                 if ($("input[type='radio'].rad_washType").is(':checked')) {
-                    var washtype = $("input[type='radio'].rad_washType:checked").val();
+                    washtype = $("input[type='radio'].rad_washType:checked").val();
                     if (washtype == "In-House") {
                         $('.div_address').show();
                         $('.div_township').hide();
                         $('.div_branch').hide();
                         $('#txt_BranchId').val(0);
 
+                        $('#div_trcharges').empty().append(`                            
+                             <div class="ct-row">
+                                <div class="ct-left">Transportation Charges</div>
+                                <div class="ct-right"><span>
+                                               500 MMK</span></div>
+                                <div class="clear"></div>
+                            </div>
+                 
+                       `)
+
+                        total = basicprice + 500;
+
+                       
+
+                        $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
+
+
                     } else {
                         $('.div_address').hide();
                         $('.div_township').show();
                         $('.div_branch').show();
 
+                        $('#div_trcharges').empty();
+
+                            total = basicprice;
+
+                        $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
                     }
+
+                    $('#txt_TotalAmount').val(total);
                 }
             });
 
@@ -591,6 +681,22 @@
             //    uiLibrary: 'bootstrap'
             //});
         })
+
+
+        function paymentfilter(pytypefilter) {
+            if (pytypefilter == "COD") {
+                $('.payment').removeClass('payment-active');
+                $('#p1').addClass('payment-active');
+                $('#txt_Payment').val(pytypefilter);
+
+            } else {
+                $('.payment').removeClass('payment-active');
+                $('#p2').addClass('payment-active');
+                $('#txt_Payment').val(pytypefilter);
+
+            }
+        }
+
 
 
            function BindTownshipList() {
@@ -764,6 +870,7 @@
 
                     for (var i = 0; i < result.length; i++) {
 
+
                         if (result[i].IsDailyHot == true) {
                             $('#div_additionalservice').append(`<div><label>
                             <input type="checkbox" value="${result[i].Name}"
@@ -797,6 +904,9 @@
 
                 complete: function () {
 
+                   
+
+
 
                   
                     $('.chk_additionalservice').on("click", function () {
@@ -804,12 +914,17 @@
                         additionalsname = "";
                         additionalprices = "";
 
-                        total = basicprice;
+
+                        if (washtype == "In-House") {
+                            total = basicprice + 500;
+                        } else {
+                            total = basicprice;
+                        }
 
 
                         if ($('.chk_additionalservice:checked').length == 0) {
                             $('#div_total').empty().append(`
-                                 <span>
+                                 <span id="span_total">
                                         ${total} MMK</span>
 
                              `);
@@ -845,7 +960,7 @@
                              `);
 
                                 $('#div_total').empty().append(`
-                                 <span>
+                                 <span id="span_total">
                                         ${total} MMK</span>
 
                              `);
@@ -886,7 +1001,7 @@
                         $('#txt_AdditionalNames').val(additionalsname);
                         $('#txt_AdditionalPrices').val(additionalprices);
 
-                        $('#txt_TotalAmount').val(total);
+                       $('#txt_TotalAmount').val(total);
 
                     });
 
@@ -1012,6 +1127,10 @@
             }
 
 
+            if (washtype == "In-House") {
+
+                total += 500;
+
             $('#div_pricing').append(`
               <div class="cart-total">
                 <div class="ct-row">
@@ -1023,16 +1142,55 @@
                 <div id="div_additionalCalc">
 
                 </div>
-
-
+                 
+                <div id="div_trcharges">
+                 
+                 <div class="ct-row">
+                    <div class="ct-left">Transportation Charges</div>
+                    <div class="ct-right"><span>
+                                   500 MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+                  </div>
+                
                 <div class="ct-row total">
                     <div class="ct-left">Total</div>
-                    <div class="ct-right" id="div_total"><span>
+                    <div class="ct-right" id="div_total"><span id="span_total">
                           ${total} MMK</span></div>
                     <div class="clear"></div>
                 </div>
             </div>
            `)
+
+            } else {
+                $('#div_pricing').append(`
+              <div class="cart-total">
+                <div class="ct-row">
+                    <div class="ct-left">${cartypedisplay}</div>
+                    <div class="ct-right"><span>
+                                  ${basicprice} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+                <div id="div_additionalCalc">
+
+                </div>
+                  <div id="div_trcharges">
+                 
+               
+                  </div>
+
+
+                <div class="ct-row total">
+                    <div class="ct-left">Total</div>
+                    <div class="ct-right" id="div_total" ><span id="span_total">
+                          ${total} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+           `)
+            }
+
+            
 
             $('#txt_TotalAmount').val(total);
 
@@ -1135,9 +1293,7 @@
                     $('#txt_memberpackagesname').val($('#ddpackages :selected').data('memberpackagesname'));
 
 
-                    $('#txt_bookingpackage').val("Special");
-                    $('#txt_TotalAmount').val(packageprice);
-
+                 
                     console.log(servicenames);
                     console.log(cartype);
                     $('#div_carcategory').empty();
@@ -1241,14 +1397,40 @@
                                         <div class="clear"></div>
                                     </div>`;
                     }
+
+
+                    total = packageprice;
+
+                    if (washtype == "In-House") {
+                        elements += ` <div id="div_trcharges">                
+                         <div class="ct-row">
+                            <div class="ct-left">Transportation Charges</div>
+                            <div class="ct-right"><span>
+                                           500 MMK</span></div>
+                            <div class="clear"></div>
+                        </div>
+                          </div>`;
+
+                        total = total + 500;
+
+                    } else {
+                        elements += ` <div id="div_trcharges">    </div>`;  
+                    }
+
+
+
+
                     elements += `<div class="ct-row total">
                                         <div class="ct-left">Total</div>
-                                        <div class="ct-right" id="div_total"><span>
-                                              ${packageprice} MMK</span></div>
+                                        <div class="ct-right" id="div_total"><span id="span_total">
+                                              ${total} MMK</span></div>
                                         <div class="clear"></div>
                                     </div>`;
                     elements += `</div>`;
 
+                    $('#txt_bookingpackage').val("Special");
+                
+                    $('#txt_TotalAmount').val(total);
                     $('#div_pricing').append(elements);
 
 

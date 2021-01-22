@@ -47,6 +47,8 @@ namespace Infra.Models
         public string BookingPackage { get; set; }
         public int? MemberPackageId { get; set; }
         public string MemberPackageName { get; set; }
+        public string PaymentType { get; set; }
+        public decimal? TransportationCharges { get; set; }
 
 
     }

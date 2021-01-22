@@ -21,6 +21,19 @@ namespace Infra.Models
         public Nullable<decimal> DiscountPrice { get; set; }
         public string CarType { get; set; }
         public bool? IsDailyHot { get; set; }
+        public string Photo { get; set; }
+        public string PhotoUrl
+        {
+            get
+            {
+                if (this.Photo != null)
+                {
+                    return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/AdditionalService/{0}", Photo);
+                }
+                return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
+
+            }
+        }
 
 
 

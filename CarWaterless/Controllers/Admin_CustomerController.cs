@@ -92,6 +92,364 @@ namespace CarWaterless.Controllers
 
 
 
+        public ActionResult OperationList(int customerid = 0)
+        {
+            ViewBag.customerid = customerid;
+            return View();
+        }
+
+
+        public ActionResult _operationlist(int pagesize = 10, int page = 1, string searchvalue = null,
+         string OrderBy = "Accesstime", string Direction = "DESC",
+         DateTime? fromdate = null, DateTime? todate = null, string type = null
+         , string washtype = null, string cardata = null, string bookingsource = null
+          ,int customerid = 0,string carno = null)
+        {
+            Expression<Func<tbCustomer, bool>> searchfilter = null;
+            Expression<Func<tbOperation, bool>> datefilter, washtypefilter, statusfilter, bookingsourcefilter = null;
+            Expression<Func<tbCustomerVehicle, bool>> carfilter, carnofilter = null;
+            if (searchvalue != "" && searchvalue != null)
+            {
+                searchfilter = PredicateBuilder.New<tbCustomer>();
+                searchfilter = searchfilter.Or(l => l.FullName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.UserName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.PhoneNo.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.Email.Contains(searchvalue));
+            }
+            else
+            {
+                searchfilter = l => l.IsDeleted != true;
+            }
+
+            if (cardata != "" && cardata != null)
+            {
+                carfilter = PredicateBuilder.New<tbCustomerVehicle>();
+                carfilter = carfilter.Or(l => l.VehicleName.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleNo.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleColor.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleBrand.Contains(searchvalue));
+            }
+            else
+            {
+                carfilter = l => l.IsDeleted != true;
+            }
+
+            if (carno != null && carno != "")
+            {
+
+                carnofilter = l => l.VehicleNo == carno;
+            }
+            else
+            {
+                carnofilter = l => l.IsDeleted != true;
+            }
+
+
+            if (fromdate != null && todate != null)
+            {
+                fromdate = fromdate.Value.Date;
+                todate = todate.Value.AddDays(1).Date;
+                datefilter = l => l.FinishedTime >= fromdate && l.FinishedTime < todate;
+            }
+            else
+            {
+                var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                var nextday = today.AddDays(1).Date;
+                datefilter = l => l.FinishedTime >= today && l.FinishedTime < nextday;
+            }
+
+           
+
+            if (bookingsource != null && bookingsource != "")
+            {
+
+                bookingsourcefilter = l => l.BookingSource == bookingsource;
+            }
+            else
+            {
+
+                bookingsourcefilter = l => l.IsDeleted != true;
+            }
+
+
+
+
+
+            if (type != null && type != "")
+            {
+
+                statusfilter = l => l.Status == type;
+            }
+            else
+            {
+
+                statusfilter = l => l.IsDeleted != true;
+            }
+
+
+
+            if (washtype != null && washtype != "")
+            {
+
+                washtypefilter = l => l.WashOption == washtype;
+            }
+            else
+            {
+
+                washtypefilter = l => l.IsDeleted != true;
+            }
+
+
+
+
+
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                             Where(a => a.IsDeleted != true && a.CustomerId == customerid && a.Status == "Finished").Where(datefilter).Where(washtypefilter)
+                                                             .Where(statusfilter).Where(bookingsourcefilter)
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == customerid)
+                                                   .Where(searchfilter)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   .Where(carfilter).Where(carfilter).Where(carnofilter)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+           
+            result = result.OrderByDescending(a => a.FinishedDate);
+         
+
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+           
+            var skipindex = pagesize * (page - 1);
+            var objs = result.Skip(skipindex).Take(pagesize).ToList();
+
+            var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
+            return PartialView("_operationlist", model);
+        }
+
+
+
+        public ActionResult _exceloperationlist(int pagesize = 10, int page = 1, string searchvalue = null,
+        string OrderBy = "Accesstime", string Direction = "DESC",
+        DateTime? fromdate = null, DateTime? todate = null, string type = null
+        , string washtype = null, string cardata = null, string bookingsource = null
+         , int customerid = 0,string carno = null)
+        {
+            Expression<Func<tbCustomer, bool>> searchfilter = null;
+            Expression<Func<tbOperation, bool>> datefilter, washtypefilter, statusfilter, bookingsourcefilter = null;
+            Expression<Func<tbCustomerVehicle, bool>> carfilter, carnofilter = null;
+            if (searchvalue != "" && searchvalue != null)
+            {
+                searchfilter = PredicateBuilder.New<tbCustomer>();
+                searchfilter = searchfilter.Or(l => l.FullName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.UserName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.PhoneNo.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.Email.Contains(searchvalue));
+            }
+            else
+            {
+                searchfilter = l => l.IsDeleted != true;
+            }
+
+            if (cardata != "" && cardata != null)
+            {
+                carfilter = PredicateBuilder.New<tbCustomerVehicle>();
+                carfilter = carfilter.Or(l => l.VehicleName.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleNo.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleColor.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleBrand.Contains(searchvalue));
+            }
+            else
+            {
+                carfilter = l => l.IsDeleted != true;
+            }
+
+
+            if (carno != null && carno != "")
+            {
+
+                carnofilter = l => l.VehicleNo == carno;
+            }
+            else
+            {
+                carnofilter = l => l.IsDeleted != true;
+            }
+
+
+
+
+
+            if (fromdate != null && todate != null)
+            {
+                fromdate = fromdate.Value.Date;
+                todate = todate.Value.AddDays(1).Date;
+                datefilter = l => l.FinishedTime >= fromdate && l.FinishedTime < todate;
+            }
+            else
+            {
+                var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                var nextday = today.AddDays(1).Date;
+                datefilter = l => l.FinishedTime >= today && l.FinishedTime < nextday;
+            }
+
+
+
+            if (bookingsource != null && bookingsource != "")
+            {
+
+                bookingsourcefilter = l => l.BookingSource == bookingsource;
+            }
+            else
+            {
+
+                bookingsourcefilter = l => l.IsDeleted != true;
+            }
+
+
+
+
+
+            if (type != null && type != "")
+            {
+
+                statusfilter = l => l.Status == type;
+            }
+            else
+            {
+
+                statusfilter = l => l.IsDeleted != true;
+            }
+
+
+
+            if (washtype != null && washtype != "")
+            {
+
+                washtypefilter = l => l.WashOption == washtype;
+            }
+            else
+            {
+
+                washtypefilter = l => l.IsDeleted != true;
+            }
+
+
+
+
+
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                             Where(a => a.IsDeleted != true && a.CustomerId == customerid && a.Status == "Finished").Where(datefilter).Where(washtypefilter)
+                                                             .Where(statusfilter).Where(bookingsourcefilter)
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == customerid)
+                                                   .Where(searchfilter)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   .Where(carfilter).Where(carfilter).Where(carnofilter)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+
+            result = result.OrderByDescending(a => a.FinishedDate);
+
+
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+
+            var skipindex = pagesize * (page - 1);
+            var objs = result.Skip(skipindex).Take(pagesize).ToList();
+
+            var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
+            return PartialView("_exceloperationlist", model);
+        }
+
+
+
+
+        public ActionResult getCarNoByCustomer(string customerid = null)
+        {
+            IQueryable<string> result = uow.customerVehicleRepo.Get().Where(a => a.CustomerId == customerid && a.IsDeleted != true).Select(a => a.VehicleNo).AsQueryable();
+          
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
         public ActionResult CustomerForm(int ID = 0,string FormType = "Add")
         {
             ViewBag.formtype = FormType;
@@ -164,6 +522,10 @@ namespace CarWaterless.Controllers
             }
 
         }
+
+
+
+
 
         public async System.Threading.Tasks.Task<ActionResult> UpsertData(tbCustomer obj)
         {
