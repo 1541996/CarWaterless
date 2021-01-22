@@ -22,8 +22,9 @@ namespace CarWaterless.Controllers
         }
 
         // GET: Package
-        public ActionResult Index()
+        public ActionResult Index(string type = null)
         {
+            ViewBag.type = type;
             var data = uow.additionalServiceRepo.GetAll().Where(a => a.IsDeleted != true).AsQueryable();
         
             return View(data);
