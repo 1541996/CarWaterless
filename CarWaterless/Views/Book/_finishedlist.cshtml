@@ -1,0 +1,99 @@
+﻿
+@model Infra.ViewModels.PagedListClient<Infra.ViewModels.BookingViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+
+
+@{
+    if (Model.TotalCount > 0)
+    {
+        if (ViewBag.page == 1)
+        {
+
+            <span class="text-primary mb-10"><strong style="font-size:21px">@Model.TotalCount</strong></span>
+
+            if (Model.TotalCount == 1)
+            {
+                <span class="text text-black margin-bottom-15px" style="text-align: left">booking found.</span>
+            }
+            else
+            {
+                <span class="text text-black margin-bottom-15px" style="text-align: left">bookings found.</span>
+            }
+        }
+
+        foreach (var result in Model.Results)
+        {
+            <div class="panel-custom-default p-15 mb-10">
+                <div class="d-flex">
+                    <div>
+                        <h6>@result.VehicleBrand @result.VehicleName</h6>
+                        <p class="mb-5">
+                            @result.CategoryName
+                            @if (result.CategoryType == "medium")
+                            {
+
+                                <span class="badge badge-danger">ကားလတ်</span>
+
+                            }
+                            else if (result.CategoryType == "big")
+                            {
+                                <span class="badge badge-danger">ကားကြီး</span>
+
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">ကားသေး</span>
+
+                            }
+
+
+
+                        </p>
+
+                        @if (result.BookingPackage == "Normal")
+                        {
+                            if (result.AdditionalNames != null)
+                            {
+                                <p class="mb-5">@result.AdditionalNames.Replace("_", ", ")</p>
+                            }
+
+                        }
+                        else
+                        {
+                            <span class="badge badge-primary fs-12">@result.MemberPackage</span>
+                            if (result.AdditionalNames != null)
+                            {
+                                <p class="mb-5">@result.AdditionalNames.Replace("_", ", ")</p>
+                            }
+
+
+
+                        }
+
+
+                    </div>
+
+                    <div class="ml-auto text-right" style="width:50%">
+                        <h6>MMK @result.TotalAmount.Value.ToString("#,##0")</h6>
+
+                        <p class="text text-danger">@result.OperationDate.Value.ToString("dd MMM yyyy") @result.OperationDate.Value.ToShortTimeString()</p>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        }
+
+
+    }
+
+
+}
+
+
+
+

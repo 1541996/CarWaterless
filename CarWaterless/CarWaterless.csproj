@@ -530,6 +530,14 @@
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.js" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.css" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.js" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.svg" />
+    <Content Include="Plesirthemes\Raty\lib\images\cancel-off.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\cancel-on.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-half.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-off.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-on.png" />
+    <Content Include="Plesirthemes\Raty\lib\jquery.raty.css" />
+    <Content Include="Plesirthemes\Raty\lib\jquery.raty.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -630,6 +638,9 @@
     <Content Include="ArchitectThemes\webfonts\gijgo-material.ttf" />
     <Content Include="ArchitectThemes\webfonts\gijgo-material.woff" />
     <Content Include="ArchitectThemes\webfonts\Lato-Regular.ttf" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.eot" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.ttf" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.woff" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -697,6 +708,14 @@
     <Content Include="Views\Admin_Customer\_operationlist.cshtml" />
     <Content Include="Views\Admin_Customer\_exceloperationlist.cshtml" />
     <Content Include="Views\Home\_dailyhot.cshtml" />
+    <Content Include="Views\Book\bookedlist.cshtml" />
+    <Content Include="Views\Book\_confirmedlist.cshtml" />
+    <Content Include="Views\Book\_finishedlist.cshtml" />
+    <Content Include="Views\Book\_waitinglist.cshtml" />
+    <Content Include="Views\Shared\nobookingdata.cshtml" />
+    <Content Include="Views\Book\RatingList.cshtml" />
+    <Content Include="Views\Book\_ratinglist.cshtml" />
+    <Content Include="Views\Book\RatedForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

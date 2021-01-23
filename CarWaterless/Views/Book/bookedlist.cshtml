@@ -1,0 +1,359 @@
+﻿
+@{
+    ViewBag.Title = "bookedlist";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+    
+
+<style>
+    .tab-wrap {
+        transition: 0.3s box-shadow ease;
+        border-radius: 6px;
+        max-width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        list-style: none;
+        background-color: #f8f9fa;
+        /* margin: 40px 0;*/
+    }
+
+     /*   .tab-wrap:hover {
+            box-shadow: 0 12px 23px rgba(0, 0, 0, 0.23), 0 10px 10px rgba(0, 0, 0, 0.19);
+        }*/
+
+
+        .shadow{
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+    .tab {
+        display: none;
+    }
+
+        .tab:checked:nth-of-type(1) ~ .tab__content:nth-of-type(1) {
+            opacity: 1;
+            transition: 0.5s opacity ease-in, 0.8s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+
+        .tab:checked:nth-of-type(2) ~ .tab__content:nth-of-type(2) {
+            opacity: 1;
+            transition: 0.5s opacity ease-in, 0.8s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+
+        .tab:checked:nth-of-type(3) ~ .tab__content:nth-of-type(3) {
+            opacity: 1;
+            transition: 0.5s opacity ease-in, 0.8s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+
+        .tab:checked:nth-of-type(4) ~ .tab__content:nth-of-type(4) {
+            opacity: 1;
+            transition: 0.5s opacity ease-in, 0.8s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+
+        .tab:checked:nth-of-type(5) ~ .tab__content:nth-of-type(5) {
+            opacity: 1;
+            transition: 0.5s opacity ease-in, 0.8s transform ease;
+            position: relative;
+            top: 0;
+            z-index: 100;
+            transform: translateY(0px);
+            text-shadow: 0 0 0;
+        }
+
+        .tab:first-of-type:not(:last-of-type) + label {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .tab:not(:first-of-type):not(:last-of-type) + label {
+            border-radius: 0;
+        }
+
+        .tab:last-of-type:not(:first-of-type) + label {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .tab:checked + label {
+            background-color: #fff;
+            box-shadow: 0 -1px 0 #fff inset;
+            cursor: default;
+        }
+
+            .tab:checked + label:hover {
+                box-shadow: 0 -1px 0 #fff inset;
+                background-color: #fff;
+            }
+
+        .tab + label {
+            box-shadow: 0 -1px 0 #eee inset;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: #333;
+            flex-grow: 3;
+            text-align: center;
+            background-color: #f2f2f2;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-align: center;
+            transition: 0.3s background-color ease, 0.3s box-shadow ease;
+            height: 50px;
+            box-sizing: border-box;
+            padding: 15px;
+        }
+
+            .tab + label:hover {
+                background-color: #f9f9f9;
+                box-shadow: 0 1px 0 #f4f4f4 inset;
+            }
+
+    .tab__content {
+        padding: 10px 20px;
+        background-color: transparent;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+        opacity: 0;
+        left: 0;
+        transform: translateY(-3px);
+        border-radius: 6px;
+    }
+
+    /* boring stuff */
+ 
+
+    .container {
+        margin: 0 auto;
+        display: block;
+        max-width: 800px;
+        margin-left:0 !important;
+        margin-right:0 !important;
+    }
+
+        .container > *:not(.tab-wrap) {
+            padding: 0 80px;
+        }
+
+
+
+    #content {
+        background: #f8f9fa !important
+    }
+
+    .content-wrap {
+        background: #f8f9fa!important
+    }
+
+</style>
+
+
+    <div class="content-wrap">
+
+
+    
+        <div class="tab-wrap">
+
+
+            <input type="radio" id="tab1" name="tabGroup1" class="tab" value="Active" checked onchange="radchange('Active')">
+            <label for="tab1">Active</label>
+
+            <input type="radio" id="tab2" name="tabGroup1" value="Waiting" class="tab" onchange="radchange('Waiting')">
+            <label for="tab2">Waiting</label>
+
+            <input type="radio" id="tab3" name="tabGroup1" value="Past" class="tab" onchange="radchange('Past')">
+            <label for="tab3">Past</label>
+
+
+            <!-- active tab on page load gets checked attribute -->
+
+            <div class="tab__content pt-0" id="div_confirmedlist">
+
+            </div>
+
+            <div class="tab__content pt-0" id="div_waitinglist">
+
+            </div>
+
+            <div class="tab__content pt-0" id="div_finishedlist">
+
+            </div>
+            <div id="progress" class="text-center text-muted loading mt-5">
+                <h5>Loading...</h5>
+            </div>
+
+        </div>
+
+          
+
+    </div>
+
+
+
+@section scripts{
+    
+    <script>
+
+        var customerid = '@ViewBag.customerid';
+        var page = 1;
+        var pagesize = 4;
+        var hasResult = false;
+        var isLoading = false;
+        var loading = $('#progress');
+        var bktype = "Active";
+
+        $(function () {
+
+
+
+
+
+            getfinishedlist();
+            getwaitinglist();
+            getconfirmedlist();
+
+
+            $(window).scroll(function () {
+                if (hasResult) {
+                   // console.log("scroll" + pageindex);
+                    var scrolltop = Math.round($(window).scrollTop());
+                    var screenheight = $(document).height() - $(window).height();
+
+                    if (!isLoading && hasResult) {
+
+                        if (scrolltop + 1500 > screenheight || scrolltop === screenheight - 1) {
+                            //    alert(pageindex);
+                            if (bktype == "Past") {
+                                getfinishedlist();
+                            }
+                          
+
+                        }
+                    }
+                }
+            });
+
+        })
+
+
+        function radchange(type) {
+            bktype = type;
+            if (bktype == "Past") {
+                $('body, html').animate({ scrollTop: $('.content-wrap').offset().top - 150 }, 'slow');
+            }
+        }
+
+
+
+        function getconfirmedlist()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_confirmedlist", "Book")',
+                data: { customerid: customerid },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#div_confirmedlist').empty().append(result);
+                },
+                complete: function () {
+
+                }
+            });
+
+        }
+
+
+       function getwaitinglist()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_waitinglist", "Book")',
+                data: { customerid: customerid },
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#div_waitinglist').empty().append(result);
+                },
+                complete: function () {
+                    
+                }
+            });
+
+        }
+
+
+        function getfinishedlist()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_finishedlist", "Book")',
+                data: { customerid: customerid, page: page, pagesize: pagesize },
+                beforeSend: function () {
+                    isLoading = true;
+                    hasResult = false;
+                    loading.show();
+                },
+                success: function (result) {
+               //     $('#div_finishedlist').empty().append(result);
+
+                    if (result != null && result != "NoResult") {
+                        hasResult = true;
+                      
+                       $('#div_finishedlist').append(result);
+                      
+                    }
+                    else if (result == "NoResult") {
+
+                        $('#div_finishedlist').append();
+                      
+                        hasResult = false;
+                        isLoading = false;
+                        loading.hide();
+                    }
+
+                },
+                complete: function () {
+                    if (hasResult) {
+                        page = page + 1;
+                    }
+                    isLoading = false;
+                    loading.hide();
+                }
+            });
+
+        }
+
+
+    </script>
+    
+    
+    
+    }

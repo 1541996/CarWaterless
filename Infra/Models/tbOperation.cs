@@ -49,6 +49,7 @@ namespace Infra.Models
         public string MemberPackageName { get; set; }
         public string PaymentType { get; set; }
         public decimal? TransportationCharges { get; set; }
+        public bool? IsRated { get; set; }
 
 
     }
