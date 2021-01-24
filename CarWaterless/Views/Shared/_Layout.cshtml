@@ -97,14 +97,14 @@
                         </div>
                         <button class="close"></button>
                     </div>
-                    @*<ul class="header-menu nav">
+                    <ul class="header-menu nav">
                             <li class="nav-item">
-                                <a href="javascript:void(0);" class="nav-link">
+                                <a href="@Url.Action("DailyHot","AdminSetup")" class="nav-link">
                                     <i class="nav-link-icon fa fa-database"> </i>
-                                    Statistics
+                                    Daily Hot
                                 </a>
                             </li>
-                            <li class="btn-group nav-item">
+                            @*<li class="btn-group nav-item">
                                 <a href="javascript:void(0);" class="nav-link">
                                     <i class="nav-link-icon fa fa-edit"></i>
                                     Projects
@@ -115,8 +115,8 @@
                                     <i class="nav-link-icon fa fa-cog"></i>
                                     Settings
                                 </a>
-                            </li>
-                        </ul>*@
+                            </li>*@
+                        </ul>
                 </div>
                 <div class="app-header-right">
 
@@ -513,6 +513,12 @@
                                         <a href="@Url.Action("Branch","AdminSetup")" id="liBranch">
                                             <i class="metismenu-icon"></i>
                                             Branch
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("MemberPackage","AdminSetup")" id="liMemberPackage">
+                                            <i class="metismenu-icon"></i>
+                                            Member Package
                                         </a>
                                     </li>
                                     <li>

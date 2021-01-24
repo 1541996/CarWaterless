@@ -1,51 +1,90 @@
-﻿
+﻿var selectIds = "";
+var selectNames = "";
+var hasData = false;
 $(document).ready(function () {
 
+    $('select').select2();
+    $('#ddladditionalservice').empty();
+
     BindGrid();
+
+    $('#ddlCarType').change(function () {
+
+        var cartype = $(this).val();
+        if (cartype != "") {
+            $.ajax({
+                type: "POST",
+                url: bindserviceUrl,
+                data: { "cartype": cartype },
+                success: function (data) {
+                    var select = $('#ddladditionalservice').empty();
+                    $.each(data, function () {
+                        select.append($("<option></option>").val(this['Id']).html(this['Name']));
+                    });
+                    select.trigger('change');
+                }
+            })
+        }
+    });
+
+    
 
     $('#btnCancel').click(function () {
         location.reload();
     });
 
+
     $('#btnSave').click(function () {
-
         ClearError();
+        selectIds = "";
+        selectNames = "";
 
-        var isvalid = false;
-        var Name = $('#Name').val();
+        var Title = $('#Title').val();
         var ddlCarType = $('#ddlCarType').val();
-        var BasicPrice = $('#BasicPrice').val();
-        if (Name != "") {
+        var PackagePrice = $('#PackagePrice').val();
+        if (Title != "") {
             if (ddlCarType != "") {
-                if (BasicPrice != "") {
-                    isvalid = true;
+                GetSelectedIds();
+                GetSelectedNames();
+                if (selectIds.length != 0) {
+                    if (PackagePrice != "") {
+                        $.ajax({
+                            type: "POST",
+                            url: saveUrl,
+                            data: GetModel(),
+                            success: function (data) {
+
+                                showMessage(data.MessageType, data.Message);
+
+                            }
+                        });
+                    }
+                    else {
+                        $('#PackagePrice').closest(".form-control").addClass("is-invalid");
+                        $('#PackagePrice-error').show();
+                    }
                 }
                 else {
-                    $('#BasicPrice').closest(".form-control").addClass("is-invalid");
-                    $('#BasicPrice-error').show();
+                    $('#AdditionalServiceIds').closest(".form-control").addClass("is-invalid");
+                    $('#AdditionalServiceIds-error').show();
                 }
             }
             else {
                 $('#ddlCarType').closest(".form-control").addClass("is-invalid");
                 $('#ddlCarType-error').show();
             }
+            
+           
         }
         else {
-            $('#Name').closest(".form-control").addClass("is-invalid");
-            $('#Name-error').show();
+            $('#Title').closest(".form-control").addClass("is-invalid");
+            $('#Title-error').show();
         }
-        if (isvalid == true) {
-            $.ajax({
-                type: "POST",
-                url: saveUrl,
-                data: GetModel(),
-                success: function (data) {
-                    showMessage(data.MessageType, data.Message);
-                    BindGrid();
-                }
-            })
-        }
+        
+
+
     });
+
 
 });
 
@@ -66,7 +105,7 @@ function BindGrid() {
                 oTable = $("#tbl").dataTable({
                     "columnDefs": [
                         {
-                            className: "text-center", "targets": [4]
+                            className: "text-center", "targets": [5]
                         }
                     ],
                     "pagingType": "full_numbers",
@@ -84,12 +123,13 @@ function BindGrid() {
                                 return "<center>" + data.toString() + "</center>";
                             }
                         },
-                        { "mData": "Name", "bSearchable": true, "bSortable": true, "width": "15%" },
-                        { "mData": "Type", "bSearchable": true, "bSortable": true, "width": "10%" },
-                        { "mData": "BasicPrice", "bSearchable": true, "bSortable": true, "width": "10%" },
+                        { "mData": "Title", "bSearchable": true, "bSortable": true, "width": "20%" },
+                        { "mData": "CarType", "bSearchable": true, "bSortable": true, "width": "5%" },
+                        { "mData": "AdditionalServiceNames", "bSearchable": true, "bSortable": true, "width": "20%" },
+                        { "mData": "PackagePrice", "bSearchable": true, "bSortable": true, "width": "10%" },
                        
                         {
-                            "mData": "Id", "bSearchable": false, "bSortable": false, "width": "30%",
+                            "mData": "ID", "bSearchable": false, "bSortable": false, "width": "20%",
                             "mRender": function (data) {
 
                                 var actions = "";
@@ -132,7 +172,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/AdminSetup/CarCategory";
+                window.location = "/AdminSetup/MemberPackage";
             }
         });
     }
@@ -154,8 +194,10 @@ function Edit(id) {
         data: { "Id": id },
         success: function (data) {
             $("#Id").val(data.Id);
-            $('#Name').val(data.Name);
-            $('#PrefixCode').val(data.PrefixCode);
+            $('#Title').val(data.Title);
+            $('#ddlCarType').val(data.CarType);
+            $('#ddlCarType').trigger('change');
+            $('#PackagePrice').val(data.PackagePrice);
             
 
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
@@ -172,7 +214,7 @@ function Delete(id) {
 
     Swal.fire({
         title: "Are you sure to delete?",
-        text: "Deleting car category may occur errors for existing records.",
+        text: "Deleting may occur errors for existing records.",
         type: 'warning',
         showCancelButton: true,
         cancelButtonColor: '#ff6258',
@@ -197,7 +239,7 @@ function Delete(id) {
                             'success'
                         ).then((result) => {
                             if (result.value) {
-                                window.location = "/AdminSetup/CarCategory";
+                                window.location = "/AdminSetup/MemberPackage";
                             }
                         });
                     }
@@ -213,24 +255,50 @@ function Delete(id) {
 }
 
 function GetModel() {
+
+
     var model = {};
     var id = $('#Id').val();
     if (id != "") {
         model.Id = id;
     }
-    model.Name = $('#Name').val();
-    model.Type = $('#ddlCarType').val();
-    model.BasicPrice = $('#BasicPrice').val();
-    
+    model.Title = $('#Title').val();
+    model.AdditionalServiceIds = selectIds;
+    model.AdditionalServiceNames = selectNames;
+    model.PackagePrice = $('#PackagePrice').val();
+    model.CarType = $('#ddlCarType').val();
     return model;
 }
 
 
 function ClearError() {
-    $('#Name').closest(".form-control").removeClass("is-invalid");
+    $('#Title').closest(".form-control").removeClass("is-invalid");
+    $('#AdditionalServiceIds').closest(".form-control").removeClass("is-invalid");
+    $('#PackagePrice').closest(".form-control").removeClass("is-invalid");
     $('#ddlCarType').closest(".form-control").removeClass("is-invalid");
-    $('#BasicPrice').closest(".form-control").removeClass("is-invalid");
-    $('#Name-error').hide();
+    $('#Title-error').hide();
+    $('#AdditionalServiceIds-error').hide();
+    $('#PackagePrice-error').hide();
     $('#ddlCarType-error').hide();
-    $('#BasicPrice-error').hide();
+}
+
+function GetSelectedIds() {
+    $('#ddladditionalservice option:selected').each(function () {
+        var $this = $(this);
+        if ($this.length) {
+            var selval = $this.val();
+            selectIds += selval + ",";
+        }
+    });
+}
+
+function GetSelectedNames() {
+    $('#ddladditionalservice option:selected').each(function () {
+
+        var $this = $(this);
+        if ($this.length) {
+            var selText = $this.text();
+            selectNames += selText + ",";
+        }
+    });
 }

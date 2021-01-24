@@ -121,6 +121,7 @@
     <Compile Include="ViewModels\BranchModel.cs" />
     <Compile Include="ViewModels\CarCategoryModel.cs" />
     <Compile Include="ViewModels\FileUploadViewModel.cs" />
+    <Compile Include="ViewModels\MemberPackageViewModel.cs" />
     <Compile Include="ViewModels\OperationCustomerViewModel.cs" />
     <Compile Include="ViewModels\PagedListModel.cs" />
     <Compile Include="ViewModels\TownshipModel.cs" />
