@@ -21,20 +21,22 @@ namespace CarWaterless.Controllers
             dbContext = new CarWaterLessContext();
             uow = new UnitOfWork(dbContext);
         }
-        public ActionResult Index()
+        public ActionResult Index(string customerid = null)
         {
+            ViewBag.customerid = customerid;
             return View();
         }
 
-        public ActionResult Detail(int id = 0)
+        public ActionResult Detail(int id = 0,string customerid = null)
         {
+            ViewBag.customerid = customerid;
             BranchViewModel obj = new BranchViewModel();
             obj.branch = uow.branchRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
             obj.township = uow.townshipRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.branch.TownshipId).FirstOrDefault();
             return View(obj);
         }
 
-        public ActionResult GetBranchList(string searchvalue = null)
+        public ActionResult GetBranchList(string searchvalue = null,string customerid = null)
         {
             Expression<Func<tbBranch, bool>> searchfilter = null;
             Expression<Func<tbTownship, bool>> townshipfilter = null;
@@ -54,7 +56,9 @@ namespace CarWaterless.Controllers
               //  townshipfilter = l => l.IsDeleted != true;
             }
 
-            
+
+            ViewBag.customerid = customerid;
+
             //   var data = uow.branchRepo.GetAll().Where(a => a.IsDeleted != true).AsQueryable();
             var data = (from branch in uow.branchRepo.GetAll().Where(a => a.IsDeleted != true).Where(searchfilter)
                         join township in uow.townshipRepo.GetAll().Where(a => a.IsDeleted != true)

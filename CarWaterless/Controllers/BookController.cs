@@ -75,10 +75,13 @@ namespace CarWaterless.Controllers
         }
 
 
-        public ActionResult Index(string customerid = null,string source = "APP")
+        public ActionResult Index(string customerid = null,string source = "APP",int branchid = 0,int townshipid = 0)
         {
             ViewBag.bksource = source;
             ViewBag.customerid = customerid;
+            ViewBag.branchid = branchid;
+            ViewBag.townshipid = townshipid;
+
             tbCustomer customer = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid).FirstOrDefault();
             if(customer.IsMember == true)
             {

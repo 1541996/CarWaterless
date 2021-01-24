@@ -390,11 +390,9 @@
     <!-- section 3 -->
 
 
-    <div id="div_dailyhotV2">
+  
 
-    </div>
-
-
+    
 
 
     <div id="div_dailyhot">
@@ -575,28 +573,31 @@
                  arrows: false,
                  variableWidth: true
              });
-              
+
+
+
+
 
             GetDailyHot();
-           
+
             GetMemberPackages();
            // GetStackCardsMemberPackages();
 
-            
 
-        
+
+
 
         })
 
 
             function Packages(id) {
                 $('.preloading').show();
-                location.href = "../package?id=" + id;
+                location.href = "../package?id=" + id + "&customerid=" + customerid;
             }
 
             function Services(type) {
                 $('.preloading').show();
-                location.href = "../service?type=" + type;
+                location.href = "../service?type=" + type + "&customerid=" + customerid;
             }
 
 
@@ -715,22 +716,22 @@
 
         function book() {
             $('.preloading').show();
-            window.location.replace('../book?customerid=@ViewBag.customerid');
+          location.href='../book?customerid=@ViewBag.customerid';
         }
 
         function branch() {
             $('.preloading').show();
-            window.location.replace('../branch');
+          location.href='../branch?customerid=@ViewBag.customerid';
         }
 
         function caradd() {
             $('.preloading').show();
-            window.location.replace('../car/add?ID=0&type=Add&customerid=@ViewBag.customerid');
+          location.href='../car/add?ID=0&type=Add&customerid=@ViewBag.customerid';
         }
 
         function SeeMore(Id) {
             $('.preloading').show();
-            window.location.replace('../Branch');
+          location.href='../branch?customerid=@ViewBag.customerid';
         }
 
 

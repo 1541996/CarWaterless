@@ -97,7 +97,7 @@
             $.ajax({
                 cache: false,
                 url: '@Url.Action("GetBranchList", "Branch")',
-                data: { searchvalue: searchvalue },
+                data: { searchvalue: searchvalue, customerid: customerid },
                 beforeSend: function () {
 
                 },

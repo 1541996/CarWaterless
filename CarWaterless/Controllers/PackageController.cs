@@ -19,9 +19,10 @@ namespace CarWaterless.Controllers
             uow = new UnitOfWork(dbContext);
         }
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 0,string customerid = null)
         {
             ViewBag.id = id;
+            ViewBag.customerid = customerid;
             var data = uow.memberPackageRepo.GetAll().Where(a => a.IsDeleted != true).AsQueryable();
             return View(data);
         }

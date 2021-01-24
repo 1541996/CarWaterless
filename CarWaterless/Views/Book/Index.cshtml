@@ -326,11 +326,11 @@
                             <div class="form-group col-md-12">
                                 <label>Choose Type</label>
                                 <div class="btn-group btn-group-justified" data-toggle="buttons">
-                                    <label class="btn btn-light r_male rounded-default lb">
+                                    <label class="btn btn-light r_house rounded-default lb">
                                         <input type="radio" name="WashOption" class="rad_washType" value="In-House"> In-House
                                     </label>
 
-                                    <label class="btn btn-light r_female rounded-default lb">
+                                    <label class="btn btn-light r_walk rounded-default lb">
                                         <input type="radio" name="WashOption" class="rad_washType" value="Walk-In"> Walk-In
                                     </label>
                                 </div>
@@ -520,8 +520,10 @@
 
 
     <script>
-        var townshipid;
+      //  var townshipid;
         var customerid = '@ViewBag.customerid';
+        var branchid = '@ViewBag.branchid';
+        var townshipid = '@ViewBag.townshipid';
         var ismember = '@ViewBag.ismember';
         var carcategoryid;
         var cartype;
@@ -532,6 +534,11 @@
         var additionalprices;
         var washtype;
         $(function () {
+
+            console.log(branchid);
+            console.log(townshipid);
+
+
 
             $('#datestart').daterangepicker({
                 singleDatePicker: true,
@@ -560,19 +567,19 @@
                         $('.div_branch').hide();
                         $('#txt_BranchId').val(0);
 
-                        $('#div_trcharges').empty().append(`                            
+                        $('#div_trcharges').empty().append(`
                              <div class="ct-row">
                                 <div class="ct-left">Transportation Charges</div>
                                 <div class="ct-right"><span>
                                                500 MMK</span></div>
                                 <div class="clear"></div>
                             </div>
-                 
+
                        `)
 
                         total = basicprice + 500;
 
-                       
+
 
                         $('#div_total').empty().append(`
                                  <span>
@@ -737,6 +744,24 @@
                     });
 
 
+                    if (townshipid != null && townshipid != "" && townshipid != undefined && townshipid != 0) {
+                        $('.div_address').hide();
+                        $('.div_township').show();
+                        $('.div_branch').show();
+                        $('.r_walk').addClass('active');
+                        $(".rad_washType").attr('checked', true);
+
+
+
+                        $("#township").val(townshipid);
+                        $("#txt_township").val(townshipid);
+                        BindBrandListByTownship();
+
+
+                    }
+
+
+
                 }
             })
         }
@@ -781,6 +806,13 @@
                         $("#txt_BranchId").val(id);
 
                     });
+
+
+
+                    if (branchid != null && branchid != "" && branchid != undefined && branchid != 0) {
+                        $("#branch").val(branchid);
+                        $("#txt_BranchId").val(branchid);
+                    }
 
 
                 }
@@ -836,7 +868,7 @@
 
 
                         } else {
-                       
+
                             GetMemberPackages();
                         }
 
@@ -878,7 +910,7 @@
                                     data-dailyhot="${result[i].IsDailyHot}"
                                     data-discount="${result[i].DiscountPrice}"
                                     class="option-input checkbox chk_additionalservice" />
-                                   ${result[i].Name} 
+                                   ${result[i].Name}
                             </label>
                             <span class="badge badge-danger ml-5 fs-12">Daily Hot</span>
                             <span style="text-decoration: line-through;">(${result[i].Price} MMK)</span>
@@ -896,7 +928,7 @@
                             </label></div>`)
                         }
 
-                      
+
                     };
 
 
@@ -904,11 +936,11 @@
 
                 complete: function () {
 
-                   
 
 
 
-                  
+
+
                     $('.chk_additionalservice').on("click", function () {
                         additionalids = "";
                         additionalsname = "";
@@ -941,7 +973,7 @@
                             var isdailyhot = $(this).data('dailyhot');
                             var discount = $(this).data('discount');
 
-                           
+
 
                             if (isdailyhot == true) {
                                 additionalids += id + "_";
@@ -989,7 +1021,7 @@
                              `);
                             }
 
-                           
+
 
                         });
                         additionalids = additionalids.slice(0, -1);
@@ -1106,7 +1138,7 @@
                 complete: function () {
 
                     changePrice();
-                 
+
 
                 }
             })
@@ -1142,9 +1174,9 @@
                 <div id="div_additionalCalc">
 
                 </div>
-                 
+
                 <div id="div_trcharges">
-                 
+
                  <div class="ct-row">
                     <div class="ct-left">Transportation Charges</div>
                     <div class="ct-right"><span>
@@ -1152,7 +1184,7 @@
                     <div class="clear"></div>
                 </div>
                   </div>
-                
+
                 <div class="ct-row total">
                     <div class="ct-left">Total</div>
                     <div class="ct-right" id="div_total"><span id="span_total">
@@ -1175,8 +1207,8 @@
 
                 </div>
                   <div id="div_trcharges">
-                 
-               
+
+
                   </div>
 
 
@@ -1190,7 +1222,7 @@
            `)
             }
 
-            
+
 
             $('#txt_TotalAmount').val(total);
 
@@ -1232,8 +1264,8 @@
                 complete: function () {
 
                    // alert($("#txt_carcategory").val());
-                    
-                   
+
+
 
                 }
             })
@@ -1242,10 +1274,10 @@
 
 
         function packageschange() {
-         
+
                 var id = $('#ddpackages').val();
 
-           
+
 
 
                 if (id == 0) {
@@ -1265,7 +1297,7 @@
                     //}
                     //else if (cartype == "ကားသေး") {
                     //    cartype = "small"
-                    //} 
+                    //}
 
                     $('#txt_memberpackagesid').val(0);
                     $('#txt_memberpackagesname').val('');
@@ -1275,7 +1307,7 @@
                     GetCarCategoryByID();
                     GetAdditionalService();
 
-                  
+
 
                 } else {
 
@@ -1293,7 +1325,7 @@
                     $('#txt_memberpackagesname').val($('#ddpackages :selected').data('memberpackagesname'));
 
 
-                 
+
                     console.log(servicenames);
                     console.log(cartype);
                     $('#div_carcategory').empty();
@@ -1393,7 +1425,7 @@
                     var elements = `<div class="cart-total">`;
                     for (var i = 0; i < servicenames.length; i++) {
                         elements += `<div class="ct-row">
-                                        <div class="ct-left">${servicenames[i]}</div>                                       
+                                        <div class="ct-left">${servicenames[i]}</div>
                                         <div class="clear"></div>
                                     </div>`;
                     }
@@ -1402,7 +1434,7 @@
                     total = packageprice;
 
                     if (washtype == "In-House") {
-                        elements += ` <div id="div_trcharges">                
+                        elements += ` <div id="div_trcharges">
                          <div class="ct-row">
                             <div class="ct-left">Transportation Charges</div>
                             <div class="ct-right"><span>
@@ -1414,7 +1446,7 @@
                         total = total + 500;
 
                     } else {
-                        elements += ` <div id="div_trcharges">    </div>`;  
+                        elements += ` <div id="div_trcharges">    </div>`;
                     }
 
 
@@ -1429,7 +1461,7 @@
                     elements += `</div>`;
 
                     $('#txt_bookingpackage').val("Special");
-                
+
                     $('#txt_TotalAmount').val(total);
                     $('#div_pricing').append(elements);
 
@@ -1441,7 +1473,7 @@
 
 
 
-        
+
 
         }
 
