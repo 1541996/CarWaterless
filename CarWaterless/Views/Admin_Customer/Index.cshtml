@@ -135,6 +135,7 @@
 
         }
         function LoadMainList() {
+            callloading('div_list');
             $.ajax({
                 cache: false,
                 url: '@Url.Action("_list", "Admin_Customer")',

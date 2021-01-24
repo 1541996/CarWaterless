@@ -12,6 +12,7 @@ namespace CarWaterless.Controllers
     /// <summary>
     /// test2
     /// </summary>
+    [RequireHttps]
     public class HomeController : Controller
     {
         UnitOfWork uow;

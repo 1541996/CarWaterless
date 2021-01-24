@@ -47,6 +47,7 @@
 
         function GetCarList()
         {
+            callloading('div_car');
             $.ajax({
                 cache: false,
                 url: '@Url.Action("GetCarList", "Admin_Customer")',

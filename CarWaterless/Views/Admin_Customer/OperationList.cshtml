@@ -192,6 +192,7 @@
 
         }
         function LoadMainList() {
+            callloading('div_list');
             $.ajax({
                 cache: false,
                 url: '@Url.Action("_operationlist", "Admin_Customer")',
