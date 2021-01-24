@@ -66,6 +66,126 @@ namespace CarWaterless.Controllers
 
 
 
+
+        public ActionResult DurationForm(int ID = 0, string FormType = "Add")
+        {
+            ViewBag.formtype = FormType;
+            if (ID > 0)
+            {
+                tbAdvertisement data = uow.adsRepo.GetAll().Where(a => a.IsDeleted != true && a.ID == ID).FirstOrDefault();
+                return View(data);
+            }
+            else
+            {
+                tbAdvertisement data = new tbAdvertisement();
+                return View(data);
+            }
+        }
+
+        public async System.Threading.Tasks.Task<ActionResult> ExtendDurationData(tbAdvertisement obj)
+        {
+            var today = MyExtension.getLocalTime(DateTime.UtcNow).Date;
+            tbAdvertisement UpdateEntity = null;
+
+
+            if (obj.ID > 0)
+            {
+                var olddata = uow.adsRepo.GetAll().Where(a => a.IsDeleted != true && a.ID == obj.ID).FirstOrDefault();
+               
+                if (obj.Duration == "1 month")
+                {
+                    if (olddata.FromDate <= today && olddata.ToDate >= today)
+                    {
+                        olddata.FromDate = olddata.FromDate;
+                        olddata.ToDate = olddata.ToDate.Value.AddMonths(1).Date;
+                    }
+                    else
+                    {
+                        olddata.FromDate = today;
+                        olddata.ToDate = today.AddMonths(1).Date;
+                    }
+
+                }
+                else if (obj.Duration == "3 months")
+                {
+                    if (olddata.FromDate <= today && olddata.ToDate >= today)
+                    {
+                        olddata.FromDate = olddata.FromDate;
+                        olddata.ToDate = olddata.ToDate.Value.AddMonths(3).Date;
+                    }
+                    else
+                    {
+                        olddata.FromDate = today;
+                        olddata.ToDate = today.AddMonths(3).Date;
+                    }
+
+                }
+                else if (obj.Duration == "6 months")
+                {
+                    if (olddata.FromDate <= today && olddata.ToDate >= today)
+                    {
+                        olddata.FromDate = olddata.FromDate;
+                        olddata.ToDate = olddata.ToDate.Value.AddMonths(6).Date;
+                    }
+                    else
+                    {
+                        olddata.FromDate = today;
+                        olddata.ToDate = today.AddMonths(6).Date;
+                    }
+
+
+                }
+                else if (obj.Duration == "9 months")
+                {
+                    if (olddata.FromDate <= today && olddata.ToDate >= today)
+                    {
+                        olddata.FromDate = olddata.FromDate;
+                        olddata.ToDate = olddata.ToDate.Value.AddMonths(9).Date;
+                    }
+                    else
+                    {
+                        olddata.FromDate = today;
+                        olddata.ToDate = today.AddMonths(9).Date;
+                    }
+
+                }
+                else if (obj.Duration == "12 months")
+                {
+                    if (olddata.FromDate <= today && olddata.ToDate >= today)
+                    {
+                        olddata.FromDate = olddata.FromDate;
+                        olddata.ToDate = olddata.ToDate.Value.AddYears(1).Date;
+                    }
+                    else
+                    {
+                        olddata.FromDate = today;
+                        olddata.ToDate = today.AddYears(1).Date;
+                    }
+
+                }
+
+
+
+                UpdateEntity = uow.adsRepo.UpdateWithObj(olddata);
+            }
+          
+
+            if (UpdateEntity != null)
+            {
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+
+
+
+
         public async System.Threading.Tasks.Task<ActionResult> UpsertData(tbAdvertisement obj)
         {
             var today = MyExtension.getLocalTime(DateTime.UtcNow).Date;
@@ -107,74 +227,40 @@ namespace CarWaterless.Controllers
 
                     if (obj.Duration == "1 month")
                     {
-                        if (olddata.FromDate <= today && olddata.ToDate >= today)
-                        {
-                            obj.FromDate = olddata.FromDate;
-                            obj.ToDate = olddata.ToDate.Value.AddMonths(1).Date;
-                        }
-                        else
-                        {
+                       
                             obj.FromDate = today;
                             obj.ToDate = today.AddMonths(1).Date;
-                        }
-
+                      
                     }
                     else if (obj.Duration == "3 months")
                     {
-                        if (olddata.FromDate <= today && olddata.ToDate >= today)
-                        {
-                            obj.FromDate = olddata.FromDate;
-                            obj.ToDate = olddata.ToDate.Value.AddMonths(3).Date;
-                        }
-                        else
-                        {
+                       
                             obj.FromDate = today;
                             obj.ToDate = today.AddMonths(3).Date;
-                        }
+                       
 
                     }
                     else if (obj.Duration == "6 months")
                     {
-                        if (olddata.FromDate <= today && olddata.ToDate >= today)
-                        {
-                            obj.FromDate = olddata.FromDate;
-                            obj.ToDate = olddata.ToDate.Value.AddMonths(6).Date;
-                        }
-                        else
-                        {
+                      
                             obj.FromDate = today;
                             obj.ToDate = today.AddMonths(6).Date;
-                        }
-
+                        
 
                     }
                     else if (obj.Duration == "9 months")
                     {
-                        if (olddata.FromDate <= today && olddata.ToDate >= today)
-                        {
-                            obj.FromDate = olddata.FromDate;
-                            obj.ToDate = olddata.ToDate.Value.AddMonths(9).Date;
-                        }
-                        else
-                        {
+                       
                             obj.FromDate = today;
                             obj.ToDate = today.AddMonths(9).Date;
-                        }
-
+                     
                     }
                     else if (obj.Duration == "12 months")
                     {
-                        if (olddata.FromDate <= today && olddata.ToDate >= today)
-                        {
-                            obj.FromDate = olddata.FromDate;
-                            obj.ToDate = olddata.ToDate.Value.AddYears(1).Date;
-                        }
-                        else
-                        {
+                      
                             obj.FromDate = today;
                             obj.ToDate = today.AddYears(1).Date;
-                        }
-
+                    
                     }
                     
               

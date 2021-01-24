@@ -36,7 +36,7 @@
                         <tr id="div_Advertisement_@result.ID">
 
                             <td>@count</td>
-                            <td><img src="@result.PhotoUrl"></td>
+                            <td><img src="@result.PhotoUrl" style="width:200px;height:100px;object-fit:cover;border-radius:10px"></td>
                             <td>@result.Title</td>
                             <td>
                                 @if (result.FromDate != null)
@@ -56,6 +56,10 @@
                             </td>
                             <td class="text-center">
 
+
+                                <button class="btn bg-blue btn-info btn-rounded" onclick="extendduration('@result.ID')" data-advertisementid="@result.ID">
+                                    <i class="icon-pencil7  position-left"></i>Extend Duration
+                                </button>
 
                                 <button class="btn bg-blue btn-info btn-rounded" onclick="editadvertisement('@result.ID')" data-advertisementid="@result.ID">
                                     <i class="icon-pencil7  position-left"></i>Edit

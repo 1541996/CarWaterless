@@ -38,7 +38,7 @@
 
 
 
-@using (Html.BeginForm("upsertuser", "User", FormMethod.Post, new { id = "AdvertisementForm", @class = "form-horizontal" }))
+@using (Html.BeginForm("upsertuser", "User", FormMethod.Post, new { id = "DurationForm", @class = "form-horizontal" }))
 {
 
 
@@ -47,7 +47,7 @@
         <div class="page-title-wrapper">
             <div class="page-title-heading">
                 <div>
-                    Ads Form
+                   Extend Ads Duration
                 </div>
             </div>
         </div>
@@ -61,13 +61,13 @@
                 <div class="position-relative row form-group">
                     <label for="txt_FullName" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                        <input name="Title" value="@Model.Title" placeholder="" type="text" class="form-control">
+                        <input name="Title" value="@Model.Title" placeholder="" type="text" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="position-relative row form-group">
                     <label for="txt_UserName" class="col-sm-2 col-form-label">Ads Link</label>
                     <div class="col-sm-10">
-                        <input name="WebLink" value="@Model.WebLink" placeholder="" type="text" class="form-control">
+                        <input name="WebLink" value="@Model.WebLink" placeholder="" type="text" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="position-relative row form-group">
@@ -95,100 +95,12 @@
                 </div>
 
 
-                <div class="position-relative row form-group">
-                    <label class="col-sm-2 col-form-label">Ads Type</label>
-                    <div class="col-sm-10">
-
-                        <div class="btn-group btn-group-justified" data-toggle="buttons">
-                            <label class="btn btn-light r_image rounded-default lb">
-                                <input type="radio" name="Option" class="rad_Type" onchange="radchange('Image')" value="Image" id="r_1"> Image
-                            </label>
-
-                            <label class="btn btn-light r_gif rounded-default lb">
-                                <input type="radio" name="Option" class="rad_Type" onchange="radchange('Gif')" value="Gif" id="r_2"> Gif
-                            </label>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-
-                <div class="position-relative row form-group" id="div_image" style="display:none">
-                    <label for="exampleFile" class="col-sm-2 col-form-label">Photo</label>
-                    <div class="col-sm-3">
-                        <input name="file" id="exampleFile" type="file" class="form-control-file file_ads" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'ads')">
-                        <small class="form-text text-muted">Please upload photo.</small>
-
-                    </div>
-                    <div class="col-sm-6">
-                        <img id="imagePreview" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Ads/@Model.Photo" style="width:200px" />
-
-                    </div>
-                </div>
-
-                <div class="position-relative row form-group" id="div_gif" style="display:none">
-                    <label for="exampleFile" class="col-sm-2 col-form-label">Gif</label>
-                    <div class="col-sm-3">
-                        <input name="file" id="file_adsgif" type="file" class="form-control-file file_adsgif" onchange="ShowImagePreviewGif(this,document.getElementById('imagePreviewGif'), 'adsgif')">
-                        <small class="form-text text-muted">Please upload Gif.</small>
-
-                    </div>
-                    <div class="col-sm-6">
-                        <img id="imagePreviewGif" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Ads/@Model.Photo" style="width:200px" />
-
-                    </div>
-                </div>
-
-
-
-
-                <input type="hidden" id="photo_ads" name="Photo" />
+               
 
                 <input type="hidden" id="isgifs" name="IsGif" value="@Model.IsGif" />
 
 
-                <div class="position-relative row form-group">
-                    <label for="exampleFile" class="col-sm-2 col-form-label">Publish Page</label>
-                    <div class="col-sm-10">
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input id="HomeTop" type="checkbox" value="HomeTop" class="form-check-input chk_type">
-                                <label class="form-check-label" for="HomeTop">
-                                    Home Top
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input id="HomeBottom" type="checkbox" value="HomeBottom" class="form-check-input chk_type">
-                                <label class="form-check-label" for="HomeBottom">
-                                    Home Bottom
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input id="Branch" type="checkbox" value="Branch" class="form-check-input chk_type">
-                                <label class="form-check-label" for="Branch">
-                                    Branch
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input id="BranchDetail" type="checkbox" value="BranchDetail" class="form-check-input chk_type">
-                                <label class="form-check-label" for="BranchDetail">
-                                    Branch Detail
-                                </label>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-
-                <input type="text" name="Type" value="@Model.Type" id="txt_type" />
-
-
+            
 
 
                 <div class="position-relative row form-check mt-30">
@@ -234,68 +146,18 @@
         $(function () {
 
 
-            var type = $('#txt_type').val();
-
-            if (type != "" && type != null) {
-                checkvalues = $('#txt_type').val().split('_');
-
-                if (checkvalues != null) {
-                    for (i = 0; i < checkvalues.length; i++) {
-                        $('#' + checkvalues[i]).prop("checked", true);
-                    }
-                }
-
-            }
-
-
-            if ($('#isgifs').val() == "value") {
-
-                $('#div_image').hide();
-                $('#div_gif').show();
-
-                $('.r_gif').addClass('active');
-
-                $('#isgifs').val(true);
-
-            } else {
-                $('#div_image').show();
-                $('#div_gif').hide();
-
-                $('.r_image').addClass('active');
-                $('#isgifs').val('');
-            }
-
-
-
-
-            $('.chk_type').on("click", function () {
-                checkvalues = "";
-
-                $('.chk_type:checked').each(function () {
-
-                    checkvalues += $(this).val() + "_";
-
-                });
-                checkvalues = checkvalues.slice(0, -1);
-
-
-                $('#txt_type').val(checkvalues);
-
-
-            });
-
 
 
         })
 
 
 
-            $('#AdvertisementForm').submit(function (e) {
+            $('#DurationForm').submit(function (e) {
 
                         e.preventDefault();
                         $.ajax({
                             cache: false,
-                            url: '@Url.Action("UpsertData", "Admin_Advertisement")',
+                            url: '@Url.Action("ExtendDurationData", "Admin_Advertisement")',
                             type: "Post",
                             data: $(this).serialize(),
                             beforeSend: function () {
@@ -319,12 +181,11 @@
                                         }
                                     })
                                 }
-
                             },
                             complete: function () {
 
                                 $('.btn').prop("disabled", false);
-
+                               
 
 
                             }

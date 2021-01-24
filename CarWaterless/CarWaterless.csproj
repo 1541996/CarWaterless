@@ -522,6 +522,29 @@
     <Content Include="Plesirthemes\lib\slick\slick\slick-theme.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.svg" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-autoplay.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-autoplay.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-fullscreen.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-fullscreen.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-hash.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-hash.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-pager.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-pager.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-rotate.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-rotate.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-share.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-share.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-thumbnail.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-thumbnail.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-video.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-video.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-zoom.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-zoom.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.css" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.min.css" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.min.js" />
     <Content Include="Plesirthemes\lightSlider\css\lightslider.css" />
     <Content Include="Plesirthemes\lightSlider\css\lightslider.min.css" />
     <Content Include="Plesirthemes\lightSlider\img\controls.png" />
@@ -642,6 +665,8 @@
     <Content Include="Plesirthemes\Raty\lib\fonts\raty.eot" />
     <Content Include="Plesirthemes\Raty\lib\fonts\raty.ttf" />
     <Content Include="Plesirthemes\Raty\lib\fonts\raty.woff" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.ttf" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.woff" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -720,6 +745,7 @@
     <Content Include="Views\Admin_Advertisement\Index.cshtml" />
     <Content Include="Views\Admin_Advertisement\_list.cshtml" />
     <Content Include="Views\Admin_Advertisement\AdvertisementForm.cshtml" />
+    <Content Include="Views\Admin_Advertisement\DurationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

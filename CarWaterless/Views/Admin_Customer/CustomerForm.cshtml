@@ -73,10 +73,15 @@
 
             <div class="position-relative row form-group">
                 <label for="exampleFile" class="col-sm-2 col-form-label">Photo</label>
-                <div class="col-sm-10">
+                <div class="col-sm-4">
                     <input name="file" id="exampleFile" type="file" class="form-control-file file_customer" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'customer')">
                     <small class="form-text text-muted">Please upload photo.</small>
                     <input type="hidden" id="photo_customer" name="Photo" />
+
+                </div>
+
+                <div class="col-sm-6">
+                    <img id="imagePreview" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@Model.Photo" style="width:200px" />
 
                 </div>
             </div>

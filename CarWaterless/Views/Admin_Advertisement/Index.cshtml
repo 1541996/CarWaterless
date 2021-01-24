@@ -137,8 +137,8 @@
             location.href = "../admin_advertisement/advertisementform?ID=" + ID + "&FormType=Edit";
         }
 
-        function AddCar(ID) {
-            location.href = "../admin_customer/car?customerid=" + ID;
+        function extendduration(ID) {
+            location.href = "../admin_advertisement/durationform?ID=" + ID + "&FormType=Edit";
         }
 
         function Delete(e) {
@@ -159,7 +159,7 @@
                             var infoid = $(e).data('infoid');
                             $.ajax({
                                 cache: false,
-                                url: '@Url.Action("Delete", "Admin_Customer")',
+                                url: '@Url.Action("Delete", "Admin_Advertisement")',
 
                                 data: { ID: ID },
                                 beforeSend: function () {
@@ -196,7 +196,7 @@
         }
 
 
-        function IsMember(cusid) {
+        function IsActive(ID) {
             Swal.fire({
                 title: "Are you sure?",
                 text: "Do you want to promote this customer as a member?!",
@@ -214,15 +214,15 @@
                            // var infoid = $(e).data('infoid');
                             $.ajax({
                                 cache: false,
-                                url: '@Url.Action("IsMember", "Admin_Customer")',
+                                url: '@Url.Action("IsActive", "Admin_Advertisement")',
 
-                                data: { ID: cusid },
+                                data: { ID: ID },
                                 beforeSend: function () {
 
                                 },
                                 success: function (result) {
 
-                                        if (result.IsMember == true) {
+                                        if (result.IsActive == true) {
                                             $("#member_" + cusid).addClass('btn-success');
                                             $("#member_" + cusid).removeClass('btn-danger');
                                         } else {
