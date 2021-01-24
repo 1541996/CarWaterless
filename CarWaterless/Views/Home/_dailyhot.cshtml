@@ -1,0 +1,71 @@
+﻿
+@model IQueryable<Infra.Models.tbAdditionalService>
+
+@if (Model.Count() > 0)
+{
+    <div class="heading-section">
+        <div class="sa-title popcat">Daily Hot </div>
+        <div class="heading-info">
+            Let's see our daily hot
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="mt-20">
+        <div class="owl-carousel dailyhot-carousel">
+            @{ 
+                var i = 0;
+            }
+            @foreach (var item in Model)
+            {
+
+                <div class="daily">
+                    <img src="@item.PhotoUrl" class="br-10" alt="">
+                    <div class="vsb-rating">
+                        25% off
+                    </div>
+
+                    <div class="vsb-middle">
+                        <div class="vsbm-left">
+                            @item.Name
+
+                        </div>
+
+                        @if (item.CarType == "small")
+                        {
+                            <div class="vsbm-right">
+                                ကားသေး
+                            </div>
+                        }
+                        else if (item.CarType == "big")
+                        {
+                            <div class="vsbm-right">
+                                ကားကြီး
+                            </div>
+                        }
+                        else
+                        {
+
+                            <div class="vsbm-right">
+                                ကားလတ်
+                            </div>
+                        }
+
+
+                    </div>
+                </div>
+
+               
+            }
+
+        </div>
+
+
+
+    </div>
+
+
+
+}
+
+

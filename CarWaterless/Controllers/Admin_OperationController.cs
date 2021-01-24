@@ -186,6 +186,14 @@ namespace CarWaterless.Controllers
                                                                    ConfirmedDate = operation.ConfirmedTime,
                                                                    TotalAmount = operation.TotalAmount,
                                                                    CancelDate = operation.CancelTime,
+                                                                   FinishedDate = operation.FinishedTime,
+                                                                   Email = customer.Email,
+                                                                   BookingPackage = operation.BookingPackage,
+                                                                   MemberPackage = operation.MemberPackageName,
+                                                                   PaymentType = operation.PaymentType,
+                                                                   ComplaintMessage = operation.ComplaintsMessage,
+                                                                   Branch = operation.BranchName,
+                                                                   Township = operation.TownshipName
 
                                                              }).AsQueryable();
             var totalCount = result.Count();

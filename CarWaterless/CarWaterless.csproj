@@ -203,6 +203,7 @@
     <Compile Include="Business\AdminSetupRepository.cs" />
     <Compile Include="Business\CommonRepository.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\Admin_AdvertisementController.cs" />
     <Compile Include="Controllers\Admin_CustomerController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
@@ -301,7 +302,6 @@
     <Content Include="ArchitectThemes\fonts\themify.svg" />
     <Content Include="ArchitectThemes\frontend\bankpay.js" />
     <Content Include="ArchitectThemes\frontend\additionalservice.js" />
-    <Content Include="ArchitectThemes\frontend\memberpackage.js" />
     <Content Include="ArchitectThemes\frontend\user-new.js" />
     <Content Include="ArchitectThemes\frontend\carcategory.js" />
     <Content Include="ArchitectThemes\frontend\township.js" />
@@ -425,19 +425,31 @@
     <Content Include="Plesirthemes\EcoPhoto\ads-holder.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads-holder1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ads.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\bank-transfer.png" />
+    <Content Include="Plesirthemes\EcoPhoto\big.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\bookcar.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\bronze.png" />
     <Content Include="Plesirthemes\EcoPhoto\camera.png" />
     <Content Include="Plesirthemes\EcoPhoto\carwash1.png" />
     <Content Include="Plesirthemes\EcoPhoto\carwash2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\carwash3.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\cleaninginterior.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\COD.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco3.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco4.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\fbicon.png" />
     <Content Include="Plesirthemes\EcoPhoto\feedback.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\gold.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\handpolish.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\igeco.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\mailicon.png" />
+    <Content Include="Plesirthemes\EcoPhoto\medium.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\ozone.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\platinum.png" />
+    <Content Include="Plesirthemes\EcoPhoto\silver.png" />
+    <Content Include="Plesirthemes\EcoPhoto\small.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\tick.svg" />
     <Content Include="Plesirthemes\img\bgcar.jpg" />
     <Content Include="Plesirthemes\img\cab.png" />
@@ -483,6 +495,7 @@
     <Content Include="Plesirthemes\img\temple.png" />
     <Content Include="Plesirthemes\img\train.png" />
     <Content Include="Plesirthemes\img\transmission.png" />
+    <Content Include="Plesirthemes\js\stackedCards.js" />
     <Content Include="Plesirthemes\js\themev1.js" />
     <Content Include="Plesirthemes\lib\bootstrap-timepicker\bootstrap-timepicker.js" />
     <Content Include="Plesirthemes\lib\bootstrap\css\bootstrap.min.css" />
@@ -509,6 +522,29 @@
     <Content Include="Plesirthemes\lib\slick\slick\slick-theme.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.css" />
     <Content Include="Plesirthemes\lib\slick\slick\slick.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.svg" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-autoplay.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-autoplay.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-fullscreen.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-fullscreen.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-hash.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-hash.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-pager.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-pager.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-rotate.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-rotate.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-share.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-share.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-thumbnail.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-thumbnail.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-video.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-video.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-zoom.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\js\lg-zoom.min.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.css" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.js" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.min.css" />
+    <Content Include="Plesirthemes\LightGalleryV2\lightgallery.min.js" />
     <Content Include="Plesirthemes\lightSlider\css\lightslider.css" />
     <Content Include="Plesirthemes\lightSlider\css\lightslider.min.css" />
     <Content Include="Plesirthemes\lightSlider\img\controls.png" />
@@ -518,6 +554,14 @@
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.js" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.css" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.js" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.svg" />
+    <Content Include="Plesirthemes\Raty\lib\images\cancel-off.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\cancel-on.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-half.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-off.png" />
+    <Content Include="Plesirthemes\Raty\lib\images\star-on.png" />
+    <Content Include="Plesirthemes\Raty\lib\jquery.raty.css" />
+    <Content Include="Plesirthemes\Raty\lib\jquery.raty.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -618,6 +662,11 @@
     <Content Include="ArchitectThemes\webfonts\gijgo-material.ttf" />
     <Content Include="ArchitectThemes\webfonts\gijgo-material.woff" />
     <Content Include="ArchitectThemes\webfonts\Lato-Regular.ttf" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.eot" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.ttf" />
+    <Content Include="Plesirthemes\Raty\lib\fonts\raty.woff" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.ttf" />
+    <Content Include="Plesirthemes\LightGalleryV2\fonts\lg.woff" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -680,7 +729,23 @@
     <Content Include="Views\Home\_packages.cshtml" />
     <Content Include="Views\Service\Detail.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
-    <Content Include="Views\AdminSetup\MemberPackage.cshtml" />
+    <Content Include="Views\Home\_stackedCardPackages.cshtml" />
+    <Content Include="Views\Admin_Customer\OperationList.cshtml" />
+    <Content Include="Views\Admin_Customer\_operationlist.cshtml" />
+    <Content Include="Views\Admin_Customer\_exceloperationlist.cshtml" />
+    <Content Include="Views\Home\_dailyhot.cshtml" />
+    <Content Include="Views\Book\bookedlist.cshtml" />
+    <Content Include="Views\Book\_confirmedlist.cshtml" />
+    <Content Include="Views\Book\_finishedlist.cshtml" />
+    <Content Include="Views\Book\_waitinglist.cshtml" />
+    <Content Include="Views\Shared\nobookingdata.cshtml" />
+    <Content Include="Views\Book\RatingList.cshtml" />
+    <Content Include="Views\Book\_ratinglist.cshtml" />
+    <Content Include="Views\Book\RatedForm.cshtml" />
+    <Content Include="Views\Admin_Advertisement\Index.cshtml" />
+    <Content Include="Views\Admin_Advertisement\_list.cshtml" />
+    <Content Include="Views\Admin_Advertisement\AdvertisementForm.cshtml" />
+    <Content Include="Views\Admin_Advertisement\DurationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -740,6 +805,8 @@
           <DevelopmentServerPort>59278</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>https://localhost:44338/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44338/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

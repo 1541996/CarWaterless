@@ -29,24 +29,34 @@ namespace CarWaterless.Controllers
             // normal login
             if (cus.UserName != null && cus.Password != null)
             {
-                tbCustomer customer = uow.customerRepo.GetAll().Where(a => a.UserName == cus.UserName && a.Password == cus.Password).FirstOrDefault();
-                if (customer != null)
+                try
                 {
-                    customer.LastLoginTime = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow);                  
-                    customer = uow.customerRepo.UpdateWithObj(customer);
-                    if(customer != null)
+                    tbCustomer customer = uow.customerRepo.GetAll().Where(a => a.UserName == cus.UserName && a.Password == cus.Password).FirstOrDefault();
+                    if (customer != null)
                     {
-                        customer.ReturnStatus = "Success";
-                    }
+                        customer.LastLoginTime = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow);
+                        customer = uow.customerRepo.UpdateWithObj(customer);
+                        if (customer != null)
+                        {
+                            customer.ReturnStatus = "Success";
+                        }
 
-                    return request.CreateResponse<tbCustomer>(HttpStatusCode.OK, customer);
+                        return request.CreateResponse<tbCustomer>(HttpStatusCode.OK, customer);
+                    }
+                    else
+                    {
+                        customer = new tbCustomer();
+                        customer.ReturnStatus = "Fail";
+                        return request.CreateResponse<tbCustomer>(HttpStatusCode.OK, customer);
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    customer = new tbCustomer();
-                    customer.ReturnStatus = "Fail";
-                    return request.CreateResponse<tbCustomer>(HttpStatusCode.OK, customer);
+
                 }
+
+                return null;
+               
             }
            
             // fb login

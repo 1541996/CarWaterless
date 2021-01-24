@@ -55,6 +55,12 @@ namespace CarWaterless.Controllers
         }
 
 
+        public ActionResult GetMemberPackages(string cartype = null)
+        {
+            IQueryable data = uow.memberPackageRepo.GetAll().Where(a => a.IsDeleted != true && a.CarType == cartype).AsQueryable();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult GetTownshipList()
         {
@@ -82,6 +88,337 @@ namespace CarWaterless.Controllers
             return View(operation);
             
         }
+
+
+
+        public ActionResult bookedlist(string customerid = null)
+        {
+            // ViewBag.bksource = source;
+            ViewBag.customerid = customerid;
+            return View();
+
+        }
+
+
+        public ActionResult _finishedlist(string customerid = null,int page = 0,int pagesize = 0)
+        {
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                           Where(a => a.IsDeleted != true && a.CustomerId.ToString() == customerid && a.Status == "Finished")
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+
+            result = result.OrderByDescending(a => a.FinishedDate);
+
+
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+
+            var skipindex = pagesize * (page - 1);
+            var objs = result.Skip(skipindex).Take(pagesize).ToList();
+
+            var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
+
+
+            if (model.Results.Count != 0)
+            {
+                return PartialView("_finishedlist", model);
+            }
+            else
+            {
+                if (page == 1)
+                {
+                    return PartialView("_nobookingdata", result);
+                }
+                else
+                {
+                    return Json("NoResult", JsonRequestBehavior.AllowGet);
+                }
+
+
+            }
+
+
+        }
+
+
+
+        public ActionResult _confirmedlist(string customerid = null, int page = 0, int pagesize = 0)
+        {
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                           Where(a => a.IsDeleted != true && a.CustomerId.ToString() == customerid && a.Status == "Confirmed")
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+
+            result = result.OrderByDescending(a => a.ConfirmedDate);
+
+
+            return PartialView("_confirmedlist", result);
+
+        }
+
+
+
+
+        public ActionResult _waitinglist(string customerid = null, int page = 0, int pagesize = 0)
+        {
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                   Where(a => a.IsDeleted != true && a.CustomerId.ToString() == customerid && a.Status == "Waiting")
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+
+            result = result.OrderByDescending(a => a.OperationDate);
+
+
+          
+
+            return PartialView("_waitinglist", result);
+
+        }
+
+
+
+
+
+        public ActionResult RatingList(string customerid = null)
+        {
+            ViewBag.customerid = customerid;
+            return View();
+        }
+
+
+        public ActionResult _ratinglist(string customerid = null, int page = 0, int pagesize = 0)
+        {
+            IQueryable<BookingViewModel> result = (from operation in uow.operationRepo.GetAll().
+                                                           Where(a => a.IsDeleted != true && a.CustomerId.ToString() == customerid && a.Status == "Finished" && a.IsRated != true)
+                                                   join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == customerid)
+                                                   on operation.CustomerId equals customer.Id
+                                                   join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on operation.CustomerVehicleId equals car.Id
+                                                   join carcategory in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
+                                                   on car.CarCategoryId equals carcategory.Id
+                                                   select new BookingViewModel
+                                                   {
+                                                       FullName = customer.FullName,
+                                                       VehicleBrand = car.VehicleBrand,
+                                                       VehicleName = car.VehicleName,
+                                                       VehicleColor = car.VehicleColor,
+                                                       CategoryName = carcategory.Name,
+                                                       VehicleNo = car.VehicleNo,
+                                                       PhoneNo = customer.PhoneNo,
+                                                       OperationId = operation.Id,
+                                                       BookingStatus = operation.Status,
+                                                       WashOption = operation.WashOption,
+                                                       CustomerAddress = operation.CustomerAddress,
+                                                       CategoryType = carcategory.Type,
+                                                       CategoryBasicPrice = carcategory.BasicPrice,
+                                                       AdditionalNames = operation.AdditionalNames,
+                                                       AdditionalPrices = operation.AdditionalPrices,
+                                                       CustomerId = operation.CustomerId ?? 0,
+                                                       OperationDate = operation.OperationDate,
+                                                       ConfirmedDate = operation.ConfirmedTime,
+                                                       TotalAmount = operation.TotalAmount,
+                                                       CancelDate = operation.CancelTime,
+                                                       FinishedDate = operation.FinishedTime,
+                                                       Email = customer.Email,
+                                                       BookingPackage = operation.BookingPackage,
+                                                       MemberPackage = operation.MemberPackageName,
+                                                       PaymentType = operation.PaymentType,
+                                                       ComplaintMessage = operation.ComplaintsMessage,
+                                                       Branch = operation.BranchName,
+                                                       Township = operation.TownshipName
+
+
+                                                   }).AsQueryable();
+            var totalCount = result.Count();
+
+
+            result = result.OrderByDescending(a => a.FinishedDate);
+
+
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+
+            var skipindex = pagesize * (page - 1);
+            var objs = result.Skip(skipindex).Take(pagesize).ToList();
+
+            var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
+
+
+            if (model.Results.Count != 0)
+            {
+                return PartialView("_ratinglist", model);
+            }
+            else
+            {
+                if (page == 1)
+                {
+                    return PartialView("_nobookingdata", result);
+                }
+                else
+                {
+                    return Json("NoResult", JsonRequestBehavior.AllowGet);
+                }
+
+
+            }
+
+
+        }
+
+
+
+
+        public ActionResult RatedForm(int operationid = 0,string customerid = null)
+        {
+            ViewBag.customerid = customerid;
+            ViewBag.operationid = operationid;
+            return View();
+        }
+
+        
+        public ActionResult saveRating(string ratingscore = null,string feedback = null,int operationid = 0)
+        {
+            tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operationid && a.Status == "Finished").FirstOrDefault();
+
+            if(operation != null)
+            {
+                operation.IsRated = true;
+                operation.StarRate = ratingscore;
+                operation.Feedback = feedback;
+
+                uow.operationRepo.UpdateWithObj(operation);
+
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+       
+
+        }
+
+
+
+
 
         public ActionResult BookingSuccess(int id = 0)
         {
@@ -119,6 +456,15 @@ namespace CarWaterless.Controllers
             //    obj.CarCategoryName = carcategory.Name;
             //    obj.CarCategoryType = carcategory.Type;
             //}
+
+            if(obj.WashOption == "In-House")
+            {
+                obj.TransportationCharges = 500;
+            }
+            else
+            {
+                obj.TransportationCharges = null;
+            }
 
 
             if (obj.Id > 0)

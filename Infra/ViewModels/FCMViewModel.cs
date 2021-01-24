@@ -36,7 +36,7 @@ namespace Infra.ViewModels
         public string to { get; set; }
         public string priority { get; set; }
         public fcmdata data { get; set; }
-     //   public int time_to_live { get; set; }
+   
     }
 
     public class fcmdata

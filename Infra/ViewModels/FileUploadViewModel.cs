@@ -12,4 +12,15 @@ namespace Infra.ViewModels
         public string photo { get; set; }
     }
 
+
+    public class ChatViewModel
+    {
+        public string fromuserid { get; set; }
+        public string touserid { get; set; }
+        public int? operationid { get; set; }
+        public string message { get; set; }
+        public string file { get; set; }
+
+    }
+
 }

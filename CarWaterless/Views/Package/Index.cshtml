@@ -22,7 +22,7 @@
             foreach (var item in Model)
             {
                 <div class="panel-custom-default br-10 mb-30" id="1" style="background:#f2fbff!important;">
-                    <img src="~/Plesirthemes/img/car2-mitsubishi2.png" class="br-10 br-b-l-0 br-b-r-0">
+                    <img src="@item.PhotoUrl" class="br-10 br-b-l-0 br-b-r-0">
 
 
                     <div class="p-15">
@@ -82,6 +82,13 @@
 @section scripts{
 
     <script>
+
+
+
+        $(function () {
+            $('#div_package_' + '@ViewBag.id').toggle();
+        })
+
 
         function toggle(type) {
 

@@ -1,0 +1,115 @@
+﻿
+@model Infra.ViewModels.PagedListClient<Infra.ViewModels.BookingViewModel>
+@using PagedList;
+@using PagedList.Mvc;
+
+@if (Model.Results.Count() > 0)
+{
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.TotalCount records found.</h5>
+            <div class="table-responsive">
+                <table class="mb-0 table" id="tb_list">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Full Name</th>
+
+                            @*<th>Email</th>*@
+                            <th>Phone No.</th>
+                            <th>Vehicle</th>
+                            <th>Vehicle No</th>
+                            <th>Operation Date</th>
+                            <th>Wash Type</th>
+                            <th>Car Type</th>
+                            <th>Package</th>
+                            <th>Total Amount</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int pagesize = ViewBag.pagesize;
+                            int pagestartno = ViewBag.page;
+                            int count = 0;
+                            count = (pagestartno - 1) * pagesize;
+                        }
+                        @foreach (var result in Model.Results)
+                        {
+                            count++;
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@result.FullName</td>
+                            @*<td>@result.Email</td>*@
+                            <td data-tableexport-xlsxformatid="1">@result.PhoneNo.ToString()</td>
+                            <td>@result.VehicleBrand @result.VehicleName</td>
+                            <td>@result.VehicleNo</td>
+                            <td>@result.OperationDate.Value.ToString("dd MMM yyyy") @result.OperationDate.Value.ToShortTimeString()</td>
+                            <td>@result.WashOption</td>
+
+                            
+
+                            @if (result.CategoryType == "medium")
+                            {
+                                <td>ကားလတ်</td>
+                            }
+                            else if (result.CategoryType == "big")
+                            {
+                                <td>ကားကြီး</td>
+                            }
+                            else if (result.CategoryType == "small")
+                            {
+                                <td>ကားသေး</td>
+                            }
+                            @if (result.BookingPackage == "Normal")
+                            {
+                                if (result.AdditionalNames != null)
+                                {
+                                    <td> @result.AdditionalNames.Replace("_", ", ")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+
+                            }
+                            else
+                            {
+                                <td>
+                                    @result.MemberPackage <span class="text-success">(@result.AdditionalNames.Replace("_", ", "))</span>
+                                </td>
+
+                            }
+
+                            <td>
+                                @result.TotalAmount.Value.ToString("#,##0") MMK
+
+
+                            </td>
+                        </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12 mt-30">
+                <div class="paginator-wrap pagedList">
+
+                    @Html.PagedListPager(Model.Results, page => Url.Action("_operationlist", "Admin_Customer",
+               new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+
+}
+
+

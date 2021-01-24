@@ -122,8 +122,8 @@
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         border-radius: 10px;
-        left: 118px;
-        width: 75px;
+        left: 110px;
+        width: 85px;
         font-size: 12px !important;
     }
 
@@ -257,6 +257,31 @@
     .subsite-banner {
         height: 128px !important
     }
+
+    #div_additionalservice label{
+        display:inline-block;
+    }
+
+    .payment {
+        cursor: pointer;
+        background-size: contain;
+       /* width: 60px;*/
+        height: 80px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        transition: all 50ms ease-in-out;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .payment-active {
+        border: 2px solid #00c9a7;
+    }
+
+
+
 </style>
 
 
@@ -380,6 +405,25 @@
                                 </div>
                             </div>
 
+                            <div class="form-group col-md-12 div_packages">
+                                <label>Choose Packages</label>
+                                <div class="field-group">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <select class="custom-select mr-sm-2 with-icon" onchange="packageschange()" name="selectpacakges" id="ddpackages" required>
+                                        <option selected disabled>Choose Packages</option>
+
+                                    </select>
+
+                                    <input type="hidden" name="MemberPackageId" id="txt_memberpackagesid" />
+                                    <input type="hidden" name="MemberPackageName" id="txt_memberpackagesname" />
+                                    <input type="hidden" name="BookingPackage" id="txt_bookingpackage" />
+                                </div>
+
+                                @*<div id="errPackages" class="error-message"></div>*@
+                            </div>
+
+
+
 
                             <div class="form-group col-md-12 mt-10" id="div_carcategory" style="margin-bottom:5px;">
 
@@ -387,17 +431,16 @@
 
 
 
-                            <div class="form-group col-md-12 chk">
 
-                                <div id="div_additionalservice" class="mt-10">
-
-                                </div>
-
-                                <input type="hidden" name="AdditionalIds" id="txt_AdditionalIds" />
-                                <input type="hidden" name="AdditionalPrices" id="txt_AdditionalPrices" />
-                                <input type="hidden" name="AdditionalNames" id="txt_AdditionalNames" />
+                            <div id="div_additionalservice" class="form-group col-md-12 chk mt-10">
 
                             </div>
+
+                            <input type="hidden" name="AdditionalIds" id="txt_AdditionalIds" />
+                            <input type="hidden" name="AdditionalPrices" id="txt_AdditionalPrices" />
+                            <input type="hidden" name="AdditionalNames" id="txt_AdditionalNames" />
+
+
 
                             <div class="form-group col-md-12 page-cart mt-20" id="div_pricing">
 
@@ -409,12 +452,48 @@
 
 
 
+                            <div class="col-md-12 text-center mt-10">
+                                <label>Choose Payment Method</label>
+
+                                <div class="d-flex justify-content-center mt-10">
+                                    <div>
+                                        <div class="payment payment-active" id="p1" onclick="paymentfilter('COD')">
+                                            <img src="~/Plesirthemes/EcoPhoto/COD.jpg" style="margin-top: 8px; width: 80px; object-fit: cover;" />
+                                        </div>
+
+                                    </div>
+                                    <div>
+                                        <div class="payment ml-10" id="p2" onclick="paymentfilter('Bank')">
+                                            <img src="~/Plesirthemes/EcoPhoto/bank-transfer.png" style=" width: 80px; object-fit: cover;" />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <input type="hidden" name="PaymentType" id="txt_Payment" value="COD" />
 
 
 
 
+                            </div>
 
-                            <div class="form-group col-md-12">
+
+                            <input type="hidden" name="TransportationCharges" value="500" />
+
+                            <div class="form-group col-md-12 mt-15">
+                                <label for="Address">Message</label>
+                                <div class="input-group">
+                                    <textarea class="form-control" name="ComplaintsMessage"></textarea>
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="form-group col-md-12 mt-20">
                                 <br>
                                 <div class="button">
                                     <button type="submit" class="theme-button">Book Now</button>
@@ -451,6 +530,7 @@
         var additionalids;
         var additionalsname;
         var additionalprices;
+        var washtype;
         $(function () {
 
             $('#datestart').daterangepicker({
@@ -473,19 +553,51 @@
 
             $("input[type='radio'].rad_washType").change(function () {
                 if ($("input[type='radio'].rad_washType").is(':checked')) {
-                    var washtype = $("input[type='radio'].rad_washType:checked").val();
+                    washtype = $("input[type='radio'].rad_washType:checked").val();
                     if (washtype == "In-House") {
                         $('.div_address').show();
                         $('.div_township').hide();
                         $('.div_branch').hide();
                         $('#txt_BranchId').val(0);
 
+                        $('#div_trcharges').empty().append(`                            
+                             <div class="ct-row">
+                                <div class="ct-left">Transportation Charges</div>
+                                <div class="ct-right"><span>
+                                               500 MMK</span></div>
+                                <div class="clear"></div>
+                            </div>
+                 
+                       `)
+
+                        total = basicprice + 500;
+
+                       
+
+                        $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
+
+
                     } else {
                         $('.div_address').hide();
                         $('.div_township').show();
                         $('.div_branch').show();
 
+                        $('#div_trcharges').empty();
+
+                            total = basicprice;
+
+                        $('#div_total').empty().append(`
+                                 <span>
+                                        ${total} MMK</span>
+
+                             `);
                     }
+
+                    $('#txt_TotalAmount').val(total);
                 }
             });
 
@@ -504,6 +616,9 @@
                     {
                         required: true
                     },
+                    selectpacakges: {
+                        required: true
+                    }
 
                 },
                 errorPlacement: function (error, element) {
@@ -566,6 +681,22 @@
             //    uiLibrary: 'bootstrap'
             //});
         })
+
+
+        function paymentfilter(pytypefilter) {
+            if (pytypefilter == "COD") {
+                $('.payment').removeClass('payment-active');
+                $('#p1').addClass('payment-active');
+                $('#txt_Payment').val(pytypefilter);
+
+            } else {
+                $('.payment').removeClass('payment-active');
+                $('#p2').addClass('payment-active');
+                $('#txt_Payment').val(pytypefilter);
+
+            }
+        }
+
 
 
            function BindTownshipList() {
@@ -705,12 +836,12 @@
 
 
                         } else {
-                            GetCarCategoryByID();
-                            GetAdditionalService();
-
+                       
+                            GetMemberPackages();
                         }
 
-                      
+                        $('#div_carcategory').empty();
+                        $('#div_additionalservice').empty();
                         $('#div_pricing').empty();
 
 
@@ -734,13 +865,38 @@
                 },
                 success: function (result) {
 
+
                     $('#div_additionalservice').empty().append('<label for="note" class="mb-0">Choose Additional Service (optional)</label>');
 
                     for (var i = 0; i < result.length; i++) {
-                        $('#div_additionalservice').append(`<div><label>
-                            <input type="checkbox" value="${result[i].Name}" data-price="${result[i].Price}" data-id="${result[i].Id}" class="option-input checkbox chk_additionalservice" />
+
+
+                        if (result[i].IsDailyHot == true) {
+                            $('#div_additionalservice').append(`<div><label>
+                            <input type="checkbox" value="${result[i].Name}"
+                                    data-price="${result[i].Price}" data-id="${result[i].Id}"
+                                    data-dailyhot="${result[i].IsDailyHot}"
+                                    data-discount="${result[i].DiscountPrice}"
+                                    class="option-input checkbox chk_additionalservice" />
+                                   ${result[i].Name} 
+                            </label>
+                            <span class="badge badge-danger ml-5 fs-12">Daily Hot</span>
+                            <span style="text-decoration: line-through;">(${result[i].Price} MMK)</span>
+                            <span class="font-bold">(${result[i].DiscountPrice} MMK)</span>
+
+                            </div>`)
+                        } else {
+                            $('#div_additionalservice').append(`<div><label>
+                            <input type="checkbox" value="${result[i].Name}"
+                                    data-price="${result[i].Price}" data-id="${result[i].Id}"
+                                    data-dailyhot="${result[i].IsDailyHot}"
+                                    data-discount="${result[i].DiscountPrice}"
+                                    class="option-input checkbox chk_additionalservice" />
                                    ${result[i].Name} (${result[i].Price} MMK)
                             </label></div>`)
+                        }
+
+                      
                     };
 
 
@@ -748,18 +904,27 @@
 
                 complete: function () {
 
+                   
 
+
+
+                  
                     $('.chk_additionalservice').on("click", function () {
                         additionalids = "";
                         additionalsname = "";
                         additionalprices = "";
 
-                        total = basicprice;
+
+                        if (washtype == "In-House") {
+                            total = basicprice + 500;
+                        } else {
+                            total = basicprice;
+                        }
 
 
                         if ($('.chk_additionalservice:checked').length == 0) {
                             $('#div_total').empty().append(`
-                                 <span>
+                                 <span id="span_total">
                                         ${total} MMK</span>
 
                              `);
@@ -773,15 +938,41 @@
                             var name = $(this).val();
                             var price = $(this).data('price');
                             var id = $(this).data('id');
+                            var isdailyhot = $(this).data('dailyhot');
+                            var discount = $(this).data('discount');
 
-                            additionalids += id + "_";
-                            additionalsname += name + "_";
-                            additionalprices += price + "_";
+                           
+
+                            if (isdailyhot == true) {
+                                additionalids += id + "_";
+                                additionalsname += name + "_";
+                                additionalprices += discount + "_";
+                                total += discount;
+
+                                $('#div_additionalCalc').append(`
+                                  <div class="ct-row">
+                                    <div class="ct-left">${name}<span class="badge badge-danger ml-5 fs-12">Daily Hot</span></div>
+                                    <div class="ct-right"><span>
+                                      ${discount} MMK</span></div>
+                                    <div class="clear"></div>
+                                </div>
+
+                             `);
+
+                                $('#div_total').empty().append(`
+                                 <span id="span_total">
+                                        ${total} MMK</span>
+
+                             `);
 
 
-                            total += price;
+                            } else {
+                                additionalids += id + "_";
+                                additionalsname += name + "_";
+                                additionalprices += price + "_";
+                                total += price;
 
-                            $('#div_additionalCalc').append(`
+                                $('#div_additionalCalc').append(`
                                   <div class="ct-row">
                                     <div class="ct-left">${name}</div>
                                     <div class="ct-right"><span>
@@ -791,11 +982,14 @@
 
                              `);
 
-                            $('#div_total').empty().append(`
+                                $('#div_total').empty().append(`
                                  <span>
                                         ${total} MMK</span>
 
                              `);
+                            }
+
+                           
 
                         });
                         additionalids = additionalids.slice(0, -1);
@@ -807,7 +1001,7 @@
                         $('#txt_AdditionalNames').val(additionalsname);
                         $('#txt_AdditionalPrices').val(additionalprices);
 
-                        $('#txt_TotalAmount').val(total);
+                       $('#txt_TotalAmount').val(total);
 
                     });
 
@@ -911,8 +1105,8 @@
 
                 complete: function () {
 
-
                     changePrice();
+                 
 
                 }
             })
@@ -921,22 +1115,26 @@
 
 
         function changePrice() {
-
+            var cartypedisplay;
             total = basicprice;
 
             if (cartype == "big") {
-                cartype = "ကားကြီး";
+                cartypedisplay = "ကားကြီး";
             } else if (cartype == "small") {
-                cartype = "ကားသေး";
+                cartypedisplay = "ကားသေး";
             } else if (cartype == "medium") {
-                cartype = "ကားလတ်";
+                cartypedisplay = "ကားလတ်";
             }
 
+
+            if (washtype == "In-House") {
+
+                total += 500;
 
             $('#div_pricing').append(`
               <div class="cart-total">
                 <div class="ct-row">
-                    <div class="ct-left">${cartype}</div>
+                    <div class="ct-left">${cartypedisplay}</div>
                     <div class="ct-right"><span>
                                   ${basicprice} MMK</span></div>
                     <div class="clear"></div>
@@ -944,21 +1142,55 @@
                 <div id="div_additionalCalc">
 
                 </div>
-
-
-                <div class="ct-row">
-                    <div class="ct-left">Discount</div>
-                    <div class="ct-right"><span>0</span></div>
+                 
+                <div id="div_trcharges">
+                 
+                 <div class="ct-row">
+                    <div class="ct-left">Transportation Charges</div>
+                    <div class="ct-right"><span>
+                                   500 MMK</span></div>
                     <div class="clear"></div>
                 </div>
+                  </div>
+                
                 <div class="ct-row total">
                     <div class="ct-left">Total</div>
-                    <div class="ct-right" id="div_total"><span>
+                    <div class="ct-right" id="div_total"><span id="span_total">
                           ${total} MMK</span></div>
                     <div class="clear"></div>
                 </div>
             </div>
            `)
+
+            } else {
+                $('#div_pricing').append(`
+              <div class="cart-total">
+                <div class="ct-row">
+                    <div class="ct-left">${cartypedisplay}</div>
+                    <div class="ct-right"><span>
+                                  ${basicprice} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+                <div id="div_additionalCalc">
+
+                </div>
+                  <div id="div_trcharges">
+                 
+               
+                  </div>
+
+
+                <div class="ct-row total">
+                    <div class="ct-left">Total</div>
+                    <div class="ct-right" id="div_total" ><span id="span_total">
+                          ${total} MMK</span></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+           `)
+            }
+
+            
 
             $('#txt_TotalAmount').val(total);
 
@@ -967,7 +1199,251 @@
 
 
 
+           function GetMemberPackages() {
+             $.ajax({
+                cache: false,
+                url: '@Url.Action("GetMemberPackages", "Book")',
+                 data: {
+                     customerid: customerid, cartype: cartype
+                },
+                beforeSend: function () {
 
+                },
+                success: function (result) {
+
+                    console.log(result);
+
+                    $('#ddpackages').empty();
+                    $('#ddpackages').append('<option value="">Choose Packages</option>')
+                    $('#ddpackages').append('<option value="0">Custom Packages</option>')
+
+                    for (var i = 0; i < result.length; i++) {
+                        $('#ddpackages').append('<option value="' + result[i].ID + '" data-memberpackagesname="' + result[i].Title + '"  data-serviceids="' + result[i].AdditionalServiceIds + '"  data-servicenames="' + result[i].AdditionalServiceNames + '" data-packageprice= "' + result[i].PackagePrice + '"  >' + result[i].Title + '(' + result[i].CarType + ')</option>')
+
+                    };
+
+                    //$('#caravailable').select2({
+                    //    placeholder: "Choose Car",
+                    //    allowClear: true
+                    //});
+
+                },
+
+                complete: function () {
+
+                   // alert($("#txt_carcategory").val());
+                    
+                   
+
+                }
+            })
+        }
+
+
+
+        function packageschange() {
+         
+                var id = $('#ddpackages').val();
+
+           
+
+
+                if (id == 0) {
+                    $('#div_carcategory').empty();
+                    $('#div_pricing').empty();
+                    $('#div_additionalservice').empty();
+
+                    $('#txt_AdditionalIds').val('');
+                    $('#txt_AdditionalPrices').val('');
+                    $('#txt_AdditionalNames').val('');
+
+                    //if (cartype == "ကားကြီး") {
+                    //    cartype = "big"
+                    //}
+                    //else if (cartype == "ကားလတ်") {
+                    //    cartype = "medium"
+                    //}
+                    //else if (cartype == "ကားသေး") {
+                    //    cartype = "small"
+                    //} 
+
+                    $('#txt_memberpackagesid').val(0);
+                    $('#txt_memberpackagesname').val('');
+                    $('#txt_bookingpackage').val("Normal");
+                    //   alert(cartype);
+
+                    GetCarCategoryByID();
+                    GetAdditionalService();
+
+                  
+
+                } else {
+
+
+
+                    var serviceids = $('#ddpackages :selected').data('serviceids').split('_');
+                    var servicenames = $('#ddpackages :selected').data('servicenames').split('_');
+                    var packageprice = $('#ddpackages :selected').data('packageprice');
+                    txt_AdditionalPrices
+                    $('#txt_AdditionalPrices').val('');
+                    $('#txt_AdditionalIds').val($('#ddpackages :selected').data('serviceids'));
+                    $('#txt_AdditionalNames').val($('#ddpackages :selected').data('servicenames'));
+
+                    $('#txt_memberpackagesid').val($('#ddpackages :selected').val());
+                    $('#txt_memberpackagesname').val($('#ddpackages :selected').data('memberpackagesname'));
+
+
+                 
+                    console.log(servicenames);
+                    console.log(cartype);
+                    $('#div_carcategory').empty();
+                    $('#div_pricing').empty();
+                    $('#div_additionalservice').empty();
+
+                    //if (cartype == "big") {
+                    //    cartype = "ကားကြီး";
+                    //} else if (cartype == "small") {
+                    //    cartype = "ကားသေး";
+                    //} else if (cartype == "medium") {
+                    //    cartype = "ကားလတ်";
+                    //}
+
+
+
+                    if (cartype == "big") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+                                <div class="chk-package">
+
+                                    <div class="div-img position-relative">
+                                        <div class="vsb-price">
+                                            ${packageprice} MMK
+                                        </div>
+                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားကြီး
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+                    }
+                    else if (cartype == "medium") {
+                        $('#div_carcategory').append(`<label for="note" id="lbl_package">Package for</label>
+                               <div class="chk-package">
+
+                                <div class="div-img position-relative">
+                                    <div class="vsb-price">
+                                       ${packageprice} MMK
+                                        </div>
+                                    <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားလတ်
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+
+                    }
+                    else if (cartype == "small") {
+                        $('#div_carcategory').append(` <label for="note" id="lbl_package">Package for</label>
+                                <div class="chk-package">
+
+                                    <div class="div-img position-relative">
+                                        <div class="vsb-price">
+                                            ${packageprice} MMK
+                                        </div>
+                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <div class="vsb-middle">
+                                            <div class="vsbm-left">
+                                                ကားသေး
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>`)
+
+                    }
+
+
+                    for (var i = 0; i < servicenames.length; i++) {
+                        $('#div_additionalservice').append(`<div><label>
+                                    <input type="checkbox" value="${servicenames[i]}" class="option-input checkbox" disabled="disabled" checked  />
+                                           ${servicenames[i]}
+                                    </label></div>`)
+
+
+                    }
+
+
+
+
+
+                    var elements = `<div class="cart-total">`;
+                    for (var i = 0; i < servicenames.length; i++) {
+                        elements += `<div class="ct-row">
+                                        <div class="ct-left">${servicenames[i]}</div>                                       
+                                        <div class="clear"></div>
+                                    </div>`;
+                    }
+
+
+                    total = packageprice;
+
+                    if (washtype == "In-House") {
+                        elements += ` <div id="div_trcharges">                
+                         <div class="ct-row">
+                            <div class="ct-left">Transportation Charges</div>
+                            <div class="ct-right"><span>
+                                           500 MMK</span></div>
+                            <div class="clear"></div>
+                        </div>
+                          </div>`;
+
+                        total = total + 500;
+
+                    } else {
+                        elements += ` <div id="div_trcharges">    </div>`;  
+                    }
+
+
+
+
+                    elements += `<div class="ct-row total">
+                                        <div class="ct-left">Total</div>
+                                        <div class="ct-right" id="div_total"><span id="span_total">
+                                              ${total} MMK</span></div>
+                                        <div class="clear"></div>
+                                    </div>`;
+                    elements += `</div>`;
+
+                    $('#txt_bookingpackage').val("Special");
+                
+                    $('#txt_TotalAmount').val(total);
+                    $('#div_pricing').append(elements);
+
+
+
+
+
+                }
+
+
+
+        
+
+        }
 
     </script>
 

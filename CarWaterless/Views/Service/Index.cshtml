@@ -25,7 +25,7 @@
 
 
             <div class="panel-custom-default mb-10 br-10 mt-10" id="1" style="background:#f2fbff!important;">
-                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
+                <img src="~/Plesirthemes/EcoPhoto/small.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
                 <div class="p-15">
 
@@ -66,7 +66,7 @@
             </div>
 
             <div class="panel-custom-default mb-10 br-10 mt-20" id="1" style="background:#f2fbff!important;">
-                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
+                <img src="~/Plesirthemes/EcoPhoto/medium.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
                 <div class="p-15">
 
@@ -107,7 +107,7 @@
             </div>
 
             <div class="panel-custom-default mb-10 br-10 mt-20" id="1" style="background:#f2fbff!important;">
-                <img src="~/Plesirthemes/EcoPhoto/eco1.jpg" class="br-10 br-b-l-0 br-b-r-0">
+                <img src="~/Plesirthemes/EcoPhoto/big.jpg" class="br-10 br-b-l-0 br-b-r-0">
 
                 <div class="p-15">
 
@@ -164,6 +164,12 @@
 @section scripts{
     
     <script>
+
+
+        $(function () {
+            $('#div_' + '@ViewBag.type').toggle();
+        })
+
 
         function toggle(type) {
 

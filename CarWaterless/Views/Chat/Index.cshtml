@@ -5,7 +5,7 @@
 }
 
 
-<style>
+    <style>
     #content {
         max-width: 100% !important
     }
@@ -224,8 +224,114 @@
     small {
         font-size: 80%;
     }
-</style>
 
+
+
+
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation */
+.modal-content, #caption {
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)}
+  to {-webkit-transform:scale(1)}
+}
+
+@@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+/*.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+*/
+/* 100% Image Width on Smaller Screens */
+@@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+    </style>
+
+
+<div id="myModal" class="modal">
+
+    <div class="d-flex float-right">
+        @*<div onclick="imagedownload()">
+            <span class="fa fa-download fs-20 text-primary"></span>
+        </div>*@
+        <div class="ml-10" onclick="closemodal()">
+            <span class="fa fa-times-circle fs-20 text-danger"></span>
+        </div>
+
+    </div>
+  
+    <img class="modal-content" id="img01">
+ 
+</div>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-header">
     <div class="container-fluid">
@@ -235,15 +341,15 @@
                 @ViewBag.username
             </div>
             @*<div class="seen">
-                Today at 12:56
-            </div>*@
+                    Today at 12:56
+                </div>*@
 
         </div>
 
     </div>
 </nav>
 
-<div class="chat chat-layout" id="div_chat">
+<div class="chat chat-layout" id="div_chat" style="height: calc(100vh - 120px);overflow-x:hidden">
 
 
 
@@ -252,14 +358,30 @@
 
 <div class="div-chat-footer">
     <div class="display-flex-row">
-        <div class="display-flex-column" style="width:85%">
+        <div class="display-flex-column" style="width:70%">
             <div class="input-group">
                 <textarea class="form-control" id="txt_message" placeholder="type here..." aria-label="note"></textarea>
             </div>
         </div>
+
+        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
+            <i class="fas fa-camera upload-button"></i>
+            <input class="file-upload" type="file" accept="image/*" style="display:none" multiple />
+        </div>
+
+
         <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
             <i class="fas fa-paper-plane" onclick="SendMessage()"></i>
+
         </div>
+
+
+
+    </div>
+
+
+
+    <div class="div_images row">
 
 
     </div>
@@ -271,18 +393,26 @@
 
 @section scripts{
 
+
+  
+
     <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    @*<script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>*@
+        <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>
 
     <script>
         var chathub = $.connection.chatHub;
         var connectionId;
-     
+
 
         var fromuserid = '@ViewBag.fromuserid';
         var touserid = '@ViewBag.touserid';
         var operationid = '@ViewBag.operationid';
         $(function () {
+
+            $('body').on('dragstart drop', function (e) {
+                e.preventDefault();
+                return false;
+            });
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
@@ -297,7 +427,7 @@
 
             });
 
-          //  transport: 'longPolling' 
+          //  transport: 'longPolling'
 
 
             var tryingToReconnect = false;
@@ -320,12 +450,39 @@
 
 
 
-           $('.navbar').hide();
+        //   $('.navbar').hide();
             $('.bottom-panel').hide();
             getChatList();
 
 
         })
+
+
+        var index = 1;
+        var imageArray = [];
+        var photoRemove = [];
+        var imagesstring = "";
+
+        function removeimage(e) {
+
+
+
+
+            var index = $(e).attr("index");
+            photoRemove.splice(index, 1);
+            $("#rmimage_" + index).remove();
+
+
+            var wHeight = $(window).height() - (parseInt($('.div-chat-footer').height()) + 68);
+            $('#div_chat').height(wHeight);
+
+            var chat = document.getElementById('div_chat');
+            if (chat) {
+                chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+            }
+
+        }
+
 
          function getChatList(){
               $.ajax({
@@ -345,27 +502,163 @@
 
                     },
                     complete: function () {
+                        var wHeight = $(window).height() - (parseInt($('.div-chat-footer').height()) + 68);
+                        $('#div_chat').height(wHeight);
 
-                        window.scrollTo(0, document.body.scrollHeight);
-                      
+                        var chat = document.getElementById('div_chat');
+                        if (chat) {
+                            chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+                        }
+
+
+
+                        $('.file-upload').on('change', function () {
+                            imagesPreview(this, 'div.multiplephotoupload');
+                        });
+
+                        $(".upload-button").on('click', function () {
+                            $(".file-upload").click();
+                        });
+
+                       
+
+                       
 
                     }
                 });
-             }
+        }
+
+
+        var imagesPreview = function (input, placeToInsertImagePreview) {
+
+            if (input.files) {
+
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    console.log(i);
+
+                    multipleupload(input.files[i], index);
+                    index++;
+
+
+                }
+            }
+
+        };
+
+
+
+        function multipleupload(input, index) {
+            var reader = new FileReader();
+
+            var img = document.createElement("img");
+
+            reader.onload = function (e) {
+
+                //    $(previewImage).attr('src', e.target.result);
+
+                img.src = e.target.result;
+                var mime_type = "image/jpeg";
+                if (typeof output_format !== "undefined" && output_format == "png") {
+                    mime_type = "image/png";
+                }
+                img.onload = function () {
+                    var canvas = document.createElement("canvas");
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0);
+
+                    var MAX_WIDTH = 800;
+                    var MAX_HEIGHT = 600;
+                    var width = img.width;
+                    var height = img.height;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    var ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    var dataurl = canvas.toDataURL(mime_type, 40 / 100);
+
+
+                  //   $('.div_images').append('<div class="col-sm-3 col-xs-3 mr-10" id="rmimage_' + index + '" data-image="' + dataurl + '"><i class="fa fa-trash" onclick="removeimage(this)" index=' + index + '></i><img src="' + e.target.result + '" style="width:10%;height:70px" /></div>');
+
+
+                    $('.div_images').append(`
+                        <div class="col-3 mt-10" id="rmimage_${index}" data-image="${dataurl}">
+                            <img src="${e.target.result}" style="width:70px;height:70px;border-radius:10px" />
+
+                            <i class="fa fa-times-circle text-danger" onclick="removeimage(this)" index="${index}"></i>
+
+                             </div>
+
+                       `)
+
+                    var wHeight = $(window).height() - (parseInt($('.div-chat-footer').height()) + 68);
+                    $('#div_chat').height(wHeight);
+
+                    var chat = document.getElementById('div_chat');
+                    if (chat) {
+                        chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+                    }
+
+                    photoRemove.push(index);
+                    index++;
+
+                }
+
+
+            }
+
+            reader.readAsDataURL(input);
+
+
+        }
 
 
 
 
-          function SendMessage(){
+        function SendMessage() {
+
+
+            $('.div_images').find('div').each(function () {
+                images = $(this).attr("data-image");
+                imagesstring += images + "~";
+                images = "";
+            });
+
+            imagesstring = imagesstring.slice(0, -1);
+
+
+            var obj = {
+                fromuserid: fromuserid,
+                touserid: touserid,
+                operationid: operationid,
+                message: $('#txt_message').val(),
+                file: imagesstring
+
+
+            }
+
+
+
               $.ajax({
                   cache: false,
-                  url: '@Url.Action("sendMessage", "Chat")',
+                  url: '@Url.Action("sendMessageAsync", "Chat")',
                   type: "Post",
                   data: {
-                      fromuserid: fromuserid,
-                      touserid: touserid,
-                      operationid: operationid,
-                      message: $('#txt_message').val()
+                      obj: obj
                   },
                     beforeSend: function () {
                      //   $('.btn').prop("disabled", true);
@@ -374,17 +667,89 @@
 
                         $('#div_chat').append(myData);
                         $('#txt_message').val('');
+                        $('.div_images').empty();
 
                     },
                     complete: function () {
+                        var wHeight = $(window).height() - (parseInt($('.div-chat-footer').height()) + 68);
+                        $('#div_chat').height(wHeight);
+
+                        var chat = document.getElementById('div_chat');
+                        if (chat) {
+                            chat.scrollTop = chat.scrollHeight - chat.clientHeight;
+                        }
 
 
-                        window.scrollTo(0, document.body.scrollHeight);
+                      
+
+
 
                     }
                 });
-             }
+        }
 
+
+        //function initLightGallery() {
+        //    lightGallery(document.getElementById('lightgallery'), {
+
+        //        thumbnail: true
+        //    });
+
+         
+
+
+        //}
+
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+      //  var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        function imageShow(src) {
+            modal.style.display = "block";
+            modalImg.src = src;
+            
+        }
+
+       
+
+        function closemodal() {
+            modal.style.display = "none";
+        }
+
+
+        function toDataURL(url, callback) {
+        
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    callback(reader.result);
+                    var a = document.createElement("a"); //Create <a>
+                    a.href = reader.result; //Image Base64 Goes here
+                    a.download = "Image.png"; //File name Here
+                    a.click(); //Downloaded file
+                }
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.withCredentials = true;
+            xhr.send();
+        }
+
+        function imagedownload() {
+            var img = $('#img01').attr('src');
+
+            toDataURL(img, function (dataUrl) {
+                console.log('RESULT:', dataUrl)
+            })
+
+
+
+        }
 
 
     </script>

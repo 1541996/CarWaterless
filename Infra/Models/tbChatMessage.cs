@@ -20,5 +20,18 @@ namespace Infra.Models
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<bool> IsConversationEnd { get; set; }
         public string Message { get; set; }
+        public string Photo { get; set; }
+        //public string PhotoUrl
+        //{
+        //    get
+        //    {
+        //        if (this.Photo != null)
+        //        {
+        //            return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Chat/{0}", Photo);
+        //        }
+        //        return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
+
+        //    }
+        //}
     }
 }

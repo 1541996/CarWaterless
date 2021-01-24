@@ -19,16 +19,16 @@
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 @*<div class="widget-content-left mr-3">
-                        <div class="widget-content-left">
-                            <img width="40" class="rounded-circle" src="~/ArchitectThemes/image/admin.jpg" alt="">
-                        </div>
-                    </div>*@
+                            <div class="widget-content-left">
+                                <img width="40" class="rounded-circle" src="~/ArchitectThemes/image/admin.jpg" alt="">
+                            </div>
+                        </div>*@
                                 <div class="widget-content-left flex2">
                                     <div class="widget-heading">@result.FullName</div>
                                     <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.VehicleBrand @result.VehicleName <span class="badge badge-primary ml-5">@result.VehicleColor</span></div>
                                     <div class="mt-5"><i class="fa fa-car-alt mr-5 theme-color"></i> @result.CategoryName</div>
                                     <div class="mt-5"><i class="fa fa-car mr-5 theme-color"></i> @result.VehicleNo</div>
-                                    <div class="mt-5"><i class="fa fa-phone-square theme-color"></i>  @result.PhoneNo</div>
+                                    <div class="mt-5"><i class="fa fa-phone-square theme-color"></i>  @result.PhoneNo <span class="badge badge-danger ml-5">@result.PaymentType</span></div>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,8 @@
 
                             </ol>
 
-                        }else if(result.BookingStatus == "Cancel")
+                        }
+                        else if (result.BookingStatus == "Cancel")
                         {
                             <p>Cancel at <span class="text text-primary">@result.CancelDate.Value.ToString("dd MMM yyyy") @result.CancelDate.Value.ToShortTimeString()</span></p>
                         }
@@ -78,40 +79,56 @@
                         <div class="badge badge-success">@result.WashOption</div>
                         @if (result.WashOption == "In-House")
                         {
-                             <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.CustomerAddress</span>
+                            <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.CustomerAddress</span>
+
                         }
+                        else
+                        {
+                            <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.Township</span>
+                            <span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.Branch</span>
+                            @*<span class="mt-10 ml-5"><i class="fa fa-map-marker-alt"></i>  @result.</span>*@
+
+                        }
+
+
+
+
 
 
                     </div>
 
 
+                    @if (result.BookingPackage == "Normal")
+                    {
+                <div class="col-md-4 text-right">
 
-                    <div class="col-md-4 text-right">
+                    <div class="">
+                        @if (result.CategoryType == "medium")
+                        {
+                            <h6>ကားလတ် - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span></h6>
+                        }
+                        else if (result.CategoryType == "big")
+                        {
+                            <h6>ကားကြီး - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
 
-                        <div class="">
-                            @if (result.CategoryType == "medium")
-                            {
-                                <h6>ကားလတ် - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span></h6>
-                            }
-                            else if (result.CategoryType == "big")
-                            {
-                                <h6>ကားကြီး - <span class="text text-danger"> @result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
+                        }
+                        else
+                        {
+                            <h6>ကားသေး - <span class="text text-danger">@result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
 
-                            }
-                            else
-                            {
-                                <h6>ကားသေး - <span class="text text-danger">@result.CategoryBasicPrice.Value.ToString("#,##0") MMK</span> </h6>
-
-                            }
-
-
-                        </div>
-                        @{
-                            var name = result.AdditionalNames.Split('_').ToList();
-                            var price = result.AdditionalPrices.Split('_').ToList();
                         }
 
-                        @for (var i = 0; i < name.Count(); i++)
+
+                    </div>
+
+                    @if (result.AdditionalNames != null)
+                    {
+
+                        var name = result.AdditionalNames.Split('_').ToList();
+                        var price = result.AdditionalPrices.Split('_').ToList();
+
+
+                        for (var i = 0; i < name.Count(); i++)
                         {
                             <div class="mt-10">
                                 <h6>@name[i] - <span class="text text-danger">@Convert.ToDouble(price[i]).ToString("#,##0") MMK</span></h6>
@@ -119,14 +136,84 @@
                             </div>
                         }
 
+                    }
+
+                    @if (result.WashOption == "In-House")
+                    {
                         <div class="mt-10">
-                            <h6>Total - <span class="text text-danger">@result.TotalAmount.Value.ToString("#,##0") MMK</span> </h6>
+                            <h6>TC - <span class="text text-danger">500 MMK</span> </h6>
 
                         </div>
 
+                    }
+
+
+                    <div class="mt-10">
+                        <h6>Total - <span class="text text-danger">@result.TotalAmount.Value.ToString("#,##0") MMK</span> </h6>
+
                     </div>
 
-                    @{ 
+                </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 text-right">
+
+                            <div class="">
+
+                                @if (result.CategoryType == "medium")
+                                {
+                                    <h6>ကားလတ်</h6>
+                                }
+                                else if (result.CategoryType == "big")
+                                {
+                                    <h6>ကားကြီး</h6>
+
+                                }
+                                else
+                                {
+                                    <h6>ကားသေး</h6>
+
+                                }
+
+
+                            </div>
+                         
+
+                            <div class="mt-10">
+                                <h6>@result.AdditionalNames.Replace("_", ", ")</h6>
+                            </div>
+
+                            @*@for (var i = 0; i < name.Count(); i++)
+                            {
+                                <div class="mt-10">
+                                    <h6>@name[i]</h6>
+
+                                </div>
+                            }*@
+
+                           @if (result.WashOption == "In-House")
+                            {
+                                <div class="mt-10">
+                                    <h6>TC - <span class="text text-danger">500 MMK</span> </h6>
+
+                                </div>
+
+                            }
+
+
+                            <div class="mt-10">
+                                <h6 class="text text-danger">@result.MemberPackage - <span class="text text-danger">@result.TotalAmount.Value.ToString("#,##0") MMK</span> </h6>
+
+                            </div>
+
+                        </div>
+                    }
+
+
+
+
+                    @{
                         Infra.ViewModels.AdminViewModel userModel = CarWaterless.Business.CommonRepository.GetLoginData();
                         int userid = userModel.Id;
                     }
@@ -134,22 +221,22 @@
                     <div class="col-md-1">
                         <div class="font-icon-wrapper font-icon-lg" onclick="gotochat(this)"
                              data-fromuserid="@userid"
-                             data-touserid="@result.CustomerId" 
+                             data-touserid="@result.CustomerId"
                              data-operationid="@result.OperationId">
-                           <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
+                            <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
                         </div>
 
-                        @if(result.BookingStatus != "Cancel")
+                        @if (result.BookingStatus != "Cancel")
                         {
-                             <div class="font-icon-wrapper font-icon-lg"
+                            <div class="font-icon-wrapper font-icon-lg"
                                  data-operationid="@result.OperationId"
                                  onclick="statusCancel(this)">
-                                 <i class="fas fa-trash icon-gradient bg-love-kiss cursor-pointer"> </i>
-                           </div>
+                                <i class="fas fa-trash icon-gradient bg-love-kiss cursor-pointer"> </i>
+                            </div>
                         }
 
-                       
-                        
+
+
                     </div>
 
 
@@ -158,15 +245,30 @@
                 </div>
 
 
-            </div>
+                @if (result.ComplaintMessage != null && result.ComplaintMessage != "")
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <br />
+                            <span class="mt-10 ml-5"><i class="fa fa-comment-dots"></i>  @result.ComplaintMessage</span>
+
+                          
+                        </div>
+
+
+                    </div>
+                }
+
+                </div>
         </div>
-    }
+                        }
 
 
     <div class="col-12 mt-20">
         <div class="paginator-wrap pagedList">
 
-            @Html.PagedListPager(Model.Results, page => Url.Action("_list", "Admin_Customer",
+            @Html.PagedListPager(Model.Results, page => Url.Action("_list", "Admin_Operation",
        new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
         </div>
     </div>

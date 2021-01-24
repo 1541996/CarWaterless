@@ -1,0 +1,104 @@
+﻿
+@model Infra.ViewModels.PagedListClient<Infra.Models.tbAdvertisement>
+@using PagedList;
+@using PagedList.Mvc;
+
+@if (Model.Results.Count() > 0)
+{
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.TotalCount records found.</h5>
+            <div class="table-responsive">
+                <table class="mb-0 table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Advertise Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Duration</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int pagesize = ViewBag.pagesize;
+                            int pagestartno = ViewBag.page;
+                            int count = 0;
+                            count = (pagestartno - 1) * pagesize;
+                        }
+                        @foreach (var result in Model.Results)
+                        {
+                            count++;
+                        <tr id="div_Advertisement_@result.ID">
+
+                            <td>@count</td>
+                            <td><img src="@result.PhotoUrl" style="width:200px;height:100px;object-fit:cover;border-radius:10px"></td>
+                            <td>@result.Title</td>
+                            <td>
+                                @if (result.FromDate != null)
+                                {
+                                    @result.FromDate.Value.ToShortDateString()
+                                }
+                            </td>
+                            <td>
+                                @if (result.ToDate != null)
+                                {
+                                    @result.ToDate.Value.ToShortDateString()
+                                }
+                            </td>
+                            <td>@result.Duration</td>
+                            <td class="text-center">
+                                <span class="label label-success label-rounded bg-green">Active</span>
+                            </td>
+                            <td class="text-center">
+
+
+                                <button class="btn bg-blue btn-info btn-rounded" onclick="extendduration('@result.ID')" data-advertisementid="@result.ID">
+                                    <i class="icon-pencil7  position-left"></i>Extend Duration
+                                </button>
+
+                                <button class="btn bg-blue btn-info btn-rounded" onclick="editadvertisement('@result.ID')" data-advertisementid="@result.ID">
+                                    <i class="icon-pencil7  position-left"></i>Edit
+                                </button>
+
+                                <button class="btn bg-red btn-danger btn-rounded"
+                                        data-roleid="@result.ID"
+                                        data-action="@Url.Action("delete", "Admin_Advertisement")"
+                                        data-modalid="modal_delete"
+                                        data-id="@result.ID"
+                                        data-infoid="div_Advertisement_@result.ID"
+                                        onclick="deleteconfirmation(this)">
+
+                                    <i class="icon-trash-alt  position-left"></i>Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12 mt-30">
+                <div class="paginator-wrap pagedList">
+
+                    @Html.PagedListPager(Model.Results, page => Url.Action("_list", "Admin_Advertisement",
+               new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+
+}
+
+

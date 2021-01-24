@@ -93,6 +93,7 @@
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Models\CarWaterLessContext.cs" />
     <Compile Include="Models\tbAdmin.cs" />
+    <Compile Include="Models\tbAdvertisement.cs" />
     <Compile Include="Models\tbBranch.cs" />
     <Compile Include="Models\tbCarCategory.cs" />
     <Compile Include="Models\tbChatMessage.cs" />

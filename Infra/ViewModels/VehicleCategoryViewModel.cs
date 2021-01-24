@@ -15,6 +15,34 @@ namespace Infra.ViewModels
         public tbPhoto photos { get; set; }
     }
 
+
+    public class VehicleCategoryViewModelV2
+    {
+        public int VehicleId { get; set; }
+        public string CustomerId { get; set; }
+        public string VehicleBrand { get; set; }
+        public string VehicleName { get; set; }
+        public string CategoryName { get; set; }
+        public string VehicleColor { get; set; }
+        public string VehicleNo { get; set; }
+        public string Photo { get; set; }
+        public string PhotoUrl
+        {
+            get
+            {
+                if (this.Photo != null)
+                {
+                    return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/CustomerVehicle/{0}", Photo);
+                }
+                return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
+
+            }
+        }
+
+
+    }
+
+
     public class CarDDViewModel
     {
         public int carid { get; set; }
@@ -50,6 +78,14 @@ namespace Infra.ViewModels
         public DateTime? ConfirmedDate { get; set; }
         public decimal? TotalAmount { get; set; }
         public DateTime? CancelDate { get; set; }
+        public DateTime? FinishedDate { get; set; }
+        public string Email { get; set; }
+        public string BookingPackage { get; set; }
+        public string MemberPackage { get; set; }
+        public string PaymentType { get; set; }
+        public string ComplaintMessage { get; set; }
+        public string Township { get; set; }
+        public string Branch { get; set; }
 
 
     }
