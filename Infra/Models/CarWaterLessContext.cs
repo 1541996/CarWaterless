@@ -40,6 +40,7 @@ namespace Infra.Models
         public DbSet<tbPhoto> tbPhotos { get; set; }
         public DbSet<tbFeedBack> tbFeedBacks { get; set; }
         public DbSet<tbMemberPackage> tbMemberPackages { get; set; }
+        public DbSet<tbAdvertisement> tbAdvertisements { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Ignore field map

@@ -203,6 +203,7 @@
     <Compile Include="Business\AdminSetupRepository.cs" />
     <Compile Include="Business\CommonRepository.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\Admin_AdvertisementController.cs" />
     <Compile Include="Controllers\Admin_CustomerController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
@@ -716,6 +717,9 @@
     <Content Include="Views\Book\RatingList.cshtml" />
     <Content Include="Views\Book\_ratinglist.cshtml" />
     <Content Include="Views\Book\RatedForm.cshtml" />
+    <Content Include="Views\Admin_Advertisement\Index.cshtml" />
+    <Content Include="Views\Admin_Advertisement\_list.cshtml" />
+    <Content Include="Views\Admin_Advertisement\AdvertisementForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

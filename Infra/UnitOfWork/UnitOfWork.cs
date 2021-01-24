@@ -27,6 +27,7 @@ namespace Infra.UnitOfWork
         private IRepository<tbAdditionalService> _additionalServiceRepo;
         private IRepository<tbFeedBack> _feedbackRepo;
         private IRepository<tbMemberPackage> _memberPackageRepo;
+        private IRepository<tbAdvertisement> _adsRepo;
 
 
 
@@ -37,6 +38,19 @@ namespace Infra.UnitOfWork
         {
             _dbContext = dbContext;
         }
+
+        public IRepository<tbAdvertisement> adsRepo
+        {
+            get
+            {
+                if (_adsRepo == null)
+                {
+                    _adsRepo = new Repository<tbAdvertisement>(_dbContext);
+                }
+                return _adsRepo;
+            }
+        }
+
 
         public IRepository<tbMemberPackage> memberPackageRepo
         {

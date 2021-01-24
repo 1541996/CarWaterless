@@ -35,30 +35,38 @@
         padding: 20px 0;
     }
 
+    #content{
+        background:#fff!important
+    }
+
+    body{
+        background:#fff!important
+    }
+
 </style>
 
 @model Infra.Helper.CarPhotoModel
 
-<div class="container mt-10">
-        
-     
-        <div class="subsite-heading mt-10 fs-22">
-            @Model.vehicle.VehicleBrand @Model.vehicle.VehicleName
-        </div>
+<div class="container mt-10 page-cart">
 
 
-        <ul id="lightSlider" class="item mt-10">
-
-            @foreach (var item in Model.photos)
-            {
-                <li data-thumb="@item.PhotoUrl">
-                    <img class="br-10" src="@item.PhotoUrl" />
-                </li>
-            }
+    <div class="subsite-heading mt-10 fs-22">
+        @Model.vehicle.VehicleBrand @Model.vehicle.VehicleName
+    </div>
 
 
+    <ul id="lightSlider" class="item mt-10">
 
-            @*<li data-thumb="/Plesirthemes/img/car2-honda2.png">
+        @foreach (var item in Model.photos)
+        {
+            <li data-thumb="@item.PhotoUrl">
+                <img class="br-10" src="@item.PhotoUrl" />
+            </li>
+        }
+
+
+
+        @*<li data-thumb="/Plesirthemes/img/car2-honda2.png">
                 <img class="br-10" src="~/Plesirthemes/img/car2-honda2.png" />
             </li>
 
@@ -72,22 +80,53 @@
 
 
 
-        </ul>
+    </ul>
 
 
-        <div class="panel-custom-default mt-30 p-20">
+    <div class="row">
+
+        <div class="form-group col-md-12">
+           
+            <div class="button m-0">
+                <button type="button" class="theme-button" onclick="editcar('@Model.vehicle.Id','@Model.vehicle.CustomerId')">Edit</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart-box">
+
+                <div class="cart-box-detail">
+                    <ul>
+                        <li><i class="fas fa-car"></i> <label>Car No</label> : @Model.vehicle.VehicleColor</li>
+                        <li><i class="fas fa-car"></i> <label>Build Types</label> : @Model.carcategory.Name</li>
+                        <li><i class="fas fa-cubes"></i> <label>Color</label> :  @Model.vehicle.VehicleColor</li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="panel-custom-default mt-30 p-20">
 
             <div class="display-flex-row attr pt-0">
                 <div class="display-flex-column d-block">
-                   
+
                         <i class="fas fa-car"></i>&nbsp;&nbsp; Car No
-                   
+
                 </div>
                 <div class="display-flex-column ml-auto">
                     <h6>
                        @Model.vehicle.VehicleNo
                     </h6>
-                        
+
                 </div>
 
 
@@ -100,7 +139,7 @@
                     <h6>
                         @Model.carcategory.Name
                     </h6>
-                    
+
                 </div>
 
 
@@ -114,7 +153,7 @@
                     <h6>
                        @Model.vehicle.VehicleColor
                     </h6>
-                    
+
                 </div>
 
 
@@ -122,10 +161,10 @@
 
 
 
-        </div>
+        </div>*@
 
 
-   
+
 </div>
 
 
@@ -158,6 +197,10 @@
 
         })
 
+
+        function editcar(id, customerid) {
+            location.href = '../Car/Add?Id=' + id + '&type=Edit&customerid=' + customerid;
+        }
 
     </script>
 

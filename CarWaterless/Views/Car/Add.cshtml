@@ -208,7 +208,7 @@
                                         {
                                             foreach (var item in Model.photos)
                                             {
-                                                <div class="display-flex-column flex-basis mb-10" data-image="" id="rmimage_@item.ID">
+                                                <div class="display-flex-column mb-10 pr-10" data-image="" id="rmimage_@item.ID">
 
                                                     <div class="div-img text-center">
 
@@ -223,7 +223,7 @@
                                         }
                                     }
 
-                                    <div class="display-flex-column flex-basis mb-10" id="placeholder">
+                                    <div class="display-flex-column mb-10" id="placeholder">
                                         <div class="image-upload-wrap">
 
                                             <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">
@@ -343,13 +343,15 @@
 
 
 
+                         
 
-                            <div class="form-group col-md-12">
-                                <br>
-                                <div class="button">
-                                    <button type="submit" class="theme-button">Save</button>
-                                </div>
+                        <div class="form-group col-md-12">
+                            <div id="errCarNoExists" class="error-message text-center" style="display:none">Car No. already exists in our system.</div>
+                            <br>
+                            <div class="button">
+                                <button type="submit" class="theme-button">Save</button>
                             </div>
+                        </div>
 
                         </div>
 
@@ -454,10 +456,43 @@
                                         }
                                     })
 
+                                    $('#errCarNoExists').hide();
+
+
+                                } else if (myData == "E001") {
+                                    $('.btn').prop("disabled", false);
+                                    $('#errCarNoExists').show();
+
+                                    $('.multiplephotoupload').append(`
+
+                                     <div class="display-flex-column pr-10 mb-10" id="placeholder">
+                                        <div class="image-upload-wrap">
+
+                                            <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">
+
+                                            <div class="drag-text" style="text-align: center;padding:24px;">
+                                                <img src="../Plesirthemes/EcoPhoto/camera.png" />
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+                        `)
+
+                                    $('#gallery-photo-add').on('change', function () {
+                                        imagesPreview(this, 'div.multiplephotoupload');
+                                    });
                                 }
                             },
                             complete: function () {
-                                $('.btn').prop("disabled", true);
+                                $('.btn').prop("disabled", false);
                                 $('#pageloading').hide();
                               //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
 
@@ -639,7 +674,7 @@
 
 
                         $('#placeholder').remove();
-                        $('.multiplephotoupload').append(`<div class="display-flex-column div_photo flex-basis mb-10" data-image="${dataurl}" id="rmimage_${index}">
+                        $('.multiplephotoupload').append(`<div class="display-flex-column pr-10 div_photo mb-10" data-image="${dataurl}" id="rmimage_${index}">
 
                                             <div class="div-img text-center">
 
@@ -649,7 +684,7 @@
                                             </div>
                                         </div>
 
-                                     <div class="display-flex-column flex-basis mb-10" id="placeholder">
+                                     <div class="display-flex-column pr-10 mb-10" id="placeholder">
                                         <div class="image-upload-wrap">
 
                                             <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">

@@ -315,6 +315,7 @@
 
 
                         <div class="position-relative row form-check mt-30">
+                            <div id="errCarNoExists" class="error-message text-center" style="display:none">Car No. already exists in our system.</div>
                             <div class="col-sm-12 d-flex flex-end">
                                 <button class="btn btn-lg btn-danger mr-20">Cancel</button>
                                 <button class="btn btn-lg btn-primary">Save</button>
@@ -494,6 +495,35 @@
                                         }
                                     })
 
+                                } else if (myData == "E001") {
+                                    $('#errCarNoExists').show();
+
+                                    $('.multiplephotoupload').append(`
+
+                                     <div class="display-flex-column pr-10 mb-10" id="placeholder">
+                                        <div class="image-upload-wrap">
+
+                                            <input id="gallery-photo-add" class="file-upload-input" multiple="" type="file">
+
+                                            <div class="drag-text" style="text-align: center;padding:24px;">
+                                                <img src="../Plesirthemes/EcoPhoto/camera.png" />
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+
+                        `)
+
+                                    $('#gallery-photo-add').on('change', function () {
+                                        imagesPreview(this, 'div.multiplephotoupload');
+                                    });
                                 }
                             },
                             complete: function () {

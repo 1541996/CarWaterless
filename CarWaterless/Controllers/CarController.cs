@@ -34,11 +34,16 @@ namespace CarWaterless.Controllers
             var data = (from veh in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.CustomerId == customerid)
                         join cat in uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true)
                         on veh.CarCategoryId equals cat.Id
-                        select new VehicleCategoryViewModel()
+                        select new VehicleCategoryViewModelV2()
                         {
-                            vehicle = veh,
-                            category = cat,
-                            photos = photo.Where(a => a.CarID == veh.Id).FirstOrDefault()
+                            VehicleId = veh.Id,
+                            VehicleName = veh.VehicleName,
+                            VehicleBrand = veh.VehicleBrand,
+                            VehicleColor = veh.VehicleColor,
+                            VehicleNo = veh.VehicleNo,
+                            CategoryName = cat.Name,
+                            CustomerId = veh.CustomerId,
+                            Photo = photo.Where(a => a.CarID == veh.Id).Select(a => a.Photo).FirstOrDefault()
                         }).AsQueryable();
 
             return PartialView("_getCarList", data);
@@ -85,7 +90,15 @@ namespace CarWaterless.Controllers
         public async System.Threading.Tasks.Task<ActionResult> SaveCarAsync(CarPhotoModel obj)
         {
             tbCustomerVehicle UpdateEntity = null;
-            
+
+            var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo).Any();
+
+            if(checkcarno == true)
+            {
+                ViewBag.Status = "Car No. already exists in our system.";
+                return Json("E001", JsonRequestBehavior.AllowGet);
+            }
+
             if (obj.vehicle.Id > 0)
             {
                 UpdateEntity = uow.customerVehicleRepo.UpdateWithObj(obj.vehicle);
