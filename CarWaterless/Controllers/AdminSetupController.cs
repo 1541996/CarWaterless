@@ -335,5 +335,69 @@ namespace CarWaterless.Controllers
         }
 
         #endregion
+
+        #region MemberPackage
+        public ActionResult MemberPackage()
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                MemberPackageViewModel model = new MemberPackageViewModel();
+                AdminSetupRepository repository = new AdminSetupRepository();
+                model.AdditionalServiceList = new SelectList(repository.GetAllAdditionalService(), "Id", "Name");
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult MemberPackage(MemberPackageViewModel model)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            
+            if (model.ID == 0)
+            {
+                model = repository.SaveMemberPackage(model);
+            }
+            else
+            {
+                model = repository.EditMemberPackage(model);
+            }
+            return Json(model);
+        }
+
+        public ActionResult GetAllMemberPackage()
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            List<MemberPackageViewModel> list = repository.GetAllMemberPackage();
+            return Json(list);
+        }
+
+        public ActionResult EditMemberPackage(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            MemberPackageViewModel model = repository.GetMemberPackagebyId(id);
+            return Json(model);
+        }
+
+        public ActionResult DeleteMemberPackage(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            MemberPackageViewModel model = repository.DeleteMemberPackage(id);
+            return Json(model);
+        }
+
+        public ActionResult BindServiceByCarType(string cartype)
+        {
+            List<Infra.Models.tbAdditionalService> lst = new List<Infra.Models.tbAdditionalService>();
+            AdminSetupRepository repository = new AdminSetupRepository();
+            lst = repository.BindServiceByCarType(cartype);
+            return Json(lst);
+        }
+        #endregion
     }
 }

@@ -740,5 +740,157 @@ namespace CarWaterless.Business
         #region tbAdmin
 
         #endregion
+
+        #region tbMemberPackage
+        public List<MemberPackageViewModel> GetAllMemberPackage()
+        {
+            List<MemberPackageViewModel> lst = new List<MemberPackageViewModel>();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbMemberPackages
+                             where data.IsDeleted == false
+                             select new MemberPackageViewModel
+                             {
+                                 ID = data.ID,
+                                 Title = data.Title,
+                                 AdditionalServiceIds = data.AdditionalServiceIds,
+                                 AdditionalServiceNames = data.AdditionalServiceNames,
+                                 PackagePrice = data.PackagePrice,
+                                 CarType = data.CarType,
+                             });
+                lst = query.AsEnumerable().Select((data, index) => new MemberPackageViewModel()
+                {
+                    ID = data.ID,
+                    Title = data.Title,
+                    AdditionalServiceIds = data.AdditionalServiceIds,
+                    AdditionalServiceNames = data.AdditionalServiceNames,
+                    PackagePrice = data.PackagePrice,
+                    CarType = data.CarType,
+                    IsActive = data.IsActive,
+                    No = ++index
+                }).ToList();
+            }
+            return lst;
+        }
+
+        public MemberPackageViewModel GetMemberPackagebyId(int id)
+        {
+            MemberPackageViewModel model = new MemberPackageViewModel();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbMemberPackages
+                             where data.IsDeleted == false && data.ID == id
+                             select new MemberPackageViewModel
+                             {
+                                 ID = data.ID,
+                                 Title = data.Title,
+                                 AdditionalServiceIds = data.AdditionalServiceIds,
+                                 AdditionalServiceNames = data.AdditionalServiceNames,
+                                 PackagePrice = data.PackagePrice,
+                                 CarType = data.CarType,
+                                 IsActive = data.IsActive,
+                             });
+                model = query.AsEnumerable().Select((data, index) => new MemberPackageViewModel()
+                {
+                    ID = data.ID,
+                    Title = data.Title,
+                    AdditionalServiceIds = data.AdditionalServiceIds,
+                    AdditionalServiceNames = data.AdditionalServiceNames,
+                    PackagePrice = data.PackagePrice,
+                    CarType = data.CarType,
+                    IsActive = data.IsActive,
+                }).FirstOrDefault();
+            }
+            return model;
+        }
+
+        public MemberPackageViewModel SaveMemberPackage(MemberPackageViewModel model)
+        {
+            MemberPackageViewModel response = new MemberPackageViewModel();
+            try
+            {
+                using (var context = new CarWaterLessContext())
+                {
+                    string ids = model.AdditionalServiceIds;
+                    ids = ids.Remove(ids.Length - 1, 1);
+                    string names = model.AdditionalServiceNames;
+                    names = names.Remove(names.Length - 1, 1);
+                    tbMemberPackage obj = new tbMemberPackage();
+
+                    obj.Title = model.Title;
+                    obj.CarType = model.CarType;
+                    obj.PackagePrice = model.PackagePrice;
+                    obj.AdditionalServiceIds = ids;
+                    obj.AdditionalServiceNames = names;
+                    obj.IsActive = true;
+                    obj.IsDeleted = false;
+                    obj.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                    context.tbMemberPackages.Add(obj);
+                    context.SaveChanges();
+                }
+                response.MessageType = 1;
+                response.Message = "Save Successful.";
+            }
+            catch (Exception e)
+            {
+                response.MessageType = 2;
+                response.Message = "Save Failed.";
+            }
+
+            return response;
+        }
+
+        public MemberPackageViewModel EditMemberPackage(MemberPackageViewModel model)
+        {
+            MemberPackageViewModel response = new MemberPackageViewModel();
+            try
+            {
+                using (var context = new CarWaterLessContext())
+                {
+                    context.tbMemberPackages.First(x => x.ID == model.ID).Title = model.Title;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceIds = model.AdditionalServiceIds;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceNames = model.AdditionalServiceNames;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).CarType = model.CarType;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).PackagePrice = model.PackagePrice;
+                    context.SaveChanges();
+
+                    response.MessageType = 1;
+                    response.Message = "Update Successful.";
+                }
+            }
+            catch (Exception e)
+            {
+                response.MessageType = 2;
+                response.Message = "Update failed.";
+            }
+            return response;
+        }
+        public MemberPackageViewModel DeleteMemberPackage(int id)
+        {
+            MemberPackageViewModel model = new MemberPackageViewModel();
+            using (var context = new CarWaterLessContext())
+            {
+
+                context.tbMemberPackages.First(x => x.ID == id).IsDeleted = true;
+                context.SaveChanges();
+
+
+                model.MessageType = 1;
+                model.Message = "";
+            }
+
+            return model;
+        }
+
+        public List<tbAdditionalService> BindServiceByCarType(string cartype)
+        {
+            List<tbAdditionalService> lst = new List<tbAdditionalService>();
+            using(var context = new CarWaterLessContext())
+            {
+                lst = context.tbAdditionalServices.Where(x => x.CarType == cartype && x.IsDeleted == false).ToList();
+            }
+            return lst;
+        }
+        #endregion
     }
 }
