@@ -22,6 +22,7 @@ namespace Infra.ViewModels
         public int? CreateUserId { get; set; }
         public DateTime? UpdateDate { get; set; }
         public int? UpdateUserId { get; set; }
+        public string Photo { get; set; }
 
         public int No { get; set; }
         public string Message { get; set; }

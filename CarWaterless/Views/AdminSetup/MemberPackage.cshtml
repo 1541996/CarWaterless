@@ -335,7 +335,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                             <div class="position-relative form-group">
                                 <label>Services</label>
                                 @Html.DropDownListFor(model => model.AdditionalServiceIds, Model.AdditionalServiceList, new { @class = "form-control", @autocomplete = "off", @id = "ddladditionalservice", @multiple = "multiple", @name = "services[]" })
@@ -345,7 +345,30 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3">
+
+                        <div class="col-md-6 text-center">
+                            <div class="position-relative form-group">
+                                <label for="exampleFile">Photo</label>
+
+                                <div class="mt-5">
+                                    <img id="imagePreview"
+                                         src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/@Model.Photo" style="width:200px;height:150px" />
+
+                                </div>
+
+                                <div class="text-center" style="display:inline-block">
+                                    <input name="file" id="exampleFile" type="file" class="form-control-file file_memberpackage mt-5" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'memberpackage')">
+                                    <small class="form-text text-muted">Please upload photo.</small>
+                                    <input type="hidden" id="photo_memberpackage" name="Photo" />
+                                </div>
+
+                              
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 float-right">
                             <div class="position-relative form-group" style="margin-top: 30px;float:right">
                                 <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
                                 <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
@@ -385,6 +408,7 @@
 </div>
 
 @Scripts.Render("~/bundles/memberpackage")
+<script src="~/ArchitectThemes/File/fileupload.js"></script>
 <script type="text/javascript">
     $(function () {
         $('#liSetting').addClass('mm-active');

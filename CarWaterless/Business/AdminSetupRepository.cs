@@ -757,6 +757,7 @@ namespace CarWaterless.Business
                                  AdditionalServiceNames = data.AdditionalServiceNames,
                                  PackagePrice = data.PackagePrice,
                                  CarType = data.CarType,
+                                 Photo = data.Photo
                              });
                 lst = query.AsEnumerable().Select((data, index) => new MemberPackageViewModel()
                 {
@@ -767,6 +768,7 @@ namespace CarWaterless.Business
                     PackagePrice = data.PackagePrice,
                     CarType = data.CarType,
                     IsActive = data.IsActive,
+                    Photo = data.Photo,
                     No = ++index
                 }).ToList();
             }
@@ -789,6 +791,7 @@ namespace CarWaterless.Business
                                  PackagePrice = data.PackagePrice,
                                  CarType = data.CarType,
                                  IsActive = data.IsActive,
+                                 Photo = data.Photo,
                              });
                 model = query.AsEnumerable().Select((data, index) => new MemberPackageViewModel()
                 {
@@ -799,24 +802,37 @@ namespace CarWaterless.Business
                     PackagePrice = data.PackagePrice,
                     CarType = data.CarType,
                     IsActive = data.IsActive,
+                    Photo = data.Photo,
                 }).FirstOrDefault();
             }
             return model;
         }
 
-        public MemberPackageViewModel SaveMemberPackage(MemberPackageViewModel model)
+        public async System.Threading.Tasks.Task<MemberPackageViewModel> SaveMemberPackageAsync(MemberPackageViewModel model)
         {
             MemberPackageViewModel response = new MemberPackageViewModel();
             try
             {
                 using (var context = new CarWaterLessContext())
                 {
+                    tbMemberPackage obj = new tbMemberPackage();
+
+                    if (model.Photo != null)
+                    {
+                        FileUploadViewModel fileupload = new FileUploadViewModel();
+                        fileupload.photo = model.Photo;
+                        fileupload.filepath = "/ImageStorage/CarWaterlessProject/MemberPackage";
+                        var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+
+                        obj.Photo = responsefile;
+                    }
+
+
                     string ids = model.AdditionalServiceIds;
                     ids = ids.Remove(ids.Length - 1, 1);
                     string names = model.AdditionalServiceNames;
                     names = names.Remove(names.Length - 1, 1);
-                    tbMemberPackage obj = new tbMemberPackage();
-
+                  
                     obj.Title = model.Title;
                     obj.CarType = model.CarType;
                     obj.PackagePrice = model.PackagePrice;
@@ -840,13 +856,32 @@ namespace CarWaterless.Business
             return response;
         }
 
-        public MemberPackageViewModel EditMemberPackage(MemberPackageViewModel model)
+        public async System.Threading.Tasks.Task<MemberPackageViewModel> EditMemberPackageAsync(MemberPackageViewModel model)
         {
             MemberPackageViewModel response = new MemberPackageViewModel();
             try
             {
                 using (var context = new CarWaterLessContext())
                 {
+                    if (model.ID > 0)
+                    {
+                        if (model.Photo != null)
+                        {
+                            FileUploadViewModel fileupload = new FileUploadViewModel();
+                            fileupload.photo = model.Photo;
+                            fileupload.filepath = "/ImageStorage/CarWaterlessProject/MemberPackage";
+                            var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+                            model.Photo = responsefile;
+                        }
+                        else
+                        {
+                            var olddata = context.tbMemberPackages.Where(a => a.IsDeleted != true && a.ID == model.ID).FirstOrDefault();
+                            model.Photo = olddata.Photo;
+                        }
+
+
+                    }
+
                     context.tbMemberPackages.First(x => x.ID == model.ID).Title = model.Title;
                     context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceIds = model.AdditionalServiceIds;
                     context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceNames = model.AdditionalServiceNames;

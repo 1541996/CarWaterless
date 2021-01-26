@@ -302,6 +302,7 @@
     <Content Include="ArchitectThemes\fonts\themify.svg" />
     <Content Include="ArchitectThemes\frontend\bankpay.js" />
     <Content Include="ArchitectThemes\frontend\additionalservice.js" />
+    <Content Include="ArchitectThemes\frontend\memberpackage.js" />
     <Content Include="ArchitectThemes\frontend\user-new.js" />
     <Content Include="ArchitectThemes\frontend\carcategory.js" />
     <Content Include="ArchitectThemes\frontend\township.js" />
@@ -746,6 +747,7 @@
     <Content Include="Views\Admin_Advertisement\_list.cshtml" />
     <Content Include="Views\Admin_Advertisement\AdvertisementForm.cshtml" />
     <Content Include="Views\Admin_Advertisement\DurationForm.cshtml" />
+    <Content Include="Views\AdminSetup\MemberPackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

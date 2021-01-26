@@ -198,6 +198,7 @@ function Edit(id) {
             $('#ddlCarType').val(data.CarType);
             $('#ddlCarType').trigger('change');
             $('#PackagePrice').val(data.PackagePrice);
+            $('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
             
 
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
@@ -267,6 +268,7 @@ function GetModel() {
     model.AdditionalServiceNames = selectNames;
     model.PackagePrice = $('#PackagePrice').val();
     model.CarType = $('#ddlCarType').val();
+    model.Photo = $('#photo_memberpackage').val();
     return model;
 }
 

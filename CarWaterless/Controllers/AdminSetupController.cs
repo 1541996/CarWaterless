@@ -355,17 +355,17 @@ namespace CarWaterless.Controllers
         }
 
         [HttpPost]
-        public ActionResult MemberPackage(MemberPackageViewModel model)
+        public async System.Threading.Tasks.Task<ActionResult> MemberPackage(MemberPackageViewModel model)
         {
             AdminSetupRepository repository = new AdminSetupRepository();
             
             if (model.ID == 0)
             {
-                model = repository.SaveMemberPackage(model);
+                model = await repository.SaveMemberPackageAsync(model);
             }
             else
             {
-                model = repository.EditMemberPackage(model);
+                model = await repository.EditMemberPackageAsync(model);
             }
             return Json(model);
         }
