@@ -1,10 +1,21 @@
 ﻿var selectIds = "";
 var selectNames = "";
 var hasData = false;
+var editbindIds_arr;
 $(document).ready(function () {
 
     $('select').select2();
     $('#ddladditionalservice').empty();
+
+    var ID = $('#ID').val();
+    //if (ID != "0") {
+    //    var editbindIds = $('#AdditionalServiceIds').val();
+    //    editbindIds_arr = editbindIds.split("_");
+
+    //    $("#ddladditionalservice").select2({
+    //        data: data
+    //    });
+    //}
 
     BindGrid();
 
@@ -198,15 +209,19 @@ function Edit(id) {
             $('#ddlCarType').val(data.CarType);
             $('#ddlCarType').trigger('change');
             $('#PackagePrice').val(data.PackagePrice);
-            $('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
+            //$('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
+            var editbindIds = data.AdditionalServiceIds;
+            editbindIds_arr = editbindIds.split("_");
+            $('#ddladditionalservice').val(editbindIds_arr).trigger("change");
             
-
+           
+            
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
 
             //$('body, html').animate({ scrollTop: $(patientFormTop).offset().top }, 'slow');
-            $('html, body').animate({
-                scrollTop: 0
-            }, 800);
+            //$('html, body').animate({
+            //    scrollTop: 0
+            //}, 800);
         },
     })
 }
@@ -300,7 +315,7 @@ function GetSelectedNames() {
         var $this = $(this);
         if ($this.length) {
             var selText = $this.text();
-            selectNames += selText + ",";
+            selectNames += selText + "_";
         }
     });
 }
