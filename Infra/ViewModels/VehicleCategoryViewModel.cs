@@ -86,10 +86,23 @@ namespace Infra.ViewModels
         public string ComplaintMessage { get; set; }
         public string Township { get; set; }
         public string Branch { get; set; }
+        public string customername { get; set; }
 
 
     }
 
+    public class ChatDataViewModel
+    {
+        public string vehiclename { get; set; }
+        public string vehiclebrand { get; set; }
+        public string vehicleno { get; set; }
+        public string userid { get; set; }
+        public string username { get; set; }
+        public string lastmessage { get; set; }
+        public DateTime? senddate { get; set; }
+        public bool? isread { get; set; }
+        public string type { get; set; }
+    }
 
 
     public class BranchViewModel

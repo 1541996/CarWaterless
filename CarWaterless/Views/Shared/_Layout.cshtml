@@ -98,13 +98,13 @@
                         <button class="close"></button>
                     </div>
                     <ul class="header-menu nav">
-                            <li class="nav-item">
-                                <a href="@Url.Action("DailyHot","AdminSetup")" class="nav-link">
-                                    <i class="nav-link-icon fa fa-database"> </i>
-                                    Daily Hot
-                                </a>
-                            </li>
-                            @*<li class="btn-group nav-item">
+                        <li class="nav-item">
+                            <a href="@Url.Action("DailyHot","AdminSetup")" class="nav-link">
+                                <i class="nav-link-icon fa fa-database"> </i>
+                                Daily Hot
+                            </a>
+                        </li>
+                        @*<li class="btn-group nav-item">
                                 <a href="javascript:void(0);" class="nav-link">
                                     <i class="nav-link-icon fa fa-edit"></i>
                                     Projects
@@ -116,7 +116,7 @@
                                     Settings
                                 </a>
                             </li>*@
-                        </ul>
+                    </ul>
                 </div>
                 <div class="app-header-right">
 
@@ -154,6 +154,10 @@
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
         </div>
         @*<div class="ui-theme-settings">
@@ -551,11 +555,11 @@
                                         </a>
                                     </li>
                                     @*<li>
-                    <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
-                        <i class="metismenu-icon"></i>
-                        Add Booking
-                    </a>
-                </li>*@
+                                            <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
+                                                <i class="metismenu-icon"></i>
+                                                Add Booking
+                                            </a>
+                                        </li>*@
                                 </ul>
                             </li>
 
@@ -657,7 +661,7 @@
     @*<script src="@Url.Content("~/ArchitectThemes/js/bootstrap.min.js")"></script>*@
     <script src="@Url.Content("~/ArchitectThemes/js/metisMenu.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/jquery.slimscroll.min.js")"></script>
-
+  
     <script src="@Url.Content("~/ArchitectThemes/js/jquery.dataTables.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/dataTables.bootstrap4.min.js")"></script>
     <script src="@Url.Content("~/ArchitectThemes/js/dataTables.responsive.min.js")"></script>
@@ -695,7 +699,7 @@
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
-                alert(connectionId);
+               // alert(connectionId);
                 console.log(connectionId);
 
             });
@@ -725,7 +729,7 @@
 
         })
 
-      
+
 
         function callloading(loadingopt) {
             var elements = "";

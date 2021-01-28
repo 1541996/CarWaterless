@@ -4,6 +4,7 @@ using Infra.UnitOfWork;
 using Infra.ViewModels;
 using LinqKit;
 using Microsoft.AspNet.SignalR;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -246,6 +247,106 @@ namespace CarWaterless.Controllers
 
 
 
+        public ActionResult _getuserlist(string searchvalue = null,
+         DateTime? fromdate = null, DateTime? todate = null, string cardata = null)
+        {
+            Expression<Func<tbCustomer, bool>> searchfilter = null;
+            Expression<Func<tbOperation, bool>> datefilter, washtypefilter, statusfilter, bookingsourcefilter = null;
+            Expression<Func<tbCustomerVehicle, bool>> carfilter = null;
+            if (searchvalue != "" && searchvalue != null)
+            {
+                searchfilter = PredicateBuilder.New<tbCustomer>();
+                searchfilter = searchfilter.Or(l => l.FullName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.UserName.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.PhoneNo.Contains(searchvalue));
+                searchfilter = searchfilter.Or(l => l.Email.Contains(searchvalue));
+            }
+            else
+            {
+                searchfilter = l => l.IsDeleted != true;
+            }
+
+            if (cardata != "" && cardata != null)
+            {
+                carfilter = PredicateBuilder.New<tbCustomerVehicle>();
+                carfilter = carfilter.Or(l => l.VehicleName.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleNo.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleColor.Contains(searchvalue));
+                carfilter = carfilter.Or(l => l.VehicleBrand.Contains(searchvalue));
+            }
+            else
+            {
+                carfilter = l => l.IsDeleted != true;
+            }
+
+            if(fromdate == null)
+            {
+                fromdate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
+            }
+
+
+
+            var result = (from operation in uow.operationRepo.GetAll().
+                          Where(a => a.IsDeleted != true && a.OperationDate >= fromdate)
+                          join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true)
+                          .Where(searchfilter)
+                          on operation.CustomerId equals customer.Id
+                          join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                                  .Where(carfilter).Where(carfilter)
+                          on operation.CustomerVehicleId equals car.Id      
+                          join chat in uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true)
+                          on customer.Id.ToString() equals chat.UserID
+                          select new {
+                              operation,
+                              car.VehicleBrand,
+                              car.VehicleName,
+                              car.VehicleNo,
+                          }).DistinctBy(a => a.operation.Id);
+
+
+            var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true && a.OperationDate >= fromdate).AsQueryable();
+
+
+            if(messagelist.Count() > 0)
+            {
+                IQueryable<ChatDataViewModel> data = (from d in result
+                                                      select new ChatDataViewModel
+                                                      {
+                                                          vehiclebrand = d.VehicleBrand,
+                                                          vehiclename = d.VehicleName,
+                                                          vehicleno = d.VehicleNo,
+                                                          userid = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserID.ToString(),
+                                                          username = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserName.ToString(),
+                                                          senddate = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().SendDateTime,
+                                                          lastmessage = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Message.ToString(),
+                                                          isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
+                                                          type = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type.ToString(),
+
+                                                      }).AsQueryable();
+                var totalCount = data.Count();
+
+
+
+                //var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
+                return PartialView("_getuserlist", data);
+            }
+            else
+            {
+                IQueryable<ChatDataViewModel> data = null;
+                
+                return PartialView("_getuserlist", data);
+            }
+        
+
+
+         
+        }
+
+
+
+
+
+
         public ActionResult newstatuschange(int id = 0, string status = null)
         {
             tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
@@ -347,17 +448,17 @@ namespace CarWaterless.Controllers
 
         }
 
-        public ActionResult BookingSuccess(int id = 0)
-        {
-            // ViewBag.customerid = customerid;
-            BookingSuccessModel bk = new BookingSuccessModel();
-            bk.operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
-            bk.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CustomerVehicleId).FirstOrDefault();
-            bk.carCategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CarCategoryId).FirstOrDefault();
-            bk.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).AsQueryable();
-            return View(bk);
+        //public ActionResult BookingSuccess(int id = 0)
+        //{
+        //    // ViewBag.customerid = customerid;
+        //    BookingSuccessModel bk = new BookingSuccessModel();
+        //    bk.operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
+        //    bk.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CustomerVehicleId).FirstOrDefault();
+        //    bk.carCategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CarCategoryId).FirstOrDefault();
+        //    bk.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).AsQueryable();
+        //    return View(bk);
 
-        }
+        //}
 
 
 

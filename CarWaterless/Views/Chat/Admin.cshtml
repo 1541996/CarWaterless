@@ -6,303 +6,303 @@
 
 
 <style>
-        #content {
-            max-width: 100% !important
-        }
+    #content {
+        max-width: 100% !important
+    }
 
-        .bg-header {
-            background: #fff !important
-        }
+    .bg-header {
+        background: #fff !important
+    }
 
-        .div-chat-footer {
-            /* height: 70px;
+    .div-chat-footer {
+        /* height: 70px;
           */
-            width: 100%;
-            border-top: 0px solid #ddd;
-            position: fixed;
-            bottom: 0px;
-            left: 0px;
-            z-index: 2;
-            background: #fff !important
-            /*  padding: 0px 5px 5px;*/
-        }
+        width: 100%;
+        border-top: 0px solid #ddd;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        z-index: 2;
+        background: #fff !important
+        /*  padding: 0px 5px 5px;*/
+    }
 
 
-        .pic {
-            width: 3rem;
-            height: 3rem;
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
-        }
+    .pic {
+        width: 3rem;
+        height: 3rem;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+    }
 
-        .contact {
-            position: relative;
-            padding-left: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .contact {
+        position: relative;
+        padding-left: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
 
-            .contact .pic {
-                position: absolute;
-                left: 0;
-            }
-
-            .contact .name {
-                font-weight: 500;
-                margin-bottom: 0.125rem;
-            }
-
-            .contact .message, .contact .seen {
-                font-size: 10px;
-                color: #999;
-            }
-
-            .contact .badge {
-                box-sizing: border-box;
-                position: absolute;
-                width: 1.5rem;
-                height: 1.5rem;
-                text-align: center;
-                font-size: 0.9rem;
-                padding-top: 0.125rem;
-                border-radius: 1rem;
-                top: 0;
-                left: 2.5rem;
-                background: #333;
-                color: white;
-            }
-
-
-
-        .chat-layout .chat-box-wrapper {
-            padding: 15px;
-        }
-
-        .chat-box-wrapper {
-            display: flex;
-            clear: both;
-            padding: .75rem;
-        }
-
-        .avatar-icon-wrapper .badge-dot.badge-dot-lg.badge-bottom {
-            top: auto;
-            right: 0;
-            bottom: 0;
-        }
-
-        .avatar-icon-wrapper .badge-dot.badge-dot-lg {
-            width: 14px;
-            height: 14px;
-            border: #fff solid 2px;
-            top: 0;
-            right: 0;
-        }
-
-        .avatar-icon-wrapper .badge.badge-bottom {
-            top: auto;
-            right: -2px;
-            bottom: -2px;
-        }
-
-        .avatar-icon-wrapper .badge-dot {
-            width: 10px;
-            height: 10px;
-            border: #fff solid 2px;
-        }
-
-        .avatar-icon-wrapper .badge {
+        .contact .pic {
             position: absolute;
-            right: -2px;
-            top: -2px;
-        }
-
-        .badge-dot-lg {
-            width: 10px;
-            height: 10px;
-        }
-
-        .badge-dot {
-            text-indent: -999em;
-            padding: 0;
-            width: 8px;
-            height: 8px;
-            border: transparent solid 1px;
-            border-radius: 30px;
-            min-width: 2px;
-        }
-
-        .badge {
-            font-weight: bold;
-            text-transform: uppercase;
-            padding: 5px 10px;
-            min-width: 19px;
-        }
-
-        .badge-success {
-            color: #fff;
-            background-color: #3ac47d;
-        }
-
-        .badge-success {
-            color: #fff;
-            background-color: #3ac47d;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: .25em .4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: .25rem;
-        }
-
-        .avatar-icon.rounded {
-            border-radius: .39rem !important;
-        }
-
-        .avatar-icon {
-            /*  border: #fff solid 3px;*/
-            overflow: hidden;
-        }
-
-        .avatar-icon {
-            display: block;
-            width: 40px;
-            height: 40px;
-            transition: all .2s;
-            opacity: 1;
-            border-radius: 50px;
-        }
-
-        .rounded {
-            border-radius: .25rem !important;
-        }
-
-        .avatar-icon img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .chat-box-wrapper .chat-box {
-            box-shadow: 0 0 0 transparent;
-            position: relative;
-            opacity: 1;
-            background: #e0f3ff;
-            border: 0;
-            padding: .75rem 1.5rem;
-            border-radius: 30px;
-            border-top-left-radius: .25rem;
-            flex: 1;
-            display: flex;
-            max-width: 50%;
-            min-width: 100%;
-            text-align: left;
-        }
-
-            .chat-box-wrapper .chat-box + small {
-                text-align: left;
-                padding: .5rem 0 0;
-                margin-left: 1.5rem;
-                display: block;
-            }
-
-        .opacity-6 {
-            opacity: .6 !important;
-        }
-
-        small, .small {
-            font-size: 80%;
-            font-weight: 400;
-        }
-
-        small {
-            font-size: 80%;
-        }
-
-
-
-
-        #myImg {
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-            #myImg:hover {
-                opacity: 0.7;
-            }
-
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
             left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
         }
 
-        /* Modal Content (image) */
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
+        .contact .name {
+            font-weight: 500;
+            margin-bottom: 0.125rem;
         }
 
-        /* Caption of Modal Image */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
+        .contact .message, .contact .seen {
+            font-size: 10px;
+            color: #999;
+        }
+
+        .contact .badge {
+            box-sizing: border-box;
+            position: absolute;
+            width: 1.5rem;
+            height: 1.5rem;
             text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
+            font-size: 0.9rem;
+            padding-top: 0.125rem;
+            border-radius: 1rem;
+            top: 0;
+            left: 2.5rem;
+            background: #333;
+            color: white;
         }
 
-        /* Add Animation */
-        .modal-content, #caption {
-            -webkit-animation-name: zoom;
-            -webkit-animation-duration: 0.6s;
-            animation-name: zoom;
-            animation-duration: 0.6s;
+
+
+    .chat-layout .chat-box-wrapper {
+        padding: 15px;
+    }
+
+    .chat-box-wrapper {
+        display: flex;
+        clear: both;
+        padding: .75rem;
+    }
+
+    .avatar-icon-wrapper .badge-dot.badge-dot-lg.badge-bottom {
+        top: auto;
+        right: 0;
+        bottom: 0;
+    }
+
+    .avatar-icon-wrapper .badge-dot.badge-dot-lg {
+        width: 14px;
+        height: 14px;
+        border: #fff solid 2px;
+        top: 0;
+        right: 0;
+    }
+
+    .avatar-icon-wrapper .badge.badge-bottom {
+        top: auto;
+        right: -2px;
+        bottom: -2px;
+    }
+
+    .avatar-icon-wrapper .badge-dot {
+        width: 10px;
+        height: 10px;
+        border: #fff solid 2px;
+    }
+
+    .avatar-icon-wrapper .badge {
+        position: absolute;
+        right: -2px;
+        top: -2px;
+    }
+
+    .badge-dot-lg {
+        width: 10px;
+        height: 10px;
+    }
+
+    .badge-dot {
+        text-indent: -999em;
+        padding: 0;
+        width: 8px;
+        height: 8px;
+        border: transparent solid 1px;
+        border-radius: 30px;
+        min-width: 2px;
+    }
+
+    .badge {
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        min-width: 19px;
+    }
+
+    .badge-success {
+        color: #fff;
+        background-color: #3ac47d;
+    }
+
+    .badge-success {
+        color: #fff;
+        background-color: #3ac47d;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: .25em .4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25rem;
+    }
+
+    .avatar-icon.rounded {
+        border-radius: .39rem !important;
+    }
+
+    .avatar-icon {
+        /*  border: #fff solid 3px;*/
+        overflow: hidden;
+    }
+
+    .avatar-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        transition: all .2s;
+        opacity: 1;
+        border-radius: 50px;
+    }
+
+    .rounded {
+        border-radius: .25rem !important;
+    }
+
+    .avatar-icon img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .chat-box-wrapper .chat-box {
+        box-shadow: 0 0 0 transparent;
+        position: relative;
+        opacity: 1;
+        background: #e0f3ff;
+        border: 0;
+        padding: .75rem 1.5rem;
+        border-radius: 30px;
+        border-top-left-radius: .25rem;
+        flex: 1;
+        display: flex;
+        max-width: 50%;
+        min-width: 100%;
+        text-align: left;
+    }
+
+        .chat-box-wrapper .chat-box + small {
+            text-align: left;
+            padding: .5rem 0 0;
+            margin-left: 1.5rem;
+            display: block;
         }
 
-        @@-webkit-keyframes zoom {
-            from {
-                -webkit-transform: scale(0)
-            }
+    .opacity-6 {
+        opacity: .6 !important;
+    }
 
-            to {
-                -webkit-transform: scale(1)
-            }
+    small, .small {
+        font-size: 80%;
+        font-weight: 400;
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+
+
+
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        #myImg:hover {
+            opacity: 0.7;
         }
 
-        @@keyframes zoom {
-            from {
-                transform: scale(0)
-            }
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    }
 
-            to {
-                transform: scale(1)
-            }
+    /* Modal Content (image) */
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation */
+    .modal-content, #caption {
+        -webkit-animation-name: zoom;
+        -webkit-animation-duration: 0.6s;
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @@-webkit-keyframes zoom {
+        from {
+            -webkit-transform: scale(0)
         }
 
-        /* The Close Button */
-        /*.close {
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @@keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    /*.close {
       position: absolute;
       top: 15px;
       right: 35px;
@@ -319,12 +319,12 @@
       cursor: pointer;
     }
     */
-        /* 100% Image Width on Smaller Screens */
-        @@media only screen and (max-width: 700px) {
-            .modal-content {
-                width: 100%;
-            }
+    /* 100% Image Width on Smaller Screens */
+    @@media only screen and (max-width: 700px) {
+        .modal-content {
+            width: 100%;
         }
+    }
 </style>
 
 
@@ -401,9 +401,14 @@
 </div>
 
 
-
 @section scripts{
 
+
+    @{
+        Infra.ViewModels.AdminViewModel userModel = CarWaterless.Business.CommonRepository.GetLoginData();
+        string fullname = userModel.UserName;
+
+    }
 
 
 
@@ -419,8 +424,8 @@
 
 
         var userid = '@ViewBag.userid';
+
         var operationid = '@ViewBag.operationid';
-        var username =  '@ViewBag.username';
         $(function () {
 
             $('body').on('dragstart drop', function (e) {
@@ -434,7 +439,7 @@
                 connectionId = $.connection.hub.id;
                 console.log(connectionId);
             });
-        //    $.connection.hub.url = 'http://centurylinksmm-001-site7.dtempurl.com/signalr';
+           // $.connection.hub.url = 'http://centurylinksmm-001-site7.dtempurl.com/signalr';
 
             $.connection.hub.url = 'https://localhost:44338/signalr';
 
@@ -502,8 +507,6 @@
         }
 
 
-
-
          function getChatList(){
               $.ajax({
                   cache: false,
@@ -511,7 +514,7 @@
                   type: "Get",
                   data: {
                       userid: userid,
-                      type: "User",
+                      type: "Admin",
                       operationid: operationid
                   },
                     beforeSend: function () {
@@ -663,11 +666,11 @@
 
             var obj = {
                 userid: userid,
-                type: "User",
+                type: "Admin",
                 operationid: operationid,
                 message: $('#txt_message').val(),
                 file: imagesstring,
-                username: username
+                username: '@fullname',
 
 
             }

@@ -22,52 +22,52 @@ namespace CarWaterless.Controllers
             uow = new UnitOfWork(dbContext);
         }
         // GET: Chat
-        public ActionResult Index(string fromuserid = null,string touserid = null,int operationid = 0,string type = null)
+        public ActionResult Index(string userid = null,string username = null,int operationid = 0)
         {
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
             ViewBag.operationid = operationid;
-            ViewBag.fromuserid = fromuserid;
-            ViewBag.touserid = touserid;
-            ViewBag.type = type;
-            if (type == "admin")
-            {
+            ViewBag.userid = userid;
+            ViewBag.username = username;
+            ViewBag.type = "User";
+           
 
-                tbCustomer cus = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == touserid).FirstOrDefault();
-                ViewBag.username = cus.FullName;
-                ViewBag.photo = cus.Photo;
+           
+            return View();
+        }
 
-                hubContext.Clients.All.chatAppear(touserid, fromuserid, operationid);
-            }
-            else
-            {
-                tbAdmin admin = uow.adminRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == touserid).FirstOrDefault();
-                ViewBag.username = admin.FullName;
-                ViewBag.photo = "";
-
-
-            }
+        public ActionResult Admin(string userid = null, string username = null, int operationid = 0)
+        {
+            var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();
+            ViewBag.operationid = operationid;
+            ViewBag.userid = userid;
+            ViewBag.username = username;
+            ViewBag.type = "Admin";
 
 
-          
+            hubContext.Clients.All.chatAppear(userid, username, operationid);
+
             return View();
         }
 
 
-        public ActionResult _chatList(string fromuserid = null, string touserid = null, int operationid = 0)
+
+        public ActionResult _chatList(string userid = null, int operationid = 0,string type = null)
         {
-            ViewBag.operationid = operationid;
-            ViewBag.fromuserid = fromuserid;
-            ViewBag.touserid = touserid;
+            ViewBag.userid = userid;
+            ViewBag.type = type;
 
-            var messagesfromuser = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.FromUserID == fromuserid && a.ToUserID == touserid
-                                   && a.OperationID == operationid).AsQueryable();
-            //receive messages by user 1 
+            //var messagesfromuser = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.FromUserID == fromuserid && a.ToUserID == touserid
+            //                       && a.OperationID == operationid).AsQueryable();
+            ////receive messages by user 1 
 
-            var messagestouser = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.FromUserID == touserid 
-                                 && a.ToUserID == fromuserid && a.OperationID == operationid).AsQueryable();
+            //var messagestouser = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.FromUserID == touserid 
+            //                     && a.ToUserID == fromuserid && a.OperationID == operationid).AsQueryable();
+
+            //List<tbChatMessage> result = null;
+            //result = messagesfromuser.Union(messagestouser).OrderBy(a => a.SendDateTime).ToList();
 
             List<tbChatMessage> result = null;
-            result = messagesfromuser.Union(messagestouser).OrderBy(a => a.SendDateTime).ToList();
+            result = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.OperationID == operationid).ToList();
 
             return PartialView("_chatList", result);
         }
@@ -76,9 +76,12 @@ namespace CarWaterless.Controllers
         [HttpPost]
         public async System.Threading.Tasks.Task<ActionResult> sendMessageAsync(ChatViewModel obj)
         {
-            ViewBag.fromuserid = obj.fromuserid;
-            ViewBag.touserid = obj.touserid;
+            ViewBag.userid = obj.userid;
+            ViewBag.type = obj.type;
 
+            ViewBag.fromuserid = obj.userid;
+
+            var operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == obj.operationid).FirstOrDefault();
 
             var hubContext = GlobalHost.ConnectionManager.GetHubContext<ChatHub>();        
             
@@ -121,12 +124,15 @@ namespace CarWaterless.Controllers
                     tbChatMessage messageobj = new tbChatMessage();
 
                     messageobj.Photo = photoconcat;
-                    messageobj.FromUserID = obj.fromuserid;
-                    messageobj.ToUserID = obj.touserid;
+                    messageobj.UserID = obj.userid;
+                 
                     messageobj.IsDeleted = false;
+                    messageobj.Type = obj.type;
                   //  messageobj.Message = obj.message;
                     messageobj.OperationID = obj.operationid ?? 0;
                     messageobj.SendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                    messageobj.OperationDate = operation.OperationDate;
+                    messageobj.UserName = obj.username;
                     UpdatePhoto = uow.chatMessageRepo.InsertReturn(messageobj);
                    
                     if(obj.message != null && obj.message != "")
@@ -135,12 +141,14 @@ namespace CarWaterless.Controllers
                         tbChatMessage messageobj2 = new tbChatMessage();
 
                         
-                        messageobj2.FromUserID = obj.fromuserid;
-                        messageobj2.ToUserID = obj.touserid;
+                        messageobj2.UserID = obj.userid;
+                        messageobj2.Type = obj.type;
                         messageobj2.IsDeleted = false;
                         messageobj2.Message = obj.message;
                         messageobj2.OperationID = obj.operationid ?? 0;
                         messageobj2.SendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                        messageobj2.OperationDate = operation.OperationDate;
+                        messageobj2.UserName = obj.username;
                         UpdateEntitiy = uow.chatMessageRepo.InsertReturn(messageobj2);
                     }
 
@@ -167,12 +175,14 @@ namespace CarWaterless.Controllers
                 tbChatMessage UpdateEntity = null;
                 tbChatMessage messageobj = new tbChatMessage();
 
-                messageobj.FromUserID = obj.fromuserid;
-                messageobj.ToUserID = obj.touserid;
+                messageobj.UserID = obj.userid;
+                messageobj.Type = obj.type;
                 messageobj.IsDeleted = false;
                 messageobj.Message = obj.message;
                 messageobj.OperationID = obj.operationid ?? 0;
                 messageobj.SendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                messageobj.OperationDate = operation.OperationDate;
+                messageobj.UserName = obj.username;
                 UpdateEntity = uow.chatMessageRepo.InsertReturn(messageobj);
 
                 hubContext.Clients.All.chatAdd("Success");

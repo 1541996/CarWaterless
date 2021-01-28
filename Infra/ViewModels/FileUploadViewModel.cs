@@ -15,11 +15,12 @@ namespace Infra.ViewModels
 
     public class ChatViewModel
     {
-        public string fromuserid { get; set; }
-        public string touserid { get; set; }
+        public string userid { get; set; }
+        public string type { get; set; }
         public int? operationid { get; set; }
         public string message { get; set; }
         public string file { get; set; }
+        public string username { get; set; }
 
     }
 

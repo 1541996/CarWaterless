@@ -74,11 +74,11 @@
             <div class="col-md-12">
                 <div class="chart-box">
                     <div class="cart-car-box">
-                        @if (Model.photos.Count() > 0)
-                        {
-                            var photo = Model.photos.FirstOrDefault();
-                            <div class="chart-car"><img src="@photo.PhotoUrl"></div>
-                        }
+                        @*@if (Model.photos.Count() > 0)
+                        {*@
+                            @*var photo = Model.photos.FirstOrDefault();*@
+                            <div class="chart-car"><img src="@Model.photourl"></div>
+                        @*}*@
 
                         <div class="chart-car-title theme-color mt-10">@Model.vehicle.VehicleBrand @Model.vehicle.VehicleName</div>
 
@@ -316,9 +316,14 @@
     <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>
 
 
+
     <script>
         var chathub = $.connection.chatHub;
         var connectionId;
+        var userid = '@Model.operation.CustomerId';
+        var operationid = '@Model.operation.Id';
+        var username = '@Model.CustomerName';
+
         $(function () {
 
             //$.connection.hub.start().done(function () {
@@ -355,7 +360,7 @@
 
                 alert("Signalr");
 
-                $('#div_chatappear').empty().append(`<a href="../chat?fromuserid=${fromuserid}&touserid=${touserid}&operationid=${operationid}" class="float" target="_blank">
+                $('#div_chatappear').empty().append(`<a href="../chat?userid=${userid}&username=${username}&operationid=${operationid}" class="float" target="_blank">
                         <i class= "fa fa-comments my-float"></i>
                     </a>`)
 

@@ -12,7 +12,8 @@ namespace Infra.ViewModels
         public tbOperation operation { get; set; }
         public tbCarCategory carCategory { get; set; }
         public tbCustomerVehicle vehicle { get; set; }
-        public IQueryable<tbPhoto> photos { get; set; }
+        public string photourl { get; set; }
+        public string CustomerName { get; set; }
 
     }
 

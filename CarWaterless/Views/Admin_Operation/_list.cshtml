@@ -216,12 +216,14 @@
                     @{
                         Infra.ViewModels.AdminViewModel userModel = CarWaterless.Business.CommonRepository.GetLoginData();
                         int userid = userModel.Id;
+                        var username = userModel.FullName;
                     }
 
                     <div class="col-md-1">
                         <div class="font-icon-wrapper font-icon-lg" onclick="gotochat(this)"
-                             data-fromuserid="@userid"
-                             data-touserid="@result.CustomerId"
+                             data-userid="@userid"
+                             data-username="@username"
+                             @*data-touserid="@result.CustomerId"*@
                              data-operationid="@result.OperationId">
                             <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
                         </div>

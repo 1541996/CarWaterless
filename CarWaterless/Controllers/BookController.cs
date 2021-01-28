@@ -223,7 +223,8 @@ namespace CarWaterless.Controllers
                                                        PaymentType = operation.PaymentType,
                                                        ComplaintMessage = operation.ComplaintsMessage,
                                                        Branch = operation.BranchName,
-                                                       Township = operation.TownshipName
+                                                       Township = operation.TownshipName,
+                                                       customername = customer.FullName,
 
 
                                                    }).AsQueryable();
@@ -279,7 +280,8 @@ namespace CarWaterless.Controllers
                                                        PaymentType = operation.PaymentType,
                                                        ComplaintMessage = operation.ComplaintsMessage,
                                                        Branch = operation.BranchName,
-                                                       Township = operation.TownshipName
+                                                       Township = operation.TownshipName,
+                                                       customername = customer.FullName,
 
 
                                                    }).AsQueryable();
@@ -430,8 +432,15 @@ namespace CarWaterless.Controllers
             bk.operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
             bk.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CustomerVehicleId).FirstOrDefault();
             bk.carCategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CarCategoryId).FirstOrDefault();
-            bk.photos = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).AsQueryable();
+            bk.photourl = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).Select(a => a.PhotoUrl).FirstOrDefault();
+            bk.CustomerName = uow.customerRepo.GetAll().Where(a => a.Id == bk.operation.CustomerId).Select(a => a.FullName).FirstOrDefault();
+
+
+
+           
+
             return View(bk);
+
 
         }
 

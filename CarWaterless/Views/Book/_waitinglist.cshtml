@@ -72,6 +72,10 @@
                         <h6>MMK @result.TotalAmount.Value.ToString("#,##0")</h6>
 
                         <p class="text text-danger">@result.OperationDate.Value.ToString("dd MMM yyyy") @result.OperationDate.Value.ToShortTimeString()</p>
+
+                        <a href="../chat?userid=@result.CustomerId&username=@result.customername&operationid=@result.OperationId&type=User" class="btn btn-success" target="_blank">
+                            <i class="fa fa-comments"></i>
+                        </a>
                     </div>
 
 

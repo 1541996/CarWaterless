@@ -77,6 +77,9 @@
     <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
+    <Reference Include="MoreLinq, Version=3.3.2.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.3.3.2\lib\net451\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
@@ -90,6 +93,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -214,6 +220,7 @@
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\CarController.cs" />
+    <Compile Include="Controllers\AdminChatController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -748,6 +755,11 @@
     <Content Include="Views\Admin_Advertisement\AdvertisementForm.cshtml" />
     <Content Include="Views\Admin_Advertisement\DurationForm.cshtml" />
     <Content Include="Views\AdminSetup\MemberPackage.cshtml" />
+    <Content Include="Views\AdminChat\_chatList.cshtml" />
+    <Content Include="Views\AdminChat\Index.cshtml" />
+    <Content Include="Views\AdminChat\_userList.cshtml" />
+    <Content Include="Views\Chat\Admin.cshtml" />
+    <Content Include="Views\Admin_Operation\_getuserlist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

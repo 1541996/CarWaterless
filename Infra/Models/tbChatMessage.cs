@@ -10,10 +10,8 @@ namespace Infra.Models
     {
         [Key]
         public int Id { get; set; }
-        public string FromUserID { get; set; }
-        public string FromUserName { get; set; }
-        public string ToUserID { get; set; }
-        public string ToUserName { get; set; }
+        public string UserID { get; set; }
+        public string UserName { get; set; }
         public string UserToken { get; set; }
         public int OperationID { get; set; }
         public Nullable<System.DateTime> SendDateTime { get; set; }
@@ -21,6 +19,8 @@ namespace Infra.Models
         public Nullable<bool> IsConversationEnd { get; set; }
         public string Message { get; set; }
         public string Photo { get; set; }
+        public Nullable<System.DateTime> OperationDate { get; set; }
+        public string Type { get; set; }
         //public string PhotoUrl
         //{
         //    get

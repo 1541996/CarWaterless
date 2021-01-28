@@ -11,7 +11,7 @@
 
     foreach (var item in Model)
     {
-        if (item.UserID == ViewBag.userid && item.Type == ViewBag.type)
+        if (item.FromUserID == fromuserid)
         {
             if (item.Photo != null)
             {
@@ -79,7 +79,7 @@
 
                         <small class="opacity-6">
                             <i class="fa fa-calendar-alt mr-1"></i>
-                            @item.SendDateTime.Value.ToShortTimeString() - @item.UserName
+                            @item.SendDateTime.Value.ToShortTimeString()
                         </small>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                         </div>
                         <small class="opacity-6">
                             <i class="fa fa-calendar-alt mr-1"></i>
-                            @item.SendDateTime.Value.ToShortTimeString() - @item.UserName
+                            @item.SendDateTime.Value.ToShortTimeString()
                         </small>
                     </div>
                 </div>
