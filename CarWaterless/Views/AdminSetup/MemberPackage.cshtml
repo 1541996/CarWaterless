@@ -339,7 +339,7 @@
                         <div class="col-md-6">
                             <div class="position-relative form-group">
                                 <label>Services</label>
-                                @Html.DropDownListFor(model => model.AdditionalServiceIds, Model.AdditionalServiceList, new { @class = "form-control", @autocomplete = "off", @id = "ddladditionalservice", @multiple = "multiple", @name = "services[]" })
+                                @Html.DropDownListFor(model => model.AdditionalServiceIds, Model.AdditionalServiceList, new { @class = "form-control", @autocomplete = "off", @id = "ddladditionalservice2", @multiple = "multiple", @name = "services[]" })
                                 <div id="AdditionalServiceIds-error" class="invalid-feedback" style="display:none;">
                                     Select Additional Services.
                                 </div>
@@ -347,7 +347,7 @@
                         </div>
 
 
-                        <div class="col-md-6 text-center">
+                        @*<div class="col-md-6 text-center">
                             <div class="position-relative form-group">
                                 <label for="exampleFile">Photo</label>
 
@@ -367,7 +367,7 @@
 
 
                             </div>
-                        </div>
+                        </div>*@
 
                         <div class="col-md-12 float-right">
                             <div class="position-relative form-group" style="margin-top: 30px;float:right">
@@ -409,13 +409,87 @@
 </div>
 
 @Scripts.Render("~/bundles/memberpackage")
-<script src="~/ArchitectThemes/File/fileupload.js"></script>
+@*<script src="~/ArchitectThemes/File/fileupload.js"></script>*@
 <script type="text/javascript">
+    var cartype;
+    var editbindIds;
     $(function () {
+        $('#ddladditionalservice2').select2();
+
         $('#liSetting').addClass('mm-active');
         $('#liMemberPackage').addClass('mm-active');
         $('#liSetting a').attr('aria-expanded', true);
+
+        bindadditionalservice(cartype);
+        $('#ddlCarType').on('change', function (e) {
+
+            cartype = $(this).val();
+            bindadditionalservice(cartype);
+        });
     });
+
+
+    function bindadditionalservice() {         
+            if (cartype != "") {
+                $.ajax({
+                    type: "POST",
+                    url: bindserviceUrl,
+                    data: { "cartype": cartype },
+                    success: function (data) {
+                        alert(data);
+                        var select = $('#ddladditionalservice2').empty();
+                        $.each(data, function () {
+                            select.append($("<option></option>").val(this['Id']).html(this['Name']));
+                        });
+                        select.trigger('change');
+
+                       
+                        editbindIds_arr = editbindIds.split("_");
+                        console.log(editbindIds_arr);
+                        $('#ddladditionalservice2').val(editbindIds_arr).trigger("change");
+
+                    }
+                })
+            }
+       
+    }
+
+    function Edit(id) {
+        //  $('#ddladditionalservice').val(["1", "2"]).trigger("change");
+        $.ajax({
+            url: editUrl,
+            type: 'POST',
+            data: { "Id": id },
+            success: function (data) {
+                $("#Id").val(data.Id);
+                $('#Title').val(data.Title);
+                $('#ddlCarType').val(data.CarType);
+              //  $('#ddlCarType').trigger('change');
+
+                editbindIds = data.AdditionalServiceIds;
+                $('#PackagePrice').val(data.PackagePrice);
+                //$('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
+
+                $('#ddladditionalservice2').select2();
+
+                cartype = data.CarType;
+                if (cartype != "") {
+                    bindadditionalservice(cartype);
+                }
+
+              
+                $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
+
+                //$('body, html').animate({ scrollTop: $(patientFormTop).offset().top }, 'slow');
+                //$('html, body').animate({
+                //    scrollTop: 0
+                //}, 800);
+            },
+        })
+    }
+
+
+
     var listUrl = '@Url.Action("GetAllMemberPackage","AdminSetup")';
     var saveUrl = '@Url.Action("MemberPackage","AdminSetup")';
     var editUrl = '@Url.Action("EditMemberPackage", "AdminSetup", new { id="__id__" })';

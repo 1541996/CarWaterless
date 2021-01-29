@@ -4,8 +4,8 @@ var hasData = false;
 var editbindIds_arr;
 $(document).ready(function () {
 
-    $('select').select2();
-    $('#ddladditionalservice').empty();
+  
+ //   $('#ddladditionalservice2').empty();
 
     var ID = $('#ID').val();
     //if (ID != "0") {
@@ -19,24 +19,27 @@ $(document).ready(function () {
 
     BindGrid();
 
-    $('#ddlCarType').change(function () {
+    
+      
+  
+    //$('#ddlCarType').change(function () {
 
-        var cartype = $(this).val();
-        if (cartype != "") {
-            $.ajax({
-                type: "POST",
-                url: bindserviceUrl,
-                data: { "cartype": cartype },
-                success: function (data) {
-                    var select = $('#ddladditionalservice').empty();
-                    $.each(data, function () {
-                        select.append($("<option></option>").val(this['Id']).html(this['Name']));
-                    });
-                    select.trigger('change');
-                }
-            })
-        }
-    });
+    //    var cartype = $(this).val();
+    //    if (cartype != "") {
+    //        $.ajax({
+    //            type: "POST",
+    //            url: bindserviceUrl,
+    //            data: { "cartype": cartype },
+    //            success: function (data) {
+    //                var select = $('#ddladditionalservice').empty();
+    //                $.each(data, function () {
+    //                    select.append($("<option></option>").val(this['Id']).html(this['Name']));
+    //                });
+    //                select.trigger('change');
+    //            }
+    //        })
+    //    }
+    //});
 
     
 
@@ -147,8 +150,8 @@ function BindGrid() {
                                 var edit = "";
                                 var del = "";
 
-                                edit = "<a class='btn btn-warning btn-sm' href='javascript:void(0)' onclick=Edit('" + data.toString() + "')><i class='fas fa-edit'></i></a>&nbsp;&nbsp;";
-                                del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-trash'></i></a>";
+                                edit = "<a class='btn btn-warning btn-sm' onclick=Edit('" + data.toString() + "')><i class='fas fa-edit'></i></a>&nbsp;&nbsp;";
+                                del = "<a class='btn btn-danger btn-sm' onclick=Delete('" + data.toString() + "')><i class='fas fa-trash'></i></a>";
 
                                 actions += edit;
                                 actions += del;
@@ -196,34 +199,6 @@ function showMessage(messagetype, message) {
             type: "error"
         }).catch(swal.noop)
     }
-}
-
-function Edit(id) {
-    $.ajax({
-        url: editUrl,
-        type: 'POST',
-        data: { "Id": id },
-        success: function (data) {
-            $("#Id").val(data.Id);
-            $('#Title').val(data.Title);
-            $('#ddlCarType').val(data.CarType);
-            $('#ddlCarType').trigger('change');
-            $('#PackagePrice').val(data.PackagePrice);
-            //$('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
-            var editbindIds = data.AdditionalServiceIds;
-            editbindIds_arr = editbindIds.split("_");
-            $('#ddladditionalservice').val(editbindIds_arr).trigger("change");
-            
-           
-            
-            $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
-
-            //$('body, html').animate({ scrollTop: $(patientFormTop).offset().top }, 'slow');
-            //$('html, body').animate({
-            //    scrollTop: 0
-            //}, 800);
-        },
-    })
 }
 
 function Delete(id) {

@@ -358,12 +358,14 @@
     <Content Include="ArchitectThemes\image\CL-Logo-Long.png" />
     <Content Include="ArchitectThemes\image\igecowashlogo-removebg-preview.png" />
     <Content Include="ArchitectThemes\image\igecowashlogo.jpeg" />
+    <Content Include="ArchitectThemes\image\imageplaceholder.png" />
     <Content Include="ArchitectThemes\image\login-bg-white.jpg" />
     <Content Include="ArchitectThemes\image\logo.jpg" />
     <Content Include="ArchitectThemes\image\logo.png" />
     <Content Include="ArchitectThemes\image\newsense.jpg" />
     <Content Include="ArchitectThemes\image\newsensebag-removebg-preview.png" />
     <Content Include="ArchitectThemes\image\newsensebag.png" />
+    <Content Include="ArchitectThemes\image\nodata.jpg" />
     <Content Include="ArchitectThemes\image\pink.jpg" />
     <Content Include="ArchitectThemes\image\stock.png" />
     <Content Include="ArchitectThemes\image\walhtarlogo.jpg" />

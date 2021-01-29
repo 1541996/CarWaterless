@@ -22,7 +22,7 @@ namespace Infra.Models
                 {
                     return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/CustomerVehicle/{0}", Photo);
                 }
-                return "https://kktstroage.azureedge.net/yammo/careme/knowledge.png";
+                return "http://ecowash.centurylinks-stock.com/ArchitectThemes/image/imageplaceholder.png";
 
             }
         }

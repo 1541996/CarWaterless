@@ -279,12 +279,7 @@ namespace CarWaterless.Controllers
                 carfilter = l => l.IsDeleted != true;
             }
 
-            if(fromdate == null)
-            {
-                fromdate = MyExtension.getLocalTime(DateTime.UtcNow).Date;
-            }
-
-
+         
             if (type == "Waiting")
             {
                 if (fromdate != null && todate != null)
@@ -332,6 +327,13 @@ namespace CarWaterless.Controllers
 
             }
 
+            var chatdatefilter = new DateTime();
+
+            if (fromdate == null)
+            {
+                chatdatefilter = MyExtension.getLocalTime(DateTime.UtcNow).Date;
+            }
+
 
 
             var result = (from operation in uow.operationRepo.GetAll().
@@ -339,9 +341,11 @@ namespace CarWaterless.Controllers
                           join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true)
                           .Where(searchfilter)
                           on operation.CustomerId equals customer.Id
-                          join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
+                          join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Status != "Finished")
                                   .Where(carfilter).Where(carfilter)
                           on operation.CustomerVehicleId equals car.Id    
+                          join chat in uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true)
+                          on operation.Id equals chat.OperationID
                           select new {
                               operation,
                               car.VehicleBrand,
@@ -351,11 +355,14 @@ namespace CarWaterless.Controllers
                           }).DistinctBy(a => a.operation.Id);
 
 
-            var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true && a.OperationDate >= fromdate).AsQueryable();
+            var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true).AsQueryable();
+
 
 
             if(messagelist.Count() > 0)
             {
+                
+
                 IQueryable<ChatDataViewModel> data = (from d in result
                                                       select new ChatDataViewModel
                                                       {
