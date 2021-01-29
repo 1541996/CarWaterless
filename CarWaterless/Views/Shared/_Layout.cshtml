@@ -3,6 +3,7 @@
     string fullname = userModel.UserName;
     string userrole = userModel.UserRole;
     string userrolename = CarWaterless.Business.CommonRepository.GetUserRoleName(userrole);
+    bool Dailyhotactive = CarWaterless.Business.CommonRepository.CheckDailyHotStatus();
 }
 <!doctype html>
 <html lang="en">
@@ -102,6 +103,10 @@
                             <a href="@Url.Action("DailyHot","AdminSetup")" class="nav-link">
                                 <i class="nav-link-icon fa fa-database"> </i>
                                 Daily Hot
+                                @if (Dailyhotactive)
+                                {
+                                    <span class="badge badge-pill badge-danger"><i class="fa fa-check"></i></span>
+                                }
                             </a>
                         </li>
                         @*<li class="btn-group nav-item">
@@ -684,8 +689,8 @@
     @RenderSection("scripts", required: false)
 
 
-    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>
+    @*<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>*@
 
 
     <script>

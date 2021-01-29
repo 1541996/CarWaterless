@@ -1,0 +1,357 @@
+﻿@model Infra.ViewModels.DailyHotViewModel
+
+@{
+    ViewBag.Title = "DailyHot";
+}
+
+<style>
+
+
+    body {
+        overflow-x: hidden !important
+    }
+
+    .nopad {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    /*image gallery*/
+    .image-checkbox {
+        cursor: pointer;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 4px solid transparent;
+        margin-bottom: 0;
+        outline: 0;
+    }
+
+        .image-checkbox input[type="checkbox"] {
+            display: none !important;
+        }
+
+    .image-checkbox-checked {
+        border-color: #4783B0;
+    }
+
+    .image-checkbox .fa {
+        position: absolute;
+        color: #4A79A3;
+        background-color: #fff;
+        padding: 10px;
+        top: 0;
+        right: 0;
+    }
+
+    .image-checkbox-checked .fa {
+        display: block !important;
+    }
+
+    .chk-package .vsb-middle {
+        padding: 5px 0px;
+        font-weight: 600;
+        font-size: 13px;
+    }
+
+    .chk-package .vsbm-left {
+        color: #000;
+        display: inline-block;
+    }
+
+
+    .chk-package .vsbm-right {
+        display: inline-block;
+        color: #df9403;
+        float: right;
+    }
+
+    .div-img {
+        width: 200px;
+        border-radius: 10px;
+    }
+
+        .div-img img {
+            width: 200px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover
+        }
+
+    .vsb-price {
+        /*  color: #00c9a7;*/
+        color: #fff;
+        position: absolute;
+        padding: 3px 5px;
+        background-color: #00c9a7;
+        top: 7px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        left: 118px;
+        width: 75px;
+        font-size: 12px !important;
+    }
+
+    .div-active {
+        border: 3px solid #00c9a7;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        display: none
+    }
+
+
+    .btn-group-justified {
+        width: 100%
+    }
+
+
+    .btn-light {
+        color: #212529 !important;
+        background-color: #dae0e5 !important;
+        border-color: #d3d9df !important;
+    }
+
+    .active {
+        color: #fff !important;
+        background: #00c9a7 !important
+    }
+
+
+
+
+    @@keyframes click-wave {
+        0% {
+            height: 40px;
+            width: 40px;
+            opacity: 0.35;
+            position: relative;
+        }
+
+        100% {
+            height: 200px;
+            width: 200px;
+            margin-left: -80px;
+            margin-top: -80px;
+            opacity: 0;
+        }
+    }
+
+    .chk .option-input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        -o-appearance: none;
+        appearance: none;
+        position: relative;
+        top: 10.33333px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
+        transition: all 0.15s ease-out 0s;
+        background: #cbd1d8;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        margin-right: 0.5rem;
+        outline: none;
+        position: relative;
+        z-index: 1000;
+    }
+
+        .chk .option-input:hover {
+            background: #9faab7;
+        }
+
+        .chk .option-input:checked {
+            background: #40e0d0;
+        }
+
+            .chk .option-input:checked::before {
+                height: 30px;
+                width: 30px;
+                position: absolute;
+                content: "✔";
+                display: inline-block;
+                font-size: 20.66667px;
+                text-align: center;
+                line-height: 33px;
+            }
+
+            .chk .option-input:checked::after {
+                -webkit-animation: click-wave 0.65s;
+                -moz-animation: click-wave 0.65s;
+                animation: click-wave 0.65s;
+                background: #40e0d0;
+                content: "";
+                display: block;
+                position: relative;
+                z-index: 100;
+            }
+
+        .chk .option-input.radio {
+            border-radius: 50%;
+        }
+
+            .chk .option-input.radio::after {
+                border-radius: 50%;
+            }
+
+
+    .chk label {
+        display: block;
+        /* line-height: 40px;*/
+    }
+
+
+
+    .subsite-banner {
+        height: 128px !important
+    }
+
+    .page-cart .cart-total {
+        padding: 10px 10px;
+        border: 0px solid #dadfe3;
+        border-radius: 10px;
+        background-color: #f7f7f7;
+    }
+
+        .page-cart .cart-total .ct-row {
+            padding: 0px 0px 5px;
+        }
+
+        .page-cart .cart-total .ct-left {
+            width: 50%;
+            float: left;
+            text-align: left;
+        }
+
+        .page-cart .cart-total .ct-row .ct-right {
+            width: 50%;
+            float: left;
+            text-align: right;
+        }
+
+            .page-cart .cart-total .ct-row .ct-right span {
+                width: 100px;
+                text-align: left;
+                display: inline-block;
+            }
+
+        .page-cart .cart-total .ct-row.total {
+            font-weight: 600;
+        }
+
+        .page-cart .cart-total .svg-inline--fa.fa-dollar-sign {
+            color: #a4a4a4;
+            margin-right: 5px;
+        }
+
+    .error-message {
+        color: red !important
+    }
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Daily Hot
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12" style="display:none;" id="divedit">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <form class="">
+                    <div class="form-row">
+                        @Html.HiddenFor(x => x.ID)
+                        <div class="col-md-5">
+                            <div class="position-relative form-group">
+                                <label>Title</label>
+                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                                <div id="Title-error" class="invalid-feedback" style="display:none;">
+                                    Enter Title.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 text-center">
+                            <div class="position-relative form-group">
+                                <label for="exampleFile">Photo</label>
+
+                                <div class="mt-5">
+                                    <img id="imagePreview"
+                                         src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/DailyHot/@Model.Photo" style="width:200px;height:150px" />
+
+                                </div>
+
+                                <div class="text-center" style="display:inline-block">
+                                    <input name="file" id="exampleFile" type="file" class="form-control-file file_DailyHot mt-5" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'DailyHot')">
+                                    <small class="form-text text-muted">Please upload photo.</small>
+                                    <input type="hidden" id="photo_DailyHot" name="Photo" />
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 float-right">
+                            <div class="position-relative form-group" style="margin-top: 30px;float:right">
+                                <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
+                                <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row col-sm-12">
+                    <table id="tbl" class="table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/dailyhot")
+<script src="~/ArchitectThemes/File/fileupload.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#liSetting').addClass('mm-active');
+        $('#liSetting a').attr('aria-expanded', true);
+    });
+    var listUrl = '@Url.Action("GetAllDailyHot","AdminSetup")';
+    var saveUrl = '@Url.Action("DailyHot","AdminSetup")';
+    var editUrl = '@Url.Action("EditDailyHot", "AdminSetup", new { id="__id__" })';
+    var deacUrl = '@Url.Action("ActivateDeactivateDailyHot", "AdminSetup")';
+</script>
+
+

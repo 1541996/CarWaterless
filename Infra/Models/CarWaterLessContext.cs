@@ -28,6 +28,7 @@ namespace Infra.Models
         public DbSet<tbChatMessage> tbChatMessages { get; set; }
         public DbSet<tbCustomer> tbCustomers { get; set; }
         public DbSet<tbCustomerVehicle> tbCustomerVehicles { get; set; }
+        public DbSet<tbDailyHot> tbDailyHots { get; set; }
         public DbSet<tbDiscount> tbDiscounts { get; set; }
         public DbSet<tbDiscountedCar> tbDiscountedCars { get; set; }
         public DbSet<tbFinance> tbFinances { get; set; }

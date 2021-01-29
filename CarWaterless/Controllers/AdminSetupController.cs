@@ -399,5 +399,65 @@ namespace CarWaterless.Controllers
             return Json(lst);
         }
         #endregion
+
+        #region DailyHot
+        public ActionResult DailyHot()
+        {
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
+            if (reqCookies != null)
+            {
+                DailyHotViewModel model = new DailyHotViewModel();
+                AdminSetupRepository repository = new AdminSetupRepository();
+                AdminRepository adminRepository = new AdminRepository();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+        }
+
+        [HttpPost]
+        public async System.Threading.Tasks.Task<ActionResult> DailyHot(DailyHotViewModel model)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+
+            if (model.ID == 0)
+            {
+                
+            }
+            else
+            {
+                model = await repository.EditDailyHotAsync(model);
+            }
+            return Json(model);
+        }
+
+
+        public ActionResult GetAllDailyHot(DailyHotViewModel model)
+        {
+            List<DailyHotViewModel> list = new List<DailyHotViewModel>();
+            AdminSetupRepository repository = new AdminSetupRepository();
+            model.IsActive = true;
+            list = repository.GetAllDailyHot(model);
+            return Json(list);
+        }
+
+        public ActionResult EditDailyHot(int id)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            DailyHotViewModel model = repository.GetDailyHotbyId(id);
+            return Json(model);
+        }
+        public ActionResult ActivateDeactivateDailyHot(int id,bool currentflag)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            DailyHotViewModel model = new DailyHotViewModel();
+            model = repository.ActivateDeactivateDailyHot(id,currentflag);
+            return Json(model);
+        }
+
+        #endregion
     }
 }

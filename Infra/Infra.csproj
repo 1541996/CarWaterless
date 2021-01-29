@@ -118,6 +118,7 @@
     <Compile Include="ViewModels\AdditionalServiceModel.cs" />
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\BookingSuccessModel.cs" />
+    <Compile Include="ViewModels\DailyHotModel.cs" />
     <Compile Include="ViewModels\FCMViewModel.cs" />
     <Compile Include="ViewModels\BranchModel.cs" />
     <Compile Include="ViewModels\CarCategoryModel.cs" />

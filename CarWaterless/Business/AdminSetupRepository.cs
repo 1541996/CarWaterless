@@ -927,5 +927,123 @@ namespace CarWaterless.Business
             return lst;
         }
         #endregion
+
+        #region tbDailyHot
+        public List<DailyHotViewModel> GetAllDailyHot(DailyHotViewModel model)
+        {
+            List<DailyHotViewModel> lst = new List<DailyHotViewModel>();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbDailyHots
+                             where data.IsDeleted == false
+                             orderby data.CreatedDate ascending
+                             select new DailyHotViewModel
+                             {
+                                ID=data.ID,
+                                Title = data.Title,
+                                 IsActive = data.IsActive,
+                             });
+                lst = query.AsEnumerable().Select((data, index) => new DailyHotViewModel()
+                {
+                    ID = data.ID,
+                    Title = data.Title,
+                    IsActive = data.IsActive,
+                    No = ++index
+                }).ToList();
+            }
+            return lst;
+        }
+
+        public DailyHotViewModel GetDailyHotbyId(int id)
+        {
+            DailyHotViewModel model = new DailyHotViewModel();
+            using (var context = new CarWaterLessContext())
+            {
+                var query = (from data in context.tbDailyHots
+                             where data.IsDeleted == false && data.ID == id
+                             select new DailyHotViewModel
+                             {
+                                 ID = data.ID,
+                                 Title = data.Title,
+                                 IsActive = data.IsActive,
+                                 Photo = data.Photo,
+                             });
+                model = query.AsEnumerable().Select((data, index) => new DailyHotViewModel()
+                {
+                    ID = data.ID,
+                    Title = data.Title,
+                    IsActive = data.IsActive,
+                    Photo = data.Photo,
+                    No = ++index
+                }).FirstOrDefault();
+            }
+            return model;
+        }
+        public async System.Threading.Tasks.Task<DailyHotViewModel> EditDailyHotAsync(DailyHotViewModel model)
+        {
+            DailyHotViewModel response = new DailyHotViewModel();
+            try
+            {
+                using (var context = new CarWaterLessContext())
+                {
+                    if (model.ID > 0)
+                    {
+                        if (model.Photo != null)
+                        {
+                            FileUploadViewModel fileupload = new FileUploadViewModel();
+                            fileupload.photo = model.Photo;
+                            fileupload.filepath = "/ImageStorage/CarWaterlessProject/DailyHot";
+                            var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+                            model.Photo = responsefile;
+                        }
+                        else
+                        {
+                            var olddata = context.tbDailyHots.Where(a => a.IsDeleted != true && a.ID == model.ID).FirstOrDefault();
+                            model.Photo = olddata.Photo;
+                        }
+
+
+                    }
+                    context.tbDailyHots.First(x => x.ID == model.ID).Title = model.Title;
+                    context.tbDailyHots.First(x => x.ID == model.ID).Photo = model.Photo;
+                    context.SaveChanges();
+
+                    response.MessageType = 1;
+                    response.Message = "Update Successful.";
+                }
+            }
+            catch (Exception e)
+            {
+                response.MessageType = 2;
+                response.Message = "Update failed.";
+            }
+            return response;
+        }
+        public DailyHotViewModel ActivateDeactivateDailyHot(int id,bool currentflag)
+        {
+            DailyHotViewModel model = new DailyHotViewModel();
+            using (var context = new CarWaterLessContext())
+            {
+
+                context.tbDailyHots.First(x => x.ID == id).IsActive = !currentflag;
+                context.SaveChanges();
+
+                if (currentflag == true)
+                {
+                    model.MessageType = 1;
+                    model.Message = "Deactivate Successful.";
+                }
+                else
+                {
+                    model.MessageType = 1;
+                    model.Message = "Activate Successful.";
+                }
+                
+            }
+
+            return model;
+        }
+
+        #endregion
     }
 }
