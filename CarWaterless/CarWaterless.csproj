@@ -309,6 +309,7 @@
     <Content Include="ArchitectThemes\fonts\themify.svg" />
     <Content Include="ArchitectThemes\frontend\bankpay.js" />
     <Content Include="ArchitectThemes\frontend\additionalservice.js" />
+    <Content Include="ArchitectThemes\frontend\dailyhot.js" />
     <Content Include="ArchitectThemes\frontend\memberpackage.js" />
     <Content Include="ArchitectThemes\frontend\user-new.js" />
     <Content Include="ArchitectThemes\frontend\carcategory.js" />
@@ -760,6 +761,7 @@
     <Content Include="Views\AdminChat\_userList.cshtml" />
     <Content Include="Views\Chat\Admin.cshtml" />
     <Content Include="Views\Admin_Operation\_getuserlist.cshtml" />
+    <Content Include="Views\AdminSetup\DailyHot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

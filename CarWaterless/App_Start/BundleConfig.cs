@@ -47,6 +47,9 @@ namespace CarWaterless
             bundles.Add(new ScriptBundle("~/bundles/memberpackage").Include(
                "~/ArchitectThemes/frontend/memberpackage.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/dailyhot").Include(
+               "~/ArchitectThemes/frontend/dailyhot.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/user-new").Include(
               "~/ArchitectThemes/frontend/user-new.js"));
         }

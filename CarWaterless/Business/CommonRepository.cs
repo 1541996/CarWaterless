@@ -122,6 +122,14 @@ namespace CarWaterless.Business
             }
         }
 
+        public static bool CheckDailyHotStatus()
+        {
+            using(var context = new CarWaterLessContext())
+            {
+                bool isactive = context.tbDailyHots.FirstOrDefault().IsActive??false;
+                return isactive;
+            }
+        }
 
         //#region CheckExpiredCars
         //public static void CheckExpiredCars()
