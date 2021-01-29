@@ -21,9 +21,15 @@
 
                         </div>
                         <div class="ml-10 mt-5">
-                            <h6>@item.username</h6>                           
-                            <span>@item.lastmessage</span><span class="text-muted ml-10">@Data.Helper.MyExtension.getTimeAgo(item.senddate ?? new DateTime())</span>
+                            <h6>@item.customername</h6>
 
+                            <span>@item.lastmessage</span>
+                            @if (item.senddate != null)
+                            {
+                                <span class="text-muted ml-10 text-primary">@Data.Helper.MyExtension.getTimeAgo(item.senddate ?? new DateTime())</span>
+
+
+                            }
 
 
                         </div>
@@ -49,11 +55,18 @@
 
                         </div>
                         <div class="ml-10 mt-5">
-                            <h6>@item.username</h6>
+                            <h6>@item.customername</h6>
                             <span>@item.lastmessage</span>
+                            @if (item.senddate != null)
+                            {
+                                <span class="text-muted ml-10 text-primary">@Data.Helper.MyExtension.getTimeAgo(item.senddate ?? new DateTime())</span>
+                            }
 
 
 
+                            </div>
+                        <div class="ml-auto">
+                            <h6>@item.vehiclebrand @item.vehiclename <span class="badge badge-primary">@item.vehicleno</span></h6>
                         </div>
 
                     </div>

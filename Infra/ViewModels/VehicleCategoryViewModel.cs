@@ -102,6 +102,7 @@ namespace Infra.ViewModels
         public DateTime? senddate { get; set; }
         public bool? isread { get; set; }
         public string type { get; set; }
+        public string customername { get; set; }
     }
 
 

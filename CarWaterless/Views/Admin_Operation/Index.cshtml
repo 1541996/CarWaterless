@@ -249,11 +249,9 @@
             <div class="theme-settings__options-wrapper">
                 <h3 class="themeoptions-heading">
                     <div>
-                        Header Options
+                        Chat
                     </div>
-                    <button type="button" class="btn-pill btn-shadow btn-wide ml-auto btn btn-focus btn-sm switch-header-cs-class" data-class="">
-                        Restore Default
-                    </button>
+                   
                 </h3>
                 <div class="p-3" id="div_userlist">
                  
@@ -510,7 +508,7 @@
                 url: '@Url.Action("_getuserlist", "Admin_Operation")',
                 data: {
                     fromdate: fromdate, todate: todate, searchvalue: searchvalue,
-                    cardata: cardata
+                    cardata: cardata,type: type
                 },
                 beforeSend: function () {
 

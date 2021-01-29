@@ -248,7 +248,7 @@ namespace CarWaterless.Controllers
 
 
         public ActionResult _getuserlist(string searchvalue = null,
-         DateTime? fromdate = null, DateTime? todate = null, string cardata = null)
+         DateTime? fromdate = null, DateTime? todate = null, string cardata = null,string type = null)
         {
             Expression<Func<tbCustomer, bool>> searchfilter = null;
             Expression<Func<tbOperation, bool>> datefilter, washtypefilter, statusfilter, bookingsourcefilter = null;
@@ -285,22 +285,69 @@ namespace CarWaterless.Controllers
             }
 
 
+            if (type == "Waiting")
+            {
+                if (fromdate != null && todate != null)
+                {
+                    fromdate = fromdate.Value.Date;
+                    todate = todate.Value.AddDays(1).Date;
+                    datefilter = l => l.OperationDate >= fromdate && l.OperationDate < todate;
+                }
+                else
+                {
+                    var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                    var nextday = today.AddDays(1).Date;
+                    datefilter = l => l.OperationDate >= today && l.OperationDate < nextday;
+                }
+            }
+            else if (type == "Cancel")
+            {
+                if (fromdate != null && todate != null)
+                {
+                    fromdate = fromdate.Value.Date;
+                    todate = todate.Value.AddDays(1).Date;
+                    datefilter = l => l.CancelTime >= fromdate && l.CancelTime < todate;
+                }
+                else
+                {
+                    var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                    var nextday = today.AddDays(1).Date;
+                    datefilter = l => l.CancelTime >= today && l.CancelTime < nextday;
+                }
+            }
+            else
+            {
+                if (fromdate != null && todate != null)
+                {
+                    fromdate = fromdate.Value.Date;
+                    todate = todate.Value.AddDays(1).Date;
+                    datefilter = l => l.ConfirmedTime >= fromdate && l.ConfirmedTime < todate;
+                }
+                else
+                {
+                    var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;
+                    var nextday = today.AddDays(1).Date;
+                    datefilter = l => l.ConfirmedTime >= today && l.ConfirmedTime < nextday;
+                }
+
+            }
+
+
 
             var result = (from operation in uow.operationRepo.GetAll().
-                          Where(a => a.IsDeleted != true && a.OperationDate >= fromdate)
+                          Where(a => a.IsDeleted != true).Where(datefilter)
                           join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true)
                           .Where(searchfilter)
                           on operation.CustomerId equals customer.Id
                           join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
                                   .Where(carfilter).Where(carfilter)
-                          on operation.CustomerVehicleId equals car.Id      
-                          join chat in uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true)
-                          on customer.Id.ToString() equals chat.UserID
+                          on operation.CustomerVehicleId equals car.Id    
                           select new {
                               operation,
                               car.VehicleBrand,
                               car.VehicleName,
                               car.VehicleNo,
+                              customer.FullName,
                           }).DistinctBy(a => a.operation.Id);
 
 
@@ -316,12 +363,12 @@ namespace CarWaterless.Controllers
                                                           vehiclename = d.VehicleName,
                                                           vehicleno = d.VehicleNo,
                                                           userid = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserID.ToString(),
-                                                          username = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserName.ToString(),
+                                                          username = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserName,
                                                           senddate = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().SendDateTime,
-                                                          lastmessage = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Message.ToString(),
+                                                          lastmessage = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Message,
                                                           isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
-                                                          type = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type.ToString(),
-
+                                                          type = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type,
+                                                          customername = d.FullName
                                                       }).AsQueryable();
                 var totalCount = data.Count();
 
