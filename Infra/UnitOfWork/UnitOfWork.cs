@@ -28,6 +28,7 @@ namespace Infra.UnitOfWork
         private IRepository<tbFeedBack> _feedbackRepo;
         private IRepository<tbMemberPackage> _memberPackageRepo;
         private IRepository<tbAdvertisement> _adsRepo;
+        private IRepository<tbDailyHot> _dailyHotRepo;
 
 
 
@@ -37,6 +38,18 @@ namespace Infra.UnitOfWork
         public UnitOfWork(CarWaterLessContext dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public IRepository<tbDailyHot> dailyHotRepo
+        {
+            get
+            {
+                if (_dailyHotRepo == null)
+                {
+                    _dailyHotRepo = new Repository<tbDailyHot>(_dbContext);
+                }
+                return _dailyHotRepo;
+            }
         }
 
         public IRepository<tbAdvertisement> adsRepo

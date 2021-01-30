@@ -22,13 +22,20 @@
 
                 <div class="news-card__post-date">@item.CategoryName</div> <div class="news-card__post-date ml-5">@item.VehicleColor</div>
                 @*<div class="news-card__details-wrapper">
-                    <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
-                    <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
-                </div>*@
+                        <p class="news-card__excerpt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est pariatur nemo tempore repellat? Ullam sed officia iure architecto deserunt distinctio, pariatur&hellip;</p>
+                        <a href="#" class="news-card__read-more">Read more <i class="fas fa-long-arrow-alt-right"></i></a>
+                    </div>*@
             </div>
         </div>
 
     }
+}
+else
+{
+    <div class="text-center mt-40">
+        <img src="~/ArchitectThemes/image/nodata.jpg" style="width:200px;border-radius:10px" />
+        <h6 class="mt-10">There is no data to display.</h6>
+    </div>
 }
 
 

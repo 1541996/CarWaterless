@@ -39,7 +39,7 @@
                                 <td>@result.PhoneNo</td>
                                 <td class="text-right">
 
-                                    @if (result.IsMember == true)
+                                    @*@if (result.IsMember == true)
                                     {
                                         <a class="btn btn-success" id="member_@result.Id" onclick="IsMember('@result.Id')">
                                             <i class="fas fa-user text-white"></i>
@@ -50,13 +50,13 @@
                                         <a class="btn btn-danger" id="member_@result.Id" onclick="IsMember('@result.Id')">
                                             <i class="fas fa-user text-white"></i>
                                         </a>
-                                    }
+                                    }*@
 
-                                  
-                                        <a class="btn btn-success" id="member_@result.Id" href="../Admin_Customer/OperationList?customerid=@result.Id">
-                                            <i class="fas fa-list text-white"></i>
-                                        </a>
-                                   
+
+                                    @*<a class="btn btn-success" id="member_@result.Id" href="../Admin_Customer/OperationList?customerid=@result.Id">
+                                        <i class="fas fa-list text-white"></i>
+                                    </a>*@
+
 
                                     @*@if (result.IsPrepaid == true)
                                     {
@@ -74,7 +74,7 @@
 
 
 
-                                    <a class="btn btn-primary" onclick="AddCar('@result.Id')">
+                                    @*<a class="btn btn-primary" onclick="AddCar('@result.Id')">
                                         <i class="fas fa-car text-white"></i>
                                     </a>&nbsp;&nbsp;
                                     <a class="btn btn-warning" onclick="Edit('@result.Id')">
@@ -82,7 +82,7 @@
                                     </a>&nbsp;&nbsp;
                                     <a class="btn btn-danger" onclick="Delete('@result.Id')">
                                         <i class="fas fa-trash text-white"></i>
-                                    </a>
+                                    </a>*@
                                     @*<div id="div_prepaidcode_@result.Id" style="display:none">
                                         <div class="d-flex mt-10 justify-content-end">
                                             <div>
@@ -96,7 +96,78 @@
 
                                     </div>*@
 
-                                </td>                              
+                                    <div class="d-inline-block dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                                           
+                                            Actions
+                                        </button>
+                                        <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                            <ul class="nav flex-column">
+                                                @if (result.IsMember == true)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a onclick="IsMember('@result.Id')" class="nav-link">
+                                                          
+                                                            <span>
+                                                                Demote Member
+                                                            </span>
+                                                            <i class="fa fa-star ml-15" style="color:gold"></i>
+                                                        </a>
+                                                    </li>
+                                                }
+                                                else
+                                                {
+                                                    <li class="nav-item">
+                                                        <a onclick="IsMember('@result.Id')" class="nav-link">
+                                                          
+                                                            <span>
+                                                                Promote Member
+                                                            </span>
+                                                         
+                                                        </a>
+                                                    </li>
+                                                }
+
+                                                <li class="nav-item">
+                                                    <a onclick="Edit('@result.Id')" class="nav-link">
+                                                       
+                                                        <span>
+                                                            Edit Customer
+                                                        </span>
+
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a onclick="Delete('@result.Id')" class="nav-link">
+                                                      
+                                                        <span>
+                                                            Delete Customer
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a onclick="AddCar('@result.Id')" class="nav-link">
+                                                      
+                                                        <span>
+                                                            Add Car
+                                                        </span>
+
+                                                    </a>
+                                                </li>
+
+                                                <li class="nav-item">
+                                                    <a href="../Admin_Customer/OperationList?customerid=@result.Id" class="nav-link">
+                                                       
+                                                        <span>
+                                                            Bookings
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </td>
                             </tr>
 
                         }
@@ -118,8 +189,9 @@
 }
 else
 {
-
+    @Html.Partial("_nodatafound")
 
 }
+
 
 

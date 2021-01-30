@@ -222,6 +222,7 @@
     <Compile Include="Controllers\CarController.cs" />
     <Compile Include="Controllers\AdminChatController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\DailyHotController.cs" />
     <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
@@ -446,6 +447,7 @@
     <Content Include="Plesirthemes\EcoPhoto\carwash3.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\cleaninginterior.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\COD.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\dailyhot.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco1.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco2.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\eco3.jpg" />
@@ -764,6 +766,8 @@
     <Content Include="Views\Chat\Admin.cshtml" />
     <Content Include="Views\Admin_Operation\_getuserlist.cshtml" />
     <Content Include="Views\AdminSetup\DailyHot.cshtml" />
+    <Content Include="Views\Shared\_nodatafound.cshtml" />
+    <Content Include="Views\DailyHot\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

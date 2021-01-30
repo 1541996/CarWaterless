@@ -48,11 +48,21 @@ namespace CarWaterless.Controllers
 
         public ActionResult GetDailyHot()
         {
-         
+            
             var data = uow.additionalServiceRepo.GetAll().Where(a => a.IsDeleted != true && a.IsDailyHot == true).AsQueryable();
 
             return PartialView("_dailyhot", data);
         }
+
+        public ActionResult GetDailyHotData()
+        {
+
+            var data = uow.dailyHotRepo.GetAll().Where(a => a.IsDeleted != true && a.IsActive == true).FirstOrDefault();
+
+            return PartialView("_dailyhot", data);
+        }
+
+
 
 
         public ActionResult GetStackCardsMemberPackages()

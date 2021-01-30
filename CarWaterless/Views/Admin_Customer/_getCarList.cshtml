@@ -4,60 +4,66 @@
 
 @if (Model.Count() > 0)
 {
- 
-        <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">@Model.Count() car(s) found.</h5>
-                <div class="table-responsive">
-                    <table class="mb-0 table">
-                        <thead>
+
+    <div class="main-card mb-3 card">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Count() car(s) found.</h5>
+            <div class="table-responsive">
+                <table class="mb-0 table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Vehicle</th>
+                            <th>Category</th>
+                            <th>Color</th>
+                            <th>Car No.</th>
+                            <th class="text-right">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            int count = 0;
+
+                        }
+                        @foreach (var result in Model)
+                        {
+                            count++;
                             <tr>
-                                <th>#</th>
-                                <th>Vehicle</th>
-                                <th>Category</th>
-                                <th>Color</th>
-                                <th>Car No.</th>
-                                <th class="text-right">Actions</th>
-
+                                <th scope="row">@count</th>
+                                <td>@result.VehicleBrand @result.VehicleName</td>
+                                <td>@result.CategoryName</td>
+                                <td>@result.VehicleColor</td>
+                                <td>@result.VehicleNo</td>
+                                <td class="text-right">
+                                    <a class="btn btn-warning" onclick="Edit('@result.VehicleId')">
+                                        <i class="fas fa-edit text-white"></i>
+                                    </a>&nbsp;&nbsp;
+                                    <a class="btn btn-danger" onclick="Delete('@result.VehicleId')">
+                                        <i class="fas fa-trash text-white"></i>
+                                    </a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                               
-                                int count = 0;
-                              
-                            }
-                            @foreach (var result in Model)
-                            {
-                                count++;
-                                <tr>
-                                    <th scope="row">@count</th>
-                                    <td>@result.VehicleBrand @result.VehicleName</td>
-                                    <td>@result.CategoryName</td>
-                                    <td>@result.VehicleColor</td>
-                                    <td>@result.VehicleNo</td>
-                                    <td class="text-right">
-                                        <a class="btn btn-warning" onclick="Edit('@result.VehicleId')">
-                                            <i class="fas fa-edit text-white"></i>
-                                        </a>&nbsp;&nbsp;
-                                        <a class="btn btn-danger" onclick="Delete('@result.VehicleId')">
-                                            <i class="fas fa-trash text-white"></i>
-                                        </a>
-                                    </td>
-                                </tr>
 
-                            }
+                        }
 
 
-                        </tbody>
-                    </table>
-                </div>
-
-            
+                    </tbody>
+                </table>
             </div>
+
+
         </div>
-   
+    </div>
+
 }
+else
+{
+    @Html.Partial("_nodatafound")
+
+}
+
 
 
 

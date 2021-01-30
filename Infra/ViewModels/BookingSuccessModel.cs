@@ -24,4 +24,11 @@ namespace Infra.ViewModels
         public List<tbMemberPackage> medium { get; set; }
     }
 
+    public class DailyHotDataViewModel
+    {
+        public string title { get; set; }
+        public string photourl { get; set; }
+        public IQueryable<tbAdditionalService> additionalservicelist { get; set; }
+    }
+
 }

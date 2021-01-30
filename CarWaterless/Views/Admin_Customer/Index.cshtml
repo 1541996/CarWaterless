@@ -5,17 +5,29 @@
 }
 
 
+<style>
+
+    .app-page-title{
+        padding: 20px 30px!important
+    }
+
+</style>
+
 <div class="app-page-title">
     <div class="page-title-wrapper">
         <div class="page-title-heading width-100">
             <div class="display-flex-row">
                 <div class="display-flex-column">
                     Customer
-                </div>
-                <div class="display-flex-column flex-end ml-auto">
-                    <a href="../admin_customer/customerform" class="mb-2 mr-2 btn btn-primary text-white">
+                    <a href="../admin_customer/customerform" class="mt-5 btn btn-primary text-white">
                         Add Customer
                     </a>
+                </div>
+                <div class="display-flex-column flex-end ml-auto" style="width:30%">
+                   
+                    <h6>Search(Name,Phone,Email)</h6>
+                    <input type="text" class="form-control" value="" id="txt_keywords" placeholder="keywords..." autocomplete="off" />
+
                 </div>
 
             </div>
@@ -74,41 +86,24 @@
 
             LoadMainList();
             initPaging();
-            initsComponent();
+          
         });
-        function initsComponent() {
+       
 
-            $('.sort li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
+         // Get the input box
+        let input = document.getElementById('txt_keywords');
 
-            $('.sort li').on('click', function () {
-                var text = $(this).text();
-                OrderBy = text;
+        // Init a timeout variable to be used below
+        let timeout = null;
 
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
+        // Listen for keystroke events
+        input.addEventListener('keyup', function (e) {
+            clearTimeout(timeout);
+            // Make a new timeout set to go off in 1000ms (1 second)
+            timeout = setTimeout(function () {
                 Search();
-            });
-
-            $('.direction li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
-
-            $('.direction li').on('click', function () {
-                var text = $(this).text();
-                Direction = text;
-
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
-                Search();
-            });
-
-
-
-        }
+            }, 1000);
+        });
 
 
         function initPaging() {
@@ -125,12 +120,12 @@
                 catch (e) {
                     page = 1;
                 }
-                ItemList();
+                LoadMainList();
             });
         }
-        function Search(value) {
+        function Search() {
             page = 1;
-            searchvalue = value;
+            searchvalue = $('#txt_keywords').val();
             LoadMainList();
 
         }

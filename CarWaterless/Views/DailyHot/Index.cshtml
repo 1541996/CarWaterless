@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+
+@model Infra.ViewModels.DailyHotDataViewModel
+
+
+
+<div class="content-wrap page-car-single">
+
+    <div class="subsite pt-10">
+        <div class="subsite-heading mt-10 mb-10 fs-22">
+            Check our packages
+        </div>
+
+
+        @if(Model.title != null)
+        {
+            <div class="panel-custom-default br-10 mb-30" id="1" style="background:#f2fbff!important;">
+                <img src="~/Plesirthemes/EcoPhoto/dailyhot.jpg" class="br-10 br-b-l-0 br-b-r-0">
+
+
+                <div class="p-15">
+
+                    <div class="display-flex-row">
+                        <div class="display-flex-column">
+                            <h6 class="black-color">@Model.title</h6>
+                            @*<div class="price">
+                                <div class="price-value theme-color fs-16">@item.PackagePrice.Value.ToString("#,##0") MMK</div>
+
+                            </div>*@
+                        </div>
+                        <div class="display-flex-column ml-auto justify-content-center">
+                            <i class="fa fa-arrow-circle-down theme-color" style="font-size:20px" onclick="toggle('div_dailyhot')"></i>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-15" style="display:flex;justify-content:space-between;display:none" id="div_dailyhot">
+                        <div class="p-0">
+                            @*@{
+                                var data = item.AdditionalServiceNames.Split('_').ToList();
+                            }*@
+
+                            @foreach (var service in Model.additionalservicelist)
+                            {
+                                <ul class="pl-0" style="list-style-type:none">
+                                    <li class="black-color"><img src="~/Plesirthemes/EcoPhoto/tick.svg" style="width:15px" /> @service.Name</li>
+                                </ul>
+                            }
+
+
+
+                        </div>
+
+                    </div>
+
+
+                    @*<div class="button mt-20">
+                        <button type="submit" class="theme-button" onclick="book()">Book Now</button>
+                    </div>*@
+                </div>
+
+            </div>
+
+         
+
+        }
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+@section scripts{
+
+    <script>
+
+
+
+        $(function () {
+            $('#div_dailyhot').toggle();
+        })
+
+
+        function toggle(type) {
+
+            $('#' + type).toggle();
+
+        }
+
+
+      
+
+    </script>
+
+
+
+}

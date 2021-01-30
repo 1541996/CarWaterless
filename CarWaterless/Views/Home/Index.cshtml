@@ -296,6 +296,169 @@
             float: right;
         }
 
+    .dailyhot {
+        padding: 20px;
+        object-fit: cover;
+        width: 100%;
+        height: 300px;
+        border-radius: 30px;
+    }
+
+
+    #div_dailyhot .news-card {
+        border: 0px solid aqua;
+        margin: 20px;
+        position: relative;
+        height: auto;
+        overflow: hidden;
+        border-radius: 0.5rem;
+        flex: 1;
+        min-width: 290px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+        /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+        /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 38%, rgba(255, 255, 255, 0.06) 39%, rgba(30, 27, 38, 0.88) 53%, #1e1b26 55%);
+        /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1e1b26',GradientType=0 );
+        /* IE6-9 */
+    }
+
+    @@media (min-width: 900px) {
+
+        #div_dailyhot .news-card {
+            height: 20rem
+        }
+    }
+
+    #div_dailyhot .news-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);
+        z-index: 0;
+    }
+
+    #div_dailyhot .news-card__card-link {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        /*     background: rgba(255,0,0,.5); */
+    }
+
+    #div_dailyhot .news-card__image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        transition: transform 3s ease;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        position: relative;
+        z-index: -1;
+    }
+
+    #div_dailyhot .news-card__text-wrapper {
+        position: absolute;
+        bottom: 0rem;
+        padding: 1rem;
+        color: white;
+        /*     background-color: rgba(0, 0, 0, 0.4); */
+        transition: background-color 1.5s ease;
+    }
+
+    #div_dailyhot .news-card__title {
+        transition: color 1s ease;
+        margin-bottom: .5rem;
+        font-size: 16px !important
+    }
+
+    #div_dailyhot .news-card__post-date {
+        font-size: 12px;
+        margin-bottom: .5rem;
+        color: #fff;
+        background: rgba(0,0,0,.5);
+        padding: 0 8px;
+        display: inline-block;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+
+    #div_dailyhot .news-card__details-wrapper {
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 1.5s ease, opacity 1s ease;
+    }
+
+    @@media (min-width: 900px) {
+        #div_dailyhot .news-card:hover .news-card__details-wrapper {
+            max-height: 20rem;
+            opacity: 1;
+        }
+
+        #div_dailyhot .news-card:hover .news-card__text-wrapper {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        #div_dailyhot .news-card:hover .news-card__title {
+            color: yellow;
+        }
+
+        #div_dailyhot .news-card:hover .news-card__image {
+            transform: scale(1.2);
+            z-index: -1;
+        }
+    }
+
+    #div_dailyhot .news-card__excerpt {
+        font-weight: 300;
+    }
+
+    #div_dailyhot .news-card__read-more {
+        background: black;
+        color: #bbb;
+        display: block;
+        padding: 0.4rem 0.6rem;
+        border-radius: 0.3rem;
+        margin-top: 1rem;
+        border: 1px solid #444;
+        font-size: 0.8rem;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        text-decoration: none;
+        width: 7rem;
+        margin-left: auto;
+        position: relative;
+        z-index: 5;
+    }
+
+        #div_dailyhot .news-card__read-more i {
+            position: relative;
+            left: 0.2rem;
+            color: #888;
+            transition: left 0.5s ease, color 0.6s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        #div_dailyhot .news-card__read-more:hover i {
+            left: 0.5rem;
+            color: yellow;
+        }
+
+
+    
 </style>
 
 <!-- Content Wrap  -->
@@ -391,13 +554,32 @@
 
 
   
+    @*<div>
+        <img src="~/Plesirthemes/EcoPhoto/dailyhot.jpg" class="dailyhot" />
+        <div class="dailyhotwrapper width-100">
+            <div class="display-flex-row">
+                <div class="display-flex-column">
+                    <h6>Daily Hot Title</h6>
+                </div>
+                <div class="display-flex-column ml-auto fs-22 flex-end">
+                    <i class="fas fa-chevron-circle-right"></i> 
+                </div>
+            </div>
+
+
+           
+        </div>
+
+
+    </div>*@
 
     
 
 
-    <div id="div_dailyhot">
+<div id="div_dailyhot">
+ 
 
-    </div>
+</div>
 
 
 
@@ -564,21 +746,21 @@
             // JavaScript Document
 
          $(function () {
-             $('.default-carousel').slick({
-                 dots: false,
-                 infinite: true,
-                 speed: 300,
-                 slidesToShow: 1,
-                 centerMode: false,
-                 arrows: false,
-                 variableWidth: true
-             });
+             //$('.default-carousel').slick({
+             //    dots: false,
+             //    infinite: true,
+             //    speed: 300,
+             //    slidesToShow: 1,
+             //    centerMode: false,
+             //    arrows: false,
+             //    variableWidth: true
+             //});
 
 
 
 
 
-            GetDailyHot();
+             GetDailyHotData();
 
             GetMemberPackages();
            // GetStackCardsMemberPackages();
@@ -589,6 +771,10 @@
 
         })
 
+            function DailyHotDetail() {
+                $('.preloading').show();
+                location.href = "../dailyhot";
+            }
 
             function Packages(id) {
                 $('.preloading').show();
@@ -651,7 +837,7 @@
 
 
 
-        function GetDailyHot()
+        @*function GetDailyHot()
         {
             $.ajax({
                 cache: false,
@@ -684,7 +870,27 @@
                 }
             });
 
-         }
+            }*@
+
+
+        function GetDailyHotData()
+        {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("GetDailyHotData", "Home")',
+                beforeSend: function () {
+
+                },
+                success: function (result) {
+                    $('#div_dailyhot').empty().append(result);
+                },
+                complete: function () {
+                  
+
+                }
+            });
+
+            }
 
 
           function GetStackCardsMemberPackages()

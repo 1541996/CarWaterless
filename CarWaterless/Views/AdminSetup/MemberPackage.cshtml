@@ -429,24 +429,30 @@
     });
 
 
-    function bindadditionalservice() {         
+    function bindadditionalservice(ID) {         
             if (cartype != "") {
                 $.ajax({
                     type: "POST",
                     url: bindserviceUrl,
                     data: { "cartype": cartype },
                     success: function (data) {
-                        alert(data);
+                      
                         var select = $('#ddladditionalservice2').empty();
                         $.each(data, function () {
                             select.append($("<option></option>").val(this['Id']).html(this['Name']));
                         });
                         select.trigger('change');
 
+                      
+
+                        if (ID > 0) {
+                            editbindIds_arr = editbindIds.split("_");
+                            
+                            console.log(editbindIds_arr);
+                            $('#ddladditionalservice2').val(editbindIds_arr).trigger("change");
+                        }
+
                        
-                        editbindIds_arr = editbindIds.split("_");
-                        console.log(editbindIds_arr);
-                        $('#ddladditionalservice2').val(editbindIds_arr).trigger("change");
 
                     }
                 })
@@ -461,7 +467,7 @@
             type: 'POST',
             data: { "Id": id },
             success: function (data) {
-                $("#Id").val(data.Id);
+                $("#Id").val(data.ID);
                 $('#Title').val(data.Title);
                 $('#ddlCarType').val(data.CarType);
               //  $('#ddlCarType').trigger('change');
@@ -474,7 +480,7 @@
 
                 cartype = data.CarType;
                 if (cartype != "") {
-                    bindadditionalservice(cartype);
+                    bindadditionalservice(data.ID);
                 }
 
               

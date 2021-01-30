@@ -236,12 +236,19 @@
         top:61px !important
     }
 
+
+        .ui-theme-settings .theme-settings__inner{
+            background:#f1f4f6!important
+
+
+        }
+
 </style>
 
 
 <div class="ui-theme-settings">
-    <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
-        <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+    <button type="button" id="TooltipDemo" class="btn-open-options btn btn-success">
+        <i class="fa fa-comment-dots fa-w-16 fa-spin fa-2x"></i>
     </button>
 
     <div class="theme-settings__inner">
@@ -501,8 +508,8 @@
             }
 
 
-          function getUserList() {
-             
+            function getUserList() {
+                $('#div_userlist').empty().append('<div class="text-center"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>')
                $.ajax({
                 cache: false,
                 url: '@Url.Action("_getuserlist", "Admin_Operation")',

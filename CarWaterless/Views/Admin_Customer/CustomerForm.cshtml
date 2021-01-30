@@ -80,10 +80,22 @@
 
                 </div>
 
-                <div class="col-sm-6">
-                    <img id="imagePreview" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@Model.Photo" style="width:200px" />
+                @if (Model.Photo != null)
+                {
 
-                </div>
+                    <div class="col-sm-6">
+                        <img id="imagePreview" src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@Model.Photo" style="width:200px" />
+
+                    </div>
+                }
+                else
+                {
+                    <div class="col-sm-6">
+                        <img id="imagePreview" src="http://ecowash.centurylinks-stock.com/ArchitectThemes/image/imageplaceholder.png" style="width:200px" />
+
+                    </div>
+                }
+
             </div>
 
 

@@ -38,56 +38,56 @@
                         @foreach (var result in Model.Results)
                         {
                             count++;
-                        <tr>
-                            <th scope="row">@count</th>
-                            <td>@result.FullName</td>
-                            @*<td>@result.Email</td>*@
-                            <td>@result.PhoneNo</td>
-                            <td>@result.VehicleBrand @result.VehicleName</td>
-                            <td>@result.VehicleNo</td>
-                            <td>@result.OperationDate.Value.ToString("dd MMM yyyy") @result.OperationDate.Value.ToShortTimeString()</td>
-                            <td>@result.WashOption</td>
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td>@result.FullName</td>
+                                @*<td>@result.Email</td>*@
+                                <td>@result.PhoneNo</td>
+                                <td>@result.VehicleBrand @result.VehicleName</td>
+                                <td>@result.VehicleNo</td>
+                                <td>@result.OperationDate.Value.ToString("dd MMM yyyy") @result.OperationDate.Value.ToShortTimeString()</td>
+                                <td>@result.WashOption</td>
 
-                            
 
-                            @if (result.CategoryType == "medium")
-                            {
-                                <td>ကားလတ်</td>
-                            }
-                            else if (result.CategoryType == "big")
-                            {
-                                <td>ကားကြီး</td>
-                            }
-                            else if (result.CategoryType == "small")
-                            {
-                                <td>ကားသေး</td>
-                            }
-                            @if (result.BookingPackage == "Normal")
-                            {
-                                if (result.AdditionalNames != null)
+
+                                @if (result.CategoryType == "medium")
                                 {
-                                    <td> @result.AdditionalNames.Replace("_", ", ")</td>
+                                    <td>ကားလတ်</td>
+                                }
+                                else if (result.CategoryType == "big")
+                                {
+                                    <td>ကားကြီး</td>
+                                }
+                                else if (result.CategoryType == "small")
+                                {
+                                    <td>ကားသေး</td>
+                                }
+                                @if (result.BookingPackage == "Normal")
+                                {
+                                    if (result.AdditionalNames != null)
+                                    {
+                                        <td> @result.AdditionalNames.Replace("_", ", ")</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
                                 }
                                 else
                                 {
-                                    <td></td>
+                                    <td>
+                                        @result.MemberPackage <span class="text-success">(@result.AdditionalNames.Replace("_", ", "))</span>
+                                    </td>
+
                                 }
 
-                            }
-                            else
-                            {
                                 <td>
-                                    @result.MemberPackage <span class="text-success">(@result.AdditionalNames.Replace("_", ", "))</span>
+                                    @result.TotalAmount.Value.ToString("#,##0") MMK
+
+
                                 </td>
-
-                            }
-
-                            <td>
-                                @result.TotalAmount.Value.ToString("#,##0") MMK
-
-
-                            </td>
-                        </tr>
+                            </tr>
 
                         }
 
@@ -111,7 +111,7 @@
 }
 else
 {
-
+    @Html.Partial("_nodatafound")
 
 }
 

@@ -1,7 +1,76 @@
 ﻿
-@model IQueryable<Infra.Models.tbAdditionalService>
+@model Infra.Models.tbDailyHot
 
-@if (Model.Count() > 0)
+@*@if (Model.Count() > 0)
+    {
+        <div class="heading-section">
+            <div class="sa-title popcat">Daily Hot </div>
+            <div class="heading-info">
+                Let's see our daily hot
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="mt-20">
+            <div class="owl-carousel dailyhot-carousel">
+                @{
+                    var i = 0;
+                }
+                @foreach (var item in Model)
+                {
+
+                    <div class="daily">
+                        <img src="@item.PhotoUrl" class="br-10" alt="">
+                        <div class="vsb-rating">
+                            25% off
+                        </div>
+
+                        <div class="vsb-middle">
+                            <div class="vsbm-left">
+                                @item.Name
+
+                            </div>
+
+                            @if (item.CarType == "small")
+                            {
+                                <div class="vsbm-right">
+                                    ကားသေး
+                                </div>
+                            }
+                            else if (item.CarType == "big")
+                            {
+                                <div class="vsbm-right">
+                                    ကားကြီး
+                                </div>
+                            }
+                            else
+                            {
+
+                                <div class="vsbm-right">
+                                    ကားလတ်
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+
+
+                }
+
+            </div>
+
+
+
+        </div>
+
+
+
+    }*@
+
+
+
+@if (Model != null)
 {
     <div class="heading-section">
         <div class="sa-title popcat">Daily Hot </div>
@@ -12,52 +81,22 @@
     </div>
 
     <div class="mt-20">
-        <div class="owl-carousel dailyhot-carousel">
-            @{ 
-                var i = 0;
-            }
-            @foreach (var item in Model)
-            {
-
-                <div class="daily">
-                    <img src="@item.PhotoUrl" class="br-10" alt="">
-                    <div class="vsb-rating">
-                        25% off
+        <div class="news-card mt-30" onclick="DailyHotDetail()">
+            <a href="#" class="news-card__card-link"></a>
+            <img src="~/Plesirthemes/EcoPhoto/dailyhot.jpg" alt="" class="news-card__image">
+            <div class="news-card__text-wrapper width-100">
+                <div class="display-flex-row">
+                    <div class="display-flex-column">
+                        <h2 class="news-card__title">@Model.Title</h2>
                     </div>
-
-                    <div class="vsb-middle">
-                        <div class="vsbm-left">
-                            @item.Name
-
-                        </div>
-
-                        @if (item.CarType == "small")
-                        {
-                            <div class="vsbm-right">
-                                ကားသေး
-                            </div>
-                        }
-                        else if (item.CarType == "big")
-                        {
-                            <div class="vsbm-right">
-                                ကားကြီး
-                            </div>
-                        }
-                        else
-                        {
-
-                            <div class="vsbm-right">
-                                ကားလတ်
-                            </div>
-                        }
-
-
+                    <div class="display-flex-column ml-auto fs-22 flex-end">
+                        <i class="fas fa-chevron-circle-right"></i>
                     </div>
                 </div>
 
-               
-            }
 
+
+            </div>
         </div>
 
 
@@ -67,5 +106,4 @@
 
 
 }
-
 

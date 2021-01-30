@@ -51,39 +51,7 @@
             initPaging();
           //  initsComponent();
         });
-        function initsComponent() {
-
-            $('.sort li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
-
-            $('.sort li').on('click', function () {
-                var text = $(this).text();
-                OrderBy = text;
-
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
-                Search();
-            });
-
-            $('.direction li').each(function () {
-                $(this).attr('data-value', $(this).text().toLowerCase());
-            });
-
-            $('.direction li').on('click', function () {
-                var text = $(this).text();
-                Direction = text;
-
-                var item = $(this);
-                var id = item.closest('.filter').attr('id');
-                $('#' + id).find('.filter__item-btn input').val(text);
-                Search();
-            });
-
-
-
-        }
+    
 
 
         function initPaging() {

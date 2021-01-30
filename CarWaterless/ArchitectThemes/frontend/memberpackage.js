@@ -279,7 +279,7 @@ function GetSelectedIds() {
         var $this = $(this);
         if ($this.length) {
             var selval = $this.val();
-            selectIds += selval + ",";
+            selectIds += selval + "_";
         }
     });
 }
