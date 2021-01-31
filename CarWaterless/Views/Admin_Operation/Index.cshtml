@@ -258,7 +258,9 @@
                     <div>
                         Chat
                     </div>
-                   
+
+                    <input type="text" class="form-control ml-40" value="" id="txt_chatsearch" placeholder="Name,Phone....." autocomplete="off" />
+
                 </h3>
                 <div class="p-3" id="div_userlist">
                  
@@ -380,6 +382,9 @@
         var page = 1;
         var pagesize = 15;
 
+        var chatpage = 1;
+        var chatpagesize = 2;
+
         var searchvalue = null;
         var OrderBy = "Accesstime";
         var Direction = "DESC";
@@ -387,7 +392,9 @@
         var todate;
         var type = "Waiting";
         var washtype;
-        var cardata;
+            var cardata;
+            var searchvaluechat;
+            var cardatachat;
         $(function () {
 
 
@@ -429,19 +436,20 @@
         }
 
         //// Get the input box
-        //let input = document.getElementById('txt_keywords');
+        let input = document.getElementById('txt_chatsearch');
 
-        //// Init a timeout variable to be used below
-        //let timeout = null;
+        // Init a timeout variable to be used below
+        let timeout = null;
 
-        //// Listen for keystroke events
-        //input.addEventListener('keyup', function (e) {
-        //    clearTimeout(timeout);
-        //    // Make a new timeout set to go off in 1000ms (1 second)
-        //    timeout = setTimeout(function () {
-        //        Search();
-        //    }, 1000);
-        //});
+        // Listen for keystroke events
+        input.addEventListener('keyup', function (e) {
+            clearTimeout(timeout);
+            // Make a new timeout set to go off in 1000ms (1 second)
+            timeout = setTimeout(function () {
+                searchvaluechat = $('#txt_chatsearch').val();
+                getUserList();
+            }, 1000);
+        });
 
         //// Get the input box
         //let input1 = document.getElementById('txt_cardata');
@@ -478,6 +486,7 @@
             page = 1;
             searchvalue = $('#txt_keywords').val();
             cardata = $('#txt_cardata').val();
+            chatpage = 1;
             LoadMainList();
 
         }
@@ -508,20 +517,40 @@
             }
 
 
-            function getUserList() {
-                $('#div_userlist').empty().append('<div class="text-center"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>')
-               $.ajax({
+            function LoadMore() {
+                chatpage = chatpage + 1;
+                getUserList('pagination')
+            }
+
+
+            function getUserList(opt) {
+                if (opt != 'pagination') {
+                    $('#div_userlist').empty().append('<div class="text-center"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>')
+
+                } else {
+                    $('.btn_loadmore').empty();
+                    $('#div_userlist').append('<div class="text-center pagingloading"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>')
+
+                }
+               
+                $.ajax({
                 cache: false,
                 url: '@Url.Action("_getuserlist", "Admin_Operation")',
                 data: {
-                    fromdate: fromdate, todate: todate, searchvalue: searchvalue,
-                    cardata: cardata,type: type
+                    fromdate: fromdate, todate: todate, searchvalue: searchvaluechat,
+                    cardata: cardatachat, type: type, page: chatpage, pagesize: chatpagesize
                 },
                 beforeSend: function () {
 
                 },
-                success: function (result) {
-                    $('#div_userlist').empty().append(result);
+                   success: function (result) {
+                       if (opt != 'pagination') {
+                           $('#div_userlist').empty().append(result);
+                       } else {
+                           $('.pagingloading').hide();
+                           $('#div_userlist').append(result);
+                       }
+                  
 
                 },
 
@@ -652,6 +681,7 @@
                             },
                             complete: function () {
                                 $('.btn').prop("disabled", false);
+                                chatpage = 1;
 
                             }
                         });

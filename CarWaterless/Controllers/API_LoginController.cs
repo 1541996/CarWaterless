@@ -290,10 +290,10 @@ namespace CarWaterless.Controllers
 
         [HttpGet]
         [Route("api/user/getNoti")]
-        public HttpResponseMessage NotiList(HttpRequestMessage request, string UserAppID, int pageSize = 10, int page = 1)
+        public HttpResponseMessage NotiList(HttpRequestMessage request, string customerid = null, int pageSize = 10, int page = 1)
         {
             List<tbNotification> GeneralNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "General").Where(a => a.IsDeleted != true).ToList();
-            List<tbNotification> SpecificNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "Specific").Where(a => a.UserAppID == UserAppID).Where(a => a.IsDeleted != true).ToList();
+            List<tbNotification> SpecificNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "Specific").Where(a => a.CustomerId.ToString() == customerid).Where(a => a.IsDeleted != true).ToList();
             var objs = GeneralNoti.ToList().Union(SpecificNoti.ToList()).OrderByDescending(r => r.MessageSendDateTime);
 
             var totalCount = objs.Count();

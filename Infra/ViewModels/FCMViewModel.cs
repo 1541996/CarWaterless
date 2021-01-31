@@ -36,7 +36,8 @@ namespace Infra.ViewModels
         public string to { get; set; }
         public string priority { get; set; }
         public fcmdata data { get; set; }
-   
+        public Notification notification { get; set; }
+
     }
 
     public class fcmdata

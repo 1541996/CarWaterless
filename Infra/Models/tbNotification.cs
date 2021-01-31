@@ -21,6 +21,7 @@ namespace Infra.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public string UserAppID { get; set; }
+        public string WebUrl { get; set; }
 
     }
 }

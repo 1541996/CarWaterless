@@ -1,5 +1,5 @@
 ﻿
-@model IQueryable<Infra.ViewModels.ChatDataViewModel>
+@model List<Infra.ViewModels.ChatDataViewModel>
 @using PagedList;
 @using PagedList.Mvc;
 
@@ -10,8 +10,8 @@
     {
         foreach (var item in Model)
         {
-            if (item.isread != true)
-            {
+          //  if (item.isread != true)
+          //  {
 
                 <div class="panel-custom-default p-10 mb-10">
 
@@ -53,8 +53,8 @@
 
 
                 </div>
-            }
-            else
+          //  }
+            @*else
             {
                 <div class="panel-custom-default p-10 mb-10" style="background:#f5f5f5">
 
@@ -91,7 +91,21 @@
 
 
                 </div>
-            }
+            }*@
+
+        }
+
+
+
+
+        if (ViewBag.totalCount > 2)
+        {
+            <div class="text-center btn_loadmore">
+
+                <button class="btn btn-success" onclick="LoadMore()">Load More..</button>
+
+            </div>
+
 
         }
 

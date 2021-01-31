@@ -56,7 +56,9 @@
                             <div class="position-relative form-group">
                                 <label>Discount Price</label>
                                 @Html.TextBoxFor(model => model.DiscountPrice, new { @class = "form-control", @type = "Name", @placeholder = "", @autocomplete = "off", @onkeypress = "return onlyNumberKey(event)" })
-                                
+                            <div id="DiscountPrice-error" class="invalid-feedback" style="display:none;">
+                                Enter Discount Price
+                            </div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -86,6 +88,7 @@
                                 <th>Type</th>
                                 <th>Price</th>
                                 <th>Discount Price</th>
+                                <th>Daily Hot?</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -109,6 +112,8 @@
     var saveUrl = '@Url.Action("AdditionalService","AdminSetup")';
     var editUrl = '@Url.Action("EditAdditionalService", "AdminSetup", new { id="__id__" })';
     var deleteUrl = '@Url.Action("DeleteAdditionalService", "AdminSetup")';
+    var deacUrl = '@Url.Action("ActivateDeactivateAdditionalService", "AdminSetup")';
+
 </script>
 
 

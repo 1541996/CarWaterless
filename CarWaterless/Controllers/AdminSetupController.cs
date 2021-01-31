@@ -231,6 +231,14 @@ namespace CarWaterless.Controllers
             AdditionalServiceViewModel model = repository.DeleteAdditionalService(id);
             return Json(model);
         }
+
+        public ActionResult ActivateDeactivateAdditionalService(int id, bool currentflag)
+        {
+            AdminSetupRepository repository = new AdminSetupRepository();
+            AdditionalServiceViewModel model = new AdditionalServiceViewModel();
+            model = repository.ActivateDeactivateAdditionalService(id, currentflag);
+            return Json(model);
+        }
         #endregion
 
         #region Branch

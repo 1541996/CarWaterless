@@ -333,6 +333,7 @@ namespace CarWaterless.Business
                                  CarType = data.CarType,
                                  Price = data.Price,
                                  DiscountPrice = data.DiscountPrice,
+                                 IsDailyHot = data.IsDailyHot,
                                  IsActive = data.IsActive,
                              });
                 lst = query.AsEnumerable().Select((data, index) => new AdditionalServiceViewModel()
@@ -341,6 +342,7 @@ namespace CarWaterless.Business
                     Name = data.Name,
                     CarType = data.CarType,
                     Price = data.Price,
+                    IsDailyHot = data.IsDailyHot??false,
                     DiscountPrice = data.DiscountPrice,
                     IsActive = data.IsActive,
                     No = ++index
@@ -363,6 +365,7 @@ namespace CarWaterless.Business
                                  CarType = data.CarType,
                                  Price = data.Price,
                                  DiscountPrice = data.DiscountPrice,
+                                 IsDailyHot = data.IsDailyHot,
                                  IsActive = data.IsActive,
                              });
                 model = query.AsEnumerable().Select((data, index) => new AdditionalServiceViewModel()
@@ -372,6 +375,7 @@ namespace CarWaterless.Business
                     CarType = data.CarType,
                     Price = data.Price,
                     DiscountPrice = data.DiscountPrice,
+                    IsDailyHot = data.IsDailyHot??false,
                     IsActive = data.IsActive,
                 }).FirstOrDefault();
             }
@@ -389,6 +393,7 @@ namespace CarWaterless.Business
                     obj.Name = model.Name;
                     obj.CarType = model.CarType;
                     obj.Price = model.Price;
+                    obj.IsDailyHot = false;
                     obj.DiscountPrice = model.DiscountPrice;
                     obj.IsActive = true;
                     obj.IsDeleted = false;
@@ -480,11 +485,34 @@ namespace CarWaterless.Business
             return model;
         }
 
+        public AdditionalServiceViewModel ActivateDeactivateAdditionalService(int id, bool currentflag)
+        {
+            AdditionalServiceViewModel model = new AdditionalServiceViewModel();
+            using (var context = new CarWaterLessContext())
+            {
 
-        #endregion
+                context.tbAdditionalServices.First(x => x.Id == id).IsDailyHot = !currentflag;
+                context.SaveChanges();
 
-        #region tbBranch
-        public List<BranchViewModel> GetAllBranch(BranchViewModel model)
+                if (currentflag == true)
+                {
+                    model.MessageType = 1;
+                    model.Message = "Deactivate for Daily Hot Successful.";
+                }
+                else
+                {
+                    model.MessageType = 1;
+                    model.Message = "Activate for Daily Hot Successful.";
+                }
+
+            }
+
+            return model;
+        }
+            #endregion
+
+            #region tbBranch
+            public List<BranchViewModel> GetAllBranch(BranchViewModel model)
         {
             List<BranchViewModel> lst = new List<BranchViewModel>();
             using (var context = new CarWaterLessContext())
@@ -882,9 +910,14 @@ namespace CarWaterless.Business
 
                     }
 
+                    string ids = model.AdditionalServiceIds;
+                    ids = ids.Remove(ids.Length - 1, 1);
+                    string names = model.AdditionalServiceNames;
+                    names = names.Remove(names.Length - 1, 1);
+
                     context.tbMemberPackages.First(x => x.ID == model.ID).Title = model.Title;
-                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceIds = model.AdditionalServiceIds;
-                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceNames = model.AdditionalServiceNames;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceIds = ids;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceNames = names;
                     context.tbMemberPackages.First(x => x.ID == model.ID).CarType = model.CarType;
                     context.tbMemberPackages.First(x => x.ID == model.ID).PackagePrice = model.PackagePrice;
                     context.SaveChanges();
@@ -1026,6 +1059,7 @@ namespace CarWaterless.Business
             {
 
                 context.tbDailyHots.First(x => x.ID == id).IsActive = !currentflag;
+                context.tbAdditionalServices.ToList().ForEach(x => x.IsDailyHot = !currentflag);
                 context.SaveChanges();
 
                 if (currentflag == true)

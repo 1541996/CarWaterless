@@ -19,7 +19,7 @@ namespace Infra.ViewModels
         public decimal? Price { get; set; }
         public decimal? DiscountPrice { get; set; }
         public string CarType { get; set; }
-
+        public bool? IsDailyHot { get; set; }
         public int No { get; set; }
         public string Message { get; set; }
         public int MessageType { get; set; }

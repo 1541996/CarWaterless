@@ -1072,7 +1072,7 @@
                                         <div class="vsb-price">
                                             ${result.BasicPrice} MMK
                                         </div>
-                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <img src="../Plesirthemes/EcoPhoto/big.jpg" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားကြီး
@@ -1093,7 +1093,7 @@
                                     <div class="vsb-price">
                                        ${result.BasicPrice} MMK
                                         </div>
-                                    <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                    <img src="../Plesirthemes/EcoPhoto/medium.jpg" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားလတ်
@@ -1115,7 +1115,7 @@
                                         <div class="vsb-price">
                                             ${result.BasicPrice} MMK
                                         </div>
-                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <img src="../Plesirthemes/EcoPhoto/small.jpg" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားသေး
@@ -1250,7 +1250,7 @@
                     $('#ddpackages').append('<option value="0">Custom Packages</option>')
 
                     for (var i = 0; i < result.length; i++) {
-                        $('#ddpackages').append('<option value="' + result[i].ID + '" data-memberpackagesname="' + result[i].Title + '"  data-serviceids="' + result[i].AdditionalServiceIds + '"  data-servicenames="' + result[i].AdditionalServiceNames + '" data-packageprice= "' + result[i].PackagePrice + '"  >' + result[i].Title + '(' + result[i].CarType + ')</option>')
+                        $('#ddpackages').append('<option value="' + result[i].ID + '" data-memberpackagesname="' + result[i].Title + '"  data-serviceids="' + result[i].AdditionalServiceIds + '" data-photourl="' + result[i].PhotoUrl + '"  data-servicenames="' + result[i].AdditionalServiceNames + '" data-packageprice= "' + result[i].PackagePrice + '"  >' + result[i].Title + '(' + result[i].CarType + ')</option>')
 
                     };
 
@@ -1316,6 +1316,7 @@
                     var serviceids = $('#ddpackages :selected').data('serviceids').split('_');
                     var servicenames = $('#ddpackages :selected').data('servicenames').split('_');
                     var packageprice = $('#ddpackages :selected').data('packageprice');
+                    var photourl = $('#ddpackages :selected').data('photourl');
                     txt_AdditionalPrices
                     $('#txt_AdditionalPrices').val('');
                     $('#txt_AdditionalIds').val($('#ddpackages :selected').data('serviceids'));
@@ -1350,7 +1351,7 @@
                                         <div class="vsb-price">
                                             ${packageprice} MMK
                                         </div>
-                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <img src="${photourl}" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားကြီး
@@ -1371,7 +1372,7 @@
                                     <div class="vsb-price">
                                        ${packageprice} MMK
                                         </div>
-                                    <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                    <img src="${photourl}" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားလတ်
@@ -1393,7 +1394,7 @@
                                         <div class="vsb-price">
                                             ${packageprice} MMK
                                         </div>
-                                        <img src="../Plesirthemes/img/destination1.jpg" alt="img">
+                                        <img src="${photourl}" alt="img">
                                         <div class="vsb-middle">
                                             <div class="vsbm-left">
                                                 ကားသေး

@@ -55,7 +55,14 @@ namespace CarWaterless.Controllers
             fcmdata.type = "Individual";
             fcmdata.title = "Booking";
             fcmdata.body = "Booking is successfully done.";
+            fcmdata.weburl = "https://www.google.com/";
 
+            Notification notification = new Notification();
+            notification.title = "Booking";
+            notification.body = "Booking is successfully done.";
+
+
+            fcm.notification = notification;
             fcm.data = fcmdata;
             FCMRequestHelper.sendTokenMessage(fcm);
 

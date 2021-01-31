@@ -347,15 +347,29 @@
                         </div>
 
 
-                        @*<div class="col-md-6 text-center">
+                        <div class="col-md-6 text-center">
                             <div class="position-relative form-group">
                                 <label for="exampleFile">Photo</label>
 
-                                <div class="mt-5">
-                                    <img id="imagePreview"
-                                         src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/@Model.Photo" style="width:200px;height:150px" />
+                                @if (Model.Photo != null)
+                                {
+                                    <div class="mt-5">
+                                        <img id="imagePreview"
+                                             src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/@Model.Photo" style="width:200px;height:150px" />
 
-                                </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="mt-5">
+                                        <img id="imagePreview"
+                                             src="http://ecowash.centurylinks-stock.com/ArchitectThemes/image/imageplaceholder.png" style="width:200px;height:150px" />
+
+                                    </div>
+
+                                }
+
 
                                 <div class="text-center" style="display:inline-block">
                                     <input name="file" id="exampleFile" type="file" class="form-control-file file_memberpackage mt-5" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'memberpackage')">
@@ -363,11 +377,11 @@
                                     <input type="hidden" id="photo_memberpackage" name="Photo" />
                                 </div>
 
-                              
+
 
 
                             </div>
-                        </div>*@
+                        </div>
 
                         <div class="col-md-12 float-right">
                             <div class="position-relative form-group" style="margin-top: 30px;float:right">
@@ -467,14 +481,14 @@
             type: 'POST',
             data: { "Id": id },
             success: function (data) {
-                $("#Id").val(data.ID);
+                $("#ID").val(data.ID);
                 $('#Title').val(data.Title);
                 $('#ddlCarType').val(data.CarType);
               //  $('#ddlCarType').trigger('change');
 
                 editbindIds = data.AdditionalServiceIds;
                 $('#PackagePrice').val(data.PackagePrice);
-                //$('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
+                $('#imagePreview').attr('src','http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/' + data.Photo);
 
                 $('#ddladditionalservice2').select2();
 

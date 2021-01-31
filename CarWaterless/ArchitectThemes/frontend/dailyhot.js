@@ -102,7 +102,7 @@ function BindGrid() {
 
                                 }
                                 else {
-                                    del = "<a class='btn btn-success btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-check-alt'></i> Activate</a>";
+                                    del = "<a class='btn btn-success btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-check'></i> Activate</a>";
 
                                 }
                                 

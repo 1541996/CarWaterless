@@ -249,9 +249,9 @@ function GetModel() {
 
 
     var model = {};
-    var id = $('#Id').val();
+    var id = $('#ID').val();
     if (id != "") {
-        model.Id = id;
+        model.ID = id;
     }
     model.Title = $('#Title').val();
     model.AdditionalServiceIds = selectIds;
@@ -275,7 +275,7 @@ function ClearError() {
 }
 
 function GetSelectedIds() {
-    $('#ddladditionalservice option:selected').each(function () {
+    $('#ddladditionalservice2 option:selected').each(function () {
         var $this = $(this);
         if ($this.length) {
             var selval = $this.val();
@@ -285,7 +285,7 @@ function GetSelectedIds() {
 }
 
 function GetSelectedNames() {
-    $('#ddladditionalservice option:selected').each(function () {
+    $('#ddladditionalservice2 option:selected').each(function () {
 
         var $this = $(this);
         if ($this.length) {

@@ -248,7 +248,8 @@ namespace CarWaterless.Controllers
 
 
         public ActionResult _getuserlist(string searchvalue = null,
-         DateTime? fromdate = null, DateTime? todate = null, string cardata = null,string type = null)
+         DateTime? fromdate = null, DateTime? todate = null, string cardata = null,string type = null
+            ,int page = 1,int pagesize = 6)
         {
             Expression<Func<tbCustomer, bool>> searchfilter = null;
             Expression<Func<tbOperation, bool>> datefilter, washtypefilter, statusfilter, bookingsourcefilter = null;
@@ -337,11 +338,11 @@ namespace CarWaterless.Controllers
 
 
             var result = (from operation in uow.operationRepo.GetAll().
-                          Where(a => a.IsDeleted != true).Where(datefilter)
+                          Where(a => a.IsDeleted != true && a.Status == type).Where(datefilter)
                           join customer in uow.customerRepo.GetAll().Where(a => a.IsDeleted != true)
                           .Where(searchfilter)
                           on operation.CustomerId equals customer.Id
-                          join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Status != "Finished")
+                          join car in uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true)
                                   .Where(carfilter).Where(carfilter)
                           on operation.CustomerVehicleId equals car.Id    
                           join chat in uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true)
@@ -355,40 +356,69 @@ namespace CarWaterless.Controllers
                           }).DistinctBy(a => a.operation.Id);
 
 
-            var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true).AsQueryable();
+          //  var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true).AsQueryable();
+
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+         
+            var skipindex = pagesize * (page - 1);
+            var objs = result.Skip(skipindex).Take(pagesize);
+            var totalCount = result.Count();
 
 
+            ViewBag.pagesize = pagesize;
+            ViewBag.page = page;
+            ViewBag.totalCount = totalCount;
 
-            if(messagelist.Count() > 0)
+
+            List<ChatDataViewModel> cdvmlist = new List<ChatDataViewModel>();
+            if (objs.Count() > 0)
             {
-                
+                foreach(var d in objs)
+                {
+                    var messagelist = uow.chatMessageRepo.GetAll().Where(a => a.IsConversationEnd != true && a.IsDeleted != true && a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault();
+                    ChatDataViewModel cdvm = new ChatDataViewModel();
+                    cdvm.vehiclebrand = d.VehicleBrand;
+                    cdvm.vehiclename = d.VehicleName;
+                    cdvm.vehicleno = d.VehicleNo;
+                    cdvm.userid = messagelist.UserID.ToString();
+                    cdvm.username = messagelist.UserName;
+                    cdvm.senddate = messagelist.SendDateTime;
+                    cdvm.lastmessage = messagelist.Message;
+                    //   cdvm.isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
+                    cdvm.type = messagelist.Type;
+                    cdvm.customername = d.FullName;
+                    cdvmlist.Add(cdvm);
 
-                IQueryable<ChatDataViewModel> data = (from d in result
-                                                      select new ChatDataViewModel
-                                                      {
-                                                          vehiclebrand = d.VehicleBrand,
-                                                          vehiclename = d.VehicleName,
-                                                          vehicleno = d.VehicleNo,
-                                                          userid = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserID.ToString(),
-                                                          username = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserName,
-                                                          senddate = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().SendDateTime,
-                                                          lastmessage = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Message,
-                                                          isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
-                                                          type = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type,
-                                                          customername = d.FullName
-                                                      }).AsQueryable();
-                var totalCount = data.Count();
+
+                }
+
+                //IQueryable<ChatDataViewModel> data = (from d in objs
+                //                                      select new ChatDataViewModel
+                //                                      {
+                //                                          vehiclebrand = d.VehicleBrand,
+                //                                          vehiclename = d.VehicleName,
+                //                                          vehicleno = d.VehicleNo,
+                //                                          userid = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserID.ToString(),
+                //                                          username = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().UserName,
+                //                                          senddate = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().SendDateTime,
+                //                                          lastmessage = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Message,
+                //                                          isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
+                //                                          type = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type,
+                //                                          customername = d.FullName
+                //                                      }).AsQueryable();
+                //   var totalCount = data.Count();
 
 
 
                 //var model = new PagedListClient<BookingViewModel>(objs, page, pagesize, totalCount);
-                return PartialView("_getuserlist", data);
+                return PartialView("_getuserlist", cdvmlist);
             }
             else
             {
-                IQueryable<ChatDataViewModel> data = null;
+                List<ChatDataViewModel> cdvmdatalist = new List<ChatDataViewModel>();
                 
-                return PartialView("_getuserlist", data);
+                return PartialView("_getuserlist", cdvmdatalist);
             }
         
 
