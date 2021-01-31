@@ -105,7 +105,7 @@
                                 Daily Hot
                                 @if (Dailyhotactive)
                                 {
-                                    <span class="badge badge-pill badge-danger"><i class="fa fa-check"></i></span>
+                                    <span class="badge badge-pill badge-danger">On</span>
                                 }
                             </a>
                         </li>
@@ -137,10 +137,10 @@
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <a href="@Url.Action("EditProfile","AdminUser")" tabindex="0" class="dropdown-item">Edit Profile</a>
                                             <a href="@Url.Action("ChangePassword","AdminUser")" tabindex="0" class="dropdown-item">Change Password</a>
-                                            @if (userrole == "superadministrator")
+                                            @if (userrole != "branchagent")
                                             {
                                                 <a href="@Url.Action("Add","AdminUser")" tabindex="0" class="dropdown-item">Add User</a>
-                                                <a href="@Url.Action("UserList","AdminUser")" tabindex="0" class="dropdown-item">User List</a>
+                                                <a href="@Url.Action("Index","AdminUser")" tabindex="0" class="dropdown-item">User List</a>
                                             }
                                             <div tabindex="-1" class="dropdown-divider"></div>
                                             <a href="@Url.Action("Index","AdminLogin")" tabindex="0" class="dropdown-item">Log Out</a>
@@ -492,12 +492,12 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
                             @*<li class="app-sidebar__heading">Dashboard</li>
-                            <li id="liDashboard">
-                                <a href="@Url.Action("Index","Home")" id="liHome">
-                                    <i class="metismenu-icon pe-7s-rocket"></i>
-                                    Dashboard
-                                </a>
-                            </li>*@
+        <li id="liDashboard">
+            <a href="@Url.Action("Index","Home")" id="liHome">
+                <i class="metismenu-icon pe-7s-rocket"></i>
+                Dashboard
+            </a>
+        </li>*@
                             <li class="app-sidebar__heading">Preparation</li>
                             <li id="liSetting">
                                 <a href="#">
@@ -536,12 +536,7 @@
                                             Additional Service
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="@Url.Action("Discount","AdminSetup")" id="liDiscount">
-                                            <i class="metismenu-icon"></i>
-                                            Discount
-                                        </a>
-                                    </li>
+
                                 </ul>
                             </li>
 
@@ -560,11 +555,11 @@
                                         </a>
                                     </li>
                                     @*<li>
-                                            <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
-                                                <i class="metismenu-icon"></i>
-                                                Add Booking
-                                            </a>
-                                        </li>*@
+                    <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
+                        <i class="metismenu-icon"></i>
+                        Add Booking
+                    </a>
+                </li>*@
                                 </ul>
                             </li>
 
@@ -601,35 +596,42 @@
 
 
                             <li class="app-sidebar__heading">Financial</li>
-                            <li id="liFinance">
-                                <a href="#">
-                                    <i class="metismenu-icon pe-7s-monitor"></i>
-                                    Finance
-                                    <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="@Url.Action("MonthlySummary","Finance")" id="liMonthlySummary">
-                                            <i class="metismenu-icon"></i>
-                                            Monthly Summary
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Index","Finance")" id="liFinancialHistory">
-                                            <i class="metismenu-icon"></i>
-                                            Financial History
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (userrole != "branchagent")
+                            {
+                                <li id="liFinance">
+                                    <a href="#">
+                                        <i class="metismenu-icon pe-7s-monitor"></i>
+                                        Finance
+                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                    </a>
+                                    <ul>
+                                        <li>
+                                            <a href="@Url.Action("MonthlySummary","Finance")" id="liMonthlySummary">
+                                                <i class="metismenu-icon"></i>
+                                                Monthly Summary
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("Index","Finance")" id="liFinancialHistory">
+                                                <i class="metismenu-icon"></i>
+                                                Financial History
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
 
-                            <li class="app-sidebar__heading">Advertisement</li>
-                            <li id="liAds">
-                                <a href="@Url.Action("Index","Admin_Advertisement")" id="liAds">
-                                    <i class="metismenu-icon pe-7s-album"></i>
-                                    Advertisement
-                                </a>
-                            </li>
+                            @if (userrole == "superadministrator")
+                            {
+                                <li class="app-sidebar__heading">Advertisement</li>
+                                <li id="liAds">
+                                    <a href="@Url.Action("Index","Admin_Advertisement")" id="liAds">
+                                        <i class="metismenu-icon pe-7s-album"></i>
+                                        Advertisement
+                                    </a>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>
@@ -649,7 +651,7 @@
                             <div class="app-footer-right">
                                 <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="https://www.centurylinksmm.com/" class="nav-link">
+                                        <a href="https://www.centurylinksmm.com/" target="_blank" class="nav-link">
                                             Century Links Software Service
                                         </a>
                                     </li>

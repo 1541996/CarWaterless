@@ -519,7 +519,6 @@ namespace CarWaterless.Business
             {
                 var query = (from data in context.tbBranches
                              join town in context.tbTownships on data.TownshipId equals town.Id
-                             join adminagent in context.tbAdmins on data.AdminAgentId equals adminagent.Id
                              where data.IsDeleted == false && data.IsActive == model.IsActive
                              orderby data.CreateDate ascending
                              select new BranchViewModel
@@ -528,8 +527,6 @@ namespace CarWaterless.Business
                                  LocationName = data.LocationName,
                                  LocationPhoneNo = data.LocationPhoneNo,
                                  LocationAddress = data.LocationAddress,
-                                 AdminAgentId = data.AdminAgentId,
-                                 AdminAgentName = adminagent.FullName,
                                  CarLimit = data.CarLimit,
                                  CloseTime = data.CloseTime,
                                  OpenTime = data.OpenTime,
@@ -541,18 +538,12 @@ namespace CarWaterless.Business
                 {
                     query = query.Where(x => x.TownshipId == model.TownshipId);
                 }
-                if (model.AdminAgentId != null)
-                {
-                    query = query.Where(x => x.AdminAgentId == model.AdminAgentId);
-                }
                 lst = query.AsEnumerable().Select((data, index) => new BranchViewModel()
                 {
                     Id = data.Id,
                     LocationName = data.LocationName,
                     LocationPhoneNo = data.LocationPhoneNo,
                     LocationAddress = data.LocationAddress,
-                    AdminAgentId = data.AdminAgentId,
-                    AdminAgentName = data.AdminAgentName,
                     CarLimit = data.CarLimit,
                     CloseTime = data.CloseTime,
                     OpenTime = data.OpenTime,
@@ -572,7 +563,6 @@ namespace CarWaterless.Business
             {
                 var query = (from data in context.tbBranches
                              join town in context.tbTownships on data.TownshipId equals town.Id
-                             join adminagent in context.tbAdmins on data.AdminAgentId equals adminagent.Id
                              where data.IsDeleted == false && data.Id == id
                              select new BranchViewModel
                              {
@@ -580,8 +570,6 @@ namespace CarWaterless.Business
                                  LocationName = data.LocationName,
                                  LocationPhoneNo = data.LocationPhoneNo,
                                  LocationAddress = data.LocationAddress,
-                                 AdminAgentId = data.AdminAgentId,
-                                 AdminAgentName = adminagent.FullName,
                                  CarLimit = data.CarLimit,
                                  CloseTime = data.CloseTime,
                                  OpenTime = data.OpenTime,
@@ -597,8 +585,6 @@ namespace CarWaterless.Business
                     LocationName = data.LocationName,
                     LocationPhoneNo = data.LocationPhoneNo,
                     LocationAddress = data.LocationAddress,
-                    AdminAgentId = data.AdminAgentId,
-                    AdminAgentName = data.AdminAgentName,
                     CarLimit = data.CarLimit,
                     CloseTime = data.CloseTime,
                     OpenTime = data.OpenTime,
@@ -967,6 +953,12 @@ namespace CarWaterless.Business
             List<DailyHotViewModel> lst = new List<DailyHotViewModel>();
             using (var context = new CarWaterLessContext())
             {
+                var isactive = false;
+                var asquery = context.tbAdditionalServices.Where(x => x.IsDailyHot == true).ToList();
+                if (asquery.Count > 0)
+                {
+                    isactive = true;
+                }
                 var query = (from data in context.tbDailyHots
                              where data.IsDeleted == false
                              orderby data.CreatedDate ascending
@@ -974,13 +966,12 @@ namespace CarWaterless.Business
                              {
                                 ID=data.ID,
                                 Title = data.Title,
-                                 IsActive = data.IsActive,
                              });
                 lst = query.AsEnumerable().Select((data, index) => new DailyHotViewModel()
                 {
                     ID = data.ID,
                     Title = data.Title,
-                    IsActive = data.IsActive,
+                    IsActive = isactive,
                     No = ++index
                 }).ToList();
             }
@@ -1059,11 +1050,12 @@ namespace CarWaterless.Business
             {
 
                 context.tbDailyHots.First(x => x.ID == id).IsActive = !currentflag;
-                context.tbAdditionalServices.ToList().ForEach(x => x.IsDailyHot = !currentflag);
-                context.SaveChanges();
+               
+                
 
                 if (currentflag == true)
                 {
+                    context.tbAdditionalServices.ToList().ForEach(x => x.IsDailyHot = false);
                     model.MessageType = 1;
                     model.Message = "Deactivate Successful.";
                 }
@@ -1072,7 +1064,7 @@ namespace CarWaterless.Business
                     model.MessageType = 1;
                     model.Message = "Activate Successful.";
                 }
-                
+                context.SaveChanges();
             }
 
             return model;

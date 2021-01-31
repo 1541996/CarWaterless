@@ -60,7 +60,7 @@ function showMessage(messagetype, message) {
             type: "success"
         }).then((result) => {
             if (result.value) {
-                window.location = "/AdminUser/UserList";
+                window.location = "/AdminUser/Index";
             }
         });
     }

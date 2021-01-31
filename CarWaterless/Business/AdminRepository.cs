@@ -237,7 +237,7 @@ namespace CarWaterless.Business
             using (var context = new CarWaterLessContext())
             {
                 var query = (from data in context.tbAdmins
-                             where data.IsDeleted == false
+                             where data.IsDeleted == false && data.Id!=3
                              select new AdminViewModel
                              {
                                  Id = data.Id,

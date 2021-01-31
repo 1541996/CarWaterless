@@ -1,0 +1,52 @@
+﻿@model Infra.ViewModels.AdminViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                User List
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row col-sm-12">
+                    <table id="tbl" class="table" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>User Name</th>
+                                <th>Full Name</th>
+                                <th>Role</th>
+                                <th>IsActive</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/user")
+<script type="text/javascript">
+    $(function () {
+        $('#liDashboard').addClass('mm-active');
+    });
+    var listUrl = '@Url.Action("GetAllUser","AdminUser")';
+    var deactivateUrl = '@Url.Action("DeactivateUser", "AdminUser")';
+    var activateUrl = '@Url.Action("ActivateUser", "AdminUser")';
+</script>
+
+

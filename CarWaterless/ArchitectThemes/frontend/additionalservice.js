@@ -269,54 +269,34 @@ function ClearError() {
 }
 
 function DeAc(id,sts) {
-    var mes = "Are you sure to ";
     var flag = true;
     if (sts == "true") {
-        mes += "off daily hot?";
         flag = true;
     }
     else {
-        mes += "on daily hot?";
         flag = false;
     }
-    Swal.fire({
-        title: mes,
-        text: "",
-        type: 'question',
-        showCancelButton: true,
-        cancelButtonColor: '#ff6258',
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        confirmButtonClass: "btn btn-primary",
-        cancelButtonClass: "btn btn-danger",
-    }).then((result) => {
-        if (result.value) {
 
-            $.ajax({
-                url: deacUrl,
-                type: 'POST',
-                data: { "id": id, "currentflag": flag },
-                success: function (data) {
-                    if (data) {
-                        $('#hdMessageType').val(data.MessageType);
-                        $('#hdMessage').val(data.Message);
+    $.ajax({
+        url: deacUrl,
+        type: 'POST',
+        data: { "id": id, "currentflag": flag },
+        success: function (data) {
+            if (data) {
+                $('#hdMessageType').val(data.MessageType);
+                $('#hdMessage').val(data.Message);
 
-                        Swal.fire(
-                            'Operation Success.',
-                            'success'
-                        ).then((result) => {
-                            if (result.value) {
-                                window.location = "/AdminSetup/AdditionalService";
-                            }
-                        });
+                Swal.fire(
+                    'Operation Success.',
+                    'success'
+                ).then((result) => {
+                    if (result.value) {
+                        window.location = "/AdminSetup/AdditionalService";
                     }
-
-                    BindGird();
-                }
-
-            });
-
+                });
+            }
 
         }
+
     });
 }

@@ -126,8 +126,15 @@ namespace CarWaterless.Business
         {
             using(var context = new CarWaterLessContext())
             {
-                bool isactive = context.tbDailyHots.FirstOrDefault().IsActive??false;
-                return isactive;
+                var query = context.tbAdditionalServices.Where(x=>x.IsDailyHot==true).ToList();
+                if (query.Count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 

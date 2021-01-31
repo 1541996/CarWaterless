@@ -95,7 +95,7 @@ function showMessage(message, type) {
             type: "error"
         }).then((result) => {
             if (result.value) {
-                window.location = "/User/EditProfile";
+                window.location = "/AdminUser/EditProfile";
             }
         });
     }
