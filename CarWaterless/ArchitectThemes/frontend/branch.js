@@ -29,7 +29,7 @@ function BindGrid() {
                 oTable = $("#tbl").dataTable({
                     "columnDefs": [
                         {
-                            className: "text-center", "targets": [5,6]
+                            className: "text-center", "targets": [4,5]
                         }
                     ],
                     "pagingType": "full_numbers",
@@ -50,7 +50,6 @@ function BindGrid() {
                         { "mData": "LocationName", "bSearchable": true, "bSortable": true, "width": "15%" },
                         { "mData": "LocationPhoneNo", "bSearchable": true, "bSortable": true, "width": "15%" },
                         { "mData": "TownshipName", "bSearchable": true, "bSortable": true, "width": "10%" },
-                        { "mData": "AdminAgentName", "bSearchable": true, "bSortable": true, "width": "10%" },
                         { "mData": "LocationAddress", "bSearchable": true, "bSortable": true, "width": "20%" },
                         
 
@@ -186,8 +185,7 @@ function GetModel() {
     var model = {};
     
     model.Name = $('#Name').val();
-    model.TownshipId = $('#TownshipId').val();
-    model.AdminAgentId = $('#AdminAgentId').val();
+    model.TownshipId = $('#TownshipId').val();\
     if ($('#chkIsActive').prop("checked") == true) {
         model.IsActive = true;
     }

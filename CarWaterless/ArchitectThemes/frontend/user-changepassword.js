@@ -100,7 +100,7 @@ function showMessage(message, type) {
             type: "error"
         }).then((result) => {
             if (result.value) {
-                window.location = "/User/ChangePassword";
+                window.location = "/AdminUser/ChangePassword";
             }
         });
     }

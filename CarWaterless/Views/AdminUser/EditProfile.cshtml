@@ -1,0 +1,82 @@
+﻿@model Infra.ViewModels.AdminViewModel
+
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading">
+            <div>
+                Edit Your Profile
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <form class="">
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.IsActive)
+                    @Html.HiddenFor(x => x.CreateUserId)
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">User Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @type = "UserName", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="UserName-error" class="invalid-feedback" style="display:none;">
+                                Enter User Name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">Full Name</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @type = "FullName", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="FullName-error" class="invalid-feedback" style="display:none;">
+                                Enter Full Name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            To continue, please enter your password
+                        </div>
+                    </div>
+                    <div class="position-relative row form-group">
+                        <label class="col-sm-3 col-form-label">Password</label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "Password", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                            <div id="Password-error" class="invalid-feedback" style="display:none;">
+                                Enter Password
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="position-relative row form-group">
+                        <label for="" class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <a href="javascript:void(0)" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Update</a>
+                            <a href="javascript:void(0)" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@Scripts.Render("~/bundles/user-editprofile")
+<script type="text/javascript">
+    $(function () {
+        $('#liDashboard').addClass('mm-active');
+    });
+    var saveUrl = '@Url.Action("EditProfile", "AdminUser")';
+</script>
+
+

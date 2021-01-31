@@ -13,14 +13,14 @@ namespace CarWaterless.Controllers
         // GET: AdminUser
         public ActionResult Index()
         {
-            HttpCookie reqCookies = Request.Cookies["newsenseInfo"];
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
             AdminViewModel model = new AdminViewModel();
             if (reqCookies != null)
             {
                 int id = int.Parse(reqCookies["userid"].ToString());
-                int userrole = int.Parse(reqCookies["userrole"].ToString());
+                string userrole = reqCookies["userrole"].ToString();
                 AdminRepository repository = new AdminRepository();
-                if (userrole == 1)
+                if (userrole != "branchagent")
                 {
                     model.Id = id;
                     return View(model);
@@ -44,14 +44,14 @@ namespace CarWaterless.Controllers
         }
         public ActionResult Add()
         {
-            HttpCookie reqCookies = Request.Cookies["newsenseInfo"];
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
             AdminViewModel model = new AdminViewModel();
             if (reqCookies != null)
             {
                 int id = int.Parse(reqCookies["userid"].ToString());
-                int userrole = int.Parse(reqCookies["userrole"].ToString());
+                string userrole = reqCookies["userrole"].ToString();
                 AdminRepository repository = new AdminRepository();
-                if (userrole == 1)
+                if (userrole != "branchagent")
                 {
                     model.CreateUserId = id;
                     return View(model);
@@ -76,7 +76,7 @@ namespace CarWaterless.Controllers
         }
         public ActionResult EditProfile()
         {
-            HttpCookie reqCookies = Request.Cookies["newsenseInfo"];
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
             AdminViewModel model = new AdminViewModel();
             if (reqCookies != null)
             {
@@ -93,7 +93,7 @@ namespace CarWaterless.Controllers
 
         public ActionResult ChangePassword()
         {
-            HttpCookie reqCookies = Request.Cookies["newsenseInfo"];
+            HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];
             AdminViewModel model = new AdminViewModel();
             if (reqCookies != null)
             {

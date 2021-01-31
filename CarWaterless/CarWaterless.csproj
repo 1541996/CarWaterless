@@ -351,6 +351,7 @@
     <Content Include="ArchitectThemes\frontend\unit.js" />
     <Content Include="ArchitectThemes\frontend\user-changepassword.js" />
     <Content Include="ArchitectThemes\frontend\user-editprofile.js" />
+    <Content Include="ArchitectThemes\frontend\user.js" />
     <Content Include="ArchitectThemes\image\admin.jpg" />
     <Content Include="ArchitectThemes\image\body.jpg" />
     <Content Include="ArchitectThemes\image\carloading.jpg" />
@@ -770,6 +771,9 @@
     <Content Include="Views\AdminSetup\DailyHot.cshtml" />
     <Content Include="Views\Shared\_nodatafound.cshtml" />
     <Content Include="Views\DailyHot\Index.cshtml" />
+    <Content Include="Views\AdminUser\Index.cshtml" />
+    <Content Include="Views\AdminUser\EditProfile.cshtml" />
+    <Content Include="Views\AdminUser\ChangePassword.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

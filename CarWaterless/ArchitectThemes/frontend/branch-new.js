@@ -90,7 +90,6 @@ function GetModel() {
     model.LocationName = $('#LocationName').val();
     model.LocationPhoneNo = $('#LocationPhoneNo').val();
     model.TownshipId = $('#TownshipId').val();
-    model.AdminAgentId = $('#AdminAgentId').val();
     model.CarLimit = $('#CarLimit').val();
     model.OpenTime = $('#OpenTime').val();
     model.CloseTime = $('#CloseTime').val();
