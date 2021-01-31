@@ -1,4 +1,5 @@
 ﻿using Data.Helper;
+using Infra.Helper;
 using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
@@ -438,16 +439,124 @@ namespace CarWaterless.Controllers
             {
                 operation.ConfirmedTime = MyExtension.getLocalTime(DateTime.UtcNow);
                 operation.Status = "Confirmed";
+
+
+                var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operation.CustomerId).FirstOrDefault();
+
+                if (user != null)
+                {
+                    FCMViewModel fcm = new FCMViewModel();
+                    fcm.to = user.UserToken;
+
+                    fcmdata fcmdata = new fcmdata();
+                    fcmdata.type = "Specific";
+                    fcmdata.title = "Booking";
+                    fcmdata.body = "Your booking is confirmed.";
+                    fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
+
+                    Notification notification = new Notification();
+                    notification.title = "Booking";
+                    notification.body = "Your booking is confirmed.";
+                    fcm.notification = notification;
+                    fcm.data = fcmdata;
+
+                    FCMRequestHelper.sendTokenMessage(fcm);
+
+                    tbNotification noti = new tbNotification();
+                    noti.NotiMessage = $"Booking";
+                    noti.MessageBody = $"Your booking is confirmed.";
+                    noti.NotiType = "Specific";
+                    noti.CustomerId = user.Id;
+                    noti.UserAppID = user.UserAppId;
+                    noti.OperationId = operation.Id;
+                    noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti.WebUrl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
+
+                    uow.notificationRepo.InsertReturn(noti);
+
+
+                }
+
+
             }
 
             if (status == "Confirmed")
             {
                 operation.FinishedTime = MyExtension.getLocalTime(DateTime.UtcNow);
                 operation.Status = "Finished";
+
+                var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operation.CustomerId).FirstOrDefault();
+
+                if (user != null)
+                {
+                    FCMViewModel fcm = new FCMViewModel();
+                    fcm.to = user.UserToken;
+
+                    fcmdata fcmdata = new fcmdata();
+                    fcmdata.type = "Specific";
+                    fcmdata.title = "Booking";
+                    fcmdata.body = "Your booking is finished.";
+                    fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
+
+                    Notification notification = new Notification();
+                    notification.title = "Booking";
+                    notification.body = "Your booking is finished.";
+                    fcm.notification = notification;
+                    fcm.data = fcmdata;
+
+                    FCMRequestHelper.sendTokenMessage(fcm);
+
+                    tbNotification noti = new tbNotification();
+                    noti.NotiMessage = $"Booking";
+                    noti.MessageBody = $"Your booking is finished.";
+                    noti.NotiType = "Specific";
+                    noti.CustomerId = user.Id;
+                    noti.UserAppID = user.UserAppId;
+                    noti.OperationId = operation.Id;
+                    noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti.WebUrl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
+
+                    uow.notificationRepo.InsertReturn(noti);
+
+
+                    FCMViewModel fcm2 = new FCMViewModel();
+                    fcm2.to = user.UserToken;
+
+                    fcmdata fcmdata2 = new fcmdata();
+                    fcmdata2.type = "Specific";
+                    fcmdata2.title = "Rating";
+                    fcmdata2.body = "How would you rate our service?.";
+                    fcmdata2.weburl = $"http://ecowash.centurylinks-stock.com/book/ratedform?customerid={operation.CustomerId}&operationid={operation.Id}";
+
+                    Notification notification2 = new Notification();
+                    notification2.title = "Booking";
+                    notification2.body = "Your booking is finished.";
+                    fcm2.notification = notification;
+                    fcm2.data = fcmdata;
+
+                    FCMRequestHelper.sendTokenMessage(fcm2);
+
+                    tbNotification noti2 = new tbNotification();
+                    noti2.NotiMessage = $"Rating";
+                    noti2.MessageBody = $"How would you rate our service?.";
+                    noti2.NotiType = "Specific";
+                    noti2.CustomerId = user.Id;
+                    noti2.UserAppID = user.UserAppId;
+                    noti2.OperationId = operation.Id;
+                    noti2.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti2.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti2.WebUrl = $"http://ecowash.centurylinks-stock.com/book/ratedform?customerid={operation.CustomerId}&operationid={operation.Id}";
+
+                    uow.notificationRepo.InsertReturn(noti2);
+
+
+                }
+
             }
 
             
-
             operation = uow.operationRepo.UpdateWithObj(operation);
             return Json(operation, JsonRequestBehavior.AllowGet);
         }

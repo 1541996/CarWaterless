@@ -1,4 +1,5 @@
 ﻿using Data.Helper;
+using Infra.Helper;
 using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
@@ -479,6 +480,7 @@ namespace CarWaterless.Controllers
             }
 
 
+
             if (obj.Id > 0)
             {
                 UpdateEntity = uow.operationRepo.UpdateWithObj(obj);
@@ -492,6 +494,48 @@ namespace CarWaterless.Controllers
                
                 obj.StartTime = null;
                 UpdateEntity = uow.operationRepo.InsertReturn(obj);
+
+                var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == UpdateEntity.CustomerId).FirstOrDefault();
+
+                if(user != null)
+                {
+                    FCMViewModel fcm = new FCMViewModel();
+                    fcm.to = user.UserToken;
+
+                    fcmdata fcmdata = new fcmdata();
+                    fcmdata.type = "Specific";
+                    fcmdata.title = "Booking";
+                    fcmdata.body = "Your booking request has been received successfully.";
+                    fcmdata.weburl = "https://www.google.com/";
+
+                    Notification notification = new Notification();
+                    notification.title = "Booking";
+                    notification.body = "Booking request has been received successfully.";
+                    fcm.notification = notification;
+                    fcm.data = fcmdata;
+
+                    FCMRequestHelper.sendTokenMessage(fcm);
+
+                    tbNotification noti = new tbNotification();
+                    noti.NotiMessage = $"Booking";
+                    noti.MessageBody = $"Booking request has been received successfully.";
+                    noti.NotiType = "Specific";
+                    noti.CustomerId = user.Id;
+                    noti.UserAppID = user.UserAppId;
+                    noti.OperationId = UpdateEntity.Id;
+                    noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                    noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);                
+                    noti.WebUrl = "https://www.google.com/";
+
+                    uow.notificationRepo.InsertReturn(noti);
+
+
+                }
+
+              
+
+
+
             }
 
             var today = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow).Date;

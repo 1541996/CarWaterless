@@ -10,16 +10,61 @@
         <div class="page-title-heading width-100">
             <div class="display-flex-row">
                 <div class="display-flex-column">
-                    Operation List 
+                    Operation List
                 </div>
                 <div class="display-flex-column ml-10">
                     <button class="btn btn-success" onclick="Export()"><i class="fa fa-print"></i> Export</button>
+                    
+                </div>
+
+                <div class="display-flex-column ml-10">
+                  
+                    <button class="btn btn-primary" onclick="SendNoti()"><i class="fa fa-calendar-times"></i> Send Notification</button>
                 </div>
 
             </div>
 
         </div>
     </div>
+</div>
+
+<div class="row mt-10" style="display:none" id="div_noti">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Message Title</label>
+                        <input type="text" class="form-control" value="" id="txt_msg" autocomplete="off" />
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Message Body</label>
+                        <input type="text" class="form-control" value="" id="txt_body" autocomplete="off" />
+
+                    </div>
+
+
+                    <div class="col-md-4">
+                      
+                        <button class="btn btn-primary mt-30" onclick="SaveNoti()"><i class="fa fa-calendar-times"></i> Send</button>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-15">
+                    <div class="col-md-4">
+                        <p class="div_error text-danger mb-5" style="display:none">Please fill your message title and body</p>
+                    </div>
+               </div>
+
+
+                </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="row">
@@ -143,6 +188,10 @@
             getCarNoByCustomer();
         });
 
+
+        function SendNoti() {
+            $('#div_noti').toggle();
+        }
 
 
         function initsComponent() {
@@ -275,6 +324,55 @@
                 });
 
         }
+
+
+        function SaveNoti() {
+
+            if ($('#txt_msg').val() != "" && $('#txt_body').val() != "") {
+                $('.div_error').hide();
+                var obj = {
+                    message: $('#txt_msg').val(),
+                    body: $('#txt_body').val(),
+                    customerid: customerid
+
+                }
+
+                $.ajax({
+                    cache: false,
+                    url: '@Url.Action("SendNoti", "Admin_Customer")',
+                    data: { obj: obj },
+                    type: "Post",
+                    beforeSend: function () {
+
+                    },
+                    success: function (result) {
+                        if (result == "Success") {
+                            Swal.fire(
+                                'Success!',
+                                'Successfully Sent!',
+                                'success'
+                            )
+                        }
+
+
+
+                    },
+                    complete: function () {
+
+                        $('#txt_msg').val('');
+                        $('#txt_body').val('');
+
+                    }
+                });
+            } else {
+                $('.div_error').show();
+            }
+
+
+
+        }
+
+
 
 
 

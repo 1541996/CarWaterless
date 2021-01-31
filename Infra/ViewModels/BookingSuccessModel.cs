@@ -31,4 +31,12 @@ namespace Infra.ViewModels
         public IQueryable<tbAdditionalService> additionalservicelist { get; set; }
     }
 
+
+    public class NotiViewModel
+    {
+        public string message { get; set; }
+        public string body { get; set; }
+        public string customerid { get; set; }
+    }
+
 }

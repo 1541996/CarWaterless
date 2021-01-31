@@ -492,6 +492,63 @@ namespace CarWaterless.Controllers
           
         }
 
+
+        [HttpPost]
+        public ActionResult SendNoti(NotiViewModel obj)
+        {
+         
+            var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == obj.customerid).FirstOrDefault();
+
+            if (user != null)
+            {
+                tbNotification noti = new tbNotification();
+                noti.NotiMessage = obj.message;
+                noti.MessageBody = obj.body;
+                noti.NotiType = "Specific";
+                noti.CustomerId = user.Id;
+                noti.UserAppID = user.UserAppId;
+              //  noti.OperationId = operation.Id;
+                noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+                noti.WebUrl = $"http://ecowash.centurylinks-stock.com/Notification?Id={noti.Id}";
+
+                noti = uow.notificationRepo.InsertReturn(noti);
+
+
+                FCMViewModel fcm = new FCMViewModel();
+                fcm.to = user.UserToken;
+
+                fcmdata fcmdata = new fcmdata();
+                fcmdata.type = "Specific";
+                fcmdata.title = obj.message;
+                fcmdata.body = obj.body;
+                fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/Notification?Id={noti.Id}";
+
+                Notification notification = new Notification();
+                notification.title = obj.message;
+                notification.body = obj.body;
+                fcm.notification = notification;
+                fcm.data = fcmdata;
+
+                FCMRequestHelper.sendTokenMessage(fcm);
+
+              
+
+            }
+
+            if (user != null)
+            {
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+
         public ActionResult AddPrepaidCode(int ID = 0,decimal? prepaidamt = null)
         {
             tbCustomer data = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == ID).FirstOrDefault();

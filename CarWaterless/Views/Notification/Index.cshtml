@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_webLayout.cshtml";
+}
+
+
+
+<style>
+
+    #content {
+        background: #fff !important
+    }
+</style>
+
+@model Infra.Models.tbNotification
+
+<div class="content-wrap page-feedback">
+
+    <div class="subsite-banner" style="height:330px">
+        <img src="~/Plesirthemes/EcoPhoto/noti.jpg">
+    </div>
+    <div class="subsite subsite-with-banner" style="margin-top:-82px">
+        <div class="row mt-40">
+            <div class="col-md-12">
+                <div class="subsite-heading">
+                    @Model.NotiMessage
+                </div>
+                <div class="subsite-heading-description mt-20">
+                    @Model.MessageBody
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+
+</div>
+

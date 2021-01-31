@@ -225,6 +225,7 @@
     <Compile Include="Controllers\DailyHotController.cs" />
     <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Controllers\PackageController.cs" />
     <Compile Include="Controllers\PushNotiTestController.cs" />
@@ -459,6 +460,7 @@
     <Content Include="Plesirthemes\EcoPhoto\igeco.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\mailicon.png" />
     <Content Include="Plesirthemes\EcoPhoto\medium.jpg" />
+    <Content Include="Plesirthemes\EcoPhoto\noti.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\ozone.jpg" />
     <Content Include="Plesirthemes\EcoPhoto\platinum.png" />
     <Content Include="Plesirthemes\EcoPhoto\silver.png" />
@@ -768,6 +770,7 @@
     <Content Include="Views\AdminSetup\DailyHot.cshtml" />
     <Content Include="Views\Shared\_nodatafound.cshtml" />
     <Content Include="Views\DailyHot\Index.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

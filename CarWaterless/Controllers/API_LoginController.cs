@@ -34,6 +34,7 @@ namespace CarWaterless.Controllers
                     tbCustomer customer = uow.customerRepo.GetAll().Where(a => a.UserName == cus.UserName && a.Password == cus.Password).FirstOrDefault();
                     if (customer != null)
                     {
+                        customer.UserToken = cus.UserToken;
                         customer.LastLoginTime = Data.Helper.MyExtension.getLocalTime(DateTime.UtcNow);
                         customer = uow.customerRepo.UpdateWithObj(customer);
                         if (customer != null)
