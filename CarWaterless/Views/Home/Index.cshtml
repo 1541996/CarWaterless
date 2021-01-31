@@ -882,7 +882,10 @@
 
                 },
                 success: function (result) {
-                    $('#div_dailyhot').empty().append(result);
+                    if (result != "Fail") {
+                        $('#div_dailyhot').empty().append(result);
+                    }
+                  
                 },
                 complete: function () {
                   

@@ -56,10 +56,20 @@ namespace CarWaterless.Controllers
 
         public ActionResult GetDailyHotData()
         {
+            var check = uow.additionalServiceRepo.GetAll().Where(a => a.IsDeleted != true && a.IsDailyHot == true).Any();
+            if(check == true)
+            {
+                var data = uow.dailyHotRepo.GetAll().Where(a => a.IsDeleted != true && a.IsActive == true).FirstOrDefault();
 
-            var data = uow.dailyHotRepo.GetAll().Where(a => a.IsDeleted != true && a.IsActive == true).FirstOrDefault();
+                return PartialView("_dailyhot", data);
+            }
+            else
+            {
+                var data = uow.dailyHotRepo.GetAll().Where(a => a.IsDeleted != true && a.IsActive == true).FirstOrDefault();
 
-            return PartialView("_dailyhot", data);
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+         
         }
 
 

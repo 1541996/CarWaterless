@@ -251,7 +251,7 @@
                             if (bktype == "Past") {
                                 getfinishedlist();
                             }
-                          
+
 
                         }
                     }
@@ -303,7 +303,7 @@
                     $('#div_waitinglist').empty().append(result);
                 },
                 complete: function () {
-                    
+
                 }
             });
 
@@ -326,14 +326,14 @@
 
                     if (result != null && result != "NoResult") {
                         hasResult = true;
-                      
+
                        $('#div_finishedlist').append(result);
-                      
+
                     }
                     else if (result == "NoResult") {
 
                         $('#div_finishedlist').append();
-                      
+
                         hasResult = false;
                         isLoading = false;
                         loading.hide();
@@ -350,6 +350,15 @@
             });
 
         }
+
+
+        function ChatData(customerid, customername,operationid) {
+            $('.preloading').show();
+            location.href = "../chat?userid=" + customerid + "&username=" + customername + "&operationid=" + operationid +"&type=User";
+
+
+        }
+
 
 
     </script>
