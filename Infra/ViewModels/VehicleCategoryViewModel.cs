@@ -103,6 +103,8 @@ namespace Infra.ViewModels
         public bool? isread { get; set; }
         public string type { get; set; }
         public string customername { get; set; }
+        public int? customerid { get; set; }
+        public int? operationid { get; set; }
     }
 
 

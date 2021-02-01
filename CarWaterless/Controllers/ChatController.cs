@@ -49,6 +49,24 @@ namespace CarWaterless.Controllers
             return View();
         }
 
+        public ActionResult getBookingDetail(int operationid = 0)
+        {
+            // ViewBag.customerid = customerid;
+            BookingSuccessModel bk = new BookingSuccessModel();
+            bk.operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operationid).FirstOrDefault();
+            bk.vehicle = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CustomerVehicleId).FirstOrDefault();
+            bk.carCategory = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == bk.operation.CarCategoryId).FirstOrDefault();
+            bk.photo = uow.photoRepo.GetAll().Where(a => a.IsDeleted != true && a.CarID == bk.operation.CustomerVehicleId).Select(a => a.Photo).FirstOrDefault();
+            bk.CustomerName = uow.customerRepo.GetAll().Where(a => a.Id == bk.operation.CustomerId).Select(a => a.FullName).FirstOrDefault();
+
+
+
+
+
+            return PartialView("getBookingData", bk);
+
+
+        }
 
 
         public ActionResult _chatList(string userid = null, int operationid = 0,string type = null)

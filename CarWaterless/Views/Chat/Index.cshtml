@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Chat";
     Layout = "~/Views/Shared/_chatLayout.cshtml";
 }
@@ -243,7 +242,7 @@
             display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
             z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
+            padding-top: 60px; /* Location of the box */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
@@ -335,7 +334,7 @@
                 <span class="fa fa-download fs-20 text-primary"></span>
             </div>*@
         <div class="ml-10" onclick="closemodal()">
-            <span class="fa fa-times-circle fs-20 text-danger"></span>
+            <span class="fa fa-times-circle text-danger" style="font-size:35px"></span>
         </div>
 
     </div>
@@ -349,7 +348,7 @@
         <div class="contact bar">
             <div class="pic stark" style="background-image: url(../../Plesirthemes/img/profile4.jpg)"></div>
             <div class="name">
-                @ViewBag.username
+                Admin
             </div>
             @*<div class="seen">
                     Today at 12:56
@@ -375,9 +374,9 @@
             </div>
         </div>
 
-        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
+        <div class="display-flex-column fs-22 div_photo" style="justify-content: center; align-items: center; width: 15%;">
             <i class="fas fa-camera upload-button"></i>
-            <input class="file-upload" type="file" accept="image/*" style="display:none" multiple />
+            <input class="file-upload" type="file" id="file-input" accept="image/*" style="display:none" multiple />
         </div>
 
 
@@ -429,6 +428,8 @@
             });
 
 
+           
+
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
@@ -440,7 +441,7 @@
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
-                alert(connectionId);
+               // alert(connectionId);
                 console.log(connectionId);
 
             });
@@ -520,6 +521,19 @@
                   success: function (myData) {
                       $('#div_chat').empty().append(myData);
 
+                      $('.file-upload').on('change', function () {
+                          imagesPreview(this, 'div.multiplephotoupload');
+                      });
+
+                      $(".upload-button").on('click', function () {
+                          $(".file-upload").click();
+                         
+
+                      });
+
+                 
+
+
                     },
                     complete: function () {
                         var wHeight = $(window).height() - (parseInt($('.div-chat-footer').height()) + 68);
@@ -532,15 +546,7 @@
 
 
 
-                        $('.file-upload').on('change', function () {
-                            imagesPreview(this, 'div.multiplephotoupload');
-                        });
-
-                        $(".upload-button").on('click', function () {
-                            $(".file-upload").click();
-                        });
-
-
+                     
 
 
 
@@ -616,7 +622,7 @@
 
 
                     $('.div_images').append(`
-                        <div class="col-3 mt-10" id="rmimage_${index}" data-image="${dataurl}">
+                        <div class="col-3 col-lg-1 mt-10 ml-15" id="rmimage_${index}" data-image="${dataurl}">
                             <img src="${e.target.result}" style="width:70px;height:70px;border-radius:10px" />
 
                             <i class="fa fa-times-circle text-danger" onclick="removeimage(this)" index="${index}"></i>
@@ -660,6 +666,9 @@
 
             imagesstring = imagesstring.slice(0, -1);
 
+            if (imagesstring != "" && imagesstring != null && imagesstring != undefined) {
+                $('#chatloading').show();
+            }
 
             var obj = {
                 userid: userid,
@@ -700,9 +709,20 @@
                             chat.scrollTop = chat.scrollHeight - chat.clientHeight;
                         }
 
+                        index = 1;
+                        imageArray = [];
+                        photoRemove = [];
+                        imagesstring = "";
 
 
 
+
+                        $('.div_photo').empty().append('<i class="fas fa-camera upload-button"></i><input class= "file-upload" type = "file" id = "file-input" accept = "image/*" style = "display:none" multiple />')
+
+
+                     
+
+                        $('#chatloading').hide();
 
 
                     }

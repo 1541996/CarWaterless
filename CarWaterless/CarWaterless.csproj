@@ -402,6 +402,7 @@
     <Content Include="ArchitectThemes\js\jquery.slimscroll.min.js" />
     <Content Include="ArchitectThemes\js\jquery.validate.min.js" />
     <Content Include="ArchitectThemes\js\main.js" />
+    <Content Include="ArchitectThemes\js\main.min.js" />
     <Content Include="ArchitectThemes\js\metisMenu.min.js" />
     <Content Include="ArchitectThemes\js\modal-loading.js" />
     <Content Include="ArchitectThemes\js\moment.min.js" />
@@ -775,6 +776,7 @@
     <Content Include="Views\AdminUser\EditProfile.cshtml" />
     <Content Include="Views\AdminUser\ChangePassword.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Chat\getBookingData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

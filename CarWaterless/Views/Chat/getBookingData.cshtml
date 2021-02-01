@@ -1,9 +1,4 @@
 ﻿
-@{
-    ViewBag.Title = "BookingSuccess";
-    Layout = "~/Views/Shared/_webLayout.cshtml";
-}
-
 
 <style>
     .float {
@@ -35,14 +30,6 @@
         width: 100%;
     }
 
-    body{
-        background:#fff!important
-    }
-
-    #content {
-        background: #fff !important
-    }
-
     .subsite-banner {
         height: 128px !important
     }
@@ -52,20 +39,13 @@
 @model Infra.ViewModels.BookingSuccessModel
 
 
-<div id="div_chatappear">
 
-</div>
-
-
-<div class="content-wrap page-cart">
-    <div class="subsite-banner">
-        <img src="~/Plesirthemes/EcoPhoto/carwash2.jpg">
-    </div>
-
+<div class="content-wrap page-cart" style="margin:0">
+    
     <div class="subsite subsite-with-banner">
-        <div class="row">
+        <div class="row mt-20">
             <div class="col-md-12">
-                <div class="subsite-heading">
+                <div class="subsite-heading" style="color:blue">
                     Your Booking
                 </div>
             </div>
@@ -74,6 +54,10 @@
             <div class="col-md-12">
                 <div class="chart-box">
                     <div class="cart-car-box">
+                        @*@if (Model.photos.Count() > 0)
+        {*@
+                        @*var photo = Model.photos.FirstOrDefault();*@
+
                         @if (Model.photo != null)
                         {
                             <div class="chart-car"><img src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/CustomerVehicle/@Model.photo"></div>
@@ -85,7 +69,10 @@
 
                         }
 
-                        <div class="chart-car-title theme-color mt-10">@Model.vehicle.VehicleBrand @Model.vehicle.VehicleName</div>
+
+                        @*}*@
+
+                        <div class="chart-car-title theme-color mt-10" style="color:blue!important">@Model.vehicle.VehicleBrand @Model.vehicle.VehicleName</div>
 
                     </div>
                     <div class="cart-box-detail">
@@ -116,7 +103,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="subsite-heading">
+                <div class="subsite-heading" style="color:blue">
                     Cart Totals
                 </div>
             </div>
@@ -308,77 +295,16 @@
         }
 
 
+        <div class="row mt-20">
+            <div class="col-md-12 text-right">
+                <div class="button">
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="theme-button" style="color:#000;background:#ddd">Close</button>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
 
 
 
-
-
-@section scripts{
-    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
-    <script src="http://centurylinksmm-001-site7.dtempurl.com/signalr/hubs"></script>
-
-
-
-    <script>
-        var chathub = $.connection.chatHub;
-        var connectionId;
-        var userid = '@Model.operation.CustomerId';
-        var operationid = '@Model.operation.Id';
-        var username = '@Model.CustomerName';
-
-        $(function () {
-
-            //$.connection.hub.start().done(function () {
-            //    connectionId = $.connection.hub.id;
-            //    console.log(connectionId);
-            //});
-            $.connection.hub.url = 'http://centurylinksmm-001-site7.dtempurl.com/signalr';
-
-            $.connection.hub.start().done(function () {
-                connectionId = $.connection.hub.id;
-             //   alert(connectionId);
-                console.log(connectionId);
-
-            });
-
-            //  transport: 'longPolling'
-
-
-            var tryingToReconnect = false;
-            var pageIsDisabled = false;
-            $.connection.hub.reconnecting(function () {
-            });
-            $.connection.hub.reconnected(function () {
-            });
-            $.connection.hub.disconnected(function () {
-                setTimeout(function () {
-                    $.connection.hub.start();
-                }, 5000);
-
-            });
-
-
-            chathub.client.chatAppear = function (fromuserid, touserid, operationid) {
-
-             //   alert("Signalr");
-
-                $('#div_chatappear').empty().append(`<a href="../chat?userid=${userid}&username=${username}&operationid=${operationid}" class="float" target="_blank">
-                        <i class= "fa fa-comments my-float"></i>
-                    </a>`)
-
-            }
-
-
-
-        })
-
-
-
-    </script>
-
-
-
-}

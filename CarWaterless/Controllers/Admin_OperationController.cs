@@ -195,7 +195,8 @@ namespace CarWaterless.Controllers
                                                                    PaymentType = operation.PaymentType,
                                                                    ComplaintMessage = operation.ComplaintsMessage,
                                                                    Branch = operation.BranchName,
-                                                                   Township = operation.TownshipName
+                                                                   Township = operation.TownshipName,
+                                                                   customername = customer.UserName
 
                                                              }).AsQueryable();
             var totalCount = result.Count();
@@ -354,6 +355,8 @@ namespace CarWaterless.Controllers
                               car.VehicleName,
                               car.VehicleNo,
                               customer.FullName,
+                              customer.UserName,
+                              customer.Id,
                           }).DistinctBy(a => a.operation.Id);
 
 
@@ -388,7 +391,9 @@ namespace CarWaterless.Controllers
                     cdvm.lastmessage = messagelist.Message;
                     //   cdvm.isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
                     cdvm.type = messagelist.Type;
-                    cdvm.customername = d.FullName;
+                    cdvm.customername = d.UserName;
+                    cdvm.customerid = d.Id;
+                    cdvm.operationid = d.operation.Id;
                     cdvmlist.Add(cdvm);
 
 

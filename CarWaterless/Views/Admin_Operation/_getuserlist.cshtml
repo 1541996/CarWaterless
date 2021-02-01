@@ -43,8 +43,23 @@
 
                         </div>
 
+                        @{
+                            Infra.ViewModels.AdminViewModel userModel = CarWaterless.Business.CommonRepository.GetLoginData();
+                            var adminid = userModel.Id;
+
+                        }
+
+
+
                         <div class="ml-auto">
                             <h6>@item.vehiclebrand @item.vehiclename <span class="badge badge-primary">@item.vehicleno</span></h6>
+                            <div class="font-icon-wrapper font-icon-lg" onclick="gotochat(this)"
+                                 data-userid="@adminid"
+                                 data-username="@item.customername"
+                                 @*data-touserid="@result.CustomerId"*@
+                                 data-operationid="@item.operationid">
+                                <i class="fa fa-comments icon-gradient bg-tempting-azure cursor-pointer"></i>
+                            </div>
                         </div>
 
 

@@ -302,94 +302,104 @@
         <div class="mb-3 card">
             <div class="card-body">
                 <form class="">
-                    <div class="form-row">
-                        @Html.HiddenFor(x=>x.ID)
-                        <div class="col-md-6">
-                            <div class="position-relative form-group">
-                                <label>Title</label>
-                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
-                                <div id="Title-error" class="invalid-feedback" style="display:none;">
-                                    Enter Title.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="position-relative form-group">
-                                <label>Car Type</label>
-                                <select id="ddlCarType" class="form-control">
-                                    <option value="" selected>- Choose - </option>
-                                    <option value="big">Big </option>
-                                    <option value="medium">Normal</option>
-                                    <option value="small">Small</option>
-                                </select>
-                                <div id="ddlCarType-error" class="invalid-feedback" style="display:none;">
-                                    Choose Car Type
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="position-relative form-group">
-                                <label>Basic Price</label>
-                                @Html.TextBoxFor(model => model.PackagePrice, new { @class = "form-control", @type = "Name", @placeholder = "", @autocomplete = "off", @onkeypress = "return onlyNumberKey(event)" })
-                                <div id="PackagePrice-error" class="invalid-feedback" style="display:none;">
-                                    Enter Package Price
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="position-relative form-group">
-                                <label>Services</label>
-                                @Html.DropDownListFor(model => model.AdditionalServiceIds, Model.AdditionalServiceList, new { @class = "form-control", @autocomplete = "off", @id = "ddladditionalservice2", @multiple = "multiple", @name = "services[]" })
-                                <div id="AdditionalServiceIds-error" class="invalid-feedback" style="display:none;">
-                                    Select Additional Services.
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="col-md-12 text-center">
+                                <div class="position-relative form-group">
+                                    <label for="exampleFile">Photo</label>
+
+                                    @if (Model.Photo != null)
+                                    {
+                                        <div class="mt-5">
+                                            <img id="imagePreview"
+                                                 src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/@Model.Photo" style="width:200px;height:150px" />
+
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="mt-5">
+                                            <img id="imagePreview"
+                                                 src="http://ecowash.centurylinks-stock.com/ArchitectThemes/image/imageplaceholder.png" style="width:200px;height:150px" />
+
+                                        </div>
+
+                                    }
 
 
-                        <div class="col-md-6 text-center">
-                            <div class="position-relative form-group">
-                                <label for="exampleFile">Photo</label>
-
-                                @if (Model.Photo != null)
-                                {
-                                    <div class="mt-5">
-                                        <img id="imagePreview"
-                                             src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/MemberPackage/@Model.Photo" style="width:200px;height:150px" />
-
+                                    <div class="text-center" style="display:inline-block">
+                                        <input name="file" id="exampleFile" type="file" class="form-control-file file_memberpackage mt-5" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'memberpackage')">
+                                        <small class="form-text text-muted">Please upload photo.</small>
+                                        <input type="hidden" id="photo_memberpackage" name="Photo" />
                                     </div>
 
-                                }
-                                else
-                                {
-                                    <div class="mt-5">
-                                        <img id="imagePreview"
-                                             src="http://ecowash.centurylinks-stock.com/ArchitectThemes/image/imageplaceholder.png" style="width:200px;height:150px" />
 
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-row">
+                                @Html.HiddenFor(x => x.ID)
+                                <div class="col-md-6">
+                                    <div class="position-relative form-group">
+                                        <label>Title</label>
+                                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @placeholder = "", @autofocus = "true", @autocomplete = "off" })
+                                        <div id="Title-error" class="invalid-feedback" style="display:none;">
+                                            Enter Title.
+                                        </div>
                                     </div>
-
-                                }
-
-
-                                <div class="text-center" style="display:inline-block">
-                                    <input name="file" id="exampleFile" type="file" class="form-control-file file_memberpackage mt-5" onchange="ShowImagePreview(this,document.getElementById('imagePreview'), 'memberpackage')">
-                                    <small class="form-text text-muted">Please upload photo.</small>
-                                    <input type="hidden" id="photo_memberpackage" name="Photo" />
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="position-relative form-group">
+                                        <label>Car Type</label>
+                                        <select id="ddlCarType" class="form-control">
+                                            <option value="" selected>- Choose - </option>
+                                            <option value="big">Big </option>
+                                            <option value="medium">Normal</option>
+                                            <option value="small">Small</option>
+                                        </select>
+                                        <div id="ddlCarType-error" class="invalid-feedback" style="display:none;">
+                                            Choose Car Type
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="position-relative form-group">
+                                        <label>Basic Price</label>
+                                        @Html.TextBoxFor(model => model.PackagePrice, new { @class = "form-control", @type = "Name", @placeholder = "", @autocomplete = "off", @onkeypress = "return onlyNumberKey(event)" })
+                                        <div id="PackagePrice-error" class="invalid-feedback" style="display:none;">
+                                            Enter Package Price
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="position-relative form-group">
+                                        <label>Services</label>
+                                        @Html.DropDownListFor(model => model.AdditionalServiceIds, Model.AdditionalServiceList, new { @class = "form-control", @autocomplete = "off", @id = "ddladditionalservice2", @multiple = "multiple", @name = "services[]" })
+                                        <div id="AdditionalServiceIds-error" class="invalid-feedback" style="display:none;">
+                                            Select Additional Services.
+                                        </div>
+                                    </div>
                                 </div>
 
 
 
 
+                                <div class="col-md-12 float-right">
+                                    <div class="position-relative form-group" style="margin-top: 30px;float:right">
+                                        <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
+                                        <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="col-md-12 float-right">
-                            <div class="position-relative form-group" style="margin-top: 30px;float:right">
-                                <a href="javascript:void(0);" class="btn btn-focus btn-lg" id="btnSave"><i class="fa fa-save"></i> Save</a>
-                                <a href="javascript:void(0);" class="btn btn-light btn-lg" id="btnCancel"><i class="fa fa-ban"></i> Cancel</a>
-                            </div>
-                        </div>
                     </div>
+
+                    
                 </form>
             </div>
         </div>

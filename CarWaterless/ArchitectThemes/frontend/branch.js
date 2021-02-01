@@ -185,7 +185,7 @@ function GetModel() {
     var model = {};
     
     model.Name = $('#Name').val();
-    model.TownshipId = $('#TownshipId').val();\
+    model.TownshipId = $('#TownshipId').val();
     if ($('#chkIsActive').prop("checked") == true) {
         model.IsActive = true;
     }

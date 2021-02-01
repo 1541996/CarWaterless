@@ -11,18 +11,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
     <meta name="HandheldFriendly" content="True">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+   
     <!-- Bootstrap v4.3.1 CSS -->
     <link rel="stylesheet" href="~/Plesirthemes/lib/bootstrap/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />*@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/Plesirthemes/css/normalize.css">
 
     <link rel="stylesheet" href="~/Plesirthemes/css/themev1.css">
     <!-- Slick CSS -->
-    <link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick-theme.css">
+    @*<link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/Plesirthemes/lib/slick/slick/slick-theme.css">*@
     <!-- Magnific Popup core CSS file -->
     <link rel="stylesheet" href="~/Plesirthemes/lib/Magnific-Popup-master/dist/magnific-popup.css">
     <!-- Font Awesome Free 5.10.2 CSS JS -->
@@ -32,7 +32,7 @@
     <script defer src="~/Plesirthemes/lib/fontawesome-free-5.10.2-web/js/fontawesome.js"></script>
     <link href="~/Plesirthemes/css/customv1.css" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
 
 
 </head>
@@ -42,6 +42,21 @@
     <div class="preloading">
         <div class="wrap-preload">
             <div class="cssload-loader"></div>
+        </div>
+    </div>
+
+    <div id="chatloading" style="display:none">
+        <div class="overlayloading">
+            <div class="loading text-center">
+                <div>
+                    <img src="../ArchitectThemes/image/igecowashlogo-removebg-preview.png" alt="" style="object-fit:cover;width:60px;border-radius:10px" class="menu-image img-w round-corner2">
+                </div>
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                <div class="mt-5">
+                    <span style="color:#ddd;">Photo is sending...</span>
+                </div>
+
+            </div>
         </div>
     </div>
     <!-- .Preloading -->
@@ -235,31 +250,31 @@
     <!-- .Content  -->
     <!-- Botom Panel  -->
     @*<div class="bottom-panel">
-        <div class="bp-col">
-            <a href="index.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/iphome.png" alt="icon"> </div>
-                <div class="bp-text">Home</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="my_rides.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipcar.png" alt="icon"></div>
-                <div class="bp-text">My Rides</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="destinations.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipoffer2.png" alt="icon"></div>
-                <div class="bp-text">Offers</div>
-            </a>
-        </div>
-        <div class="bp-col">
-            <a href="setting.html">
-                <div class="bp-icon"><img src="~/Plesirthemes/img/ipaccount.png" alt="icon"></div>
-                <div class="bp-text">Account</div>
-            </a>
-        </div>
-    </div>*@
+            <div class="bp-col">
+                <a href="index.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/iphome.png" alt="icon"> </div>
+                    <div class="bp-text">Home</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="my_rides.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipcar.png" alt="icon"></div>
+                    <div class="bp-text">My Rides</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="destinations.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipoffer2.png" alt="icon"></div>
+                    <div class="bp-text">Offers</div>
+                </a>
+            </div>
+            <div class="bp-col">
+                <a href="setting.html">
+                    <div class="bp-icon"><img src="~/Plesirthemes/img/ipaccount.png" alt="icon"></div>
+                    <div class="bp-text">Account</div>
+                </a>
+            </div>
+        </div>*@
     <!-- .Bottom Panel  -->
 
 
@@ -274,21 +289,26 @@
     <!-- Magnific Popup core JS file -->
     <script src="~/Plesirthemes/lib/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
     <!-- Slick JS -->
-    <script src="~/Plesirthemes/lib/slick/slick/slick.min.js"></script>
+    @*<script src="~/Plesirthemes/lib/slick/slick/slick.min.js"></script>*@
     <!--  Custom JS -->
-    <script src="~/Plesirthemes/js/themev1.js"></script>
+    @*<script src="~/Plesirthemes/js/themev1.js"></script>*@
 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>*@
 
     @RenderSection("scripts", required: false)
 
 
     <script>
+
+        $(window).on('load', function () {
+            $(".preloading").fadeOut("slow");
+        });
+
 
         function BranchDetail(id) {
             window.location.replace('../Branch/Detail?Id=' + id);
