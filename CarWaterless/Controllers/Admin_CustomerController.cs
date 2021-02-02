@@ -588,7 +588,47 @@ namespace CarWaterless.Controllers
         {
             tbCustomer UpdateEntity = null;
           
-        
+            if(obj.Id > 0)
+            {
+                var emailexists = uow.customerRepo.GetAll().Where(a => a.Email == obj.Email && a.Email != null && a.Id != obj.Id).Any();
+                tbCustomer customer = new tbCustomer();
+                if (emailexists == true)
+                {
+                    customer.ReturnStatus = "Email Exists";
+                    customer.ReturnMessage = "Email account already exists in our system.";
+                    return Json("EmailExists", JsonRequestBehavior.AllowGet);
+                }
+
+                var usernameexists = uow.customerRepo.GetAll().Where(a => a.UserName == obj.UserName && a.UserName != null && a.Id != obj.Id).Any();
+                if (usernameexists == true)
+                {
+                    customer.ReturnStatus = "Username Exists.";
+                    customer.ReturnMessage = "Username already exists in our system.";
+                    return Json("UserNameExists", JsonRequestBehavior.AllowGet);
+                }
+            }
+            else
+            {
+                var emailexists = uow.customerRepo.GetAll().Where(a => a.Email == obj.Email && a.Email != null).Any();
+                tbCustomer customer = new tbCustomer();
+                if (emailexists == true)
+                {
+                    customer.ReturnStatus = "Email Exists";
+                    customer.ReturnMessage = "Email account already exists in our system.";
+                    return Json("EmailExists", JsonRequestBehavior.AllowGet);
+                }
+
+                var usernameexists = uow.customerRepo.GetAll().Where(a => a.UserName == obj.UserName && a.UserName != null).Any();
+                if (usernameexists == true)
+                {
+                    customer.ReturnStatus = "Username Exists.";
+                    customer.ReturnMessage = "Username already exists in our system.";
+                    return Json("UserNameExists", JsonRequestBehavior.AllowGet);
+                }
+            }
+
+
+
             if (obj.Id > 0)
             {
                 if (obj.Photo != null)
@@ -666,10 +706,11 @@ namespace CarWaterless.Controllers
 
 
      
-        public ActionResult CarForm(int Id = 0, string type = "Add", string customerid = null)
+        public ActionResult CarForm(int Id = 0, string FormType = "Add", string customerid = null)
         {
             ViewBag.id = Id;
-            ViewBag.formtype = type;
+            ViewBag.customerid = customerid;
+            ViewBag.formtype = FormType;
             if (Id > 0)
             {
                 CarPhotoModel obj = new CarPhotoModel();
@@ -694,13 +735,29 @@ namespace CarWaterless.Controllers
         {
             tbCustomerVehicle UpdateEntity = null;
 
-            var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo).Any();
-
-            if (checkcarno == true)
+            if(obj.vehicle.Id > 0)
             {
-                ViewBag.Status = "Car No. already exists in our system.";
-                return Json("E001", JsonRequestBehavior.AllowGet);
+                var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo && a.Id != obj.vehicle.Id).Any();
+
+                if (checkcarno == true)
+                {
+                    ViewBag.Status = "Car No. already exists in our system.";
+                    return Json("E001", JsonRequestBehavior.AllowGet);
+                }
+
             }
+            else
+            {
+                var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo).Any();
+
+                if (checkcarno == true)
+                {
+                    ViewBag.Status = "Car No. already exists in our system.";
+                    return Json("E001", JsonRequestBehavior.AllowGet);
+                }
+
+            }
+
 
 
             if (obj.vehicle.Id > 0)
@@ -779,7 +836,7 @@ namespace CarWaterless.Controllers
 
         }
 
-        public ActionResult DeletePhoto(int photoId = 0)
+        public async System.Threading.Tasks.Task<ActionResult> DeletePhoto(int photoId = 0)
         {
 
             tbPhoto UpdateEntity;
@@ -787,6 +844,11 @@ namespace CarWaterless.Controllers
             photo.IsDeleted = true;
             //  photo.Accesstime = MyExtension.getLocalTime(DateTime.UtcNow);
             UpdateEntity = uow.photoRepo.UpdateWithObj(photo);
+
+            FileUploadViewModel fileupload = new FileUploadViewModel();
+            fileupload.photo = photo.Photo;
+            fileupload.filepath = "~/ImageStorage/CarWaterlessProject/CustomerVehicle";
+            var responsefile = await FileUploadApiRequestHelper.deletefile(fileupload);
 
             if (UpdateEntity != null)
             {

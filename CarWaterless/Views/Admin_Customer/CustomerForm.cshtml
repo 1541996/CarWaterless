@@ -118,13 +118,15 @@
             @Html.HiddenFor(a => a.PrepaidLeftAmount)
 
 
-            <div class="position-relative row form-check mt-30">
-                <div class="col-sm-12 d-flex flex-end">
-                    <button class="btn btn-lg btn-danger mr-20">Cancel</button>
-                    <button class="btn btn-lg btn-primary">Save</button>
-                </div>
-
+        <div class="position-relative row form-check mt-30">
+            <div id="errEmailExists" class="error-message text-center" style="display:none">Email already exists in our system.</div>
+            <div id="errUserNameExists" class="error-message text-center" style="display:none">Username already exists in our system.</div>
+            <div class="col-sm-12 d-flex flex-end">
+                <button class="btn btn-lg btn-danger mr-20" type="button" onclick="CancelCustomer()">Cancel</button>
+                <button class="btn btn-lg btn-primary" type="submit">Save</button>
             </div>
+
+        </div>
         </form>
     </div>
 </div>
@@ -151,10 +153,17 @@
 
                             beforeSend: function () {
                                 $('.btn').prop("disabled", true);
+                                $('#errEmailExists').hide();
+                                $('#errUserNameExists').hide();
 
                             },
                             success: function (myData) {
-                                if (myData == "Success") {
+                                if (myData == "EmailExists") {
+                                    $('#errEmailExists').show();
+                                } else if (myData == "UserNameExists") {
+                                    $('#errUserNameExists').show();
+                                }
+                                else if (myData == "Success") {
                                     Swal.fire({
                                         title: 'Success!',
                                         text: "Successfully Added!",
@@ -168,18 +177,24 @@
                                         if (result.value) {
 
                                            // window.location.replace('../Car/Add?Id=@ViewBag.id&type=@ViewBag.formtype');
+                                            window.location.replace('../admin_customer');
                                         }
                                     })
 
                                 }
                             },
                             complete: function () {
-                                $('.btn').prop("disabled", true);
+                                $('.btn').prop("disabled", false);
                               //  window.location.replace('../Consultation/Note?AppointmentID=' + AppointmentID + '&userappid=' + userappid + '&lg=' + '@ViewBag.lg');
 
                             }
                         })
                          })
+
+
+           function CancelCustomer() {
+             window.location.replace('../admin_customer');
+        }
 
 
 

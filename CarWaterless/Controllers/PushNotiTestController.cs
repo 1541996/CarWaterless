@@ -4,9 +4,11 @@ using Infra.UnitOfWork;
 using Infra.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace CarWaterless.Controllers
@@ -20,6 +22,26 @@ namespace CarWaterless.Controllers
             dbContext = new CarWaterLessContext();
             uow = new UnitOfWork(dbContext);
         }
+
+
+      
+
+
+        [HttpGet]
+        [Route("api/test/deletephoto")]
+        public HttpResponseMessage deletephoto(HttpRequestMessage request,string filename = null)
+        {
+            if (File.Exists(HttpContext.Current.Server.MapPath("~/ArchitectThemes/image/" + filename)))
+            {
+                File.Delete(HttpContext.Current.Server.MapPath("~/ArchitectThemes/image/" + filename));
+                // Response.Redirect("~/pages/management/helpfiles.aspx");                
+            }
+
+            return request.CreateResponse<string>(HttpStatusCode.OK, "Success");
+
+
+        }
+
 
         [HttpGet]
         [Route("api/test/sendnotiall")]

@@ -91,12 +91,27 @@ namespace CarWaterless.Controllers
         {
             tbCustomerVehicle UpdateEntity = null;
 
-            var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo).Any();
-
-            if(checkcarno == true)
+            if (obj.vehicle.Id > 0)
             {
-                ViewBag.Status = "Car No. already exists in our system.";
-                return Json("E001", JsonRequestBehavior.AllowGet);
+                var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo && a.Id != obj.vehicle.Id).Any();
+
+                if (checkcarno == true)
+                {
+                    ViewBag.Status = "Car No. already exists in our system.";
+                    return Json("E001", JsonRequestBehavior.AllowGet);
+                }
+
+            }
+            else
+            {
+                var checkcarno = uow.customerVehicleRepo.GetAll().Where(a => a.IsDeleted != true && a.VehicleNo == obj.vehicle.VehicleNo).Any();
+
+                if (checkcarno == true)
+                {
+                    ViewBag.Status = "Car No. already exists in our system.";
+                    return Json("E001", JsonRequestBehavior.AllowGet);
+                }
+
             }
 
             if (obj.vehicle.Id > 0)

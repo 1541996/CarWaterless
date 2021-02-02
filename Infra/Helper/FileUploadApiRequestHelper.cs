@@ -32,7 +32,14 @@ namespace Infra.helper
             string url = string.Format("api/file/uploadsrt");
             return await ApiRequest<FileUploadViewModel, string>.PostDiffRequest(url, fvm);
         }
-      
+
+
+        public static async Task<string> deletefile(FileUploadViewModel fvm)
+        {
+            string url = string.Format("api/file/deletefile");
+            return await ApiRequest<FileUploadViewModel, string>.PostDiffRequest(url, fvm);
+        }
+
 
 
     }

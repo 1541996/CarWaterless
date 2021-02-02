@@ -353,7 +353,6 @@
     <Content Include="ArchitectThemes\frontend\user-editprofile.js" />
     <Content Include="ArchitectThemes\frontend\user.js" />
     <Content Include="ArchitectThemes\image\admin.jpg" />
-    <Content Include="ArchitectThemes\image\body.jpg" />
     <Content Include="ArchitectThemes\image\carloading.jpg" />
     <Content Include="ArchitectThemes\image\carloadingv2.png" />
     <Content Include="ArchitectThemes\image\CL-Logo-Icon-with-background.png" />
