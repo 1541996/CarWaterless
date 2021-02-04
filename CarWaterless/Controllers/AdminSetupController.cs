@@ -270,6 +270,16 @@ namespace CarWaterless.Controllers
             return Json(list);
         }
 
+
+        public ActionResult GetBranchbyId(int id)
+        {
+            BranchViewModel model = new BranchViewModel();
+            AdminSetupRepository repository = new AdminSetupRepository();
+            model = repository.GetBranchbyId(id);
+         
+            return Json(model);
+        }
+
         public ActionResult Branch(int id=0)
         {
             HttpCookie reqCookies = Request.Cookies["carwaterlessinfo"];

@@ -156,8 +156,9 @@ function Edit(id) {
         success: function (data) {
             $("#Id").val(data.Id);
             $('#Name').val(data.Name);
-            $('#PrefixCode').val(data.PrefixCode);
-            
+            $('#ddlCarType').val(data.Type);
+            $('#BasicPrice').val(data.BasicPrice);
+          
 
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
 
