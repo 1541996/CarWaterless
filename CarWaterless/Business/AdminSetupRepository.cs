@@ -906,6 +906,7 @@ namespace CarWaterless.Business
                     context.tbMemberPackages.First(x => x.ID == model.ID).AdditionalServiceNames = names;
                     context.tbMemberPackages.First(x => x.ID == model.ID).CarType = model.CarType;
                     context.tbMemberPackages.First(x => x.ID == model.ID).PackagePrice = model.PackagePrice;
+                    context.tbMemberPackages.First(x => x.ID == model.ID).Photo = model.Photo;
                     context.SaveChanges();
 
                     response.MessageType = 1;
