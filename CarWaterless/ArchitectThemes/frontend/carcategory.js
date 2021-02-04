@@ -8,7 +8,7 @@ $(document).ready(function () {
     });
 
     $('#btnSave').click(function () {
-
+        $('#btnloading').show();
         ClearError();
 
         var isvalid = false;
@@ -40,6 +40,7 @@ $(document).ready(function () {
                 url: saveUrl,
                 data: GetModel(),
                 success: function (data) {
+                    $('#btnloading').hide();
                     showMessage(data.MessageType, data.Message);
                     BindGrid();
                 }

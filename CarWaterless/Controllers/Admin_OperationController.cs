@@ -196,8 +196,11 @@ namespace CarWaterless.Controllers
                                                                    ComplaintMessage = operation.ComplaintsMessage,
                                                                    Branch = operation.BranchName,
                                                                    Township = operation.TownshipName,
-                                                                   customername = customer.UserName
-
+                                                                   customername = customer.UserName,
+                                                                   Rate = operation.StarRate,
+                                                                   RateMessage = operation.Feedback,
+                                                                   IsRated = operation.IsRated
+                                                                  
                                                              }).AsQueryable();
             var totalCount = result.Count();
 

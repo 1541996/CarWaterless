@@ -232,17 +232,15 @@
     .bg-tempting-azure {
         background-image: linear-gradient(120deg, #13b490 0%, #13b490 100%) !important;
     }
-    .ui-theme-settings{
-        top:61px !important
+
+    .ui-theme-settings {
+        top: 61px !important
     }
 
 
-        .ui-theme-settings .theme-settings__inner{
-            background:#f1f4f6!important
-
-
+        .ui-theme-settings .theme-settings__inner {
+            background: #f1f4f6 !important
         }
-
 </style>
 
 
@@ -263,111 +261,111 @@
 
                 </h3>
                 <div class="p-3" id="div_userlist">
-                 
+
                 </div>
-                
-              
+
+
             </div>
         </div>
     </div>
 </div>
 
- 
 
-    <div class="modal fade" id="myModalAppointment" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div id="Appointment">
-                    <h1>test</h1>
+
+<div class="modal fade" id="myModalAppointment" tabindex="-1" role="dialog" aria-labelledby="myModal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="Appointment">
+                <h1>test</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="mb-3 card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Wash Option</label>
+                        <select class="mb-2 form-control" id="dd_washtype">
+                            <option value="">All</option>
+                            <option value="In-House">In-House</option>
+                            <option value="Walk-In">Walk-In</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Booking Status</label>
+                        <select class="mb-2 form-control" id="dd_statustype">
+                            <option value="Waiting">Waiting</option>
+                            <option value="Confirmed">Confirmed</option>
+                            <option value="Finished">Finished</option>
+                            <option value="Cancel">Cancel</option>
+
+                        </select>
+                    </div>
+
+                    <div class="col-md-5">
+                        <label>Datefilter</label>
+                        <input type="text" class="form-control" name="daterange" value="" autocomplete="off" />
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-15" style="margin-bottom:5px!important">
+
+                    <div class="col-md-3">
+                        <label>Booking Source</label>
+                        <select class="mb-2 form-control" id="dd_bktype">
+                            <option value="">All</option>
+                            <option value="APP">APP</option>
+                            <option value="IOS">IOS</option>
+                            @*<option value="Portal">Portal</option>*@
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Search(Car No,Vehicle Brand,Vehicle Name)</label>
+                        <input type="text" class="form-control" value="" id="txt_cardata" placeholder="keywords..." autocomplete="off" />
+
+                    </div>
+                    <div class="col-md-3">
+                        <label>Search(Name,Phone)</label>
+                        <input type="text" class="form-control" value="" id="txt_keywords" placeholder="keywords..." autocomplete="off" />
+
+                    </div>
+
+
+                    <div class="col-md-2">
+
+                        <button class="mr-2 mt-20 btn-block btn btn-light mt-30" onclick="Search()">
+                            <i class="fa fa-search mr-5"></i> Search
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+</div>
 
 
 
-    <div class="row">
-        <div class="col-md-12 col-lg-12">
-            <div class="mb-3 card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label>Wash Option</label>
-                            <select class="mb-2 form-control" id="dd_washtype">
-                                <option value="">All</option>
-                                <option value="In-House">In-House</option>
-                                <option value="Walk-In">Walk-In</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label>Booking Status</label>
-                            <select class="mb-2 form-control" id="dd_statustype">
-                                <option value="Waiting">Waiting</option>
-                                <option value="Confirmed">Confirmed</option>
-                                <option value="Finished">Finished</option>
-                                <option value="Cancel">Cancel</option>
 
-                            </select>
-                        </div>
-
-                        <div class="col-md-5">
-                            <label>Datefilter</label>
-                            <input type="text" class="form-control" name="daterange" value="" autocomplete="off" />
-
-                        </div>
-
-                    </div>
-
-                    <div class="row mt-15" style="margin-bottom:5px!important">
-
-                        <div class="col-md-3">
-                            <label>Booking Source</label>
-                            <select class="mb-2 form-control" id="dd_bktype">
-                                <option value="">All</option>
-                                <option value="APP">APP</option>
-                                <option value="IOS">IOS</option>
-                                @*<option value="Portal">Portal</option>*@
-                            </select>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label>Search(Car No,Vehicle Brand,Vehicle Name)</label>
-                            <input type="text" class="form-control" value="" id="txt_cardata" placeholder="keywords..." autocomplete="off" />
-
-                        </div>
-                        <div class="col-md-3">
-                            <label>Search(Name,Phone)</label>
-                            <input type="text" class="form-control" value="" id="txt_keywords" placeholder="keywords..." autocomplete="off" />
-
-                        </div>
+<div class="row">
+    <div class="col-md-12" id="div_list">
 
 
-                        <div class="col-md-2">
 
-                            <button class="mr-2 mt-20 btn-block btn btn-light mt-30" onclick="Search()">
-                                <i class="fa fa-search mr-5"></i> Search
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
     </div>
-
-
-
-
-    <div class="row">
-        <div class="col-md-12" id="div_list">
-
-
-
-
-
-        </div>
-    </div>
+</div>
 
 
 
@@ -376,8 +374,11 @@
 
 
 
-    @section scripts{
-        <script>
+@section scripts{
+
+    <link href="~/Plesirthemes/Raty/lib/jquery.raty.css" rel="stylesheet" />
+    <script src="~/Plesirthemes/Raty/lib/jquery.raty.js"></script>
+    <script>
 
         var page = 1;
         var pagesize = 15;
@@ -434,6 +435,21 @@
 
 
         }
+
+        function ratingshow(id,rate) {
+            $('#div_rating').toggle();
+            $('#rate_' + id).empty();
+            $('#rate_' + id).raty({
+                path: 'https://cdn.jsdelivr.net/npm/raty-js@2.8.0/demo/images',
+                half: true,
+                starHalf: 'star-half.png',
+                starOff: 'star-off.png',
+                starOn: 'star-on.png',
+                readOnly: true,
+                score: rate
+            });
+        }
+        
 
         //// Get the input box
         let input = document.getElementById('txt_chatsearch');
@@ -532,7 +548,7 @@
                     $('#div_userlist').append('<div class="text-center pagingloading"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>')
 
                 }
-               
+
                 $.ajax({
                 cache: false,
                 url: '@Url.Action("_getuserlist", "Admin_Operation")',
@@ -550,7 +566,7 @@
                            $('.pagingloading').hide();
                            $('#div_userlist').append(result);
                        }
-                  
+
 
                 },
 
@@ -559,7 +575,7 @@
 
                 }
             });
-              
+
 
         }
 
@@ -762,8 +778,8 @@
 
 
 
-        </script>
+    </script>
 
 
 
-    }
+}

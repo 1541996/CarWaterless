@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+
+    .app-page-title{
+        padding: 20px 30px!important
+    }
+
+</style>
+
+<div class="app-page-title">
+    <div class="page-title-wrapper">
+        <div class="page-title-heading width-100">
+            <div class="display-flex-row">
+                <div class="display-flex-column">
+                    Feedback Message
+                    
+                </div>
+                <div class="display-flex-column flex-end ml-auto" style="width:30%">
+                   
+                    <h6>Search(Name,Phone,Mail)</h6>
+                    <input type="text" class="form-control" value="" id="txt_keywords" placeholder="keywords..." autocomplete="off" />
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" id="div_list">
+
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts{
+    <script>
+
+        var page = 1;
+        var pagesize = 15;
+
+        var searchvalue = null;
+        var OrderBy = "Accesstime";
+        var Direction = "DESC";
+        $(function () {
+            $('#lifeedback').addClass('mm-active');
+            LoadMainList();
+            initPaging();
+          
+        });
+       
+
+         // Get the input box
+        let input = document.getElementById('txt_keywords');
+
+        // Init a timeout variable to be used below
+        let timeout = null;
+
+        // Listen for keystroke events
+        input.addEventListener('keyup', function (e) {
+            clearTimeout(timeout);
+            // Make a new timeout set to go off in 1000ms (1 second)
+            timeout = setTimeout(function () {
+                Search();
+            }, 1000);
+        });
+
+
+        function initPaging() {
+            $("#div_list").on("click", ".pagedList a", function (e) {
+                e.preventDefault();
+                var $a = $(this).attr("href");
+                try {
+                    var pageurl = $a.split(/=/);
+                    page = pageurl[1];
+                    if (page == null) {
+                        page = 1;
+                    }
+                }
+                catch (e) {
+                    page = 1;
+                }
+                LoadMainList();
+            });
+        }
+        function Search() {
+            page = 1;
+            searchvalue = $('#txt_keywords').val();
+            LoadMainList();
+
+        }
+        function LoadMainList() {
+            callloading('div_list');
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_list", "Admin_Feedback")',
+                data :{
+                    page: page, pagesize: pagesize, searchvalue: searchvalue
+                },
+                beforeSend: function () {
+                   // callloading('_itemlist');
+                },
+                success: function (result) {
+                    $('#div_list').empty().append(result);
+
+                },
+
+                complete: function () {
+
+
+                }
+            });
+        }
+
+
+    
+    </script>
+
+
+
+} 

@@ -58,6 +58,21 @@
 
 </head>
 <body>
+
+    <div id="btnloading" style="display:none">
+        <div class="overlayloading">
+            <div class="loading text-center">
+                <div>
+                    <img src="../ArchitectThemes/image/igecowashlogo-removebg-preview.png" alt="" style="object-fit:cover;width:60px;border-radius:10px" class="menu-image img-w round-corner2">
+                </div>
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                <div class="mt-5">
+                    <span style="color:#ddd;">Loading. Please wait...</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div id="mainsidebar" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow bg-theme header-text-light">
             <div class="app-header__logo">
@@ -492,12 +507,12 @@
                     <div class="app-sidebar__inner">
                         <ul class="vertical-nav-menu">
                             @*<li class="app-sidebar__heading">Dashboard</li>
-        <li id="liDashboard">
-            <a href="@Url.Action("Index","Home")" id="liHome">
-                <i class="metismenu-icon pe-7s-rocket"></i>
-                Dashboard
-            </a>
-        </li>*@
+                                <li id="liDashboard">
+                                    <a href="@Url.Action("Index","Home")" id="liHome">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Dashboard
+                                    </a>
+                                </li>*@
                             <li class="app-sidebar__heading">Preparation</li>
                             <li id="liSetting">
                                 <a href="#">
@@ -555,11 +570,11 @@
                                         </a>
                                     </li>
                                     @*<li>
-                    <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
-                        <i class="metismenu-icon"></i>
-                        Add Booking
-                    </a>
-                </li>*@
+                                            <a href="@Url.Action("Add","Admin_Operation")" id="liPurchase">
+                                                <i class="metismenu-icon"></i>
+                                                Add Booking
+                                            </a>
+                                        </li>*@
                                 </ul>
                             </li>
 
@@ -592,39 +607,45 @@
                             </li>
 
 
-
-
-
-                            <li class="app-sidebar__heading">Financial</li>
-                            @if (userrole != "branchagent")
-                            {
-                                <li id="liFinance">
-                                    <a href="#">
-                                        <i class="metismenu-icon pe-7s-monitor"></i>
-                                        Finance
-                                        <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                            <li class="app-sidebar__heading">Feedback</li>
+                                <li>
+                                    <a href="@Url.Action("Index","Admin_Feedback")" id="lifeedback">
+                                        <i class="metismenu-icon pe-7s-album"></i>
+                                        Feedback Message
                                     </a>
-                                    <ul>
-                                        <li>
-                                            <a href="@Url.Action("MonthlySummary","Finance")" id="liMonthlySummary">
-                                                <i class="metismenu-icon"></i>
-                                                Monthly Summary
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="@Url.Action("Index","Finance")" id="liFinancialHistory">
-                                                <i class="metismenu-icon"></i>
-                                                Financial History
-                                            </a>
-                                        </li>
-                                    </ul>
                                 </li>
-                            }
+
+
+                            @*<li class="app-sidebar__heading">Financial</li>
+                                @if (userrole != "branchagent")
+                                {
+                                    <li id="liFinance">
+                                        <a href="#">
+                                            <i class="metismenu-icon pe-7s-monitor"></i>
+                                            Finance
+                                            <i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="@Url.Action("MonthlySummary","Finance")" id="liMonthlySummary">
+                                                    <i class="metismenu-icon"></i>
+                                                    Monthly Summary
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Index","Finance")" id="liFinancialHistory">
+                                                    <i class="metismenu-icon"></i>
+                                                    Financial History
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                }*@
 
                             @if (userrole == "superadministrator")
                             {
                                 <li class="app-sidebar__heading">Advertisement</li>
-                                <li id="liAds">
+                                <li>
                                     <a href="@Url.Action("Index","Admin_Advertisement")" id="liAds">
                                         <i class="metismenu-icon pe-7s-album"></i>
                                         Advertisement

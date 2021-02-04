@@ -87,6 +87,9 @@ namespace Infra.ViewModels
         public string Township { get; set; }
         public string Branch { get; set; }
         public string customername { get; set; }
+        public string Rate { get; set; }
+        public string RateMessage { get; set; }
+        public bool? IsRated { get; set; }
 
 
     }

@@ -213,6 +213,7 @@
     <Compile Include="Controllers\Admin_CustomerController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\AdminSetupController.cs" />
+    <Compile Include="Controllers\Admin_FeedbackController.cs" />
     <Compile Include="Controllers\Admin_OperationController.cs" />
     <Compile Include="Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\Admin_TestController.cs" />
@@ -776,6 +777,8 @@
     <Content Include="Views\AdminUser\ChangePassword.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Chat\getBookingData.cshtml" />
+    <Content Include="Views\Admin_Feedback\Index.cshtml" />
+    <Content Include="Views\Admin_Feedback\_list.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,7 @@ $(document).ready(function () {
 
 
     $('#btnSave').click(function () {
+        $('#btnloading').show();
         ClearError();
        
         var Title = $('#Title').val();
@@ -23,6 +24,7 @@ $(document).ready(function () {
                 data: GetModel(),
                 success: function (data) {
                     $('#divedit').hide();
+                    $('#btnloading').hide();
                     showMessage(data.MessageType, data.Message);
 
                 }

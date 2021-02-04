@@ -862,6 +862,96 @@ namespace CarWaterless.Controllers
 
         }
 
+        public async System.Threading.Tasks.Task<ActionResult> Delete(int ID = 0)
+        {
+
+            tbCustomer UpdateEntity;
+            tbCustomer cus = uow.customerRepo.GetAll().Where(a => a.Id == ID).Where(a => a.IsDeleted != true).FirstOrDefault();
+            cus.IsDeleted = true;
+            //  photo.Accesstime = MyExtension.getLocalTime(DateTime.UtcNow);
+            UpdateEntity = uow.customerRepo.UpdateWithObj(cus);
+
+            FileUploadViewModel fileupload = new FileUploadViewModel();
+            fileupload.photo = cus.Photo;
+            fileupload.filepath = "~/ImageStorage/CarWaterlessProject/Customer";
+            var responsefile = await FileUploadApiRequestHelper.deletefile(fileupload);
+
+            IQueryable<tbCustomerVehicle> cusvehicle = uow.customerVehicleRepo.Get().Where(a => a.IsDeleted != true && a.CustomerId == cus.Id.ToString()).AsQueryable();
+            if(cusvehicle.Count() > 0)
+            {
+                foreach (var item in cusvehicle)
+                {
+                    tbCustomerVehicle Updatevehicle;
+                    item.IsDeleted = true;
+                    Updatevehicle = uow.customerVehicleRepo.UpdateWithObj(item);
+                    if(Updatevehicle != null)
+                    {
+                        var photos = uow.photoRepo.Get().Where(a => a.IsDeleted != true && a.CarID == Updatevehicle.Id).AsQueryable();
+                        if (photos.Count() > 0)
+                        {
+                            foreach (var p in photos)
+                            {
+                                p.IsDeleted = true;
+                                uow.photoRepo.UpdateWithObj(p);
+                            }
+
+                        }
+                    }
+                   
+
+                }
+            }
+          
+
+
+            if (UpdateEntity != null)
+            {
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
+        public async System.Threading.Tasks.Task<ActionResult> DeleteCar(int ID = 0)
+        {
+
+            tbCustomerVehicle UpdateEntity;
+            tbCustomerVehicle car = uow.customerVehicleRepo.GetAll().Where(a => a.Id == ID).Where(a => a.IsDeleted != true).FirstOrDefault();
+            car.IsDeleted = true;
+            //  photo.Accesstime = MyExtension.getLocalTime(DateTime.UtcNow);
+            UpdateEntity = uow.customerVehicleRepo.UpdateWithObj(car);
+
+        
+            IQueryable<tbPhoto> photos = uow.photoRepo.Get().Where(a => a.IsDeleted != true && a.CarID == UpdateEntity.Id).AsQueryable();
+            if (photos.Count() > 0)
+            {
+                foreach (var item in photos)
+                {
+                    item.IsDeleted = true;
+                    uow.photoRepo.UpdateWithObj(item);
+                }
+            }
+
+
+
+            if (UpdateEntity != null)
+            {
+                return Json("Success", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("Fail", JsonRequestBehavior.AllowGet);
+            }
+
+
+        }
+
+
         public ActionResult GetCategory(string cartype = null)
         {
             IQueryable data = uow.carCategoryRepo.GetAll().Where(a => a.IsDeleted != true && a.Type == cartype).AsQueryable();

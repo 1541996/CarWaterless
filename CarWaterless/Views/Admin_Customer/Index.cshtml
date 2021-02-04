@@ -83,7 +83,7 @@
         var OrderBy = "Accesstime";
         var Direction = "DESC";
         $(function () {
-
+        
             LoadMainList();
             initPaging();
           
@@ -174,7 +174,8 @@
               })
                 .then((result) => {
 
-                        if (result.value == true) {
+                    if (result.value == true) {
+                        $('#btnloading').show();
                             var ID = $(e).data('id');
                             var infoid = $(e).data('infoid');
                             $.ajax({
@@ -186,10 +187,11 @@
 
                                 },
                                 success: function (result) {
+                                    $('#btnloading').hide();
                                     if (result == "Success") {
                                         $('#' + infoid).remove();
-                                        $('#MyModal').modal('hide');
-
+                                        LoadMainList();
+                                      
                                         Swal.fire(
                                             'Delete!',
                                             'Successfully Deleted!',

@@ -446,7 +446,8 @@
 
 
 
-               $("#CarForm").submit(function (e) {
+        $("#CarForm").submit(function (e) {
+            $('#btnloading').show();
                       e.preventDefault();
 
                         imagesstring = "";
@@ -481,6 +482,7 @@
 
                             },
                             success: function (myData) {
+                                $('#btnloading').hide();
                                 if (myData == "Success") {
                                     Swal.fire({
                                         title: 'Success!',

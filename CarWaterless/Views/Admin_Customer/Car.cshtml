@@ -71,6 +71,61 @@
         }
 
 
+         function Delete(e) {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this item!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonColor: '#8CD4F5',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, Confirm it!'
+              })
+                .then((result) => {
+
+                    if (result.value == true) {
+                        $('#btnloading').show();
+                            var ID = $(e).data('id');
+                            var infoid = $(e).data('infoid');
+                            $.ajax({
+                                cache: false,
+                                url: '@Url.Action("DeleteCar", "Admin_Customer")',
+
+                                data: { ID: ID },
+                                beforeSend: function () {
+
+                                },
+                                success: function (result) {
+                                    $('#btnloading').hide();
+                                    if (result == "Success") {
+                                        $('#' + infoid).remove();
+                                        GetCarList();
+
+                                        Swal.fire(
+                                            'Delete!',
+                                            'Successfully Deleted!',
+                                            'error'
+                                        )
+                                    }
+                                    else {
+
+                                    }
+                                },
+                                complete: function () {
+
+
+
+                                }
+                            });
+                        }
+
+
+
+
+                });
+
+        }
 
 
 

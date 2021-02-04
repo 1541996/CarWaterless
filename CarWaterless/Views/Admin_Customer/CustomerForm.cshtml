@@ -140,7 +140,8 @@
     <script src="~/ArchitectThemes/File/fileupload.js"></script>
     <script>
 
-                     $("#frm_data").submit(function (e) {
+        $("#frm_data").submit(function (e) {
+            $('#btnloading').show();
                         e.preventDefault();
 
 
@@ -158,12 +159,14 @@
 
                             },
                             success: function (myData) {
+                                $('#btnloading').hide();
                                 if (myData == "EmailExists") {
                                     $('#errEmailExists').show();
                                 } else if (myData == "UserNameExists") {
                                     $('#errUserNameExists').show();
                                 }
                                 else if (myData == "Success") {
+                                
                                     Swal.fire({
                                         title: 'Success!',
                                         text: "Successfully Added!",

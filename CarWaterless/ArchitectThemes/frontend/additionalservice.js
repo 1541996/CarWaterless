@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
     $('#btnSave').click(function () {
-
+        $('#btnloading').show();
         ClearError();
 
         var isvalid = false;
@@ -50,6 +50,7 @@ $(document).ready(function () {
                 url: saveUrl,
                 data: GetModel(),
                 success: function (data) {
+                    $('#btnloading').hide();
                     showMessage(data.MessageType, data.Message);
                     BindGrid();
                 }
@@ -185,7 +186,9 @@ function Edit(id) {
         success: function (data) {
             $("#Id").val(data.Id);
             $('#Name').val(data.Name);
-            $('#PrefixCode').val(data.PrefixCode);
+            $('#Price').val(data.Price);
+            $('#DiscountPrice').val(data.DiscountPrice);
+            $('#ddlCarType').val(data.CarType);
             
 
             $('#btnSave').html('<i class="fa fa-edit"></i>&nbsp;Update');
