@@ -358,13 +358,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-header">
     <div class="container-fluid">
         <div class="contact bar">
-            <div class="pic stark" style="background-image: url(../../Plesirthemes/img/profile4.jpg)"></div>
+
+            @if (ViewBag.photo != null && ViewBag.photo != "")
+            {
+                <div class="pic stark" style="background-image: url(http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@ViewBag.photo)"></div>
+            }
+            else
+            {
+                <div class="pic stark" style="background-image: url(../../Plesirthemes/img/profile2.jpg)"></div>
+            }
+
+
             <div class="name">
                 @ViewBag.username
             </div>
             <div class="seen" onclick="getBookingDetail('@ViewBag.operationid')">
-                 Check Booking Detail >>
-             </div>
+                Check Booking Detail >>
+            </div>
 
         </div>
 
@@ -456,7 +466,7 @@
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
-                alert(connectionId);
+             //   alert(connectionId);
                 console.log(connectionId);
 
             });

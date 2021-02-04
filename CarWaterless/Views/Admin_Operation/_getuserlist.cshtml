@@ -17,7 +17,16 @@
 
                     <div class="d-flex">
                         <div>
-                            <img src="~/Plesirthemes/img/profile3.jpg" style="width:60px;height:60px;border-radius:100%" />
+                            @if (item.Photo != null)
+                            {
+                                <img src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@item.Photo" style="width:60px;height:60px;border-radius:100%" />
+
+                            }
+                            else
+                            {
+                                <img src="~/Plesirthemes/img/profile2.jpg" style="width:60px;height:60px;border-radius:100%" />
+
+                            }
 
                         </div>
                         <div class="ml-10 mt-5">

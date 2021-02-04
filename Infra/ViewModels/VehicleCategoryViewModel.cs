@@ -108,6 +108,7 @@ namespace Infra.ViewModels
         public string customername { get; set; }
         public int? customerid { get; set; }
         public int? operationid { get; set; }
+        public string Photo { get; set; }
     }
 
 

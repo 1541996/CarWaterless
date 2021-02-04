@@ -42,6 +42,12 @@ namespace CarWaterless.Controllers
             ViewBag.userid = userid;
             ViewBag.username = username;
             ViewBag.type = "Admin";
+            tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operationid).FirstOrDefault();
+            tbCustomer cus = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operation.CustomerId).FirstOrDefault();
+            if(cus != null)
+            {
+                ViewBag.photo = cus.Photo;
+            }
 
 
             hubContext.Clients.All.chatAppear(userid, username, operationid);

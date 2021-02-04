@@ -360,6 +360,7 @@ namespace CarWaterless.Controllers
                               customer.FullName,
                               customer.UserName,
                               customer.Id,
+                              customer.Photo
                           }).DistinctBy(a => a.operation.Id);
 
 
@@ -392,6 +393,7 @@ namespace CarWaterless.Controllers
                     cdvm.username = messagelist.UserName;
                     cdvm.senddate = messagelist.SendDateTime;
                     cdvm.lastmessage = messagelist.Message;
+                    cdvm.Photo = d.Photo;
                     //   cdvm.isread = messagelist.Where(a => a.OperationID == d.operation.Id).OrderByDescending(a => a.SendDateTime).FirstOrDefault().Type == "Admin" ? true : false,
                     cdvm.type = messagelist.Type;
                     cdvm.customername = d.UserName;
