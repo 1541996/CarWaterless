@@ -189,10 +189,12 @@ namespace CarWaterless.Controllers
             obj.FullName = cus.FullName;
             obj.UserName = cus.UserName;
             obj.UserAppId = cus.UserAppId;
+            obj.PhoneNo = cus.PhoneNo;
             obj.Email = cus.Email;
             obj = uow.customerRepo.InsertReturn(obj);
             if (customer != null)
             {
+                obj.ReturnStatus = "Success";
                 return request.CreateResponse<tbCustomer>(HttpStatusCode.OK, obj);
             }
             else
@@ -291,16 +293,16 @@ namespace CarWaterless.Controllers
 
         [HttpGet]
         [Route("api/user/getNoti")]
-        public HttpResponseMessage NotiList(HttpRequestMessage request, string customerid = null, int pageSize = 10, int page = 1)
+        public HttpResponseMessage NotiList(HttpRequestMessage request, string customerid = null)
         {
             List<tbNotification> GeneralNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "General").Where(a => a.IsDeleted != true).ToList();
             List<tbNotification> SpecificNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "Specific").Where(a => a.CustomerId.ToString() == customerid).Where(a => a.IsDeleted != true).ToList();
             var objs = GeneralNoti.ToList().Union(SpecificNoti.ToList()).OrderByDescending(r => r.MessageSendDateTime);
 
-            var totalCount = objs.Count();
-            var results = objs.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
-            var model = new PagedListServer<tbNotification>(results, totalCount, pageSize);
-            return request.CreateResponse(HttpStatusCode.OK, model);
+            //var totalCount = objs.Count();
+            //var results = objs.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
+            //var model = new PagedListServer<tbNotification>(results, totalCount, pageSize);
+            return request.CreateResponse(HttpStatusCode.OK, objs);
 
 
         }

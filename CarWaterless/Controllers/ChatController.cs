@@ -80,6 +80,16 @@ namespace CarWaterless.Controllers
             ViewBag.userid = userid;
             ViewBag.type = type;
 
+            if(type != "Admin")
+            {
+                tbCustomer cus = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == userid).FirstOrDefault();
+                if (cus != null)
+                {
+                    ViewBag.photo = cus.Photo;
+                }
+            }
+
+           
             //var messagesfromuser = uow.chatMessageRepo.GetAll().Where(a => a.IsDeleted != true).Where(a => a.FromUserID == fromuserid && a.ToUserID == touserid
             //                       && a.OperationID == operationid).AsQueryable();
             ////receive messages by user 1 

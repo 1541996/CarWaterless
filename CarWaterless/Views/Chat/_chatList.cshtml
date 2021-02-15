@@ -62,10 +62,19 @@
                 <div class="chat-box-wrapper">
                     <div>
                         <div class="avatar-icon-wrapper mr-1">
+                            @if (ViewBag.type == "Admin")
+                            {
+                                <div class="avatar-icon avatar-icon-lg rounded">
+                                    <img src="~/Plesirthemes/img/profile2.jpg" alt="">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="avatar-icon avatar-icon-lg rounded">
+                                    <img src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@ViewBag.photo" alt="">
+                                </div>
+                            }
 
-                            <div class="avatar-icon avatar-icon-lg rounded">
-                                <img src="~/Plesirthemes/img/profile2.jpg" alt="">
-                            </div>
                         </div>
                     </div>
                     <div>
@@ -90,9 +99,18 @@
                     <div>
                         <div class="avatar-icon-wrapper mr-1">
 
-                            <div class="avatar-icon avatar-icon-lg rounded">
-                                <img src="~/Plesirthemes/img/profile2.jpg" alt="">
-                            </div>
+                            @if (ViewBag.type == "Admin")
+                            {
+                                <div class="avatar-icon avatar-icon-lg rounded">
+                                    <img src="~/Plesirthemes/img/profile2.jpg" alt="">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="avatar-icon avatar-icon-lg rounded">
+                                    <img src="http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/@ViewBag.photo" alt="">
+                                </div>
+                            }
                         </div>
                     </div>
                     <div>

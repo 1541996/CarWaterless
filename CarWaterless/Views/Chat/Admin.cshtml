@@ -390,20 +390,20 @@
 
 <div class="div-chat-footer">
     <div class="display-flex-row">
-        <div class="display-flex-column" style="width:70%">
+        <div class="display-flex-column" style="width:76%">
             <div class="input-group">
                 <textarea class="form-control" id="txt_message" placeholder="type here..." aria-label="note"></textarea>
             </div>
         </div>
 
-        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
-            <i class="fas fa-camera upload-button"></i>
+        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 12%;">
+            <i class="fas fa-camera upload-button" style="color:#00c9a7"></i>
             <input class="file-upload" type="file" accept="image/*" style="display:none" multiple />
         </div>
 
 
-        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 15%;">
-            <i class="fas fa-paper-plane" onclick="SendMessage()"></i>
+        <div class="display-flex-column fs-22" style="justify-content: center; align-items: center; width: 12%;">
+            <i class="fas fa-paper-plane" onclick="SendMessage()" style="color:#00c9a7"></i>
 
         </div>
 
@@ -462,7 +462,7 @@
             });
             $.connection.hub.url = 'http://centurylinksmm-001-site7.dtempurl.com/signalr';
 
-           // $.connection.hub.url = 'https://localhost:44338/signalr';
+          //  $.connection.hub.url = 'https://localhost:44338/signalr';
 
             $.connection.hub.start().done(function () {
                 connectionId = $.connection.hub.id;
