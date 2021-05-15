@@ -285,7 +285,7 @@ namespace CarWaterless.Controllers
             }
             else
             {
-                userdata.Photo = $"http://ecowash.centurylinks-stock.com/ArchitectThemes/image/admin.jpg";
+                userdata.Photo = $"http://ecowash.centurylinks-stock.com/Plesirthemes/img/useravator.png";
 
             }
 

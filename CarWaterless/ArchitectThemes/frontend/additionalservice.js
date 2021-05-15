@@ -123,11 +123,12 @@ function BindGrid() {
                                 edit = "<a class='btn btn-warning btn-sm' href='javascript:void(0)' onclick=Edit('" + data.toString() + "')><i class='fas fa-edit'></i></a>&nbsp;&nbsp;";
                                 del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-trash'></i></a>";
                                 if (dh == "true") {
-                                    del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=DeAc('" + data.toString() + "','" + dh +"')><i class='fas fa-ban'></i> Off</a>";
+                                    del = "<a class='btn btn-success btn-sm' href='javascript:void(0)' onclick=DeAc('" + data.toString() + "','" + dh + "')><i class='fas fa-check'></i> On</a>";
 
                                 }
                                 else {
-                                    del = "<a class='btn btn-success btn-sm' href='javascript:void(0)' onclick=DeAc('" + data.toString() + "','" + dh +"')><i class='fas fa-check'></i> On</a>";
+                                  
+                                    del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=DeAc('" + data.toString() + "','" + dh + "')><i class='fas fa-ban'></i> Off</a>";
 
                                 }
                                 actions += edit;

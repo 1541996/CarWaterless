@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AdminChatController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\DailyHotController.cs" />
+    <Compile Include="Controllers\errController.cs" />
     <Compile Include="Controllers\FeedBackController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HowToBookController.cs" />
@@ -513,6 +514,7 @@
     <Content Include="Plesirthemes\img\temple.png" />
     <Content Include="Plesirthemes\img\train.png" />
     <Content Include="Plesirthemes\img\transmission.png" />
+    <Content Include="Plesirthemes\img\useravator.png" />
     <Content Include="Plesirthemes\js\stackedCards.js" />
     <Content Include="Plesirthemes\js\themev1.js" />
     <Content Include="Plesirthemes\lib\bootstrap-timepicker\bootstrap-timepicker.js" />
@@ -790,6 +792,8 @@
     <Content Include="Views\Chat\getBookingData.cshtml" />
     <Content Include="Views\Admin_Feedback\Index.cshtml" />
     <Content Include="Views\Admin_Feedback\_list.cshtml" />
+    <Content Include="Views\err\Index.cshtml" />
+    <Content Include="Views\err\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
