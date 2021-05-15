@@ -54,8 +54,8 @@
     <script src="@Url.Content("~/ArchitectThemes/js/jquery-3.2.1.min.js")" type="text/javascript"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
+      <link href="~/Plesirthemes/NewFile/daterangepicker.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -608,12 +608,12 @@
 
 
                             <li class="app-sidebar__heading">Feedback</li>
-                                <li>
-                                    <a href="@Url.Action("Index","Admin_Feedback")" id="lifeedback">
-                                        <i class="metismenu-icon pe-7s-album"></i>
-                                        Feedback Message
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="@Url.Action("Index","Admin_Feedback")" id="lifeedback">
+                                    <i class="metismenu-icon pe-7s-album"></i>
+                                    Feedback Message
+                                </a>
+                            </li>
 
 
                             @*<li class="app-sidebar__heading">Financial</li>
@@ -700,11 +700,18 @@
 
     <script src="@Url.Content("~/ArchitectThemes/js/bootstrap-select.min.js")"></script>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>*@
+
+
+    <script src="~/Plesirthemes/NewFile/moment.min.js"></script>
+    <script src="~/Plesirthemes/NewFile/daterangepicker.min.js"></script>
+    <script src="~/Plesirthemes/NewFile/sweetalert2@9.js"></script>
 
     <script src="~/ArchitectThemes/frontend/num-key.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    @*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>*@
+
 
 
     <script src="@Url.Content("~/ArchitectThemes/js/main.min.js")" type="text/javascript"></script>

@@ -282,7 +282,7 @@
                                 <label>Choose Car Type</label>
                                 <div class="field-group">
                                     <i class="fas fa-dice-d6"></i>
-                                    <select class="custom-select mr-sm-2 with-icon" id="CarType"  data-error="#errVehicleCarType" required>
+                                    <select class="custom-select mr-sm-2 with-icon" id="CarType" data-error="#errVehicleCarType" required>
                                         <option value="">Choose Car Type</option>
                                         <option value="small">Small</option>
                                         <option value="medium">Medium</option>
@@ -302,7 +302,7 @@
                                     <i class="fas fa-dice-d6"></i>
                                     <select name="ErrorVehicleCarCat" class="custom-select mr-sm-2 with-icon" data-error="#errVehicleCarCat" id="CarCategory" required>
                                         <option value="">Choose Car Category</option>
-                                       
+
                                     </select>
 
                                     <input type="hidden" name="vehicle.CarCategoryId" id="txt_carcategory" value="@Model.vehicle.CarCategoryId" />
@@ -343,15 +343,15 @@
 
 
 
-                         
 
-                        <div class="form-group col-md-12">
-                            <div id="errCarNoExists" class="error-message text-center" style="display:none">Car No. already exists in our system.</div>
-                            <br>
-                            <div class="button">
-                                <button type="submit" class="theme-button">Save</button>
+
+                            <div class="form-group col-md-12">
+                                <div id="errCarNoExists" class="error-message text-center" style="display:none">Car No. already exists in our system.</div>
+                                <br>
+                                <div class="button">
+                                    <button type="submit" class="theme-button">Save</button>
+                                </div>
                             </div>
-                        </div>
 
                         </div>
 
@@ -369,8 +369,9 @@
 @section scripts{
     <link href="~/Plesirthemes/mdtimepicker/mdtimepicker.css" rel="stylesheet" />
     <script src="~/Plesirthemes/mdtimepicker/mdtimepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-  
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>*@
+
+    <script src="~/Plesirthemes/NewFile/jquery.validate.min.js"></script>
 
     <script>
         var photoRemove = [];
@@ -401,7 +402,7 @@
                     }
                 },
                 submitHandler: function (form) {
-                 
+
                  //   $("#CarForm").submit(function (e) {
                      //    $(form).preventDefault();
 

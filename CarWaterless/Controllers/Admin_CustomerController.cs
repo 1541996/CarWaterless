@@ -510,9 +510,12 @@ namespace CarWaterless.Controllers
               //  noti.OperationId = operation.Id;
                 noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
                 noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);
+             
+                noti = uow.notificationRepo.InsertReturn(noti);
+
                 noti.WebUrl = $"http://ecowash.centurylinks-stock.com/Notification?Id={noti.Id}";
 
-                noti = uow.notificationRepo.InsertReturn(noti);
+                noti = uow.notificationRepo.UpdateWithObj(noti);
 
 
                 FCMViewModel fcm = new FCMViewModel();

@@ -61,11 +61,11 @@ function BindGrid() {
                                 var edit = "";
                                 var del = "";
 
-                                view = "<a class='btn btn-info btn-sm' href='javascript:void(0)' onclick=View('" + data.toString() + "')><i class='fas fa-eye'></i></a>&nbsp;&nbsp;";
+                             //   view = "<a class='btn btn-info btn-sm' href='javascript:void(0)' onclick=View('" + data.toString() + "')><i class='fas fa-eye'></i></a>&nbsp;&nbsp;";
                                 edit = "<a class='btn btn-warning btn-sm' href='javascript:void(0)' onclick=Edit('" + data.toString() + "')><i class='fas fa-edit'></i></a>&nbsp;&nbsp;";
                                 del = "<a class='btn btn-danger btn-sm' href='javascript:void(0)' onclick=Delete('" + data.toString() + "')><i class='fas fa-trash'></i></a>";
 
-                                actions += view;
+                             //   actions += view;
                                 actions += edit;
                                 actions += del;
 

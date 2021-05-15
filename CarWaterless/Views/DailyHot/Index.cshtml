@@ -52,7 +52,13 @@
                                         <img src="~/Plesirthemes/EcoPhoto/tick.svg" style="width:15px" /> @service.Name
                                     <span class="float-right">
                                         <span style="text-decoration: line-through;">(@service.Price.Value.ToString("#,##0") MMK)</span>
-                                        <span class="font-bold">@service.DiscountPrice.Value.ToString("#,##0") MMK</span>
+
+                                        @if (service.DiscountPrice != null)
+                                        {
+                                            <span class="font-bold">@service.DiscountPrice.Value.ToString("#,##0") MMK</span>
+                                        }
+
+
                                     </span>
                                      
                                     </li>

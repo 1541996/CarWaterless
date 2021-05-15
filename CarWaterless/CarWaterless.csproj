@@ -572,6 +572,16 @@
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.js" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.css" />
     <Content Include="Plesirthemes\mdtimepicker\mdtimepicker.min.js" />
+    <Content Include="Plesirthemes\NewFile\jquery.min.js" />
+    <Content Include="Plesirthemes\NewFile\jquery.validate.min.js" />
+    <Content Include="Plesirthemes\NewFile\owl.carousel.min.js" />
+    <Content Include="Plesirthemes\NewFile\moment.min.js" />
+    <Content Include="Plesirthemes\NewFile\daterangepicker.min.js" />
+    <Content Include="Plesirthemes\NewFile\daterangepicker.css" />
+    <Content Include="Plesirthemes\NewFile\owl.carousel.min.css" />
+    <Content Include="Plesirthemes\NewFile\select2.min.css" />
+    <Content Include="Plesirthemes\NewFile\select2.min.js" />
+    <Content Include="Plesirthemes\NewFile\sweetalert2%409.js" />
     <Content Include="Plesirthemes\Raty\lib\fonts\raty.svg" />
     <Content Include="Plesirthemes\Raty\lib\images\cancel-off.png" />
     <Content Include="Plesirthemes\Raty\lib\images\cancel-on.png" />

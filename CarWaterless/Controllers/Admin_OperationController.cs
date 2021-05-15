@@ -460,7 +460,7 @@ namespace CarWaterless.Controllers
 
                     fcmdata fcmdata = new fcmdata();
                     fcmdata.type = "Specific";
-                    fcmdata.title = "Booking";
+                    fcmdata.title = "Booking Confirm";
                     fcmdata.body = "Your booking is confirmed.";
                     fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
 
@@ -473,7 +473,7 @@ namespace CarWaterless.Controllers
                     FCMRequestHelper.sendTokenMessage(fcm);
 
                     tbNotification noti = new tbNotification();
-                    noti.NotiMessage = $"Booking";
+                    noti.NotiMessage = $"Booking Confirm";
                     noti.MessageBody = $"Your booking is confirmed.";
                     noti.NotiType = "Specific";
                     noti.CustomerId = user.Id;
@@ -505,7 +505,7 @@ namespace CarWaterless.Controllers
 
                     fcmdata fcmdata = new fcmdata();
                     fcmdata.type = "Specific";
-                    fcmdata.title = "Booking";
+                    fcmdata.title = "Booking Finish";
                     fcmdata.body = "Your booking is finished.";
                     fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={operation.Id}";
 
@@ -518,7 +518,7 @@ namespace CarWaterless.Controllers
                     FCMRequestHelper.sendTokenMessage(fcm);
 
                     tbNotification noti = new tbNotification();
-                    noti.NotiMessage = $"Booking";
+                    noti.NotiMessage = $"Booking Finish";
                     noti.MessageBody = $"Your booking is finished.";
                     noti.NotiType = "Specific";
                     noti.CustomerId = user.Id;
@@ -577,6 +577,48 @@ namespace CarWaterless.Controllers
             operation.CancelTime = MyExtension.getLocalTime(DateTime.UtcNow);
             operation.Status = "Cancel";         
             operation = uow.operationRepo.UpdateWithObj(operation);
+
+            var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == operation.CustomerId).FirstOrDefault();
+
+            if (user != null)
+            {
+
+                tbNotification noti = new tbNotification();
+                noti.NotiMessage = $"Booking Cancel";
+                noti.MessageBody = $"Your booking is cancelled.";
+                noti.NotiType = "Specific";
+                noti.CustomerId = user.Id;
+                noti.UserAppID = user.UserAppId;
+                noti.OperationId = operation.Id;
+                noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
+                noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);             
+                noti = uow.notificationRepo.InsertReturn(noti);
+                noti.WebUrl = $"http://ecowash.centurylinks-stock.com/Notification?Id={noti.Id}";
+                noti = uow.notificationRepo.UpdateWithObj(noti);
+
+                FCMViewModel fcm = new FCMViewModel();
+                fcm.to = user.UserToken;
+
+                fcmdata fcmdata = new fcmdata();
+                fcmdata.type = "Specific";
+                fcmdata.title = "Booking Cancel";
+                fcmdata.body = "Your booking is cancelled.";
+                fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/Notification?Id={noti.Id}";
+
+                Notification notification = new Notification();
+                notification.title = "Booking Cancel";
+                notification.body = "Your booking is cancelled.";
+                fcm.notification = notification;
+                fcm.data = fcmdata;
+
+                FCMRequestHelper.sendTokenMessage(fcm);
+
+              
+
+
+            }
+
+
             return Json(operation, JsonRequestBehavior.AllowGet);
         }
 

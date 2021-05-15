@@ -504,9 +504,9 @@ namespace CarWaterless.Controllers
 
                     fcmdata fcmdata = new fcmdata();
                     fcmdata.type = "Specific";
-                    fcmdata.title = "Booking";
+                    fcmdata.title = "Booking Request";
                     fcmdata.body = "Your booking request has been received successfully.";
-                    fcmdata.weburl = "https://www.google.com/";
+                    fcmdata.weburl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={UpdateEntity.Id}";
 
                     Notification notification = new Notification();
                     notification.title = "Booking";
@@ -517,7 +517,7 @@ namespace CarWaterless.Controllers
                     FCMRequestHelper.sendTokenMessage(fcm);
 
                     tbNotification noti = new tbNotification();
-                    noti.NotiMessage = $"Booking";
+                    noti.NotiMessage = $"Booking Request";
                     noti.MessageBody = $"Booking request has been received successfully.";
                     noti.NotiType = "Specific";
                     noti.CustomerId = user.Id;
@@ -525,7 +525,7 @@ namespace CarWaterless.Controllers
                     noti.OperationId = UpdateEntity.Id;
                     noti.CreateDate = MyExtension.getLocalTime(DateTime.UtcNow);
                     noti.MessageSendDateTime = MyExtension.getLocalTime(DateTime.UtcNow);                
-                    noti.WebUrl = "https://www.google.com/";
+                    noti.WebUrl = $"http://ecowash.centurylinks-stock.com/book/bookingsuccess?Id={UpdateEntity.Id}";
 
                     uow.notificationRepo.InsertReturn(noti);
 

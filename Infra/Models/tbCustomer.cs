@@ -34,6 +34,7 @@ namespace Infra.Models
         public string UserToken { get; set; }
         public string ReturnStatus { get; set; }
         public string ReturnMessage { get; set; }
+        //public bool? IsLogin { get; set; }
 
 
     }

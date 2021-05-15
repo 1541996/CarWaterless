@@ -191,6 +191,7 @@ namespace CarWaterless.Controllers
             obj.UserAppId = cus.UserAppId;
             obj.PhoneNo = cus.PhoneNo;
             obj.Email = cus.Email;
+            obj.Password = cus.Password;
             obj = uow.customerRepo.InsertReturn(obj);
             if (customer != null)
             {
@@ -237,7 +238,17 @@ namespace CarWaterless.Controllers
                 userdata.PhoneNo = userdata.PhoneNo;
 
             }
-          
+            if (User.UserName != null)
+            {
+                userdata.UserName = User.UserName;
+            }
+            else
+            {
+                userdata.UserName = userdata.UserName;
+
+            }
+
+
             if (User.Photo != null)
             {
                 FileUploadViewModel fileupload = new FileUploadViewModel();
@@ -261,6 +272,26 @@ namespace CarWaterless.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("api/user/getUserData")]
+        public async System.Threading.Tasks.Task<HttpResponseMessage> getUserData(HttpRequestMessage request, int customerid = 0)
+        {
+           
+            tbCustomer userdata = uow.customerRepo.GetAll().Where(a => a.Id == customerid).Where(a => a.IsDeleted != true).FirstOrDefault();
+            if(userdata.Photo != null)
+            {
+                userdata.Photo = $"http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/{userdata.Photo}";
+            }
+            else
+            {
+                userdata.Photo = $"http://ecowash.centurylinks-stock.com/ArchitectThemes/image/admin.jpg";
+
+            }
+
+            return request.CreateResponse(HttpStatusCode.OK, userdata);
+
+        }
 
 
 
@@ -293,11 +324,11 @@ namespace CarWaterless.Controllers
 
         [HttpGet]
         [Route("api/user/getNoti")]
-        public HttpResponseMessage NotiList(HttpRequestMessage request, string customerid = null)
+        public HttpResponseMessage NotiList(HttpRequestMessage request, int customerid = 0)
         {
-            List<tbNotification> GeneralNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "General").Where(a => a.IsDeleted != true).ToList();
-            List<tbNotification> SpecificNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "Specific").Where(a => a.CustomerId.ToString() == customerid).Where(a => a.IsDeleted != true).ToList();
-            var objs = GeneralNoti.ToList().Union(SpecificNoti.ToList()).OrderByDescending(r => r.MessageSendDateTime);
+            List<tbNotification> objs = uow.notificationRepo.GetAll().Where(a => a.IsDeleted != true && a.CustomerId == customerid).OrderByDescending(r => r.MessageSendDateTime).Take(50).ToList();
+          //  List<tbNotification> SpecificNoti = uow.notificationRepo.GetAll().Where(a => a.NotiType == "Specific").Where(a => a.CustomerId.ToString() == customerid).Where(a => a.IsDeleted != true).ToList();
+          //  var objs = GeneralNoti.ToList().Union(SpecificNoti.ToList()).OrderByDescending(r => r.MessageSendDateTime);
 
             //var totalCount = objs.Count();
             //var results = objs.Skip(pageSize * (page - 1)).Take(pageSize).ToList();

@@ -14,7 +14,8 @@
     @*<link rel="icon" href="favicon.ico" type="image/x-icon">*@
     <!-- Bootstrap v4.3.1 CSS -->
     <link rel="stylesheet" href="~/Plesirthemes/lib/bootstrap/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    @*<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />*@
+    <link href="~/Plesirthemes/NewFile/select2.min.css" rel="stylesheet" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="~/Plesirthemes/css/normalize.css">
@@ -33,8 +34,8 @@
     <link href="~/Plesirthemes/css/customv1.css" rel="stylesheet" />
     
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+    @*<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />*@
+    <link href="~/Plesirthemes/NewFile/daterangepicker.css" rel="stylesheet" />
 
 </head>
 <body class="default">
@@ -278,9 +279,9 @@
 
                     </p>
                     @*<p class="textsub fs-14 font-bold">
-                        <a href="mailto:igmcarcare.mm@gmail.com">📧 igmcarcare.mm@gmail.com</a>
+                            <a href="mailto:igmcarcare.mm@gmail.com">📧 igmcarcare.mm@gmail.com</a>
 
-                    </p>*@
+                        </p>*@
 
                     <p class="textsub fs-14 font-bold">
 
@@ -302,7 +303,7 @@
         </div>
     </div>
 
-  
+
 
     <!-- END SUBSCRIBE -->
     <!-- .Content  -->
@@ -340,7 +341,10 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery v3.4.1 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js" integrity="sha512-YHQNqPhxuCY2ddskIbDlZfwY6Vx3L3w9WRbyJCY81xpqLmrM6rL2+LocBgeVHwGY9SXYfQWJ+lcEWx1fKS2s8A==" crossorigin="anonymous"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js" integrity="sha512-YHQNqPhxuCY2ddskIbDlZfwY6Vx3L3w9WRbyJCY81xpqLmrM6rL2+LocBgeVHwGY9SXYfQWJ+lcEWx1fKS2s8A==" crossorigin="anonymous"></script>*@
+
+    <script src="~/Plesirthemes/NewFile/jquery.min.js"></script>
+
     @*<script src="~/Plesirthemes/lib/jquery/jquery-3.4.1.min.js"></script>*@
     <!--  Bootstrap v4.3.1 JS -->
     <script src="~/Plesirthemes/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -351,12 +355,16 @@
     <!--  Custom JS -->
     <script src="~/Plesirthemes/js/themev1.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>*@
+      <script src="~/Plesirthemes/NewFile/select2.min.js"></script>
 
-
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>*@
+
+    <script src="~/Plesirthemes/NewFile/moment.min.js"></script>
+    <script src="~/Plesirthemes/NewFile/daterangepicker.min.js"></script>
+    <script src="~/Plesirthemes/NewFile/sweetalert2@9.js"></script>
 
     @RenderSection("scripts", required: false)
 
