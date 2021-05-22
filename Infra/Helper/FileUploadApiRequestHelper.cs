@@ -16,6 +16,14 @@ namespace Infra.helper
             return await ApiRequest<FileUploadViewModel, string>.PostDiffRequest(url, fvm);
         }
 
+        public static async Task<string> uploadwithoutbase64(FileUploadViewModel fvm)
+        {
+            string url = string.Format("api/file/uploadwithoutbase64");
+            return await ApiRequest<FileUploadViewModel, string>.PostDiffRequest(url, fvm);
+        }
+
+        
+
         public static async Task<string> uploadgif(FileUploadViewModel fvm)
         {
             string url = string.Format("api/file/uploadgif");

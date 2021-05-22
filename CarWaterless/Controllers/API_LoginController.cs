@@ -254,7 +254,7 @@ namespace CarWaterless.Controllers
                 FileUploadViewModel fileupload = new FileUploadViewModel();
                 fileupload.photo = User.Photo;
                 fileupload.filepath = "/ImageStorage/CarWaterlessProject/Customer";
-                var responsefile = await FileUploadApiRequestHelper.upload(fileupload);
+                var responsefile = await FileUploadApiRequestHelper.uploadwithoutbase64(fileupload);
                 userdata.Photo = responsefile;
               
                 
