@@ -35,7 +35,18 @@ namespace Infra.Models
         public string ReturnStatus { get; set; }
         public string ReturnMessage { get; set; }
         //public bool? IsLogin { get; set; }
+        public string PhotoUrl
+        {
+            get
+            {
+                if (this.Photo != null)
+                {
+                    return string.Format("http://filestorage.centurylinks-stock.com/ImageStorage/CarWaterlessProject/Customer/{0}", Photo);
+                }
+                return "http://ecowash.centurylinks-stock.com/Plesirthemes/img/useravator.png";
 
+            }
+        }
 
     }
 }

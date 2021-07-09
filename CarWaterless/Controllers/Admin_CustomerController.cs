@@ -535,7 +535,21 @@ namespace CarWaterless.Controllers
 
                 FCMRequestHelper.sendTokenMessage(fcm);
 
-              
+                // expo
+
+                ExpoNotiViewModel expo = new ExpoNotiViewModel();
+                expo.title = obj.message;
+                expo.body = obj.body;
+
+                expo.to = user.UserToken;
+
+                data data = new data();
+                data.someData = "test";
+                expo.data = data;
+
+                ExpoRequestHelper.sendTokenMessage(expo);
+
+
 
             }
 

@@ -516,6 +516,22 @@ namespace CarWaterless.Controllers
 
                     FCMRequestHelper.sendTokenMessage(fcm);
 
+
+                    // expo
+
+                    ExpoNotiViewModel expo = new ExpoNotiViewModel();
+                    expo.title = "Booking Request";
+                    expo.body = "Your booking request has been received successfully.";
+
+                    expo.to = user.UserToken;
+
+                    data data = new data();
+                    data.someData = "test";
+                    expo.data = data;
+
+                    ExpoRequestHelper.sendTokenMessage(expo);
+
+
                     tbNotification noti = new tbNotification();
                     noti.NotiMessage = $"Booking Request";
                     noti.MessageBody = $"Booking request has been received successfully.";

@@ -1,5 +1,6 @@
 ﻿using CarWaterless.Helper;
 using Infra.helper;
+using Infra.Helper;
 using Infra.Models;
 using Infra.UnitOfWork;
 using Infra.ViewModels;
@@ -334,6 +335,31 @@ namespace CarWaterless.Controllers
             //var results = objs.Skip(pageSize * (page - 1)).Take(pageSize).ToList();
             //var model = new PagedListServer<tbNotification>(results, totalCount, pageSize);
             return request.CreateResponse(HttpStatusCode.OK, objs);
+
+
+        }
+
+
+        [HttpGet]
+        [Route("api/test/sendexponoti")]
+        public HttpResponseMessage sendexponoti(HttpRequestMessage request)
+        {
+            ExpoNotiViewModel expo = new ExpoNotiViewModel();
+
+            expo.body = "Here is body";
+            expo.title = "Here is title";
+            expo.to = "ExponentPushToken[_RcoYMOj7YLH6BK2qE3nyZ]";
+                
+
+
+            data data = new data();
+            data.someData = "test";
+            expo.data = data;
+
+            ExpoRequestHelper.sendTokenMessage(expo);
+
+
+            return request.CreateResponse(HttpStatusCode.OK, "Success");
 
 
         }

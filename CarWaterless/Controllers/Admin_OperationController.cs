@@ -472,6 +472,21 @@ namespace CarWaterless.Controllers
 
                     FCMRequestHelper.sendTokenMessage(fcm);
 
+                    // expo
+
+                    ExpoNotiViewModel expo = new ExpoNotiViewModel();
+                    expo.title = "Booking Confirm";
+                    expo.body = "Your booking is confirmed.";
+
+                    expo.to = user.UserToken;
+
+                    data data = new data();
+                    data.someData = "test";
+                    expo.data = data;
+
+                    ExpoRequestHelper.sendTokenMessage(expo);
+
+
                     tbNotification noti = new tbNotification();
                     noti.NotiMessage = $"Booking Confirm";
                     noti.MessageBody = $"Your booking is confirmed.";
@@ -517,6 +532,20 @@ namespace CarWaterless.Controllers
 
                     FCMRequestHelper.sendTokenMessage(fcm);
 
+                    // expo
+
+                    ExpoNotiViewModel expo = new ExpoNotiViewModel();
+                    expo.title = "Booking Finish";
+                    expo.body = "Your booking is finished.";
+
+                    expo.to = user.UserToken;
+
+                    data data = new data();
+                    data.someData = "test";
+                    expo.data = data;
+
+                    ExpoRequestHelper.sendTokenMessage(expo);
+
                     tbNotification noti = new tbNotification();
                     noti.NotiMessage = $"Booking Finish";
                     noti.MessageBody = $"Your booking is finished.";
@@ -541,12 +570,26 @@ namespace CarWaterless.Controllers
                     fcmdata2.weburl = $"http://ecowash.centurylinks-stock.com/book/ratedform?customerid={operation.CustomerId}&operationid={operation.Id}";
 
                     Notification notification2 = new Notification();
-                    notification2.title = "Booking";
-                    notification2.body = "Your booking is finished.";
+                    notification2.title = "Rating";
+                    notification2.body = "How would you rate our service?.";
                     fcm2.notification = notification;
                     fcm2.data = fcmdata;
 
                     FCMRequestHelper.sendTokenMessage(fcm2);
+
+                    // expo
+
+                    ExpoNotiViewModel expo2 = new ExpoNotiViewModel();
+                    expo2.title = "Rating";
+                    expo2.body = "How would you rate our service?";
+
+                    expo2.to = user.UserToken;
+
+                    data data2 = new data();
+                    data2.someData = "test";
+                    expo2.data = data2;
+
+                    ExpoRequestHelper.sendTokenMessage(expo2);
 
                     tbNotification noti2 = new tbNotification();
                     noti2.NotiMessage = $"Rating";
@@ -613,7 +656,21 @@ namespace CarWaterless.Controllers
 
                 FCMRequestHelper.sendTokenMessage(fcm);
 
-              
+                // expo
+
+                ExpoNotiViewModel expo2 = new ExpoNotiViewModel();
+                expo2.title = "Booking Cancel";
+                expo2.body = "Your booking is cancelled.";
+
+                expo2.to = user.UserToken;
+
+                data data2 = new data();
+                data2.someData = "test";
+                expo2.data = data2;
+
+                ExpoRequestHelper.sendTokenMessage(expo2);
+
+
 
 
             }
