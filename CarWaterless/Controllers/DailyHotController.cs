@@ -20,7 +20,7 @@ namespace CarWaterless.Controllers
             uow = new UnitOfWork(dbContext);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int customerid = 0)
         {
             var daily = uow.dailyHotRepo.GetAll().Where(a => a.IsDeleted != true && a.IsActive == true).FirstOrDefault();
 
