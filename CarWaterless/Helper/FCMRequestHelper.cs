@@ -15,8 +15,13 @@ namespace Infra.Helper
         public static string sendTokenMessage(FCMViewModel data)
         {
 
-            string serverKey = "AAAAkHdeRik:APA91bHN9FuAb51GzU4cSfg1uTOwEKUspQcTzoXpGuH82I3yZtBOJJgda04RE8X4nozsQq-S5fSohA-E40CPWGaKSut5mM6JGSCqobhh8LTr_zfnis6NgOgCrskjVrZIi4_bgesNyYvR";
-            string senderId = "620477957673";
+            //string serverKey = "AAAAkHdeRik:APA91bHN9FuAb51GzU4cSfg1uTOwEKUspQcTzoXpGuH82I3yZtBOJJgda04RE8X4nozsQq-S5fSohA-E40CPWGaKSut5mM6JGSCqobhh8LTr_zfnis6NgOgCrskjVrZIi4_bgesNyYvR";
+            //string senderId = "620477957673";
+
+
+            string serverKey = "AAAAfuUQ_Pg:APA91bGZLvHCAWem7oK859sZKpPPLvvNYu12jy4ZnrpHoWjYv30TKNUu2BOLhUnLopqXb1U4BgosQRBg6-XA00q3MUZltj5Wwz-PvH7K5z57KuPMoGmf5Ik7_jOWzuvTfwet1ScMJnh_";
+            string senderId = "545008975096";
+
             string response;
 
             //AIzaSyAzCVo8xuNAc3Keh5IYlsSLUyUQ1fFq9Ws

@@ -27,6 +27,7 @@ namespace Infra.ViewModels
     {
         public string body { get; set; }
         public string title { get; set; }
+     //   public string sound { get; set; } = "default";
 
 
     }

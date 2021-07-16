@@ -66,13 +66,15 @@ namespace CarWaterless.Controllers
 
         [HttpGet]
         [Route("api/test/sendnotiindividual")]
-        public HttpResponseMessage ssendnotiindividualendnoti(HttpRequestMessage request,int customerid = 0)
+        public HttpResponseMessage ssendnotiindividualendnoti(HttpRequestMessage request,int customerid = 0,string title = "hh", string body = "hh")
         {
             var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == customerid).FirstOrDefault();
 
             FCMViewModel fcm = new FCMViewModel();
-            fcm.to = user.UserToken;
+            fcm.to = "dtlB16NARPqi0oOM81C-4n:APA91bGqdGqSTBwP8IwR-aQVRSIIcNV3aMNXwdNYcAWCm1ECovl0zJzxlvKdOGARUvV3RTKrbFxDsv1avckpOhNnjN23d2Ix201RT9B5xzDMVxtP8lUjMtRoNDSURG-B0SS267PXI7De";
 
+           /// fcm.to = "cUKmV_3nRNi_lVShkwY5ry:APA91bH6ER_e4O99kyy58qlNXDlnzF5qkFVqL-uRFv9JqO7uoq2Gc_JGJpwcJN9auSvZmLhMLtkgz9AM8B_SYvWHD0Xpjqd9Uz3nLWyAB4opyrULW07ztxMASoNOyVvNNOxtQJD2lCpC";
+        
             fcmdata fcmdata = new fcmdata();
             fcmdata.type = "Individual";
             fcmdata.title = "Booking";
@@ -80,8 +82,8 @@ namespace CarWaterless.Controllers
             fcmdata.weburl = "https://www.google.com/";
 
             Notification notification = new Notification();
-            notification.title = "Booking";
-            notification.body = "Booking is successfully done.";
+            notification.title = title;
+            notification.body = body;
 
 
             fcm.notification = notification;
