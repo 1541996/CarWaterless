@@ -514,7 +514,7 @@ namespace CarWaterless.Controllers
                     fcm.notification = notification;
                     fcm.data = fcmdata;
 
-                    FCMRequestHelper.sendTokenMessage(fcm);
+                    await FCMRequestHelper.sendTokenMessage(fcm);
 
 
                     // expo

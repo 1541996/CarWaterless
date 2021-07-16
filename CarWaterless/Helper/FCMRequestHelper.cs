@@ -12,7 +12,7 @@ namespace Infra.Helper
 {
     public class FCMRequestHelper
     {
-        public static string sendTokenMessage(FCMViewModel data)
+        public async static Task<string> sendTokenMessage(FCMViewModel data)
         {
 
             //string serverKey = "AAAAkHdeRik:APA91bHN9FuAb51GzU4cSfg1uTOwEKUspQcTzoXpGuH82I3yZtBOJJgda04RE8X4nozsQq-S5fSohA-E40CPWGaKSut5mM6JGSCqobhh8LTr_zfnis6NgOgCrskjVrZIi4_bgesNyYvR";

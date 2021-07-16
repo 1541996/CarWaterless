@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -442,7 +443,7 @@ namespace CarWaterless.Controllers
 
 
 
-        public ActionResult newstatuschange(int id = 0, string status = null)
+        public async Task<ActionResult> newstatuschange(int id = 0, string status = null)
         {
             tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();
             if(status == "Waiting")
@@ -470,7 +471,7 @@ namespace CarWaterless.Controllers
                     fcm.notification = notification;
                     fcm.data = fcmdata;
 
-                    FCMRequestHelper.sendTokenMessage(fcm);
+                    await FCMRequestHelper.sendTokenMessage(fcm);
 
                     // expo
 
@@ -530,7 +531,7 @@ namespace CarWaterless.Controllers
                     fcm.notification = notification;
                     fcm.data = fcmdata;
 
-                    FCMRequestHelper.sendTokenMessage(fcm);
+                    await FCMRequestHelper.sendTokenMessage(fcm);
 
                     // expo
 
@@ -575,7 +576,7 @@ namespace CarWaterless.Controllers
                     fcm2.notification = notification;
                     fcm2.data = fcmdata;
 
-                    FCMRequestHelper.sendTokenMessage(fcm2);
+                    await FCMRequestHelper.sendTokenMessage(fcm2);
 
                     // expo
 
@@ -614,7 +615,7 @@ namespace CarWaterless.Controllers
             return Json(operation, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult statusCancel(int id = 0)
+        public async Task<ActionResult> statusCancel(int id = 0)
         {
             tbOperation operation = uow.operationRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == id).FirstOrDefault();         
             operation.CancelTime = MyExtension.getLocalTime(DateTime.UtcNow);
@@ -654,7 +655,7 @@ namespace CarWaterless.Controllers
                 fcm.notification = notification;
                 fcm.data = fcmdata;
 
-                FCMRequestHelper.sendTokenMessage(fcm);
+                await FCMRequestHelper.sendTokenMessage(fcm);
 
                 // expo
 

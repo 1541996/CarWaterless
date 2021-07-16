@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -494,7 +495,7 @@ namespace CarWaterless.Controllers
 
 
         [HttpPost]
-        public ActionResult SendNoti(NotiViewModel obj)
+        public async Task<ActionResult> SendNoti(NotiViewModel obj)
         {
          
             var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id.ToString() == obj.customerid).FirstOrDefault();
@@ -533,7 +534,7 @@ namespace CarWaterless.Controllers
                 fcm.notification = notification;
                 fcm.data = fcmdata;
 
-                FCMRequestHelper.sendTokenMessage(fcm);
+                await FCMRequestHelper.sendTokenMessage(fcm);
 
 
 

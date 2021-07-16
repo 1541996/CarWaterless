@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
@@ -66,14 +67,14 @@ namespace CarWaterless.Controllers
 
         [HttpGet]
         [Route("api/test/sendnotiindividual")]
-        public HttpResponseMessage ssendnotiindividualendnoti(HttpRequestMessage request,int customerid = 0,string title = "hh", string body = "hh")
+        public async Task<HttpResponseMessage> ssendnotiindividualendnotiAsync(HttpRequestMessage request,int customerid = 0,string title = "hh", string body = "hh")
         {
             var user = uow.customerRepo.GetAll().Where(a => a.IsDeleted != true && a.Id == customerid).FirstOrDefault();
 
             FCMViewModel fcm = new FCMViewModel();
-            fcm.to = "dtlB16NARPqi0oOM81C-4n:APA91bGqdGqSTBwP8IwR-aQVRSIIcNV3aMNXwdNYcAWCm1ECovl0zJzxlvKdOGARUvV3RTKrbFxDsv1avckpOhNnjN23d2Ix201RT9B5xzDMVxtP8lUjMtRoNDSURG-B0SS267PXI7De";
+            //fcm.to = "dtlB16NARPqi0oOM81C-4n:APA91bGqdGqSTBwP8IwR-aQVRSIIcNV3aMNXwdNYcAWCm1ECovl0zJzxlvKdOGARUvV3RTKrbFxDsv1avckpOhNnjN23d2Ix201RT9B5xzDMVxtP8lUjMtRoNDSURG-B0SS267PXI7De";
 
-           /// fcm.to = "cUKmV_3nRNi_lVShkwY5ry:APA91bH6ER_e4O99kyy58qlNXDlnzF5qkFVqL-uRFv9JqO7uoq2Gc_JGJpwcJN9auSvZmLhMLtkgz9AM8B_SYvWHD0Xpjqd9Uz3nLWyAB4opyrULW07ztxMASoNOyVvNNOxtQJD2lCpC";
+             fcm.to = "cUKmV_3nRNi_lVShkwY5ry:APA91bH6ER_e4O99kyy58qlNXDlnzF5qkFVqL-uRFv9JqO7uoq2Gc_JGJpwcJN9auSvZmLhMLtkgz9AM8B_SYvWHD0Xpjqd9Uz3nLWyAB4opyrULW07ztxMASoNOyVvNNOxtQJD2lCpC";
         
             fcmdata fcmdata = new fcmdata();
             fcmdata.type = "Individual";
@@ -88,7 +89,7 @@ namespace CarWaterless.Controllers
 
             fcm.notification = notification;
             fcm.data = fcmdata;
-            FCMRequestHelper.sendTokenMessage(fcm);
+            await FCMRequestHelper.sendTokenMessage(fcm);
 
             return request.CreateResponse<string>(HttpStatusCode.OK, "Success");
 
